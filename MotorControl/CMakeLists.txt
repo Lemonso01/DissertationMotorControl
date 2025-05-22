@@ -15,3 +15,8 @@ add_executable(pico_can
 target_link_libraries(pico_can pico_stdlib hardware_spi)
 
 pico_add_extra_outputs(pico_can)
+
+add_custom_command(TARGET pico_can POST_BUILD
+    COMMAND picotool load -v -x ${CMAKE_CURRENT_BINARY_DIR}/pico_can.uf2 -f
+    COMMENT "Uploading UF2 to Pico"
+)
