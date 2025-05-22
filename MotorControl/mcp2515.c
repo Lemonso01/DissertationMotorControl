@@ -85,3 +85,20 @@ void send_rpm(uint8_t motor_id, int32_t rpm) {
     uint32_t id = (CAN_PACKET_SET_RPM << 8) | motor_id;
     mcp2515_send_extended(id, data, 4);
 }
+
+#define CAN_PACKET_SET_POS 4
+
+void send_position(uint8_t motor_id, float position) {
+    // Scale position from float to int32 as per CubeMars scaling (pos * 10000)
+    int32_t pos_int = (int32_t)(position * 10000);
+
+    uint8_t data[4];
+    data[0] = (pos_int >> 24) & 0xFF;
+    data[1] = (pos_int >> 16) & 0xFF;
+    data[2] = (pos_int >> 8) & 0xFF;
+    data[3] = pos_int & 0xFF;
+
+    uint32_t can_id = (CAN_PACKET_SET_POS << 8) | motor_id;
+
+    mcp2515_send_extended(can_id, data, 4);
+}
