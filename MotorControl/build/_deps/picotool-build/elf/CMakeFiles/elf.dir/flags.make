@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/gonca/OneDrive/Dissertation/MotorControl/build/_deps/picotool-src/elf -I/mnt/c/Users/gonca/OneDrive/Dissertation/MotorControl/build/_deps/picotool-src/errors
+CXX_INCLUDES = -I/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf -I/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/errors
 
 CXX_FLAGS = -O3 -DNDEBUG -std=gnu++14
 

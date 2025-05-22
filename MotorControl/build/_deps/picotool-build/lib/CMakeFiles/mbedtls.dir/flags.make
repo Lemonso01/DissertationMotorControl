@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = -DMBEDTLS_CONFIG_FILE=\"picotool_mbedtls_config.h\"
 
-C_INCLUDES = -I/mnt/c/Users/gonca/OneDrive/Dissertation/MotorControl/build/_deps/picotool-src/lib/include -isystem /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include
+C_INCLUDES = -I/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/include -isystem /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include
 
 C_FLAGS = -O3 -DNDEBUG
 
