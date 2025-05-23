@@ -14,5 +14,8 @@ add_executable(pico_can
 
 target_link_libraries(pico_can pico_stdlib hardware_spi)
 
+pico_enable_stdio_usb(pico_can 1)
+pico_enable_stdio_uart(pico_can 0)
+
 pico_add_extra_outputs(pico_can)
 

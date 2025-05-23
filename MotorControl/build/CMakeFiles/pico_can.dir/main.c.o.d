@@ -1,5 +1,4 @@
-CMakeFiles/pico_can.dir/main.c.o: \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/main.c \
+CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_stdlib_headers/include/pico/stdlib.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
@@ -11,9 +10,9 @@ CMakeFiles/pico_can.dir/main.c.o: \
  /usr/include/newlib/sys/features.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform.h \
@@ -58,8 +57,8 @@ CMakeFiles/pico_can.dir/main.c.o: \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/resets.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
+ /mnt/e/DissMotCont/MotorControl/mcp2515.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h \

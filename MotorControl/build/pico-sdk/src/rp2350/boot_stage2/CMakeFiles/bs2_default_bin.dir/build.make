@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl
+CMAKE_SOURCE_DIR = /mnt/e/DissMotCont/MotorControl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build
+CMAKE_BINARY_DIR = /mnt/e/DissMotCont/MotorControl/build
 
 # Utility rule file for bs2_default_bin.
 
@@ -69,8 +69,8 @@ include pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/progress.
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin: pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
 
 pico-sdk/src/rp2350/boot_stage2/bs2_default.bin: pico-sdk/src/rp2350/boot_stage2/bs2_default.elf
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating bs2_default.bin"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/arm-none-eabi-objcopy -Obinary /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.elf /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating bs2_default.bin"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/arm-none-eabi-objcopy -Obinary /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.elf /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
 
 bs2_default_bin: pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin
 bs2_default_bin: pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
@@ -82,10 +82,10 @@ pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/build: bs2_defaul
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/build
 
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/clean:
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && $(CMAKE_COMMAND) -P CMakeFiles/bs2_default_bin.dir/cmake_clean.cmake
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && $(CMAKE_COMMAND) -P CMakeFiles/bs2_default_bin.dir/cmake_clean.cmake
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/clean
 
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/depend:
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/boot_stage2 /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /mnt/e/DissMotCont/MotorControl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/e/DissMotCont/MotorControl /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/boot_stage2 /mnt/e/DissMotCont/MotorControl/build /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_bin.dir/depend
 

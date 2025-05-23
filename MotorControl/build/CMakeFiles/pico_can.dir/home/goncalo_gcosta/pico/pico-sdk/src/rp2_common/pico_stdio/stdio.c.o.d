@@ -20,9 +20,9 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h \
  /usr/include/newlib/assert.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform.h \
@@ -49,11 +49,4 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/include/hardware/sync/spin_lock.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/uart.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/uart.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/dreq.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/resets.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/resets.h
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h

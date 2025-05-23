@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl
+CMAKE_SOURCE_DIR = /mnt/e/DissMotCont/MotorControl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build
+CMAKE_BINARY_DIR = /mnt/e/DissMotCont/MotorControl/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/DissMotCont/MotorControl/build/CMakeFiles /mnt/e/DissMotCont/MotorControl/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/DissMotCont/MotorControl/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -193,6 +193,438 @@ cyw43_driver_picow_cyw43_bus_pio_spi_pio_h: cmake_check_build_system
 cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
 .PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.o: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.i: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.s: home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 
 home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.o: home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.o
@@ -530,6 +962,30 @@ home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.c.s
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.c.s
 
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
+
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.o
 
@@ -802,6 +1258,30 @@ home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.s
+
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.o
 
@@ -1041,6 +1521,30 @@ home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_sci_m33.o: h
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_sci_m33.S.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_sci_m33.S.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_sci_m33.S.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.c.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.o
@@ -1330,29 +1834,77 @@ home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.o
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.o
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.o
 
 # target to build an object file
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.o
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.o
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
 
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i
 
 # target to preprocess a source file
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
 
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s
 
 # target to generate assembly for a file
-home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
-.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
 
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.o
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.o
@@ -1377,6 +1929,30 @@ home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s: home/gonc
 home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.o: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.o
+
+# target to build an object file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i
+
+# target to preprocess a source file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
+
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s: home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s
+
+# target to generate assembly for a file
+home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pico_can.dir/build.make CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
+.PHONY : home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 
 main.o: main.c.o
 .PHONY : main.o
@@ -1440,6 +2016,60 @@ help:
 	@echo "... bs2_default"
 	@echo "... bs2_default_library"
 	@echo "... pico_can"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.s"
@@ -1482,6 +2112,9 @@ help:
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_divider/divider.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s"
@@ -1516,6 +2149,9 @@ help:
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.s"
@@ -1546,6 +2182,9 @@ help:
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_math.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_math.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_sci_m33.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_flash/flash.s"
@@ -1582,12 +2221,21 @@ help:
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.s"
-	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.o"
-	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i"
-	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.o"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i"
 	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.o"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i"
+	@echo "... home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
