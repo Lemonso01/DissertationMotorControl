@@ -4,6 +4,15 @@
 #include "hardware/spi.h"
 #include "pico/stdlib.h"
 
+// CAN command packet types
+#define CAN_PACKET_SET_DUTY          0
+#define CAN_PACKET_SET_CURRENT       1
+#define CAN_PACKET_SET_CURRENT_BRAKE 2
+#define CAN_PACKET_SET_RPM           3
+#define CAN_PACKET_SET_POS           4
+#define CAN_PACKET_SET_ORIGIN_HERE   5
+#define CAN_PACKET_SET_POS_SPD       6
+
 // GPIO definitions
 #define MCP2515_CS_PIN     17
 #define MCP2515_INT_PIN    20
@@ -95,6 +104,8 @@ void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len);
 void send_rpm(uint8_t motor_id, int32_t rpm);
 void send_position(uint8_t motor_id, float position);
 bool mcp2515_check_message();
+void mcp2515_clear_rx0if();
 void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len);
+
 
 #endif

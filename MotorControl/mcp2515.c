@@ -1,4 +1,5 @@
 #include "mcp2515.h"
+#include <stdio.h>
 
 void mcp2515_select() {
     gpio_put(MCP2515_CS_PIN, 0);
@@ -24,51 +25,63 @@ void mcp2515_write_register(uint8_t reg, uint8_t value) {
 }
 
 uint8_t mcp2515_read_register(uint8_t reg) {
+    uint8_t cmd_buf[2] = {MCP_READ, reg};  // Send READ command + register address
+    uint8_t value = 0;
+
     mcp2515_select();
-    spi_write_blocking(spi0, &reg, 1);  // Send the register address
-    uint8_t value;
-    spi_read_blocking(spi0, 0x00, &value, 1);  // Read the value
+    spi_write_blocking(spi0, cmd_buf, 2);           // Send command and address
+    spi_read_blocking(spi0, 0x00, &value, 1);       // Dummy write to read value
     mcp2515_deselect();
+
     return value;
 }
 
 void mcp2515_bit_modify(uint8_t reg, uint8_t mask, uint8_t data) {
+    uint8_t cmd[] = {MCP_BITMOD, reg, mask, data};
     mcp2515_select();
-    uint8_t buf[4] = {MCP_BITMOD, reg, mask, data};
-    spi_write_blocking(spi0, buf, 4);
+    spi_write_blocking(spi0, cmd, 4);
     mcp2515_deselect();
 }
 
 void mcp2515_enable_loopback() {
-    uint8_t ctrl_value = 0x10;  // 0x10 sets the loopback mode bit (LOM)
-    mcp2515_bit_modify(MCP_CANCTRL, 0x10, ctrl_value);  // Modify the CANCTRL register to enable loopback mode
+    mcp2515_write_register(MCP_CANCTRL, 0x40); // Set to config mode
+    mcp2515_write_register(MCP_CANCTRL, 0x40);  // Set to loopback mode
+    sleep_ms(10);  // Give time for mode to change
 }
 
 void mcp2515_disable_loopback() {
-    // MCP2515 CANCTRL register's loopback mode bit (LOM)
-    uint8_t ctrl_value = 0x00;  // 0x00 clears the loopback mode bit (LOM)
-    mcp2515_bit_modify(MCP_CANCTRL, 0x10, ctrl_value);  // Modify the CANCTRL register to disable loopback mode
+    mcp2515_write_register(MCP_CANCTRL, 0x00);  // Set normal mode bits (REQOP = 000)
+    sleep_ms(10);
 }
 
 void mcp2515_init() {
     gpio_init(MCP2515_CS_PIN);
     gpio_set_dir(MCP2515_CS_PIN, GPIO_OUT);
-    mcp2515_deselect();
+    gpio_put(MCP2515_CS_PIN, 1);
 
     spi_init(spi0, 1000 * 1000);
     gpio_set_function(16, GPIO_FUNC_SPI); // MISO
-    gpio_set_function(17, GPIO_FUNC_SPI); // CS (manual control)
     gpio_set_function(18, GPIO_FUNC_SPI); // SCK
     gpio_set_function(19, GPIO_FUNC_SPI); // MOSI
 
     mcp2515_reset();
+    sleep_ms(10);  // wait after reset
 
-    mcp2515_write_register(MCP_CNF1, 0x00);  // 1 Mbps
-    mcp2515_write_register(MCP_CNF2, 0x90);
-    mcp2515_write_register(MCP_CNF3, 0x02);
+    // Put in CONFIG mode first
+    mcp2515_write_register(MCP_CANCTRL, 0x80);
+    sleep_ms(10);
 
-    // Normal mode (REQOP=000)
-    mcp2515_write_register(MCP_CANCTRL, 0x00);
+    // Set 500 kbps
+    mcp2515_write_register(MCP_CNF1, 0x03);
+    mcp2515_write_register(MCP_CNF2, 0x91);
+    mcp2515_write_register(MCP_CNF3, 0x05);
+
+    // Enable RX buffer
+    mcp2515_write_register(MCP_RXB0CTRL, 0x60);  // Receive all valid messages
+
+    // Confirm CONFIG mode
+    uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
+    printf("CANSTAT after init: 0x%02X\n", stat);  // Should be 0x80 top bits
 }
 
 void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len) {
@@ -124,24 +137,33 @@ void send_position(uint8_t motor_id, float position) {
 }
 
 bool mcp2515_check_message() {
-    // Check the status register of the MCP2515 to see if a message is available in the RX buffer
-    uint8_t status = mcp2515_read_register(MCP_CANSTAT);
+    uint8_t intf = mcp2515_read_register(0x2C);  // CANINTF
+    return (intf & 0x01) != 0;  // RX0IF
+}
 
-    // If the "RX0IF" bit is set in the status register, there's a message in RX buffer 0
-    if (status & 0x01) {
-        return true;  // Message is available
-    }
-
-    return false;  // No message available
+void mcp2515_clear_rx0if() {
+    mcp2515_bit_modify(0x2C, 0x01, 0x00); // Clear RX0IF bit in CANINTF
 }
 
 void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len) {
-    // Read the ID from the TXB0SIDH/SIDL and RXB0EID8/EID0 registers
-    *id = (mcp2515_read_register(MCP_RXB0SIDH) << 3) | (mcp2515_read_register(MCP_RXB0SIDL) >> 5);
-    *len = mcp2515_read_register(MCP_RXB0DLC) & 0x0F;  // Data length code (DLC)
+    uint8_t sidh = mcp2515_read_register(MCP_RXB0SIDH);
+    uint8_t sidl = mcp2515_read_register(MCP_RXB0SIDL);
+    uint8_t eid8 = mcp2515_read_register(MCP_RXB0EID8);
+    uint8_t eid0 = mcp2515_read_register(MCP_RXB0EID0);
 
-    // Read the data from the RXB0D0 to RXB0D7 registers
+    // Extended ID decoding (29-bit)
+    *id = ((uint32_t)(sidh) << 21) |
+          ((uint32_t)(sidl & 0xE0) << 13) |
+          ((uint32_t)(sidl & 0x03) << 16) |
+          ((uint32_t)(eid8) << 8) |
+          (uint32_t)(eid0);
+
+    *len = mcp2515_read_register(MCP_RXB0DLC) & 0x0F;
+
     for (int i = 0; i < *len; i++) {
         data[i] = mcp2515_read_register(MCP_RXB0D0 + i);
     }
+
+    mcp2515_clear_rx0if();
 }
+
