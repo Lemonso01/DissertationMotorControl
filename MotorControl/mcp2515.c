@@ -23,11 +23,31 @@ void mcp2515_write_register(uint8_t reg, uint8_t value) {
     mcp2515_deselect();
 }
 
+uint8_t mcp2515_read_register(uint8_t reg) {
+    mcp2515_select();
+    spi_write_blocking(spi0, &reg, 1);  // Send the register address
+    uint8_t value;
+    spi_read_blocking(spi0, 0x00, &value, 1);  // Read the value
+    mcp2515_deselect();
+    return value;
+}
+
 void mcp2515_bit_modify(uint8_t reg, uint8_t mask, uint8_t data) {
     mcp2515_select();
     uint8_t buf[4] = {MCP_BITMOD, reg, mask, data};
     spi_write_blocking(spi0, buf, 4);
     mcp2515_deselect();
+}
+
+void mcp2515_enable_loopback() {
+    uint8_t ctrl_value = 0x10;  // 0x10 sets the loopback mode bit (LOM)
+    mcp2515_bit_modify(MCP_CANCTRL, 0x10, ctrl_value);  // Modify the CANCTRL register to enable loopback mode
+}
+
+void mcp2515_disable_loopback() {
+    // MCP2515 CANCTRL register's loopback mode bit (LOM)
+    uint8_t ctrl_value = 0x00;  // 0x00 clears the loopback mode bit (LOM)
+    mcp2515_bit_modify(MCP_CANCTRL, 0x10, ctrl_value);  // Modify the CANCTRL register to disable loopback mode
 }
 
 void mcp2515_init() {
@@ -101,4 +121,27 @@ void send_position(uint8_t motor_id, float position) {
     uint32_t can_id = (CAN_PACKET_SET_POS << 8) | motor_id;
 
     mcp2515_send_extended(can_id, data, 4);
+}
+
+bool mcp2515_check_message() {
+    // Check the status register of the MCP2515 to see if a message is available in the RX buffer
+    uint8_t status = mcp2515_read_register(MCP_CANSTAT);
+
+    // If the "RX0IF" bit is set in the status register, there's a message in RX buffer 0
+    if (status & 0x01) {
+        return true;  // Message is available
+    }
+
+    return false;  // No message available
+}
+
+void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len) {
+    // Read the ID from the TXB0SIDH/SIDL and RXB0EID8/EID0 registers
+    *id = (mcp2515_read_register(MCP_RXB0SIDH) << 3) | (mcp2515_read_register(MCP_RXB0SIDL) >> 5);
+    *len = mcp2515_read_register(MCP_RXB0DLC) & 0x0F;  // Data length code (DLC)
+
+    // Read the data from the RXB0D0 to RXB0D7 registers
+    for (int i = 0; i < *len; i++) {
+        data[i] = mcp2515_read_register(MCP_RXB0D0 + i);
+    }
 }
