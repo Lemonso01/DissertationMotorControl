@@ -26,77 +26,6 @@ int float_to_uint(float x, float x_min, float x_max, int bits) {
     return (int)((x - offset) * ((float)((1 << bits) - 1)) / span);
 }
 
-void send_mit_command(uint8_t motor_id, float position, float velocity, float kp, float kd, float torque) {
-    // Clamp and convert to unsigned ints
-    int p_int = float_to_uint(position, -12.5f, 12.5f, 16);
-    int v_int = float_to_uint(velocity, -50.0f, 50.0f, 12);
-    int kp_int = float_to_uint(kp, 0.0f, 500.0f, 12);
-    int kd_int = float_to_uint(kd, 0.0f, 5.0f, 12);
-    int t_int  = float_to_uint(torque, -18.0f, 18.0f, 12);
-
-    uint8_t data[8];
-    data[0] = (p_int >> 8) & 0xFF;
-    data[1] = p_int & 0xFF;
-    data[2] = (v_int >> 4) & 0xFF;
-    data[3] = ((v_int & 0xF) << 4) | ((kp_int >> 8) & 0xF);
-    data[4] = kp_int & 0xFF;
-    data[5] = (kd_int >> 4) & 0xFF;
-    data[6] = ((kd_int & 0xF) << 4) | ((t_int >> 8) & 0xF);
-    data[7] = t_int & 0xFF;
-
-    uint32_t can_id = motor_id;  // Standard ID in MIT mode
-    mcp2515_send_extended(can_id, data, 8);
-}
-
-void scan_mit_ids() {
-    uint32_t id;
-    uint8_t data[8];
-    uint8_t len;
-
-    printf("Starting MIT Mode ID scan...\n");
-
-    for (uint8_t motor_id = 0; motor_id <= 127; motor_id++) {
-        printf("Trying ID: %3d (0x%02X)\n", motor_id, motor_id);
-
-        // Step 1: Enter MIT mode
-        uint8_t enter_mit[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC};
-        mcp2515_send_extended(motor_id, enter_mit, 8);
-        sleep_ms(100);
-
-        // Step 2: Send MIT control command (e.g., velocity)
-        send_mit_command(motor_id, 0.0f, 2.0f, 5.0f, 0.1f, 0.0f);
-        sleep_ms(200);
-
-        // Step 3: Wait for response
-        if (mcp2515_check_message()) {
-            mcp2515_read_message(&id, data, &len);
-
-            if (len == 8) {
-                int received_id = data[0];
-
-                int p_int = (data[1] << 8) | data[2];
-                int v_int = (data[3] << 4) | (data[4] >> 4);
-                int t_int = ((data[4] & 0xF) << 8) | data[5];
-
-                float position = ((float)p_int) * 25.0f / 65535.0f - 12.5f;
-                float velocity = ((float)v_int) * 100.0f / 4095.0f - 50.0f;
-                float torque   = ((float)t_int) * 36.0f / 4095.0f - 18.0f;
-
-                int temperature = (int)data[6] - 40;
-                uint8_t error_flags = data[7];
-
-                printf("Found MIT Motor ID: %d (0x%02X)\n", motor_id, motor_id);
-                printf("Pos: %.2f rad | Vel: %.2f rad/s | Tq: %.2f Nm | Temp: %d°C | Err: 0x%02X\n",
-                       position, velocity, torque, temperature, error_flags);
-
-                return;  // Stop on first match
-            }
-        }
-    }
-
-    printf("Scan complete. No MIT response detected.\n");
-}
-
 void can_receive_loop() {
     uint32_t id;
     uint8_t data[8];
@@ -200,7 +129,7 @@ int main() {
     stdio_init_all();
     sleep_ms(10000);
     mcp2515_init();
-    mcp2515_disable_loopback();
+    mcp2515_enable_loopback();
     sleep_ms(300);
 
     uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
@@ -213,17 +142,17 @@ int main() {
 
     //scan_motor_ids();  // Try CAN IDs
 
-    send_rpm(0x0A, 1000);
+    send_rpm(104, 1000);
 
-    sleep_ms(10000);
+    sleep_ms(1000);
 
-    send_rpm(0x0A, 0);
-
+    send_rpm(104, 0);
 
     // Start listening
+    can_feedback_real();
     //can_receive_loop();
 
-    can_feedback_real();
+    
 
     return 0;
 }

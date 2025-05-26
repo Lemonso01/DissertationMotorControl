@@ -71,10 +71,10 @@ void mcp2515_init() {
     mcp2515_write_register(MCP_CANCTRL, 0x80);
     sleep_ms(10);
 
-    // Set 500 kbps
-    mcp2515_write_register(MCP_CNF1, 0x03);
-    mcp2515_write_register(MCP_CNF2, 0x91);
-    mcp2515_write_register(MCP_CNF3, 0x05);
+    // Set 500 kbps at 16MHz
+    mcp2515_write_register(MCP_CNF1, 0x00);
+    mcp2515_write_register(MCP_CNF2, 0xD0);
+    mcp2515_write_register(MCP_CNF3, 0x82);
 
     // Enable RX buffer
     mcp2515_write_register(MCP_RXB0CTRL, 0x60);  // Receive all valid messages
@@ -87,8 +87,8 @@ void mcp2515_init() {
 void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len) {
     uint8_t sidh = (uint8_t)(id >> 21);
     uint8_t sidl = (uint8_t)(((id >> 16) & 0x03) << 5) | (1 << 3) | ((id >> 18) & 0x07);
-    uint8_t eid8 = (uint8_t)(id >> 8);
-    uint8_t eid0 = (uint8_t)(id);
+    uint8_t eid8 = (uint8_t)((id >> 8) & 0xFF);
+    uint8_t eid0 = (uint8_t)(id & 0xFF);
 
     mcp2515_write_register(MCP_TXB0SIDH, sidh);
     mcp2515_write_register(MCP_TXB0SIDL, sidl);
@@ -105,6 +105,7 @@ void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len) {
     spi_write_blocking(spi0, &rts, 1);
     mcp2515_deselect();
 }
+
 
 #define CAN_PACKET_SET_RPM 3
 
