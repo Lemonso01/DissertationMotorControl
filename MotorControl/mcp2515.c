@@ -146,25 +146,57 @@ void mcp2515_clear_rx0if() {
     mcp2515_bit_modify(0x2C, 0x01, 0x00); // Clear RX0IF bit in CANINTF
 }
 
+uint8_t mcp2515_read_status() {
+    uint8_t tx_buf[2] = {0xA0, 0x00};  // READ STATUS command
+    uint8_t rx_buf[2] = {0};
+
+    mcp2515_select();
+    spi_write_read_blocking(spi0, tx_buf, rx_buf, 2);
+    mcp2515_deselect();
+
+    return rx_buf[1];  // This contains the status bits
+}
+
+
 void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len) {
-    uint8_t sidh = mcp2515_read_register(MCP_RXB0SIDH);
-    uint8_t sidl = mcp2515_read_register(MCP_RXB0SIDL);
-    uint8_t eid8 = mcp2515_read_register(MCP_RXB0EID8);
-    uint8_t eid0 = mcp2515_read_register(MCP_RXB0EID0);
+    uint8_t status = mcp2515_read_status();
 
-    // Extended ID decoding (29-bit)
-    *id = ((uint32_t)(sidh) << 21) |
-          ((uint32_t)(sidl & 0xE0) << 13) |
-          ((uint32_t)(sidl & 0x03) << 16) |
-          ((uint32_t)(eid8) << 8) |
-          (uint32_t)(eid0);
-
-    *len = mcp2515_read_register(MCP_RXB0DLC) & 0x0F;
-
-    for (int i = 0; i < *len; i++) {
-        data[i] = mcp2515_read_register(MCP_RXB0D0 + i);
+    uint8_t addr;
+    if (status & 0x40) {
+        // Message in RXB0
+        addr = MCP_RXB0SIDH;
+    } else if (status & 0x80) {
+        // Message in RXB1
+        addr = MCP_RXB1SIDH;
+    } else {
+        // No message available
+        *len = 0;
+        return;
     }
 
-    mcp2515_clear_rx0if();
+    uint8_t sidh = mcp2515_read_register(addr);
+    uint8_t sidl = mcp2515_read_register(addr + 1);
+    uint8_t eid8 = mcp2515_read_register(addr + 2);
+    uint8_t eid0 = mcp2515_read_register(addr + 3);
+
+    *id = ((uint32_t)sidh << 21) |
+          ((uint32_t)(sidl & 0xE0) << 13) |
+          ((uint32_t)(sidl & 0x03) << 16) |
+          ((uint32_t)eid8 << 8) |
+          (uint32_t)eid0;
+
+    *len = mcp2515_read_register(addr + 4) & 0x0F;
+
+    for (int i = 0; i < *len; i++) {
+        data[i] = mcp2515_read_register((addr + 5) + i);
+    }
+
+    // Clear appropriate interrupt flag
+    if (addr == MCP_RXB0SIDH) {
+        mcp2515_bit_modify(MCP_CANINTF, 0x01, 0x00); // Clear RX0IF
+    } else {
+        mcp2515_bit_modify(MCP_CANINTF, 0x02, 0x00); // Clear RX1IF
+    }
 }
+
 

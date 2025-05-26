@@ -33,6 +33,8 @@
 #define MCP_CNF3           0x28    // Configuration Register 3
 #define MCP_CNF2           0x29    // Configuration Register 2
 #define MCP_CNF1           0x2A    // Configuration Register 1
+#define MCP_CANINTF        0x2C
+
 
 // MCP2515 Transmit Buffers
 #define MCP_TXB0CTRL       0x30    // Transmit Buffer 0 Control Register
@@ -105,6 +107,7 @@ void send_rpm(uint8_t motor_id, int32_t rpm);
 void send_position(uint8_t motor_id, float position);
 bool mcp2515_check_message();
 void mcp2515_clear_rx0if();
+uint8_t mcp2515_read_status();
 void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len);
 
 

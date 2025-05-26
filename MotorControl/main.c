@@ -52,40 +52,25 @@ void can_feedback_real() {
     uint8_t len;
 
     while (true) {
-        if (mcp2515_check_message()) {
+        while (mcp2515_check_message()) {
             mcp2515_read_message(&id, data, &len);
 
-            // 🔍 DEBUG: Print raw message
-            printf("Raw CAN ID: 0x%03X, Length: %d, Data: ", id, len);
+            printf("ID: 0x%03X | LEN: %d | DATA: ", id, len);
             for (int i = 0; i < len; i++) {
                 printf("%02X ", data[i]);
             }
             printf("\n");
-
-            // Try to decode only if length matches CubeMars format
-            if (len == 8) {
-                int16_t pos_raw = (data[0] << 8) | data[1];
-                int16_t spd_raw = (data[2] << 8) | data[3];
-                int16_t cur_raw = (data[4] << 8) | data[5];
-                int8_t temperature = (int8_t)data[6];
-                uint8_t error_code = data[7];
-
-                float position_deg = pos_raw * 0.1f;
-                float speed_erpm = spd_raw * 10.0f;
-                float current_a = cur_raw * 0.01f;
-
-                printf("DECODED: POS: %.1f°, SPD: %.1f ERPM, CUR: %.2f A, TEMP: %d°C, ERR: %u\n",
-                       position_deg, speed_erpm, current_a, temperature, error_code);
-            } else {
-                printf("Skipped decode. Expected 8 bytes, got %d.\n", len);
-            }
-        } else {
-            printf("...Waiting for feedback\n");
         }
 
-        sleep_ms(500);
+        // Clear overflow flags (RX0/1IF)
+        mcp2515_bit_modify(0x2C, 0x03, 0x00);  // MCP_CANINTF = 0x2C
+        mcp2515_bit_modify(0x2D, 0xFF, 0x00);  // MCP_EFLG = 0x2D (clear all errors)
+
+        sleep_ms(1);  // stay aggressive
     }
 }
+
+
 
 void can_receive_loop_mit() {
     uint32_t id;
@@ -123,13 +108,34 @@ void can_receive_loop_mit() {
     }
 }
 
+void print_can_errors() {
+    uint8_t eflg = mcp2515_read_register(MCP_EFLG);
+    uint8_t tec = mcp2515_read_register(MCP_TEC);
+    uint8_t rec = mcp2515_read_register(MCP_REC);
+
+    printf("⚠️  CAN Error Flags: EFLG = 0x%02X | TEC = %d | REC = %d\n", eflg, tec, rec);
+
+    if (eflg) {
+        if (eflg & 0x01) printf("  - RX0 Overflow\n");
+        if (eflg & 0x02) printf("  - RX1 Overflow\n");
+        if (eflg & 0x04) printf("  - TX Error Warning\n");
+        if (eflg & 0x08) printf("  - RX Error Warning\n");
+        if (eflg & 0x10) printf("  - TX Passive\n");
+        if (eflg & 0x20) printf("  - RX Passive\n");
+        if (eflg & 0x40) printf("  - TX Bus-Off\n");
+        if (eflg & 0x80) printf("  - RX Bus-Off\n");
+    }
+}
+
+
 
 int main() {
 
     stdio_init_all();
     sleep_ms(10000);
     mcp2515_init();
-    mcp2515_enable_loopback();
+    //mcp2515_enable_loopback();
+    mcp2515_disable_loopback();
     sleep_ms(300);
 
     uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
@@ -143,6 +149,8 @@ int main() {
     //scan_motor_ids();  // Try CAN IDs
 
     send_rpm(104, 1000);
+
+    print_can_errors();
 
     sleep_ms(1000);
 
