@@ -1,6 +1,14 @@
 #include "pico/stdlib.h"
 #include "mcp2515.h"
 #include <stdio.h>
+#include <math.h>
+
+
+#ifndef M_PI
+  #define M_PI 3.14159265358979323846f
+#endif
+#define POS_TOL    0.01f      // ~0.6°
+#define LOOP_DELAY 5          // 200 Hz update rate
 
 
 // Error counter registers
@@ -100,6 +108,45 @@ static void ping_motor(uint8_t node_id) {
     printf(">> MIT-ENTER ping sent to ID %u\n", node_id);
 }
 
+void move_to(float p_target) {
+    can_frame_t tx, rx;
+    float p_act, v_act, t_act, kd_act;
+    int rawT, err;
+
+    for (int i = 0; i < 500; i++) {
+        // 1) pack & send
+        mit_pack_cmd(&tx,
+                     MOTOR_ID,
+                     p_target,
+                     2.0f,   // v_des
+                     50.0f,  // Kp
+                     1.0f,   // Kd
+                     0.0f    // torque ff
+        );
+        mcp2515_send_standard(tx.id, tx.data, tx.dlc);
+
+        // 2) try to read reply
+        if (mcp2515_receive_frame(&rx)) {
+            mit_unpack_reply(&rx,
+                             &p_act,
+                             &v_act,
+                             &t_act,
+                             &kd_act,
+                             &rawT,
+                             &err
+            );
+            if (fabsf(p_act - p_target) < POS_TOL) {
+                printf("→ reached %.3f rad (error=%.3f)\n",
+                       p_target, p_act - p_target);
+                return;
+            }
+        }
+
+        sleep_ms(LOOP_DELAY);
+    }
+    printf("! move_to(%.3f) timed out\n", p_target);
+}
+
 
 
 int main() {
@@ -111,35 +158,33 @@ int main() {
     mcp2515_disable_loopback();
     sleep_ms(300);
 
+    ping_motor(MOTOR_ID);
+
     // prepare a frame
     can_frame_t tx = { .id = MOTOR_ID, .extended = false, .dlc = 8 };
     can_frame_t rx;
     float p, v, t, kd; int rawT, err;
+    float cur_p, cur_v, tCur, cur_kd; int cur_rawT, cur_err;
 
-    // enter control mode
-    ping_motor(MOTOR_ID);   // use the MIT-ENTER ping from before
-    sleep_ms(20);
-
-    // now drive it in MIT-mode
-    mit_pack_cmd(&tx, MOTOR_ID,
-                 1.57f,    // desired pos = 90°
-                 0.0f,     // desired vel
-                 100.0f,   // Kp
-                 1.0f,     // Kd
-                 0.0f);    // torque ff
-    mcp2515_send_standard(tx.id, tx.data, tx.dlc);
-    printf("MIT CMD sent\n");
-
-    // read back reply
-    sleep_ms(10);
-    if(mcp2515_check_message() && mcp2515_receive_frame(&rx)){
-        mit_unpack_reply(&rx, &p, &v, &t, &kd, &rawT, &err);
-        printf("MIT REPLY P=%.3f v=%.3f t=%.3f kd=%.3f Traw=%d err=%d\n",
-               p, v, t, rawT, err);
-    } else {
-        printf("No MIT reply\n");
+    can_frame_t tx0, rx0;
+    float start_p = 0, dummy;
+    for (int i=0; i<100; i++) {
+        mit_pack_cmd(&tx0, MOTOR_ID, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        mcp2515_send_standard(tx0.id, tx0.data, tx0.dlc);
+        if (mcp2515_receive_frame(&rx0)) {
+            mit_unpack_reply(&rx0, &start_p, &dummy, &dummy, &dummy, &rawT, &err);
+            break;
+        }
+        sleep_ms(5);
     }
+    printf("Start pos = %.3f rad\n", start_p);
 
-    while(1) tight_loop_contents();
+    // move +90°
+    move_to(start_p + M_PI/2);
+    sleep_ms(500);
+    // then move −180° (ends at start − π/2)
+    move_to(start_p - M_PI/2);
+
+    while (1) tight_loop_contents();
 }
 

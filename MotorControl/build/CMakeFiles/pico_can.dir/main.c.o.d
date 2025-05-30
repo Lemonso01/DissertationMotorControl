@@ -67,4 +67,4 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /usr/include/newlib/machine/_types.h /usr/include/newlib/sys/lock.h \
  /usr/include/newlib/sys/_locale.h /usr/include/newlib/strings.h \
  /usr/include/newlib/sys/string.h /usr/include/newlib/stdio.h \
- /usr/include/newlib/sys/stdio.h
+ /usr/include/newlib/sys/stdio.h /usr/include/newlib/math.h
