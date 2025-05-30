@@ -6,6 +6,7 @@
 #include "hardware/spi.h"
 #include "hardware/gpio.h"
 #include "pico/stdlib.h"
+#include <string.h>
 
 // === Chip Select GPIO Pin ===
 #define MCP2515_CS_PIN 17
@@ -57,6 +58,14 @@
 #define CAN_PACKET_SET_ORIGIN           5
 #define CAN_PACKET_SET_POSRPM           6
 
+
+typedef struct {
+    uint32_t id;         ///< 11-bit if extended==false, else 29-bit
+    bool     extended;   ///< false=standard, true=extended
+    uint8_t  dlc;        ///< number of data bytes (0–8)
+    uint8_t  data[8];    ///< payload
+} can_frame_t;
+
 // === Function Prototypes ===
 void mcp2515_init();
 void mcp2515_reset();
@@ -83,6 +92,13 @@ void send_rpm(uint8_t motor_id, int32_t rpm);
 void send_position(uint8_t motor_id, float position);
 
 // === Utilities ===
-uint16_t float_to_uint16(float val, float min_val, float max_val);
+uint32_t float_to_uint(float x, float x_min, float x_max, int bits);
+float uint_to_float(uint16_t x_int, float x_min, float x_max, int bits);
+
+// === MIT Mode ===
+void mcp2515_send_frame(const can_frame_t *frm);
+bool mcp2515_receive_frame(can_frame_t *frm);
+void mit_pack_cmd(can_frame_t *frm, uint8_t drv_id, float p_des, float v_des, float kp, float kd, float t_ff);
+void mit_unpack_reply(const can_frame_t *frm, float *p, float *v, float *t, float *kd, int *rawTemp, int *err);
 
 #endif // MCP2515_H

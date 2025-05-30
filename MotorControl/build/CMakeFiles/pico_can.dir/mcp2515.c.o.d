@@ -63,7 +63,9 @@ CMakeFiles/pico_can.dir/mcp2515.c.o: \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
- /usr/include/newlib/stdio.h /usr/include/newlib/sys/reent.h \
+ /usr/include/newlib/string.h /usr/include/newlib/sys/reent.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/sys/_types.h \
  /usr/include/newlib/machine/_types.h /usr/include/newlib/sys/lock.h \
+ /usr/include/newlib/sys/_locale.h /usr/include/newlib/strings.h \
+ /usr/include/newlib/sys/string.h /usr/include/newlib/stdio.h \
  /usr/include/newlib/sys/stdio.h

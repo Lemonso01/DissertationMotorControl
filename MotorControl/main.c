@@ -7,6 +7,8 @@
 #define MCP_TEC 0x1C
 #define MCP_REC 0x1D
 
+#define MOTOR_ID 1
+
 
 void scan_motor_ids() {
     printf("Starting motor ID scan (1–127) using RPM commands...\n");
@@ -23,12 +25,6 @@ void scan_motor_ids() {
     }
 
     printf("Scan complete. Look for movement or feedback.\n");
-}
-
-int float_to_uint(float x, float x_min, float x_max, int bits) {
-    float span = x_max - x_min;
-    float offset = x_min;
-    return (int)((x - offset) * ((float)((1 << bits) - 1)) / span);
 }
 
 void can_receive_loop() {
@@ -76,43 +72,6 @@ void can_feedback_real() {
 }
 
 
-
-void can_receive_loop_mit() {
-    uint32_t id;
-    uint8_t data[8];
-    uint8_t len;
-
-    while (true) {
-        if (mcp2515_check_message()) {
-            mcp2515_read_message(&id, data, &len);
-
-            if (len == 8) {
-                int motor_id = data[0];
-
-                int p_int = (data[1] << 8) | data[2];
-                int v_int = (data[3] << 4) | (data[4] >> 4);
-                int t_int = ((data[4] & 0xF) << 8) | data[5];
-
-                float position = ((float)p_int) * 25.0f / 65535.0f - 12.5f;
-                float velocity = ((float)v_int) * 100.0f / 4095.0f - 50.0f;
-                float torque   = ((float)t_int) * 36.0f / 4095.0f - 18.0f;
-
-                int temperature = (int)data[6] - 40;
-                uint8_t error_flags = data[7];
-
-                printf("MIT FEEDBACK | ID: %d | Pos: %.2f rad | Vel: %.2f rad/s | Tq: %.2f Nm | Temp: %d°C | Err: 0x%02X\n",
-                       motor_id, position, velocity, torque, temperature, error_flags);
-            } else {
-                printf("Received unexpected frame length: %d\n", len);
-            }
-        } else {
-            printf("...Waiting for MIT feedback\n");
-        }
-
-        sleep_ms(250);  // Adjust polling rate if needed
-    }
-}
-
 void print_can_errors() {
     uint8_t eflg = mcp2515_read_register(MCP_EFLG);
     uint8_t tec = mcp2515_read_register(MCP_TEC);
@@ -132,6 +91,15 @@ void print_can_errors() {
     }
 }
 
+static void ping_motor(uint8_t node_id) {
+    uint8_t ping[8] = {
+        0xFF,0xFF,0xFF,0xFF,
+        0xFF,0xFF,0xFF,0xFC
+    };
+    mcp2515_send_standard(node_id, ping, 8);
+    printf(">> MIT-ENTER ping sent to ID %u\n", node_id);
+}
+
 
 
 int main() {
@@ -143,30 +111,35 @@ int main() {
     mcp2515_disable_loopback();
     sleep_ms(300);
 
-    uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
-    printf("CANSTAT after disabling loopback: 0x%02X\n", stat);
-    if ((stat & 0xE0) == 0x00) {
-        printf("MCP2515 is in normal mode.\n");
+    // prepare a frame
+    can_frame_t tx = { .id = MOTOR_ID, .extended = false, .dlc = 8 };
+    can_frame_t rx;
+    float p, v, t, kd; int rawT, err;
+
+    // enter control mode
+    ping_motor(MOTOR_ID);   // use the MIT-ENTER ping from before
+    sleep_ms(20);
+
+    // now drive it in MIT-mode
+    mit_pack_cmd(&tx, MOTOR_ID,
+                 1.57f,    // desired pos = 90°
+                 0.0f,     // desired vel
+                 100.0f,   // Kp
+                 1.0f,     // Kd
+                 0.0f);    // torque ff
+    mcp2515_send_standard(tx.id, tx.data, tx.dlc);
+    printf("MIT CMD sent\n");
+
+    // read back reply
+    sleep_ms(10);
+    if(mcp2515_check_message() && mcp2515_receive_frame(&rx)){
+        mit_unpack_reply(&rx, &p, &v, &t, &kd, &rawT, &err);
+        printf("MIT REPLY P=%.3f v=%.3f t=%.3f kd=%.3f Traw=%d err=%d\n",
+               p, v, t, rawT, err);
     } else {
-        printf("MCP2515 NOT in normal mode! Check wiring.\n");
+        printf("No MIT reply\n");
     }
 
-    //scan_motor_ids();  // Try CAN IDs
-
-    send_rpm(104, 1000);
-
-    print_can_errors();
-
-    sleep_ms(1000);
-
-    send_rpm(104, 0);
-
-    // Start listening
-    can_feedback_real();
-    //can_receive_loop();
-
-    
-
-    return 0;
+    while(1) tight_loop_contents();
 }
 

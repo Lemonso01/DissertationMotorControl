@@ -331,6 +331,15 @@ PICO_STDIO_USB:BOOL=OFF
 PIOASM_INSTALL_DIR:PATH=/mnt/e/DissMotCont/MotorControl/build/pioasm-install
 
 //Value Computed by CMake
+pico-mcp2515_BINARY_DIR:STATIC=/mnt/e/DissMotCont/MotorControl/build/lib/pico-mcp2515
+
+//Value Computed by CMake
+pico-mcp2515_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+pico-mcp2515_SOURCE_DIR:STATIC=/mnt/e/DissMotCont/MotorControl/lib/pico-mcp2515
+
+//Value Computed by CMake
 pico_can_BINARY_DIR:STATIC=/mnt/e/DissMotCont/MotorControl/build
 
 //Value Computed by CMake

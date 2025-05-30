@@ -62,7 +62,9 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h \
- /usr/include/newlib/stdio.h /usr/include/newlib/sys/reent.h \
+ /usr/include/newlib/string.h /usr/include/newlib/sys/reent.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/sys/_types.h \
  /usr/include/newlib/machine/_types.h /usr/include/newlib/sys/lock.h \
+ /usr/include/newlib/sys/_locale.h /usr/include/newlib/strings.h \
+ /usr/include/newlib/sys/string.h /usr/include/newlib/stdio.h \
  /usr/include/newlib/sys/stdio.h
