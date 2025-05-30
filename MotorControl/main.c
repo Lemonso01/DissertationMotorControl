@@ -161,30 +161,69 @@ int main() {
     ping_motor(MOTOR_ID);
     sleep_ms(50);
 
+    can_frame_t cmd0;
+    mit_pack_cmd(&cmd0,
+                MOTOR_ID,
+                0,   // 90° in radians
+                0.0f,      // no speed offset
+                2.0f,    // Kp
+                1.0f,      // Kd
+                0.0f       // torque feed-forward
+    );
+    mcp2515_send_standard(cmd0.id, cmd0.data, cmd0.dlc);
+    printf("Sent MIT → 0° to ID %d\n", MOTOR_ID);
+
+    float p,v,t, kd; int rawT, err;
+    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
+      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
+             p,v,t,rawT,err);
+    } else {
+      printf("<< No MIT reply\n");
+    }
+
+    sleep_ms(5000);
+
     can_frame_t cmd1;
     mit_pack_cmd(&cmd1,
                 MOTOR_ID,
                 +M_PI/2,   // 90° in radians
-                1.0f,      // no speed offset
-                10.0f,    // Kp
+                0.0f,      // no speed offset
+                2.0f,    // Kp
                 1.0f,      // Kd
                 0.0f       // torque feed-forward
     );
     mcp2515_send_standard(cmd1.id, cmd1.data, cmd1.dlc);
     printf("Sent MIT → +90° to ID %d\n", MOTOR_ID);
+
+    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
+      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
+             p,v,t,rawT,err);
+    } else {
+      printf("<< No MIT reply\n");
+    }
+
     sleep_ms(5000);
 
     can_frame_t cmd2;
     mit_pack_cmd(&cmd2,
                 MOTOR_ID,
                 -M_PI/2,   // -90° in radians
-                1.0f,      // no speed offset
-                10.0f,    // Kp
+                0.0f,      // no speed offset
+                2.0f,    // Kp
                 1.0f,      // Kd
                 0.0f       // torque feed-forward
     );
     mcp2515_send_standard(cmd2.id, cmd2.data, cmd2.dlc);
     printf("Sent MIT → -90° to ID %d\n", MOTOR_ID);
+
+    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
+      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
+             p,v,t,rawT,err);
+    } else {
+      printf("<< No MIT reply\n");
+    }
+    
+
     sleep_ms(5000);
 
     while (1) tight_loop_contents();
