@@ -159,31 +159,33 @@ int main() {
     sleep_ms(300);
 
     ping_motor(MOTOR_ID);
+    sleep_ms(50);
 
-    // prepare a frame
-    can_frame_t tx = { .id = MOTOR_ID, .extended = false, .dlc = 8 };
-    can_frame_t rx;
-    float p, v, t, kd; int rawT, err;
-    float cur_p, cur_v, tCur, cur_kd; int cur_rawT, cur_err;
+    can_frame_t cmd1;
+    mit_pack_cmd(&cmd1,
+                MOTOR_ID,
+                +M_PI/2,   // 90° in radians
+                1.0f,      // no speed offset
+                10.0f,    // Kp
+                1.0f,      // Kd
+                0.0f       // torque feed-forward
+    );
+    mcp2515_send_standard(cmd1.id, cmd1.data, cmd1.dlc);
+    printf("Sent MIT → +90° to ID %d\n", MOTOR_ID);
+    sleep_ms(5000);
 
-    can_frame_t tx0, rx0;
-    float start_p = 0, dummy;
-    for (int i=0; i<100; i++) {
-        mit_pack_cmd(&tx0, MOTOR_ID, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-        mcp2515_send_standard(tx0.id, tx0.data, tx0.dlc);
-        if (mcp2515_receive_frame(&rx0)) {
-            mit_unpack_reply(&rx0, &start_p, &dummy, &dummy, &dummy, &rawT, &err);
-            break;
-        }
-        sleep_ms(5);
-    }
-    printf("Start pos = %.3f rad\n", start_p);
-
-    // move +90°
-    move_to(start_p + M_PI/2);
-    sleep_ms(500);
-    // then move −180° (ends at start − π/2)
-    move_to(start_p - M_PI/2);
+    can_frame_t cmd2;
+    mit_pack_cmd(&cmd2,
+                MOTOR_ID,
+                -M_PI/2,   // -90° in radians
+                1.0f,      // no speed offset
+                10.0f,    // Kp
+                1.0f,      // Kd
+                0.0f       // torque feed-forward
+    );
+    mcp2515_send_standard(cmd2.id, cmd2.data, cmd2.dlc);
+    printf("Sent MIT → -90° to ID %d\n", MOTOR_ID);
+    sleep_ms(5000);
 
     while (1) tight_loop_contents();
 }

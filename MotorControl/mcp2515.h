@@ -100,5 +100,6 @@ void mcp2515_send_frame(const can_frame_t *frm);
 bool mcp2515_receive_frame(can_frame_t *frm);
 void mit_pack_cmd(can_frame_t *frm, uint8_t drv_id, float p_des, float v_des, float kp, float kd, float t_ff);
 void mit_unpack_reply(const can_frame_t *frm, float *p, float *v, float *t, float *kd, int *rawTemp, int *err);
+bool mit_recv_reply(uint8_t drv_id, float *p, float *v, float *t, float *kd, int *rawT, int *err);
 
 #endif // MCP2515_H

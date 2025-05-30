@@ -235,46 +235,41 @@ void mcp2515_send_frame(const can_frame_t *frm) {
 }
 
 bool mcp2515_receive_frame(can_frame_t *frm) {
-    if (!mcp2515_check_message())
-        return false;
-
-    // First read raw registers to detect IDE bit
     uint8_t status = mcp2515_read_status();
-    bool in_rx0 = status & 0x40;
-    bool in_rx1 = status & 0x80;
-    uint8_t addr = in_rx0 ? MCP_RXB0SIDH : (in_rx1 ? MCP_RXB1SIDH : 0);
-    if (!addr) return false;
+    uint8_t addr   = 0;
+    if (status & 0x40) addr = MCP_RXB0SIDH;       // RXB0
+    else if (status & 0x80) addr = MCP_RXB1SIDH;  // RXB1
+    else return false;                            // no message
 
-    uint8_t sidh = mcp2515_read_register(addr+0);
-    uint8_t sidl = mcp2515_read_register(addr+1);
-    bool isExt = sidl & 0x08;
+    uint8_t sidh = mcp2515_read_register(addr + 0);
+    uint8_t sidl = mcp2515_read_register(addr + 1);
+    bool    ext  = sidl & (1<<3);  // EXIDE bit
 
-    frm->extended = isExt;
-
-    if (isExt) {
-        // 29-bit decode
-        uint8_t eid8 = mcp2515_read_register(addr+2);
-        uint8_t eid0 = mcp2515_read_register(addr+3);
-        frm->id = ((uint32_t)sidh << 21)
-                | ((uint32_t)(sidl & 0xE0) << 13)
-                | ((uint32_t)(sidl & 0x03) << 16)
-                | ((uint32_t)eid8 << 8)
-                |  eid0;
-        frm->dlc = mcp2515_read_register(addr+4) & 0x0F;
-        for (int i = 0; i < frm->dlc; i++) {
-            frm->data[i] = mcp2515_read_register(addr+5 + i);
-        }
-        // clear RXnIF
-        mcp2515_bit_modify(MCP_CANINTF, in_rx0 ? 0x01 : 0x02, 0);
+    if (!ext) {
+        // Standard Frame ID = SIDH[7:0]<<3 | SIDL[7:5]
+        frm->extended = false;
+        frm->id       = ((uint16_t)sidh << 3) | (sidl >> 5);
     } else {
-        // 11-bit decode
-        frm->id  = ((uint32_t)sidh << 3) | ((sidl & 0xE0) >> 5);
-        frm->dlc = mcp2515_read_register(addr+2) & 0x0F;
-        for (int i = 0; i < frm->dlc; i++) {
-            frm->data[i] = mcp2515_read_register(addr+3 + i);
-        }
-        mcp2515_bit_modify(MCP_CANINTF, in_rx0 ? 0x01 : 0x02, 0);
+        // Extended frame: same as you had before
+        uint8_t eid8 = mcp2515_read_register(addr + 2);
+        uint8_t eid0 = mcp2515_read_register(addr + 3);
+        frm->extended = true;
+        frm->id = ((uint32_t)sidh << 21)
+                | (((uint32_t)(sidl & 0xE0)) << 13)
+                | (((uint32_t)(sidl & 0x03)) << 16)
+                | ((uint32_t)eid8 << 8)
+                | (uint32_t)eid0;
     }
+
+    // DLC is always at offset +4
+    frm->dlc = mcp2515_read_register(addr + 4) & 0x0F;
+    for (int i = 0; i < frm->dlc; i++) {
+        frm->data[i] = mcp2515_read_register(addr + 5 + i);
+    }
+
+    // clear the flag
+    if (addr == MCP_RXB0SIDH) mcp2515_bit_modify(MCP_CANINTF, 0x01, 0);
+    else                     mcp2515_bit_modify(MCP_CANINTF, 0x02, 0);
 
     return true;
 }
@@ -332,4 +327,14 @@ void mit_unpack_reply(const can_frame_t *frm, float *p, float *v, float *t, floa
     *err    = ecode;
 }
 
-    
+bool mit_recv_reply(uint8_t drv_id,
+                    float *p, float *v, float *t, float *kd,
+                    int   *rawT, int *err) {
+    can_frame_t rx;
+    if (!mcp2515_receive_frame(&rx)) return false;
+    if (rx.extended)                return false;
+    if (rx.id != drv_id)            return false;
+    if (rx.dlc != 8)                return false;
+    mit_unpack_reply(&rx, p, v, t, kd, rawT, err);
+    return true;
+}
