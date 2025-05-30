@@ -3,6 +3,11 @@
 #include <stdio.h>
 
 
+// Error counter registers
+#define MCP_TEC 0x1C
+#define MCP_REC 0x1D
+
+
 void scan_motor_ids() {
     printf("Starting motor ID scan (1–127) using RPM commands...\n");
 
@@ -113,7 +118,7 @@ void print_can_errors() {
     uint8_t tec = mcp2515_read_register(MCP_TEC);
     uint8_t rec = mcp2515_read_register(MCP_REC);
 
-    printf("⚠️  CAN Error Flags: EFLG = 0x%02X | TEC = %d | REC = %d\n", eflg, tec, rec);
+    printf("CAN Error Flags: EFLG = 0x%02X | TEC = %d | REC = %d\n", eflg, tec, rec);
 
     if (eflg) {
         if (eflg & 0x01) printf("  - RX0 Overflow\n");

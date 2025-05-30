@@ -1,16 +1,16 @@
 CMakeFiles/pico_can.dir/mcp2515.c.o: \
  /mnt/e/DissMotCont/MotorControl/mcp2515.c \
  /mnt/e/DissMotCont/MotorControl/mcp2515.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/assert.h \
- /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h \
  /usr/include/newlib/assert.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/sys/features.h \
- /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
  /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
@@ -34,14 +34,6 @@ CMakeFiles/pico_can.dir/mcp2515.c.o: \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/accessctrl.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/dreq.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_stdlib_headers/include/pico/stdlib.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
- /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdarg.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/timer.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/timer.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/intctrl.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/sio.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/interp.h \
@@ -50,12 +42,20 @@ CMakeFiles/pico_can.dir/mcp2515.c.o: \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/io_bank0.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/io_bank0.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/intctrl.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform/cpu_regs.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/m33.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/m33.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/nvic.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/scb.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio_coproc.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_stdlib_headers/include/pico/stdlib.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdarg.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/timer.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/timer.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/uart.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/uart.h \
