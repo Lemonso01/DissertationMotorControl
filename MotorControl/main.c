@@ -2,6 +2,7 @@
 #include "mcp2515.h"
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 
 #ifndef M_PI
@@ -147,6 +148,21 @@ void move_to(float p_target) {
     printf("! move_to(%.3f) timed out\n", p_target);
 }
 
+bool read_line(char *buf, size_t bufmax) {
+    static size_t idx = 0;
+    while (1) {
+        int c = getchar_timeout_us(0);
+        if (c == PICO_ERROR_TIMEOUT) break;
+        if (c == '\r') continue;
+        if (c == '\n' || idx >= bufmax-1) {
+            buf[idx] = '\0';
+            idx = 0;
+            return true;
+        }
+        buf[idx++] = (char)c;
+    }
+    return false;
+}
 
 
 int main() {
@@ -158,7 +174,77 @@ int main() {
     mcp2515_disable_loopback();
     sleep_ms(300);
 
-    ping_motor(MOTOR_ID);
+
+    printf("\n--- Pico CAN console ready ---\n");
+
+    char line[64];
+    while (true) {
+        printf("> "); fflush(stdout);
+        // wait for a full line
+        while (!read_line(line, sizeof(line)))
+            tight_loop_contents();
+
+        // HELP
+        if (strcasecmp(line,"HELP")==0) {
+            printf(
+              "POS <deg>\n"
+              "RPM <erpm>\n"
+              "MITPING\n"
+              "MITPOS <rad>\n"
+              "SCAN\n"
+              "EXIT\n"
+            );
+        }
+        // SERVO position
+        else if (strncmp(line,"POS ",4)==0) {
+            float deg = atof(line+4);
+            send_position(MOTOR_ID, deg);
+            printf("→ servo POS %.1f°\n", deg);
+        }
+        // SERVO speed
+        else if (strncmp(line,"RPM ",4)==0) {
+            int erpm = atoi(line+4);
+            send_rpm(MOTOR_ID, erpm);
+            printf("→ servo RPM %d\n", erpm);
+        }
+        // MIT enter
+        else if (strcasecmp(line,"MITPING")==0) {
+            uint8_t ping[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFC};
+            mcp2515_send_standard(MOTOR_ID, ping, 8);
+            printf("→ MIT-ENTER sent\n");
+        }
+        // MIT position
+        else if (strncmp(line,"MITPOS ",7)==0) {
+            float rad = atof(line+7);
+            can_frame_t cmd;
+            mit_pack_cmd(&cmd,
+                         MOTOR_ID,
+                         rad,      // pos [rad]
+                         0.0f,     // v_des
+                         100.0f,   // Kp
+                         1.0f,     // Kd
+                         0.0f);    // t_ff
+            mcp2515_send_standard(cmd.id, cmd.data, cmd.dlc);
+            printf("→ MIT POS %.3f rad sent\n", rad);
+        }
+        // ID scan
+        else if (strcasecmp(line,"SCAN")==0) {
+            for (uint8_t id=0; id<128; id++) {
+                send_rpm(id,1000);
+                sleep_ms(20);
+            }
+            printf("→ scan done\n");
+        }
+        // reboot to BOOTSEL
+        else if (strcasecmp(line,"EXIT")==0) {
+            watchdog_reboot(0,0,IRQ_CTRL_SHUTDOWN);
+        }
+        else {
+            printf("Unknown: %s\n", line);
+        }
+    }
+
+    /*ping_motor(MOTOR_ID);
     sleep_ms(50);
 
     can_frame_t cmd0;
@@ -226,6 +312,6 @@ int main() {
 
     sleep_ms(5000);
 
-    while (1) tight_loop_contents();
+    while (1) tight_loop_contents();*/
 }
 
