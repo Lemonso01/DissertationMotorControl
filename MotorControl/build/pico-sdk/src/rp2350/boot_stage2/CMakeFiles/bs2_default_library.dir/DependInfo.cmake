@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_ASM
-  "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default_padded_checksummed.S" "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/bs2_default_padded_checksummed.S.o"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/bs2_default_padded_checksummed.S" "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/bs2_default_padded_checksummed.S.o"
   )
 set(CMAKE_ASM_COMPILER_ID "GNU")
 

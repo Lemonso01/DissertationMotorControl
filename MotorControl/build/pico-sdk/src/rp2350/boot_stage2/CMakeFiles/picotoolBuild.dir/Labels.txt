@@ -1,14 +1,14 @@
 # Target labels
  picotoolBuild
 # Source files and their labels
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule
-/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule
+/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule

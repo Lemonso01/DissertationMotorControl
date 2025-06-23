@@ -1,4 +1,5 @@
-CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
+CMakeFiles/pico_can.dir/main.c.o: \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/main.c \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_stdlib_headers/include/pico/stdlib.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
@@ -10,9 +11,9 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /usr/include/newlib/sys/features.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
- /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
- /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform.h \
@@ -58,7 +59,7 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/resets.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
- /mnt/e/DissMotCont/MotorControl/mcp2515.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h \
@@ -67,4 +68,7 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /usr/include/newlib/machine/_types.h /usr/include/newlib/sys/lock.h \
  /usr/include/newlib/sys/_locale.h /usr/include/newlib/strings.h \
  /usr/include/newlib/sys/string.h /usr/include/newlib/stdio.h \
- /usr/include/newlib/sys/stdio.h /usr/include/newlib/math.h
+ /usr/include/newlib/sys/stdio.h /usr/include/newlib/math.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/watchdog.h \
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/watchdog.h

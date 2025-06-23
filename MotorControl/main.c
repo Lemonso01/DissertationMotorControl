@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include "hardware/watchdog.h"
 
 
 #ifndef M_PI
@@ -17,6 +18,9 @@
 #define MCP_REC 0x1D
 
 #define MOTOR_ID 1
+
+#define ENDSTOP_PIN  22     // end-stop switch GPIO
+#define CALIB_RPM    200    // low ERPM for calibration
 
 
 void scan_motor_ids() {
@@ -174,8 +178,109 @@ int main() {
     mcp2515_disable_loopback();
     sleep_ms(300);
 
+    printf("\n--- Pico CAN Console Ready ---\n");
+    char line[64];
 
-    printf("\n--- Pico CAN console ready ---\n");
+    while (true) {
+        if (!read_line(line, sizeof(line))) {
+            tight_loop_contents();
+            continue;
+        }
+        printf("CMD> %s\n", line);
+
+        // CALIBRATE
+        if (strcasecmp(line, "CALIBRATE") == 0) {
+            printf("→ Calibration @ %d ERPM...\n", CALIB_RPM);
+            send_rpm(MOTOR_ID, CALIB_RPM);
+            while (gpio_get(ENDSTOP_PIN)) /* idle until hit */ {};
+            send_rpm(MOTOR_ID, 0);
+            printf("→ Endstop hit, stopped.\n");
+            continue;
+        }
+
+        // STOP (falls into MITCMD below)
+        if (strcasecmp(line, "STOP") == 0) {
+            // zero both
+            send_rpm(MOTOR_ID, 0);
+            strcpy(line, "MITCMD 0.0000 0.0000 0.00 0.00 0.00");
+        }
+
+        // POS <deg>
+        if (strncmp(line, "POS ", 4) == 0) {
+            float deg = atof(line + 4);
+            send_position(MOTOR_ID, deg);
+            printf("→ Servo POS %.1f°\n", deg);
+            continue;
+        }
+
+        // RPM <erpm>
+        if (strncmp(line, "RPM ", 4) == 0) {
+            int erpm = atoi(line + 4);
+            send_rpm(MOTOR_ID, erpm);
+            printf("→ Servo RPM %d\n", erpm);
+            continue;
+        }
+
+        // SCAN
+        if (strcasecmp(line,"SCAN")==0) {
+            printf("→ SCAN IDs 0–127...\n");
+            for (uint8_t id=0; id<128; id++){
+                send_rpm(id,1000);
+                sleep_ms(20);
+                send_rpm(id,0);
+            }
+            printf("→ SCAN done\n");
+            continue;
+        }
+
+        // MITPING
+        if (strcasecmp(line, "MITPING") == 0) {
+            uint8_t ping[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFC};
+            mcp2515_send_standard(MOTOR_ID, ping, 8);
+            printf("→ MIT-ENTER ping sent\n");
+            continue;
+        }
+
+        // MITPOS <rad>
+        if (strncmp(line, "MITPOS ",7)==0) {
+            float rad = atof(line+7);
+            can_frame_t cmd;
+            mit_pack_cmd(&cmd, MOTOR_ID, rad, 0.0f, 100.0f, 1.0f, 0.0f);
+            mcp2515_send_standard(cmd.id, cmd.data, cmd.dlc);
+            printf("→ MIT POS %.4frad\n",rad);
+            continue;
+        }
+
+        // MITCMD p v kp kd t
+        if (strncmp(line, "MITCMD ",7)==0) {
+            float p,v,kp,kd,tff;
+            int n = sscanf(line+7, "%f %f %f %f %f",&p,&v,&kp,&kd,&tff);
+            if (n==5) {
+                can_frame_t cmd;
+                mit_pack_cmd(&cmd, MOTOR_ID, p, v, kp, kd, tff);
+                mcp2515_send_standard(cmd.id, cmd.data, cmd.dlc);
+                printf("→ MITCMD p=%.4f v=%.4f kp=%.2f kd=%.2f tff=%.2f\n",
+                        p,v,kp,kd,tff);
+            } else {
+                printf("! MITCMD parse error (%d args)\n",n);
+            }
+            continue;
+        }
+
+        // RESIST <torque>
+        if (strncmp(line, "RESIST ",7)==0) {
+            float torque = atof(line+7);
+            can_frame_t cmd;
+            // disable pos/vel loops (kp=kd=0), use tff=torque
+            mit_pack_cmd(&cmd, MOTOR_ID, 0.0f, 0.0f, 0.0f, 0.0f, torque);
+            mcp2515_send_standard(cmd.id, cmd.data, cmd.dlc);
+            printf("→ Resistance mode %.2fNm\n", torque);
+            continue;
+        }
+    }
+
+
+    /*printf("\n--- Pico CAN console ready ---\n");
 
     char line[64];
     while (true) {
@@ -242,76 +347,7 @@ int main() {
         else {
             printf("Unknown: %s\n", line);
         }
-    }
+    }*/
 
-    /*ping_motor(MOTOR_ID);
-    sleep_ms(50);
-
-    can_frame_t cmd0;
-    mit_pack_cmd(&cmd0,
-                MOTOR_ID,
-                0,   // 90° in radians
-                0.0f,      // no speed offset
-                2.0f,    // Kp
-                1.0f,      // Kd
-                0.0f       // torque feed-forward
-    );
-    mcp2515_send_standard(cmd0.id, cmd0.data, cmd0.dlc);
-    printf("Sent MIT → 0° to ID %d\n", MOTOR_ID);
-
-    float p,v,t, kd; int rawT, err;
-    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
-      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
-             p,v,t,rawT,err);
-    } else {
-      printf("<< No MIT reply\n");
-    }
-
-    sleep_ms(5000);
-
-    can_frame_t cmd1;
-    mit_pack_cmd(&cmd1,
-                MOTOR_ID,
-                +M_PI/2,   // 90° in radians
-                0.0f,      // no speed offset
-                2.0f,    // Kp
-                1.0f,      // Kd
-                0.0f       // torque feed-forward
-    );
-    mcp2515_send_standard(cmd1.id, cmd1.data, cmd1.dlc);
-    printf("Sent MIT → +90° to ID %d\n", MOTOR_ID);
-
-    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
-      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
-             p,v,t,rawT,err);
-    } else {
-      printf("<< No MIT reply\n");
-    }
-
-    sleep_ms(5000);
-
-    can_frame_t cmd2;
-    mit_pack_cmd(&cmd2,
-                MOTOR_ID,
-                -M_PI/2,   // -90° in radians
-                0.0f,      // no speed offset
-                2.0f,    // Kp
-                1.0f,      // Kd
-                0.0f       // torque feed-forward
-    );
-    mcp2515_send_standard(cmd2.id, cmd2.data, cmd2.dlc);
-    printf("Sent MIT → -90° to ID %d\n", MOTOR_ID);
-
-    if (mit_recv_reply(MOTOR_ID, &p,&v,&t, &kd, &rawT, &err)) {
-      printf("<< MIT REPLY  P=%.3f  v=%.3f  t=%.3f  rawT=%d  err=%d\n",
-             p,v,t,rawT,err);
-    } else {
-      printf("<< No MIT reply\n");
-    }
-    
-
-    sleep_ms(5000);
-
-    while (1) tight_loop_contents();*/
 }
 

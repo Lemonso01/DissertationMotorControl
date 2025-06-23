@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "/home/goncalo_gcosta/pico/pico-sdk/tools/pioasm"
-  "/mnt/e/DissMotCont/MotorControl/build/pioasm"
-  "/mnt/e/DissMotCont/MotorControl/build/pioasm-install"
-  "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp"
-  "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp"
-  "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src"
-  "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pioasm"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pioasm-install"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp${cfgdir}") # cfgdir has leading slash
 endif()

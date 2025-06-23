@@ -59,7 +59,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
       
       The C compiler identification is GNU, found in:
-        /mnt/e/DissMotCont/MotorControl/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.o
+        /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.o
       
   -
     kind: "message-v1"
@@ -111,7 +111,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
       
       The CXX compiler identification is GNU, found in:
-        /mnt/e/DissMotCont/MotorControl/build/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.o
+        /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.o
       
   -
     kind: "message-v1"
@@ -135,8 +135,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ"
-      binary: "/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ"
+      source: "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD"
+      binary: "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD"
     cmakeVariables:
       CMAKE_C_FLAGS: "-mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse"
       CMAKE_C_FLAGS_DEBUG: "-Og -g"
@@ -146,15 +146,13 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ'
+        Change Dir: '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD'
         
-        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_72c05/fast
-        gmake: Warning: File 'Makefile' has modification time 2.3 s in the future
-        /usr/bin/gmake  -f CMakeFiles/cmTC_72c05.dir/build.make CMakeFiles/cmTC_72c05.dir/build
-        gmake[1]: Entering directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ'
-        gmake[1]: Warning: File 'CMakeFiles/cmTC_72c05.dir/flags.make' has modification time 2.3 s in the future
-        Building C object CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o
-        /usr/bin/arm-none-eabi-gcc   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_dfc5c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_dfc5c.dir/build.make CMakeFiles/cmTC_dfc5c.dir/build
+        gmake[1]: Entering directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD'
+        Building C object CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o
+        /usr/bin/arm-none-eabi-gcc   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c
         Using built-in specs.
         COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
         Target: arm-none-eabi
@@ -162,8 +160,8 @@ events:
         Thread model: single
         Supported LTO compression algorithms: zlib
         gcc version 13.2.1 20231009 (15:13.2.rel1-2) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/cc1 -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_72c05.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/ccQAYhwo.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/cc1 -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_dfc5c.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/cc0IHiiu.s
         GNU C17 (15:13.2.rel1-2) version 13.2.1 20231009 (arm-none-eabi)
         	compiled by GNU C version 13.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.26-GMP
         
@@ -176,15 +174,15 @@ events:
          /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/include
         End of search list.
         Compiler executable checksum: 3dedaaa4c0ce80076a39ed0b54adff9d
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o /tmp/ccQAYhwo.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o /tmp/cc0IHiiu.s
         GNU assembler version 2.42 (arm-none-eabi) using BFD version (2.42-1ubuntu1+23) 2.42
         COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/
         LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.'
-        Linking C executable cmTC_72c05.elf
-        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_72c05.dir/link.txt --verbose=1
-        /usr/bin/arm-none-eabi-gcc -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o -o cmTC_72c05.elf 
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_dfc5c.elf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dfc5c.dir/link.txt --verbose=1
+        /usr/bin/arm-none-eabi-gcc -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o -o cmTC_dfc5c.elf 
         Using built-in specs.
         COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
         COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper
@@ -195,13 +193,11 @@ events:
         gcc version 13.2.1 20231009 (15:13.2.rel1-2) 
         COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/
         LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_72c05.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_72c05.elf.'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cchoG9ZM.res -X -o cmTC_72c05.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_dfc5c.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_dfc5c.elf.'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccxTDlv3.res -X -o cmTC_dfc5c.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o
         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 00008000
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_72c05.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_72c05.elf.'
-        gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
-        gmake[1]: Leaving directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ'
-        gmake: warning:  Clock skew detected.  Your build may be incomplete.
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_dfc5c.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_dfc5c.elf.'
+        gmake[1]: Leaving directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD'
         
       exitCode: 0
   -
@@ -233,15 +229,13 @@ events:
     message: |
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ']
+        ignore line: [Change Dir: '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_72c05/fast]
-        ignore line: [gmake: Warning: File 'Makefile' has modification time 2.3 s in the future]
-        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_72c05.dir/build.make CMakeFiles/cmTC_72c05.dir/build]
-        ignore line: [gmake[1]: Entering directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-5MSCIQ']
-        ignore line: [gmake[1]: Warning: File 'CMakeFiles/cmTC_72c05.dir/flags.make' has modification time 2.3 s in the future]
-        ignore line: [Building C object CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o]
-        ignore line: [/usr/bin/arm-none-eabi-gcc   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_dfc5c/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_dfc5c.dir/build.make CMakeFiles/cmTC_dfc5c.dir/build]
+        ignore line: [gmake[1]: Entering directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-y43LCD']
+        ignore line: [Building C object CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/arm-none-eabi-gcc   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-gcc]
         ignore line: [Target: arm-none-eabi]
@@ -249,8 +243,8 @@ events:
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.2.1 20231009 (15:13.2.rel1-2) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/']
-        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/cc1 -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_72c05.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/ccQAYhwo.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/']
+        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/cc1 -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_dfc5c.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/cc0IHiiu.s]
         ignore line: [GNU C17 (15:13.2.rel1-2) version 13.2.1 20231009 (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 13.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.26-GMP]
         ignore line: []
@@ -263,15 +257,15 @@ events:
         ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 3dedaaa4c0ce80076a39ed0b54adff9d]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/']
-        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o /tmp/ccQAYhwo.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/']
+        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o /tmp/cc0IHiiu.s]
         ignore line: [GNU assembler version 2.42 (arm-none-eabi) using BFD version (2.42-1ubuntu1+23) 2.42]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.']
-        ignore line: [Linking C executable cmTC_72c05.elf]
-        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_72c05.dir/link.txt --verbose=1]
-        ignore line: [/usr/bin/arm-none-eabi-gcc -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o -o cmTC_72c05.elf ]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_dfc5c.elf]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dfc5c.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/arm-none-eabi-gcc -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o -o cmTC_dfc5c.elf ]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-gcc]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper]
@@ -282,22 +276,22 @@ events:
         ignore line: [gcc version 13.2.1 20231009 (15:13.2.rel1-2) ]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_72c05.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_72c05.elf.']
-        link line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cchoG9ZM.res -X -o cmTC_72c05.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_dfc5c.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_dfc5c.elf.']
+        link line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccxTDlv3.res -X -o cmTC_dfc5c.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o]
           arg [/usr/lib/gcc/arm-none-eabi/13.2.1/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/cchoG9ZM.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccxTDlv3.res] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_72c05.elf] ==> ignore
+          arg [cmTC_dfc5c.elf] ==> ignore
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_72c05.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_dfc5c.dir/CMakeCCompilerABI.c.o] ==> ignore
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp] ==> [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp]
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp] ==> [/usr/lib/arm-none-eabi/lib/thumb/v8-m.main+fp/softfp]
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1] ==> [/usr/lib/gcc/arm-none-eabi/13.2.1]
@@ -317,8 +311,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt"
-      binary: "/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt"
+      source: "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n"
+      binary: "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "-mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse"
       CMAKE_CXX_FLAGS_DEBUG: "-Og -g"
@@ -328,15 +322,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt'
+        Change Dir: '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n'
         
-        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ea118/fast
-        gmake: Warning: File 'Makefile' has modification time 2.2 s in the future
-        /usr/bin/gmake  -f CMakeFiles/cmTC_ea118.dir/build.make CMakeFiles/cmTC_ea118.dir/build
-        gmake[1]: Entering directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt'
-        gmake[1]: Warning: File 'CMakeFiles/cmTC_ea118.dir/flags.make' has modification time 2.2 s in the future
-        Building CXX object CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o
-        /usr/bin/arm-none-eabi-g++   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d101b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d101b.dir/build.make CMakeFiles/cmTC_d101b.dir/build
+        gmake[1]: Entering directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n'
+        Building CXX object CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/arm-none-eabi-g++   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=/usr/bin/arm-none-eabi-g++
         Target: arm-none-eabi
@@ -344,8 +336,8 @@ events:
         Thread model: single
         Supported LTO compression algorithms: zlib
         gcc version 13.2.1 20231009 (15:13.2.rel1-2) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/cc1plus -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_ea118.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/cc2cTpFB.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/cc1plus -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_d101b.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/ccdSaDzR.s
         GNU C++17 (15:13.2.rel1-2) version 13.2.1 20231009 (arm-none-eabi)
         	compiled by GNU C version 13.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.26-GMP
         
@@ -361,15 +353,15 @@ events:
          /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/include
         End of search list.
         Compiler executable checksum: 59936bfd82d2454a91b227f7aec0e17a
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc2cTpFB.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccdSaDzR.s
         GNU assembler version 2.42 (arm-none-eabi) using BFD version (2.42-1ubuntu1+23) 2.42
         COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/
         LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.'
-        Linking CXX executable cmTC_ea118.elf
-        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea118.dir/link.txt --verbose=1
-        /usr/bin/arm-none-eabi-g++ -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_ea118.elf 
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_d101b.elf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d101b.dir/link.txt --verbose=1
+        /usr/bin/arm-none-eabi-g++ -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_d101b.elf 
         Using built-in specs.
         COLLECT_GCC=/usr/bin/arm-none-eabi-g++
         COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper
@@ -380,13 +372,11 @@ events:
         gcc version 13.2.1 20231009 (15:13.2.rel1-2) 
         COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/
         LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_ea118.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_ea118.elf.'
-         /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccFo2qX5.res -X -o cmTC_ea118.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_d101b.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_d101b.elf.'
+         /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccY0dQGM.res -X -o cmTC_d101b.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o
         /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 00008000
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_ea118.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_ea118.elf.'
-        gmake[1]: warning:  Clock skew detected.  Your build may be incomplete.
-        gmake[1]: Leaving directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt'
-        gmake: warning:  Clock skew detected.  Your build may be incomplete.
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_d101b.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_d101b.elf.'
+        gmake[1]: Leaving directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n'
         
       exitCode: 0
   -
@@ -424,15 +414,13 @@ events:
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt']
+        ignore line: [Change Dir: '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ea118/fast]
-        ignore line: [gmake: Warning: File 'Makefile' has modification time 2.2 s in the future]
-        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_ea118.dir/build.make CMakeFiles/cmTC_ea118.dir/build]
-        ignore line: [gmake[1]: Entering directory '/mnt/e/DissMotCont/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-WhCrGt']
-        ignore line: [gmake[1]: Warning: File 'CMakeFiles/cmTC_ea118.dir/flags.make' has modification time 2.2 s in the future]
-        ignore line: [Building CXX object CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/usr/bin/arm-none-eabi-g++   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d101b/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_d101b.dir/build.make CMakeFiles/cmTC_d101b.dir/build]
+        ignore line: [gmake[1]: Entering directory '/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles/CMakeScratch/TryCompile-YjBF1n']
+        ignore line: [Building CXX object CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/arm-none-eabi-g++   -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse    -v -o CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-g++]
         ignore line: [Target: arm-none-eabi]
@@ -440,8 +428,8 @@ events:
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 13.2.1 20231009 (15:13.2.rel1-2) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/']
-        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/cc1plus -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_ea118.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/cc2cTpFB.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/']
+        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/cc1plus -quiet -v -imultilib thumb/v8-m.main+fp/softfp -D__USES_INITFINI__ /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_d101b.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-m33 -mthumb -mfloat-abi=softfp -mcmse -mlibarch=armv8-m.main+dsp+fp -march=armv8-m.main+dsp+fp -version -o /tmp/ccdSaDzR.s]
         ignore line: [GNU C++17 (15:13.2.rel1-2) version 13.2.1 20231009 (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 13.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.26-GMP]
         ignore line: []
@@ -457,15 +445,15 @@ events:
         ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 59936bfd82d2454a91b227f7aec0e17a]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/']
-        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc2cTpFB.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/']
+        ignore line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/as -v -march=armv8-m.main+dsp+fp -mfloat-abi=softfp -meabi=5 -o CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccdSaDzR.s]
         ignore line: [GNU assembler version 2.42 (arm-none-eabi) using BFD version (2.42-1ubuntu1+23) 2.42]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [Linking CXX executable cmTC_ea118.elf]
-        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea118.dir/link.txt --verbose=1]
-        ignore line: [/usr/bin/arm-none-eabi-g++ -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_ea118.elf ]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-v' '-o' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_d101b.elf]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d101b.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/arm-none-eabi-g++ -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse  -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_d101b.elf ]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-g++]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper]
@@ -476,22 +464,22 @@ events:
         ignore line: [gcc version 13.2.1 20231009 (15:13.2.rel1-2) ]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/bin/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/:/usr/lib/gcc/arm-none-eabi/13.2.1/:/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_ea118.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_ea118.elf.']
-        link line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccFo2qX5.res -X -o cmTC_ea118.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m33' '-mthumb'  '-mfloat-abi=softfp' '-mcmse' '-nostdlib' '-v' '-o' 'cmTC_d101b.elf' '-mlibarch=armv8-m.main+dsp+fp' '-march=armv8-m.main+dsp+fp' '-dumpdir' 'cmTC_d101b.elf.']
+        link line: [ /usr/lib/gcc/arm-none-eabi/13.2.1/collect2 -plugin /usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccY0dQGM.res -X -o cmTC_d101b.elf -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp -L/usr/lib/gcc/arm-none-eabi/13.2.1 -L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o]
           arg [/usr/lib/gcc/arm-none-eabi/13.2.1/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/lib/gcc/arm-none-eabi/13.2.1/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/lib/gcc/arm-none-eabi/13.2.1/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccFo2qX5.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccY0dQGM.res] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_ea118.elf] ==> ignore
+          arg [cmTC_d101b.elf] ==> ignore
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1]
           arg [-L/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib] ==> dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_ea118.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_d101b.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp] ==> [/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp]
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp] ==> [/usr/lib/arm-none-eabi/lib/thumb/v8-m.main+fp/softfp]
         collapse library dir [/usr/lib/gcc/arm-none-eabi/13.2.1] ==> [/usr/lib/gcc/arm-none-eabi/13.2.1]

@@ -1,8 +1,8 @@
-# Install script for directory: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/picoboot_connection
+# Install script for directory: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/picoboot_connection
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/mnt/e/DissMotCont/MotorControl/build/_deps")
+  set(CMAKE_INSTALL_PREFIX "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

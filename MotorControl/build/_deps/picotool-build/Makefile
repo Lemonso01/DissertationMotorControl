@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src
+CMAKE_SOURCE_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build
+CMAKE_BINARY_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/CMakeFiles /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/CMakeFiles /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -162,17 +162,56 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named binary_data
+# Target rules for targets named enc_bootloader
 
 # Build rule for target.
-binary_data: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 binary_data
-.PHONY : binary_data
+enc_bootloader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 enc_bootloader
+.PHONY : enc_bootloader
 
 # fast build rule for target.
-binary_data/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/binary_data.dir/build.make CMakeFiles/binary_data.dir/build
-.PHONY : binary_data/fast
+enc_bootloader/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enc_bootloader.dir/build.make CMakeFiles/enc_bootloader.dir/build
+.PHONY : enc_bootloader/fast
+
+#=============================================================================
+# Target rules for targets named enc_bootloader_mbedtls
+
+# Build rule for target.
+enc_bootloader_mbedtls: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 enc_bootloader_mbedtls
+.PHONY : enc_bootloader_mbedtls
+
+# fast build rule for target.
+enc_bootloader_mbedtls/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enc_bootloader_mbedtls.dir/build.make CMakeFiles/enc_bootloader_mbedtls.dir/build
+.PHONY : enc_bootloader_mbedtls/fast
+
+#=============================================================================
+# Target rules for targets named embedded_data_no_libusb
+
+# Build rule for target.
+embedded_data_no_libusb: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 embedded_data_no_libusb
+.PHONY : embedded_data_no_libusb
+
+# fast build rule for target.
+embedded_data_no_libusb/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/embedded_data_no_libusb.dir/build.make CMakeFiles/embedded_data_no_libusb.dir/build
+.PHONY : embedded_data_no_libusb/fast
+
+#=============================================================================
+# Target rules for targets named embedded_data
+
+# Build rule for target.
+embedded_data: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 embedded_data
+.PHONY : embedded_data
+
+# fast build rule for target.
+embedded_data/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/embedded_data.dir/build.make CMakeFiles/embedded_data.dir/build
+.PHONY : embedded_data/fast
 
 #=============================================================================
 # Target rules for targets named picotool
@@ -186,6 +225,19 @@ picotool: cmake_check_build_system
 picotool/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotool.dir/build.make CMakeFiles/picotool.dir/build
 .PHONY : picotool/fast
+
+#=============================================================================
+# Target rules for targets named mbedtls
+
+# Build rule for target.
+mbedtls: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mbedtls
+.PHONY : mbedtls
+
+# fast build rule for target.
+mbedtls/fast:
+	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/mbedtls.dir/build.make lib/CMakeFiles/mbedtls.dir/build
+.PHONY : mbedtls/fast
 
 #=============================================================================
 # Target rules for targets named errors
@@ -227,19 +279,6 @@ elf2uf2/fast:
 .PHONY : elf2uf2/fast
 
 #=============================================================================
-# Target rules for targets named mbedtls
-
-# Build rule for target.
-mbedtls: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mbedtls
-.PHONY : mbedtls
-
-# fast build rule for target.
-mbedtls/fast:
-	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/mbedtls.dir/build.make lib/CMakeFiles/mbedtls.dir/build
-.PHONY : mbedtls/fast
-
-#=============================================================================
 # Target rules for targets named bintool
 
 # Build rule for target.
@@ -275,6 +314,30 @@ data_locs.s: data_locs.cpp.s
 data_locs.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotool.dir/build.make CMakeFiles/picotool.dir/data_locs.cpp.s
 .PHONY : data_locs.cpp.s
+
+get_enc_bootloader.o: get_enc_bootloader.cpp.o
+.PHONY : get_enc_bootloader.o
+
+# target to build an object file
+get_enc_bootloader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotool.dir/build.make CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o
+.PHONY : get_enc_bootloader.cpp.o
+
+get_enc_bootloader.i: get_enc_bootloader.cpp.i
+.PHONY : get_enc_bootloader.i
+
+# target to preprocess a source file
+get_enc_bootloader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotool.dir/build.make CMakeFiles/picotool.dir/get_enc_bootloader.cpp.i
+.PHONY : get_enc_bootloader.cpp.i
+
+get_enc_bootloader.s: get_enc_bootloader.cpp.s
+.PHONY : get_enc_bootloader.s
+
+# target to generate assembly for a file
+get_enc_bootloader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/picotool.dir/build.make CMakeFiles/picotool.dir/get_enc_bootloader.cpp.s
+.PHONY : get_enc_bootloader.cpp.s
 
 lib/whereami/whereami++.o: lib/whereami/whereami++.cpp.o
 .PHONY : lib/whereami/whereami++.o
@@ -384,7 +447,10 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... binary_data"
+	@echo "... embedded_data"
+	@echo "... embedded_data_no_libusb"
+	@echo "... enc_bootloader"
+	@echo "... enc_bootloader_mbedtls"
 	@echo "... bintool"
 	@echo "... elf"
 	@echo "... elf2uf2"
@@ -394,6 +460,9 @@ help:
 	@echo "... data_locs.o"
 	@echo "... data_locs.i"
 	@echo "... data_locs.s"
+	@echo "... get_enc_bootloader.o"
+	@echo "... get_enc_bootloader.i"
+	@echo "... get_enc_bootloader.s"
 	@echo "... lib/whereami/whereami++.o"
 	@echo "... lib/whereami/whereami++.i"
 	@echo "... lib/whereami/whereami++.s"

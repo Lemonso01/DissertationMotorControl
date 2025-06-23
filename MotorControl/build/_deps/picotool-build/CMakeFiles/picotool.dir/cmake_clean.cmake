@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/picotool.dir/data_locs.cpp.o"
   "CMakeFiles/picotool.dir/data_locs.cpp.o.d"
+  "CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o"
+  "CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o.d"
   "CMakeFiles/picotool.dir/lib/whereami/whereami++.cpp.o"
   "CMakeFiles/picotool.dir/lib/whereami/whereami++.cpp.o.d"
   "CMakeFiles/picotool.dir/lib/whereami/whereami.c.o"

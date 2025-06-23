@@ -1,7 +1,7 @@
 bintool/CMakeFiles/bintool.dir/mbedtls_wrapper.c.o: \
- /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.c \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.c \
  /usr/include/stdc-predef.h \
- /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -50,7 +50,7 @@ bintool/CMakeFiles/bintool.dir/mbedtls_wrapper.c.o: \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/assert.h \
  /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/sha256.h \
- /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \

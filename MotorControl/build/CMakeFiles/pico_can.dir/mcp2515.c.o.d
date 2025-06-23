@@ -1,6 +1,6 @@
 CMakeFiles/pico_can.dir/mcp2515.c.o: \
- /mnt/e/DissMotCont/MotorControl/mcp2515.c \
- /mnt/e/DissMotCont/MotorControl/mcp2515.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.c \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
@@ -12,9 +12,9 @@ CMakeFiles/pico_can.dir/mcp2515.c.o: \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/sys/features.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
- /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
- /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h \
+ /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform.h \

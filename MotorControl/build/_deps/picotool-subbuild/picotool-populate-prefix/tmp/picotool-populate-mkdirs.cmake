@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/tmp"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src"
-  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/tmp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src"
+  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp${cfgdir}") # cfgdir has leading slash
 endif()
