@@ -19,8 +19,12 @@
 
 #define MOTOR_ID 1
 
-#define ENDSTOP_PIN  22     // end-stop switch GPIO
-#define CALIB_RPM    200    // low ERPM for calibration
+#define ENDSTOP_PIN_1    22     
+#define CALIB_RPM      200    
+#define BACK_DEG       5.0f   
+#define RPM2DEG_PER_MS (CALIB_RPM * 360.0f / 60000.0f)  // deg per ms
+
+static float  encoder_offset = 0.0f; 
 
 
 void scan_motor_ids() {
@@ -168,11 +172,73 @@ bool read_line(char *buf, size_t bufmax) {
     return false;
 }
 
+bool read_motor_feedback_deg(float *out_deg) {
+    uint32_t id;
+    uint8_t data[8];
+    uint8_t len;
+
+    // if no message waiting, bail
+    if (!mcp2515_check_message()) return false;
+
+    // pull it out
+    mcp2515_read_message(&id, data, &len);
+    if (len < 2) return false;    // need at least two data bytes for pos
+
+    // high-byte first
+    int16_t pos_raw = (data[0] << 8) | data[1];
+    *out_deg = pos_raw * 0.1f;     // each LSB = 0.1°
+
+    return true;
+}
+
+void do_calibrate() {
+    float pos;
+    // 1) Step 1: rotate CW until endstop closes
+    send_rpm(MOTOR_ID, +CALIB_RPM);
+    while (gpio_get(ENDSTOP_PIN_1)){
+        tight_loop_contents();
+    }
+    send_rpm(MOTOR_ID, 0);
+    sleep_ms(100);
+
+    // 2) Back off BACK_DEG
+    //    we don't know absolute zero yet, so do a timed reverse
+    send_rpm(MOTOR_ID, -CALIB_RPM);
+    uint32_t t0 = to_ms_since_boot(get_absolute_time());
+    uint32_t dt = (uint32_t)ceil(BACK_DEG / RPM2DEG_PER_MS);
+    while (to_ms_since_boot(get_absolute_time()) - t0 < dt) tight_loop_contents();
+    send_rpm(MOTOR_ID, 0);
+    sleep_ms(100);
+
+    // 3) Rotate CW again until endstop closes second time
+    send_rpm(MOTOR_ID, +CALIB_RPM);
+    while (gpio_get(ENDSTOP_PIN_1)) tight_loop_contents();
+    send_rpm(MOTOR_ID, 0);
+    sleep_ms(100);
+
+    // 4) Read that “home” position from the periodic CAN upload
+    //    and store it as +90°
+    //    (we assume your upload rate is fast enough to catch one frame)
+    if ( read_motor_feedback_deg(&pos) ) {
+        // pos is in degrees
+        // if this is to become +90°, then offset = pos - 90
+        encoder_offset = pos - 90.0f;
+        printf("Calib done: raw=%.2f°, offset=%.2f°\n", pos, encoder_offset);
+    } else {
+        printf("Calib read‐back failed!\n");
+    }
+}
+
 
 int main() {
 
     stdio_init_all();
     sleep_ms(10000);
+
+    gpio_init(ENDSTOP_PIN_1);
+    gpio_set_dir(ENDSTOP_PIN_1, GPIO_IN);
+    gpio_pull_up(ENDSTOP_PIN_1);
+
     mcp2515_init();
     //mcp2515_enable_loopback();
     mcp2515_disable_loopback();
@@ -190,11 +256,7 @@ int main() {
 
         // CALIBRATE
         if (strcasecmp(line, "CALIBRATE") == 0) {
-            printf("→ Calibration @ %d ERPM...\n", CALIB_RPM);
-            send_rpm(MOTOR_ID, CALIB_RPM);
-            while (gpio_get(ENDSTOP_PIN)) /* idle until hit */ {};
-            send_rpm(MOTOR_ID, 0);
-            printf("→ Endstop hit, stopped.\n");
+            do_calibrate();
             continue;
         }
 
