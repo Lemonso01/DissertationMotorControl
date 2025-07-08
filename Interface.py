@@ -2,10 +2,10 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-import threading, time
+import threading, time, math
 
 # ──────────────────────────────────────────────────────────────
-# 1) Serial fallback logic
+# 1) serial fallback logic
 # ──────────────────────────────────────────────────────────────
 try:
     import serial
@@ -26,9 +26,9 @@ class DummySerial:
         return out
 
 # ──────────────────────────────────────────────────────────────
-# 2) Configuration
+# 2) configuration
 # ──────────────────────────────────────────────────────────────
-SERIAL_PORT = "COM6"    # adjust as needed
+SERIAL_PORT = "COM6"
 BAUDRATE    = 115200
 MOTOR_ID    = 1         # your CAN node ID
 
@@ -40,24 +40,17 @@ class CanGui(tk.Tk):
         super().__init__()
         self.title("Motor Control GUI")
 
-        # Style for STOP button
+        # — style for STOP button
         style = ttk.Style(self)
         style.theme_use("clam")
         style.configure("Red.TButton",
-            foreground="white",
-            background="red",
-            font=("Segoe UI", 10, "bold"),
-            padding=6,
-            borderwidth=1)
+            foreground="white", background="red",
+            font=("Segoe UI",10,"bold"), padding=6, borderwidth=1)
         style.map("Red.TButton",
-            foreground=[("!disabled", "white")],
-            background=[
-                ("!disabled", "red"),
-                ("active",   "firebrick"),
-                ("pressed",  "darkred")
-            ])
+            foreground=[("!disabled","white")],
+            background=[("!disabled","red"),("active","firebrick"),("pressed","darkred")])
 
-        # Serial port (or dummy)
+        # open serial or dummy
         try:
             if REAL_SERIAL:
                 self.ser = serial.Serial(SERIAL_PORT, BAUDRATE, timeout=0.1)
@@ -67,19 +60,19 @@ class CanGui(tk.Tk):
             messagebox.showwarning("Serial Port", f"Falling back to dummy:\n{e}")
             self.ser = DummySerial()
 
-        # auto-enter MIT mode
+        # auto‐enter MIT mode once
         self.after(500, lambda: self.send_cmd("MITPING"))
 
-        # MIT parameters defaults (Position, Velocity, Kp, Kd, Torque feed-forward)
+        # default Execute‐Movement parameters
         self.exec_params = {
             'p':   1.5708,   # rad
             'v':   0.0,      # rad/s
-            'kp': 100.0,
-            'kd':   1.0,
-            'tff':  0.0,     # N·m
+            'kp':100.0,
+            'kd':  1.0,
+            'tff': 0.0,
         }
 
-        # Tab notebook
+        # Notebook for tabs
         nb = ttk.Notebook(self)
         nb.grid(row=0, column=0, padx=10, pady=10)
 
@@ -100,12 +93,19 @@ class CanGui(tk.Tk):
                    command=self.open_exec_dialog)\
             .grid(row=0, column=1, padx=(5,0))
 
-        # Resistance Mode toggle
+        ttk.Button(main_f, text="MOVE WRIST",
+                   command=self.do_move_wrist, width=20)\
+            .pack(pady=(5,5))
+
+        ttk.Button(main_f, text="MOVE FOREARM",
+                   command=self.do_move_forearm, width=20)\
+            .pack(pady=(0,10))
+
         self.resist_var = tk.BooleanVar(value=False)
         ttk.Checkbutton(main_f, text="Resistance Mode",
                         variable=self.resist_var,
                         command=self.toggle_resistance)\
-            .pack(pady=(10,0))
+            .pack(pady=(0,10))
 
         ttk.Button(main_f, text="STOP",
                    command=self.do_stop,
@@ -116,7 +116,6 @@ class CanGui(tk.Tk):
         adv_f = ttk.Frame(nb, padding=10)
         nb.add(adv_f, text="Advanced")
 
-        # Servo POS / RPM
         ttk.Label(adv_f, text="Servo POS (°):")\
             .grid(row=0, column=0, sticky="e")
         self.pos_var = tk.DoubleVar(value=90.0)
@@ -138,9 +137,8 @@ class CanGui(tk.Tk):
         ttk.Separator(adv_f, orient="horizontal")\
             .grid(row=2, columnspan=3, sticky="ew", pady=5)
 
-        # MIT controls
         ttk.Button(adv_f, text="MIT ENTER",
-                   command=lambda: self.send_cmd("MITPING"))\
+                   command=lambda:self.send_cmd("MITPING"))\
             .grid(row=3, column=0, columnspan=3, sticky="ew", pady=(0,5))
 
         ttk.Label(adv_f, text="MIT POS (rad):")\
@@ -156,7 +154,7 @@ class CanGui(tk.Tk):
                    command=lambda: self.send_cmd("SCAN"))\
             .grid(row=5, column=0, columnspan=3, sticky="ew", pady=(5,0))
 
-        # Log pane
+        # Log below all tabs
         self.log = tk.Text(self, width=50, height=12,
                            state="disabled", takefocus=False)
         self.log.grid(row=1, column=0, padx=10, pady=(0,10))
@@ -164,7 +162,10 @@ class CanGui(tk.Tk):
         # Start reader thread
         threading.Thread(target=self.reader, daemon=True).start()
 
-    # ─── Main tab handlers ──────────────────────────────────────
+
+    # ──────────────────────────────────────────────────────────
+    # Main‐tab handlers
+    # ──────────────────────────────────────────────────────────
     def do_calibrate(self):
         self.send_cmd("CALIBRATE")
 
@@ -173,7 +174,7 @@ class CanGui(tk.Tk):
         dlg.title("Setup Execute Parameters")
         dlg.resizable(False, False)
 
-        labels = ["Position (rad):", "Velocity (rad/s):", "Kp:", "Kd:", "Torque (N·m):"]
+        labels = ["Position (rad):","Velocity (rad/s):","Kp:","Kd:","Torque (N·m):"]
         keys   = ['p','v','kp','kd','tff']
         entries = {}
 
@@ -206,17 +207,65 @@ class CanGui(tk.Tk):
         cmd = f"MITCMD {p:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}"
         self.send_cmd(cmd)
 
+    def do_move_wrist(self):
+        """Sweep from -90° to +90° using MIT mode."""
+        v   = self.exec_params['v']
+        kp  = self.exec_params['kp']
+        kd  = self.exec_params['kd']
+        tff = self.exec_params['tff']
+
+        if v <= 0.001:
+            messagebox.showwarning("Velocity Zero",
+                "Set a nonzero velocity before MOVE WRIST")
+            return
+
+        p1 = -math.pi/2
+        p2 =  math.pi/2
+
+        self.send_cmd(f"MITCMD {p1:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
+        self.log_write(f"> Move wrist start → {p1:.2f} rad")
+
+        sweep_time = abs(p2 - p1) / v
+        delay_ms   = int((sweep_time + 0.1) * 1000)
+
+        self.after(delay_ms, lambda:
+            self.send_cmd(f"MITCMD {p2:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
+        )
+        self.log_write(f"> Scheduled move wrist → {p2:.2f} rad in {sweep_time:.2f}s")
+
+    def do_move_forearm(self):
+        """Sweep from 0° to 142.5° using MIT mode."""
+        v   = self.exec_params['v']
+        kp  = self.exec_params['kp']
+        kd  = self.exec_params['kd']
+        tff = self.exec_params['tff']
+
+        if v <= 0.001:
+            messagebox.showwarning("Velocity Zero",
+                "Set a nonzero velocity before MOVE FOREARM")
+            return
+
+        p1 = 0.0
+        p2 = math.radians(142.5)
+
+        self.send_cmd(f"MITCMD {p1:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
+        self.log_write(f"> Move forearm start → {p1:.2f} rad")
+
+        sweep_time = abs(p2 - p1) / v
+        delay_ms   = int((sweep_time + 0.1) * 1000)
+
+        self.after(delay_ms, lambda:
+            self.send_cmd(f"MITCMD {p2:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
+        )
+        self.log_write(f"> Scheduled move forearm → {p2:.2f} rad in {sweep_time:.2f}s")
+
     def toggle_resistance(self):
         if self.resist_var.get():
-            # Zero out loops, only torque remains
-            v   = 0.0
-            kp  = 0.0
-            kd  = 0.0
-            tff = self.exec_params.get('tff', 1.0)
-            self.send_cmd(f"MITCMD 0.0000 {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
+            # zero out pos/vel loops, torque-only
+            tff = self.exec_params.get('tff',1.0)
+            self.send_cmd(f"MITCMD 0.0000 0.0000 0.00 0.00 {tff:.2f}")
             self.log_write(f"> Resistance ON: tff={tff:.2f}Nm")
         else:
-            # Restore loops, zero torque
             v   = self.exec_params['v']
             kp  = self.exec_params['kp']
             kd  = self.exec_params['kd']
@@ -227,7 +276,9 @@ class CanGui(tk.Tk):
         self.send_cmd("RPM 0")
         self.send_cmd("MITCMD 0.0000 0.0000 0.00 0.00 0.00")
 
-    # ─── Advanced tab handlers ──────────────────────────────────
+    # ──────────────────────────────────────────────────────────
+    # Advanced‐tab handlers
+    # ──────────────────────────────────────────────────────────
     def do_servo_pos(self):
         self.send_cmd(f"POS {self.pos_var.get():.1f}")
 
@@ -237,7 +288,9 @@ class CanGui(tk.Tk):
     def do_mitpos(self):
         self.send_cmd(f"MITPOS {self.mit_var.get():.4f}")
 
-    # ─── Serial & Logging ───────────────────────────────────────
+    # ──────────────────────────────────────────────────────────
+    # Serial & Logging
+    # ──────────────────────────────────────────────────────────
     def send_cmd(self, cmd):
         self.ser.write((cmd + "\n").encode())
         self.log_write(f"> {cmd}")
@@ -263,6 +316,7 @@ class CanGui(tk.Tk):
                     self.log_write(text)
                 buf = lines[-1]
             time.sleep(0.05)
+
 
 if __name__ == "__main__":
     CanGui().mainloop()
