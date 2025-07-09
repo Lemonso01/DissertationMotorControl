@@ -9,6 +9,7 @@ import threading, time, math
 # ──────────────────────────────────────────────────────────────
 try:
     import serial
+    from serial.tools import list_ports
     REAL_SERIAL = True
 except ImportError:
     REAL_SERIAL = False
@@ -17,6 +18,7 @@ class DummySerial:
     def __init__(self, *args, **kwargs):
         self._in = b""
     def write(self, data):
+        # echo back so you see something in the log
         self._in += b"ECHO: " + data
     def read(self, n=1):
         if not self._in:
@@ -28,9 +30,9 @@ class DummySerial:
 # ──────────────────────────────────────────────────────────────
 # 2) configuration
 # ──────────────────────────────────────────────────────────────
-SERIAL_PORT = "COM6"
+SERIAL_PORT = "COM5"      # the port you want
 BAUDRATE    = 115200
-MOTOR_ID    = 1         # your CAN node ID
+MOTOR_ID    = 1           # your CAN node ID
 
 # ──────────────────────────────────────────────────────────────
 # 3) GUI Application
@@ -40,7 +42,7 @@ class CanGui(tk.Tk):
         super().__init__()
         self.title("Motor Control GUI")
 
-        # — style for STOP button
+        # style for STOP button
         style = ttk.Style(self)
         style.theme_use("clam")
         style.configure("Red.TButton",
@@ -48,17 +50,40 @@ class CanGui(tk.Tk):
             font=("Segoe UI",10,"bold"), padding=6, borderwidth=1)
         style.map("Red.TButton",
             foreground=[("!disabled","white")],
-            background=[("!disabled","red"),("active","firebrick"),("pressed","darkred")])
+            background=[("!disabled","red"),
+                        ("active","firebrick"),
+                        ("pressed","darkred")])
 
-        # open serial or dummy
-        try:
-            if REAL_SERIAL:
-                self.ser = serial.Serial(SERIAL_PORT, BAUDRATE, timeout=0.1)
-            else:
-                raise Exception("pyserial missing or port not found")
-        except Exception as e:
-            messagebox.showwarning("Serial Port", f"Falling back to dummy:\n{e}")
+        # ── Try to open the real serial port ──
+        self.log_buffer = []
+        if REAL_SERIAL:
+            # list ports
+            ports = [p.device for p in list_ports.comports()]
+            self.log_buffer.append(f"Detected ports: {ports}")
+            success = False
+            for candidate in (SERIAL_PORT, r"\\.\ " + SERIAL_PORT):
+                if candidate in ports or candidate.startswith(r"\\.\COM"):
+                    try:
+                        self.ser = serial.Serial(candidate,
+                                                 BAUDRATE,
+                                                 timeout=0.1)
+                        self.log_buffer.append(f"Opened {candidate} OK")
+                        success = True
+                        break
+                    except Exception as e:
+                        self.log_buffer.append(f"Failed to open {candidate}: {e}")
+            if not success:
+                messagebox.showwarning("Serial Port",
+                    f"Could not open {SERIAL_PORT}.\n"
+                    f"Falling back to dummy.\nDetected: {ports}")
+                self.ser = DummySerial()
+        else:
+            messagebox.showwarning("pyserial not installed",
+                                   "Falling back to dummy serial.")
             self.ser = DummySerial()
+
+        # put initial log messages into the log widget once it's built
+        self.after(100, lambda: [self.log_write(line) for line in self.log_buffer])
 
         # auto‐enter MIT mode once
         self.after(500, lambda: self.send_cmd("MITPING"))
@@ -138,8 +163,9 @@ class CanGui(tk.Tk):
             .grid(row=2, columnspan=3, sticky="ew", pady=5)
 
         ttk.Button(adv_f, text="MIT ENTER",
-                   command=lambda:self.send_cmd("MITPING"))\
-            .grid(row=3, column=0, columnspan=3, sticky="ew", pady=(0,5))
+                   command=lambda: self.send_cmd("MITPING"))\
+            .grid(row=3, column=0, columnspan=3, sticky="ew",
+                  pady=(0,5))
 
         ttk.Label(adv_f, text="MIT POS (rad):")\
             .grid(row=4, column=0, sticky="e")
@@ -152,7 +178,8 @@ class CanGui(tk.Tk):
 
         ttk.Button(adv_f, text="SCAN IDs",
                    command=lambda: self.send_cmd("SCAN"))\
-            .grid(row=5, column=0, columnspan=3, sticky="ew", pady=(5,0))
+            .grid(row=5, column=0, columnspan=3,
+                  sticky="ew", pady=(5,0))
 
         # Log below all tabs
         self.log = tk.Text(self, width=50, height=12,
@@ -208,12 +235,10 @@ class CanGui(tk.Tk):
         self.send_cmd(cmd)
 
     def do_move_wrist(self):
-        """Sweep from -90° to +90° using MIT mode."""
         v   = self.exec_params['v']
         kp  = self.exec_params['kp']
         kd  = self.exec_params['kd']
         tff = self.exec_params['tff']
-
         if v <= 0.001:
             messagebox.showwarning("Velocity Zero",
                 "Set a nonzero velocity before MOVE WRIST")
@@ -223,23 +248,17 @@ class CanGui(tk.Tk):
         p2 =  math.pi/2
 
         self.send_cmd(f"MITCMD {p1:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
-        self.log_write(f"> Move wrist start → {p1:.2f} rad")
-
         sweep_time = abs(p2 - p1) / v
-        delay_ms   = int((sweep_time + 0.1) * 1000)
-
+        delay_ms   = int((sweep_time + 0.1)*1000)
         self.after(delay_ms, lambda:
             self.send_cmd(f"MITCMD {p2:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
         )
-        self.log_write(f"> Scheduled move wrist → {p2:.2f} rad in {sweep_time:.2f}s")
 
     def do_move_forearm(self):
-        """Sweep from 0° to 142.5° using MIT mode."""
         v   = self.exec_params['v']
         kp  = self.exec_params['kp']
         kd  = self.exec_params['kd']
         tff = self.exec_params['tff']
-
         if v <= 0.001:
             messagebox.showwarning("Velocity Zero",
                 "Set a nonzero velocity before MOVE FOREARM")
@@ -249,36 +268,26 @@ class CanGui(tk.Tk):
         p2 = math.radians(142.5)
 
         self.send_cmd(f"MITCMD {p1:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
-        self.log_write(f"> Move forearm start → {p1:.2f} rad")
-
         sweep_time = abs(p2 - p1) / v
-        delay_ms   = int((sweep_time + 0.1) * 1000)
-
+        delay_ms   = int((sweep_time + 0.1)*1000)
         self.after(delay_ms, lambda:
             self.send_cmd(f"MITCMD {p2:.4f} {v:.4f} {kp:.2f} {kd:.2f} {tff:.2f}")
         )
-        self.log_write(f"> Scheduled move forearm → {p2:.2f} rad in {sweep_time:.2f}s")
 
     def toggle_resistance(self):
         if self.resist_var.get():
-            # zero out pos/vel loops, torque-only
             tff = self.exec_params.get('tff',1.0)
             self.send_cmd(f"MITCMD 0.0000 0.0000 0.00 0.00 {tff:.2f}")
-            self.log_write(f"> Resistance ON: tff={tff:.2f}Nm")
         else:
             v   = self.exec_params['v']
             kp  = self.exec_params['kp']
             kd  = self.exec_params['kd']
             self.send_cmd(f"MITCMD 0.0000 {v:.4f} {kp:.2f} {kd:.2f} 0.00")
-            self.log_write("> Resistance OFF")
 
     def do_stop(self):
         self.send_cmd("RPM 0")
-        self.send_cmd("MITCMD 0.0000 0.0000 0.00 0.00 0.00")
+        self.send_cmd("MITCMD 0.0000 0.0000 0.00 0.00 0.0")
 
-    # ──────────────────────────────────────────────────────────
-    # Advanced‐tab handlers
-    # ──────────────────────────────────────────────────────────
     def do_servo_pos(self):
         self.send_cmd(f"POS {self.pos_var.get():.1f}")
 
@@ -288,9 +297,6 @@ class CanGui(tk.Tk):
     def do_mitpos(self):
         self.send_cmd(f"MITPOS {self.mit_var.get():.4f}")
 
-    # ──────────────────────────────────────────────────────────
-    # Serial & Logging
-    # ──────────────────────────────────────────────────────────
     def send_cmd(self, cmd):
         self.ser.write((cmd + "\n").encode())
         self.log_write(f"> {cmd}")
@@ -309,14 +315,10 @@ class CanGui(tk.Tk):
                 buf += data
                 lines = buf.split(b"\n")
                 for ln in lines[:-1]:
-                    try:
-                        text = ln.decode('utf-8', errors='ignore')
-                    except:
-                        text = repr(ln)
+                    text = ln.decode('utf-8', errors='ignore')
                     self.log_write(text)
                 buf = lines[-1]
             time.sleep(0.05)
-
 
 if __name__ == "__main__":
     CanGui().mainloop()
