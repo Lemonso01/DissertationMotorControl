@@ -19,7 +19,7 @@
 
 #define MOTOR_ID 1
 
-#define ENDSTOP_PIN_1    22     
+#define ENDSTOP_PIN_TOP    22     
 #define CALIB_RPM      200    
 #define BACK_DEG       5.0f   
 #define RPM2DEG_PER_MS (CALIB_RPM * 360.0f / 60000.0f)  // deg per ms
@@ -195,7 +195,7 @@ void do_calibrate() {
     float pos;
     // 1) Step 1: rotate CW until endstop closes
     send_rpm(MOTOR_ID, +CALIB_RPM);
-    while (gpio_get(ENDSTOP_PIN_1)){
+    while (gpio_get(ENDSTOP_PIN_TOP)){
         tight_loop_contents();
     }
     send_rpm(MOTOR_ID, 0);
@@ -212,7 +212,7 @@ void do_calibrate() {
 
     // 3) Rotate CW again until endstop closes second time
     send_rpm(MOTOR_ID, +CALIB_RPM);
-    while (gpio_get(ENDSTOP_PIN_1)) tight_loop_contents();
+    while (gpio_get(ENDSTOP_PIN_TOP)) tight_loop_contents();
     send_rpm(MOTOR_ID, 0);
     sleep_ms(100);
 
@@ -235,9 +235,9 @@ int main() {
     stdio_init_all();
     sleep_ms(10000);
 
-    gpio_init(ENDSTOP_PIN_1);
-    gpio_set_dir(ENDSTOP_PIN_1, GPIO_IN);
-    gpio_pull_up(ENDSTOP_PIN_1);
+    gpio_init(ENDSTOP_PIN_TOP);
+    gpio_set_dir(ENDSTOP_PIN_TOP, GPIO_IN);
+    gpio_pull_up(ENDSTOP_PIN_TOP);
 
     mcp2515_init();
     //mcp2515_enable_loopback();

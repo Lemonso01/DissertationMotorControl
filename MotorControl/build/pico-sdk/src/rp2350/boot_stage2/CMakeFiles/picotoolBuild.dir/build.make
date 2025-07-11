@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl
+CMAKE_SOURCE_DIR = /mnt/e/DissMotCont/MotorControl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build
+CMAKE_BINARY_DIR = /mnt/e/DissMotCont/MotorControl/build
 
 # Utility rule file for picotoolBuild.
 
@@ -77,52 +77,52 @@ pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete: pico-sdk/src/
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-build
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-install
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E make_directory /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-done
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E make_directory /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-done
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-build: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Performing build step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && $(MAKE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Performing build step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && $(MAKE)
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure: pico-sdk/src/rp2350/boot_stage2/picotool/tmp/picotoolBuild-cfgcmd.txt
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && /usr/bin/cmake --no-warn-unused-cli -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake -DPICO_SDK_PATH:FILEPATH=/home/goncalo_gcosta/pico/pico-sdk -DPICOTOOL_NO_LIBUSB=1 -DPICOTOOL_FLAT_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER "-GUnix Makefiles" -S /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src -B /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && /usr/bin/cmake --no-warn-unused-cli -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake -DPICO_SDK_PATH:FILEPATH=/home/goncalo_gcosta/pico/pico-sdk -DPICOTOOL_NO_LIBUSB=1 -DPICOTOOL_FLAT_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/mnt/e/DissMotCont/MotorControl/build/_deps -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER "-GUnix Makefiles" -S /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src -B /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-source_dirinfo.txt
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "No download step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "No download step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-install: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Performing install step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && $(MAKE) install
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Performing install step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && $(MAKE) install
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -Dcfgdir= -P /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/tmp/picotoolBuild-mkdirs.cmake
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -Dcfgdir= -P /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/tmp/picotoolBuild-mkdirs.cmake
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch-info.txt
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-install
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Performing test step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotool version 2.1.1
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Performing test step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && /mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotool version 2.1.1
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test
 
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update-info.txt
 pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update: pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "No update step for 'picotoolBuild'"
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/mnt/e/DissMotCont/MotorControl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "No update step for 'picotoolBuild'"
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E echo_append
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update
 
 picotoolBuild: pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild
 picotoolBuild: pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild-complete
@@ -142,10 +142,10 @@ pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/build: picotoolBuil
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/build
 
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/clean:
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && $(CMAKE_COMMAND) -P CMakeFiles/picotoolBuild.dir/cmake_clean.cmake
+	cd /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 && $(CMAKE_COMMAND) -P CMakeFiles/picotoolBuild.dir/cmake_clean.cmake
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/clean
 
 pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/depend:
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/boot_stage2 /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /mnt/e/DissMotCont/MotorControl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/e/DissMotCont/MotorControl /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/boot_stage2 /mnt/e/DissMotCont/MotorControl/build /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2 /mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : pico-sdk/src/rp2350/boot_stage2/CMakeFiles/picotoolBuild.dir/depend
 

@@ -4,7 +4,7 @@ lib/CMakeFiles/mbedtls.dir/home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/library
  /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/library/psa_crypto_aead.h \
  /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/psa/crypto.h \
  /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/psa/crypto_platform.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
+ /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
  /usr/include/limits.h \

@@ -1,7 +1,7 @@
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotool
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotoolTargets.cmake
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotoolTargets-release.cmake
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotoolConfig.cmake
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/picotoolConfigVersion.cmake
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/enc_bootloader.elf
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool/enc_bootloader_mbedtls.elf
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotool
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotoolTargets.cmake
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotoolTargets-release.cmake
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotoolConfig.cmake
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/picotoolConfigVersion.cmake
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/enc_bootloader.elf
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool/enc_bootloader_mbedtls.elf

@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl
+# Install script for directory: /mnt/e/DissMotCont/MotorControl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/cmake_install.cmake")
+  include("/mnt/e/DissMotCont/MotorControl/build/pico-sdk/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/e/DissMotCont/MotorControl/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

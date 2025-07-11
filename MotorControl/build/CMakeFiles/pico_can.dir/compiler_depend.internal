@@ -23,8 +23,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -87,8 +87,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -137,8 +137,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -175,8 +175,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -213,8 +213,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -251,8 +251,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -289,8 +289,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -327,8 +327,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -365,8 +365,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -403,8 +403,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -466,8 +466,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -516,8 +516,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -575,8 +575,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -654,8 +654,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -733,8 +733,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -818,8 +818,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portab
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -892,8 +892,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portab
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -973,8 +973,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1023,8 +1023,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_cl
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1066,8 +1066,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/c
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1108,8 +1108,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/l
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1153,8 +1153,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/m
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1196,8 +1196,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/s
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1259,8 +1259,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/t
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_time_adapter/include/pico/time_adapter.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -1306,8 +1306,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/t
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1338,8 +1338,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_util/d
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1391,8 +1391,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_util/p
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -1444,8 +1444,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_util/q
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -1491,8 +1491,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platfo
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1532,8 +1532,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1587,8 +1587,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1619,8 +1619,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1668,8 +1668,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1727,8 +1727,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1779,8 +1779,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1822,8 +1822,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1866,8 +1866,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1903,8 +1903,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1943,8 +1943,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -1980,8 +1980,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2027,8 +2027,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2075,8 +2075,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2112,8 +2112,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2164,8 +2164,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2214,8 +2214,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2254,8 +2254,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2301,8 +2301,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_at
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2349,8 +2349,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bo
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2401,8 +2401,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bo
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2444,8 +2444,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_cl
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2503,8 +2503,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_cx
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -2551,8 +2551,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_di
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2584,8 +2584,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_do
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2646,8 +2646,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fi
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2688,8 +2688,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fl
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2721,8 +2721,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_fl
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2759,8 +2759,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_ma
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/alloca.h
@@ -2798,8 +2798,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_pl
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2851,8 +2851,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_pr
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2892,8 +2892,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_ru
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -2959,8 +2959,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_ru
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3022,8 +3022,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_ru
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/include/pico/runtime_init.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3054,8 +3054,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_ru
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/include/pico/runtime.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3090,8 +3090,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_compiler/include/pico/platform/compiler.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3137,8 +3137,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3226,8 +3226,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb/reset_interface.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3315,8 +3315,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3394,8 +3394,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb/reset_interface.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/include/pico/unique_id.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3474,8 +3474,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_st
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3521,8 +3521,8 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_un
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/include/pico/platform/panic.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/include/pico/unique_id.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3545,7 +3545,7 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_un
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h
 
 CMakeFiles/pico_can.dir/main.c.o
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/main.c
+ /mnt/e/DissMotCont/MotorControl/main.c
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/assert.h
@@ -3598,9 +3598,9 @@ CMakeFiles/pico_can.dir/main.c.o
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/mcp2515.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
@@ -3627,7 +3627,7 @@ CMakeFiles/pico_can.dir/main.c.o
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h
 
 CMakeFiles/pico_can.dir/mcp2515.c.o
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.c
+ /mnt/e/DissMotCont/MotorControl/mcp2515.c
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/assert.h
@@ -3677,9 +3677,9 @@ CMakeFiles/pico_can.dir/mcp2515.c.o
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_sections/include/pico/platform/sections.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/mcp2515.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
+ /mnt/e/DissMotCont/MotorControl/mcp2515.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h

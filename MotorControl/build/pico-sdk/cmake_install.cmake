@@ -39,16 +39,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/tools/cmake_install.cmake")
+  include("/mnt/e/DissMotCont/MotorControl/build/pico-sdk/tools/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/src/cmake_install.cmake")
+  include("/mnt/e/DissMotCont/MotorControl/build/pico-sdk/src/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/pico-sdk/docs/cmake_install.cmake")
+  include("/mnt/e/DissMotCont/MotorControl/build/pico-sdk/docs/cmake_install.cmake")
 endif()
 

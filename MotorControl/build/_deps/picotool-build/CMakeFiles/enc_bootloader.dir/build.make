@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src
+CMAKE_SOURCE_DIR = /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build
+CMAKE_BINARY_DIR = /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build
 
 # Utility rule file for enc_bootloader.
 
@@ -73,39 +73,39 @@ CMakeFiles/enc_bootloader-complete: enc_bootloader/src/enc_bootloader-stamp/enc_
 CMakeFiles/enc_bootloader-complete: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure
 CMakeFiles/enc_bootloader-complete: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-build
 CMakeFiles/enc_bootloader-complete: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-install
-	/usr/bin/cmake -E make_directory /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/CMakeFiles
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/CMakeFiles/enc_bootloader-complete
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-done
+	/usr/bin/cmake -E make_directory /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/CMakeFiles
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/CMakeFiles/enc_bootloader-complete
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-done
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-build: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader && $(MAKE)
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader && $(MAKE)
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure: enc_bootloader/tmp/enc_bootloader-cfgcmd.txt
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake -DPICO_SDK_PATH:FILEPATH=/home/goncalo_gcosta/pico/pico-sdk -DUSE_PRECOMPILED:BOOL=true -DUSE_MBEDTLS=0 -DPICO_DEBUG_INFO_IN_RELEASE=OFF "-GUnix Makefiles" -S /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/enc_bootloader -B /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake -DPICO_SDK_PATH:FILEPATH=/home/goncalo_gcosta/pico/pico-sdk -DUSE_PRECOMPILED:BOOL=true -DUSE_MBEDTLS=0 -DPICO_DEBUG_INFO_IN_RELEASE=OFF "-GUnix Makefiles" -S /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/enc_bootloader -B /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-configure
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-download: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-source_dirinfo.txt
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-download: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-mkdir
 	/usr/bin/cmake -E echo_append
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-download
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-download
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-install: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-build
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -E echo_append
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader && /usr/bin/cmake -E echo_append
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-mkdir:
-	/usr/bin/cmake -Dcfgdir= -P /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/tmp/enc_bootloader-mkdirs.cmake
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-mkdir
+	/usr/bin/cmake -Dcfgdir= -P /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/tmp/enc_bootloader-mkdirs.cmake
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-mkdir
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch-info.txt
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update
 	/usr/bin/cmake -E echo_append
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-patch
 
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update-info.txt
 enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update: enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-download
 	/usr/bin/cmake -E echo_append
-	/usr/bin/cmake -E touch /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update
+	/usr/bin/cmake -E touch /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/enc_bootloader-update
 
 enc_bootloader: CMakeFiles/enc_bootloader
 enc_bootloader: CMakeFiles/enc_bootloader-complete
@@ -128,6 +128,6 @@ CMakeFiles/enc_bootloader.dir/clean:
 .PHONY : CMakeFiles/enc_bootloader.dir/clean
 
 CMakeFiles/enc_bootloader.dir/depend:
-	cd /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/CMakeFiles/enc_bootloader.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/CMakeFiles/enc_bootloader.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/enc_bootloader.dir/depend
 

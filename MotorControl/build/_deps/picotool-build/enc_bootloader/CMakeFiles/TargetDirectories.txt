@@ -1,2 +1,2 @@
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/CMakeFiles/edit_cache.dir
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/CMakeFiles/rebuild_cache.dir
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/CMakeFiles/edit_cache.dir
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/CMakeFiles/rebuild_cache.dir

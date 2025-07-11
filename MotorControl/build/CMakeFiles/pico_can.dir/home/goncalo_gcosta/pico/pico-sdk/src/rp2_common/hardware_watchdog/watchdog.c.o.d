@@ -17,9 +17,9 @@ CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardwar
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h \
  /usr/include/newlib/assert.h \
  /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/version.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/config.h \
- /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/generated/pico_base/pico/config_autogen.h \
+ /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/boards/include/boards/pico2.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/pico_platform/include/pico/platform.h \

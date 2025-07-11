@@ -147,12 +147,12 @@ CMakeFiles/picotool.dir/data_locs.cpp.o: data_locs.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
 
-CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/get_enc_bootloader.cpp \
+CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/get_enc_bootloader.cpp \
   enc_bootloader_elf.h \
   enc_bootloader_mbedtls_elf.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/data_locs.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/data_locs.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -377,9 +377,9 @@ CMakeFiles/picotool.dir/get_enc_bootloader.cpp.o: /mnt/c/Users/gonca/Documents/D
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
-CMakeFiles/picotool.dir/lib/whereami/whereami++.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.cpp \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c \
+CMakeFiles/picotool.dir/lib/whereami/whereami++.cpp.o: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.cpp \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -576,8 +576,8 @@ CMakeFiles/picotool.dir/lib/whereami/whereami++.cpp.o: /mnt/c/Users/gonca/Docume
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
-CMakeFiles/picotool.dir/lib/whereami/whereami.c.o: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.h \
+CMakeFiles/picotool.dir/lib/whereami/whereami.c.o: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.h \
   /usr/include/alloca.h \
   /usr/include/endian.h \
   /usr/include/features-time64.h \
@@ -654,7 +654,7 @@ CMakeFiles/picotool.dir/lib/whereami/whereami.c.o: /mnt/c/Users/gonca/Documents/
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
-CMakeFiles/picotool.dir/main.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/main.cpp \
+CMakeFiles/picotool.dir/main.cpp.o: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/main.cpp \
   /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/aes.h \
   /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/bignum.h \
   /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/ctr_drbg.h \
@@ -682,21 +682,21 @@ CMakeFiles/picotool.dir/main.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMot
   /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/otp_data.h \
   /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/boot_bootrom_headers/include/boot/bootrom_constants.h \
   /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb/reset_interface.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/bintool.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/metadata.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/cli.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/clipp/clipp.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/addresses.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/elf.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/elf_file.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf2uf2/elf2uf2.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/errors/errors.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/otp.h \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/picoboot_connection/picoboot_connection.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/bintool.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/metadata.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/cli.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/clipp/clipp.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/addresses.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/elf.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/elf_file.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf2uf2/elf2uf2.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/errors/errors.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/otp.h \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/picoboot_connection/picoboot_connection.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -1070,9 +1070,9 @@ CMakeFiles/picotool.dir/main.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMot
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
-CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/no_otp.cpp \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp \
-  /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/otp.h \
+CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/no_otp.cpp \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp \
+  /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/otp.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -1430,8 +1430,6 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/libintl.h:
 
-/usr/include/c++/13/version:
-
 /usr/include/c++/13/valarray:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
@@ -1462,6 +1460,10 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/c++/13/bits/unordered_map.h:
 
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
+/usr/include/c++/13/bits/stream_iterator.h:
+
 /usr/include/c++/13/bits/stl_stack.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
@@ -1483,8 +1485,6 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 /usr/include/c++/13/bits/slice_array.h:
 
 /usr/include/c++/13/bits/regex_executor.tcc:
-
-/usr/include/c++/13/bits/regex_constants.h:
 
 /usr/include/c++/13/bits/regex_automaton.tcc:
 
@@ -1520,27 +1520,21 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/asm-generic/ioctl.h:
 
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp:
 
-/usr/include/c++/13/bits/stream_iterator.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/otp.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf2uf2/elf2uf2.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/nlohmann_json/single_include/nlohmann/json.hpp:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/elf.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/include/picotool_mbedtls_config.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/addresses.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/elf_file.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/clipp/clipp.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/elf.h:
+/usr/include/c++/13/version:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/clipp/clipp.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/metadata.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/bintool/bintool.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/cli.h:
 
 /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/boot_bootrom_headers/include/boot/bootrom_constants.h:
 
@@ -1568,8 +1562,6 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/c++/13/bits/valarray_array.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf2uf2/elf2uf2.h:
-
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
 
 /usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
@@ -1584,6 +1576,8 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/elf/elf_file.h:
+
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
 /usr/include/c++/13/bits/hashtable.h:
@@ -1591,6 +1585,10 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/c++/13/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/13/bits/regex_constants.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h:
 
@@ -1624,6 +1622,10 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/c++/13/bits/cpp_type_traits.h:
 
+/usr/include/c++/13/limits:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
 /usr/include/c++/13/cmath:
 
 /usr/include/x86_64-linux-gnu/bits/select2.h:
@@ -1646,8 +1648,6 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
 /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
 
 /usr/include/c++/13/memory:
@@ -1661,6 +1661,8 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 /usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/bintool.h:
 
 /usr/include/c++/13/exception:
 
@@ -1714,6 +1716,12 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/c++/13/vector:
 
+/usr/include/c++/13/bits/gslice_array.h:
+
+/home/goncalo_gcosta/pico/pico-sdk/src/common/boot_picobin_headers/include/boot/picobin.h:
+
+/usr/include/c++/13/new:
+
 /usr/include/c++/13/ext/alloc_traits.h:
 
 /usr/include/c++/13/bits/predefined_ops.h:
@@ -1744,8 +1752,6 @@ CMakeFiles/picotool.dir/no_otp.cpp.o: /mnt/c/Users/gonca/Documents/DissertationM
 
 /usr/include/c++/13/bits/regex_error.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/elf/addresses.h:
-
 /usr/include/c++/13/bits/basic_ios.h:
 
 data_locs.cpp:
@@ -1773,12 +1779,6 @@ data_locs.cpp:
 /usr/include/c++/13/bits/stl_iterator.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
-/usr/include/c++/13/limits:
-
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/main.cpp:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
@@ -1808,8 +1808,6 @@ data_locs.cpp:
 
 /usr/include/c++/13/bits/cxxabi_forced.h:
 
-/usr/include/c++/13/ext/string_conversions.h:
-
 /usr/include/c++/13/bits/postypes.h:
 
 /usr/include/c++/13/bits/std_abs.h:
@@ -1818,7 +1816,9 @@ data_locs.cpp:
 
 /usr/include/c++/13/bits/basic_string.tcc:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.cpp:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/picoboot_connection/picoboot_connection.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/errors/errors.h:
 
 /usr/include/alloca.h:
 
@@ -1838,15 +1838,11 @@ data_locs.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/errors/errors.h:
-
 /usr/include/c++/13/bits/stringfwd.h:
 
 /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/pk.h:
 
 /usr/include/c++/13/backward/binders.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h:
 
 /usr/include/c++/13/unordered_map:
 
@@ -1855,6 +1851,10 @@ data_locs.cpp:
 /usr/include/c++/13/bits/stl_bvector.h:
 
 /usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/c++/13/bits/requires_hosted.h:
 
 /usr/include/c++/13/bits/stl_algo.h:
 
@@ -1910,8 +1910,6 @@ enc_bootloader_mbedtls_elf.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.c:
-
 /usr/include/string.h:
 
 /usr/include/asm-generic/errno-base.h:
@@ -1921,6 +1919,8 @@ enc_bootloader_mbedtls_elf.h:
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/c++/13/bits/stl_construct.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.cpp:
 
 /usr/include/c++/13/bits/new_allocator.h:
 
@@ -1944,13 +1944,7 @@ enc_bootloader_mbedtls_elf.h:
 
 /usr/include/c++/13/ext/type_traits.h:
 
-/usr/include/c++/13/bits/gslice_array.h:
-
-/home/goncalo_gcosta/pico/pico-sdk/src/common/boot_picobin_headers/include/boot/picobin.h:
-
-/usr/include/c++/13/new:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/get_enc_bootloader.cpp:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/metadata.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -1986,6 +1980,8 @@ enc_bootloader_mbedtls_elf.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h:
+
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/c++/13/cwchar:
@@ -2004,27 +2000,25 @@ enc_bootloader_mbedtls_elf.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/get_enc_bootloader.cpp:
+
+/usr/include/endian.h:
+
+/usr/include/stdint.h:
+
+/usr/include/linux/limits.h:
+
 enc_bootloader_elf.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/c++/13/ext/string_conversions.h:
 
-/usr/include/c++/13/bits/requires_hosted.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami++.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/usr/include/c++/13/bits/streambuf_iterator.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/opt_random.h:
-
-/usr/include/c++/13/ostream:
-
-/home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/aes.h:
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/get_enc_bootloader.h:
 
 /usr/include/c++/13/algorithm:
 
 /usr/include/c++/13/backward/auto_ptr.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -2046,8 +2040,6 @@ enc_bootloader_elf.h:
 
 /usr/include/c++/13/typeinfo:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/picoboot_connection/picoboot_connection.h:
-
 /usr/include/c++/13/bits/exception_ptr.h:
 
 /usr/include/c++/13/bits/locale_conv.h:
@@ -2059,6 +2051,8 @@ enc_bootloader_elf.h:
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /usr/include/c++/13/bits/locale_classes.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/otp.h:
 
 /usr/include/c++/13/bits/uniform_int_dist.h:
 
@@ -2090,9 +2084,9 @@ enc_bootloader_elf.h:
 
 /usr/include/asm-generic/ioctls.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/data_locs.h:
-
 /usr/include/c++/13/bits/sstream.tcc:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/bintool/mbedtls_wrapper.h:
 
 /usr/include/c++/13/cwctype:
 
@@ -2108,13 +2102,23 @@ enc_bootloader_elf.h:
 
 /usr/include/c++/13/bits/stl_tempbuf.h:
 
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/no_otp.cpp:
-
 /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/no_otp.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/c++/13/bits/streambuf_iterator.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/opt_random.h:
+
+/usr/include/c++/13/ostream:
+
+/home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/aes.h:
 
 /usr/include/c++/13/ext/concurrence.h:
 
@@ -2123,6 +2127,8 @@ enc_bootloader_elf.h:
 /usr/include/c++/13/iostream:
 
 /usr/include/c++/13/bits/regex_scanner.tcc:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/data_locs.h:
 
 /usr/include/c++/13/istream:
 
@@ -2139,12 +2145,6 @@ enc_bootloader_elf.h:
 /usr/include/wctype.h:
 
 /usr/include/sched.h:
-
-/usr/include/endian.h:
-
-/usr/include/stdint.h:
-
-/usr/include/linux/limits.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
@@ -2168,6 +2168,14 @@ enc_bootloader_elf.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
+/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
+
+/usr/include/c++/13/bits/std_function.h:
+
+/usr/include/c++/13/bits/char_traits.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
+
 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
@@ -2178,23 +2186,15 @@ enc_bootloader_elf.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
 
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/main.cpp:
+
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
 /usr/include/c++/13/stdlib.h:
 
-/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
-
-/usr/include/c++/13/bits/std_function.h:
-
-/usr/include/c++/13/bits/char_traits.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/lib/whereami/whereami.h:
-
 /home/goncalo_gcosta/pico/pico-sdk/lib/mbedtls/include/mbedtls/ctr_drbg.h:
-
-/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/cli.h:
 
 /usr/include/c++/13/bits/localefwd.h:
 

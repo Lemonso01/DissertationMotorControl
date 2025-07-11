@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/enc_bootloader"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/tmp"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src"
-  "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/enc_bootloader"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/tmp"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src"
+  "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader/src/enc_bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-src/enc_bootloader
+# Install script for directory: /mnt/e/DissMotCont/MotorControl/build/_deps/picotool-src/enc_bootloader
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/gonca/Documents/DissertationMotorControl/MotorControl/build/_deps/picotool-build/enc_bootloader_mbedtls/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/e/DissMotCont/MotorControl/build/_deps/picotool-build/enc_bootloader_mbedtls/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

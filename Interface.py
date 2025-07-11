@@ -3,13 +3,13 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import threading, time, math
+import serial
+from serial.tools import list_ports
 
 # ──────────────────────────────────────────────────────────────
 # 1) serial fallback logic
 # ──────────────────────────────────────────────────────────────
 try:
-    import serial
-    from serial.tools import list_ports
     REAL_SERIAL = True
 except ImportError:
     REAL_SERIAL = False
@@ -61,26 +61,23 @@ class CanGui(tk.Tk):
             ports = [p.device for p in list_ports.comports()]
             self.log_buffer.append(f"Detected ports: {ports}")
             success = False
-            for candidate in (SERIAL_PORT, r"\\.\ " + SERIAL_PORT):
+
+            for candidate in (SERIAL_PORT, f"\\\\.\\{SERIAL_PORT}"):
                 if candidate in ports or candidate.startswith(r"\\.\COM"):
                     try:
-                        self.ser = serial.Serial(candidate,
-                                                 BAUDRATE,
-                                                 timeout=0.1)
+                        self.ser = serial.Serial(candidate, BAUDRATE, timeout=0.1)
                         self.log_buffer.append(f"Opened {candidate} OK")
                         success = True
                         break
                     except Exception as e:
                         self.log_buffer.append(f"Failed to open {candidate}: {e}")
+                        print(f"[DEBUG] Exception: {e}")
+
             if not success:
                 messagebox.showwarning("Serial Port",
                     f"Could not open {SERIAL_PORT}.\n"
                     f"Falling back to dummy.\nDetected: {ports}")
                 self.ser = DummySerial()
-        else:
-            messagebox.showwarning("pyserial not installed",
-                                   "Falling back to dummy serial.")
-            self.ser = DummySerial()
 
         # put initial log messages into the log widget once it's built
         self.after(100, lambda: [self.log_write(line) for line in self.log_buffer])
