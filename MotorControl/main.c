@@ -19,7 +19,10 @@
 
 #define MOTOR_ID 1
 
-#define ENDSTOP_PIN_TOP    22     
+#define ENDSTOP_PIN_TOP      22
+#define ENDSTOP_PIN_BOTT     21 
+#define ENDSTOP_PIN_LEFT     14 
+#define ENDSTOP_PIN_RIGHT    15      
 #define CALIB_RPM      200    
 #define BACK_DEG       5.0f   
 #define RPM2DEG_PER_MS (CALIB_RPM * 360.0f / 60000.0f)  // deg per ms
@@ -236,8 +239,17 @@ int main() {
     sleep_ms(10000);
 
     gpio_init(ENDSTOP_PIN_TOP);
+    gpio_init(ENDSTOP_PIN_BOTT);
+    gpio_init(ENDSTOP_PIN_LEFT);
+    gpio_init(ENDSTOP_PIN_RIGHT);
     gpio_set_dir(ENDSTOP_PIN_TOP, GPIO_IN);
+    gpio_set_dir(ENDSTOP_PIN_BOTT, GPIO_IN);
+    gpio_set_dir(ENDSTOP_PIN_LEFT, GPIO_IN);
+    gpio_set_dir(ENDSTOP_PIN_RIGHT, GPIO_IN);
     gpio_pull_up(ENDSTOP_PIN_TOP);
+    gpio_pull_up(ENDSTOP_PIN_BOTT);
+    gpio_pull_up(ENDSTOP_PIN_LEFT);
+    gpio_pull_up(ENDSTOP_PIN_RIGHT);
 
     mcp2515_init();
     //mcp2515_enable_loopback();

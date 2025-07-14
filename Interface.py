@@ -30,7 +30,7 @@ class DummySerial:
 # ──────────────────────────────────────────────────────────────
 # 2) configuration
 # ──────────────────────────────────────────────────────────────
-SERIAL_PORT = "COM5"      # the port you want
+SERIAL_PORT = "COM8"      # the port you want
 BAUDRATE    = 115200
 MOTOR_ID    = 1           # your CAN node ID
 
