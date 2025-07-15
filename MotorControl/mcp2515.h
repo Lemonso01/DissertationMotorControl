@@ -58,6 +58,10 @@
 #define CAN_PACKET_SET_ORIGIN           5
 #define CAN_PACKET_SET_POSRPM           6
 
+// === Torque Constant ===
+
+#define MOTOR_TORQUE_CONSTANT 0.078f
+
 
 typedef struct {
     uint32_t id;         ///< 11-bit if extended==false, else 29-bit
@@ -80,8 +84,8 @@ uint8_t mcp2515_read_status();
 void mcp2515_enable_loopback();
 void mcp2515_disable_loopback();
 
-void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len);
-void mcp2515_send_standard(uint16_t id, uint8_t *data, uint8_t len);
+void mcp2515_send_extended(uint32_t id, const uint8_t *data, uint8_t len);
+void mcp2515_send_standard(uint16_t id, const uint8_t *data, uint8_t len);
 
 bool mcp2515_check_message();
 void mcp2515_clear_rx0if();
@@ -89,8 +93,8 @@ void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len);
 
 // === Motor Commands ===
 void send_rpm(uint8_t motor_id, int32_t rpm);
-static void send_position(uint8_t motor_id, float degrees);
-static void send_torque(uint8_t motor_id, float torque_nm);
+void send_position(uint8_t motor_id, float degrees);
+void send_torque(uint8_t motor_id, float torque_nm);
 
 // === Utilities ===
 uint32_t float_to_uint(float x, float x_min, float x_max, int bits);

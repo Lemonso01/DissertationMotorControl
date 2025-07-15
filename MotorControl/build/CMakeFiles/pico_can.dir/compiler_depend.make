@@ -3533,7 +3533,6 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
   /usr/include/newlib/machine/_default_types.h \
   /usr/include/newlib/machine/_types.h \
   /usr/include/newlib/machine/ieeefp.h \
-  /usr/include/newlib/math.h \
   /usr/include/newlib/newlib.h \
   /usr/include/newlib/stdio.h \
   /usr/include/newlib/string.h \

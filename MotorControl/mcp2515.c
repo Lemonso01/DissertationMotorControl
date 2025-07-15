@@ -96,7 +96,7 @@ void mcp2515_disable_loopback() {
 }
 
 // === CAN Send Functions ===
-void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len) {
+void mcp2515_send_extended(uint32_t id, const uint8_t *data, uint8_t len) {
     while (mcp2515_read_register(MCP_TXB0CTRL) & 0x08);
     uint8_t sidh = (uint8_t)(id >> 21);
     uint8_t sidl = (uint8_t)(((id >> 16) & 0x03) << 5) | (1 << 3) | ((id >> 18) & 0x07);
@@ -119,7 +119,7 @@ void mcp2515_send_extended(uint32_t id, uint8_t *data, uint8_t len) {
     mcp2515_deselect();
 }
 
-void mcp2515_send_standard(uint16_t can_id, uint8_t *data, uint8_t len) {
+void mcp2515_send_standard(uint16_t can_id, const uint8_t *data, uint8_t len) {
     while (mcp2515_read_register(MCP_TXB0CTRL) & 0x08);
     uint8_t sidh = (uint8_t)(can_id >> 3);
     uint8_t sidl = (uint8_t)((can_id & 0x07) << 5);
@@ -147,7 +147,7 @@ void send_rpm(uint8_t motor_id, int32_t rpm) {
 }
 
 // Send position command in degrees
-static void send_position(uint8_t motor_id, float degrees) {
+void send_position(uint8_t motor_id, float degrees) {
     // Convert degrees to the MCP2515 servo unit: 1 revolution = 10000 units
     // 1 deg = 10000/360 units
     int32_t pos_int = (int32_t)(degrees * (10000.0f / 360.0f));
@@ -161,7 +161,7 @@ static void send_position(uint8_t motor_id, float degrees) {
 }
 
 // Send torque command as current in amps
-static void send_torque(uint8_t motor_id, float torque_nm) {
+void send_torque(uint8_t motor_id, float torque_nm) {
     // Convert torque [Nm] to current [A]: I = torque / Kt
     float current_a = torque_nm / MOTOR_TORQUE_CONSTANT;
     // Pack as integer (in mA)
@@ -171,7 +171,7 @@ static void send_torque(uint8_t motor_id, float torque_nm) {
     data[1] = (cur_int >> 16) & 0xFF;
     data[2] = (cur_int >>  8) & 0xFF;
     data[3] =  cur_int        & 0xFF;
-    uint32_t id = ((uint32_t)CAN_PACKET_SET_CURRENT << 8) | motor_id;
+    uint32_t id = ((uint32_t)CAN_PACKET_SET_CURRENT_LOOP << 8) | motor_id;
     mcp2515_send_extended(id, data, 4);
 }
 
