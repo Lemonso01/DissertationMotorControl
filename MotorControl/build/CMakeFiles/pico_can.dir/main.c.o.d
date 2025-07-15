@@ -9,6 +9,9 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/stdio.h \
+ /usr/include/newlib/string.h /usr/include/newlib/sys/_locale.h \
+ /usr/include/newlib/strings.h /usr/include/newlib/sys/string.h \
+ /usr/include/newlib/math.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_stdlib_headers/include/pico/stdlib.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/common/pico_base_headers/include/pico/types.h \
@@ -64,6 +67,4 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
  /mnt/e/DissMotCont/MotorControl/mcp2515.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_structs/include/hardware/structs/spi.h \
- /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h \
- /usr/include/newlib/string.h /usr/include/newlib/sys/_locale.h \
- /usr/include/newlib/strings.h /usr/include/newlib/sys/string.h
+ /home/goncalo_gcosta/pico/pico-sdk/src/rp2350/hardware_regs/include/hardware/regs/spi.h

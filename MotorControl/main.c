@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include "pico/stdlib.h"
 #include "mcp2515.h"
 
