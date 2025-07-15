@@ -89,7 +89,8 @@ void mcp2515_read_message(uint32_t *id, uint8_t *data, uint8_t *len);
 
 // === Motor Commands ===
 void send_rpm(uint8_t motor_id, int32_t rpm);
-void send_position(uint8_t motor_id, float position);
+static void send_position(uint8_t motor_id, float degrees);
+static void send_torque(uint8_t motor_id, float torque_nm);
 
 // === Utilities ===
 uint32_t float_to_uint(float x, float x_min, float x_max, int bits);

@@ -146,16 +146,35 @@ void send_rpm(uint8_t motor_id, int32_t rpm) {
     mcp2515_send_extended(id, data, 4);
 }
 
-void send_position(uint8_t motor_id, float position) {
-    int32_t pos_int = (int32_t)(position * 10000);
+// Send position command in degrees
+static void send_position(uint8_t motor_id, float degrees) {
+    // Convert degrees to the MCP2515 servo unit: 1 revolution = 10000 units
+    // 1 deg = 10000/360 units
+    int32_t pos_int = (int32_t)(degrees * (10000.0f / 360.0f));
     uint8_t data[4];
     data[0] = (pos_int >> 24) & 0xFF;
     data[1] = (pos_int >> 16) & 0xFF;
-    data[2] = (pos_int >> 8) & 0xFF;
-    data[3] = pos_int & 0xFF;
-    uint32_t can_id = (CAN_PACKET_SET_POS << 8) | motor_id;
-    mcp2515_send_extended(can_id, data, 4);
+    data[2] = (pos_int >>  8) & 0xFF;
+    data[3] =  pos_int        & 0xFF;
+    uint32_t id = ((uint32_t)CAN_PACKET_SET_POS << 8) | motor_id;
+    mcp2515_send_extended(id, data, 4);
 }
+
+// Send torque command as current in amps
+static void send_torque(uint8_t motor_id, float torque_nm) {
+    // Convert torque [Nm] to current [A]: I = torque / Kt
+    float current_a = torque_nm / MOTOR_TORQUE_CONSTANT;
+    // Pack as integer (in mA)
+    int32_t cur_int = (int32_t)(current_a * 1000.0f);
+    uint8_t data[4];
+    data[0] = (cur_int >> 24) & 0xFF;
+    data[1] = (cur_int >> 16) & 0xFF;
+    data[2] = (cur_int >>  8) & 0xFF;
+    data[3] =  cur_int        & 0xFF;
+    uint32_t id = ((uint32_t)CAN_PACKET_SET_CURRENT << 8) | motor_id;
+    mcp2515_send_extended(id, data, 4);
+}
+
 
 // === Message Handling ===
 bool mcp2515_check_message() {
