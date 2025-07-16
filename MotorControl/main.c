@@ -17,6 +17,20 @@
 #define POS_TOL_DEG          2.0f    // assist threshold
 #define ASSIST_GAIN          0.5f    // Nm per degree error
 
+typedef enum {
+    MODE_IDLE = 0,
+    MODE_RPM,
+    MODE_POS,
+    MODE_TORQUE,
+    MODE_POSSPD,
+    MODE_AAN,
+    MODE_ORIGIN
+} CommandMode;
+
+typedef struct {
+    CommandMode mode;
+    float      p1, p2, p3;
+} CurrentCmd;
 
 // Read one feedback frame, extract position in degrees
 static bool read_position_feedback(float *out_deg) {
@@ -64,7 +78,7 @@ static void do_assist_as_needed(float start_deg, float end_deg, float duration_s
 
 void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2) {
     // Build extended CAN ID
-    uint32_t can_id = ((uint32_t)CAN_PACKET_SET_POS_VEL << 8) | motor_id;
+    uint32_t can_id = ((uint32_t)CAN_PACKET_SET_POSRPM << 8) | motor_id;
     uint8_t buf[8];
     // Position scaled: LSB = 0.0001 deg (i.e., pos_deg*10000)
     int32_t p = (int32_t)(pos_deg * 10000.0f);
@@ -85,14 +99,53 @@ void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2
     printf("→ POSSPD: %.2f° @%.2f°/s accel=%.2f°/s²\n", pos_deg, vel_dps, acc_dps2);
 }
 
+void send_origin(uint8_t motor_id) {
+    uint32_t can_id = ((uint32_t)CAN_PACKET_SET_ORIGIN << 8) | motor_id;
+    // No data payload
+    mcp2515_send_extended(can_id, NULL, 0);
+    printf("Origin set (current position = zero)\n");
+}
+
 void stop_motor(void) {
     // zero velocity
     send_rpm(MOTOR_ID, 0);
     // clear torque
     send_torque(MOTOR_ID, 0.0f);
-    // clear trajectory
-    send_pos_spd(MOTOR_ID, 0.0f, 0.0f, 0.0f);
     printf("All commands zeroed\n");
+}
+
+// Dispatch current cmd each loop to keep motor engaged
+static void process_current_cmd(const CurrentCmd *cmd){
+    switch(cmd->mode){
+        case MODE_RPM:
+            send_rpm(MOTOR_ID,(int32_t)cmd->p1);
+            break;
+        case MODE_POS:
+            send_position(MOTOR_ID,cmd->p1);
+            break;
+        case MODE_TORQUE:
+            send_torque(MOTOR_ID,cmd->p1);
+            break;
+        case MODE_POSSPD:
+            send_pos_spd(MOTOR_ID,cmd->p1,cmd->p2,cmd->p3);
+            break;
+        case MODE_ORIGIN:
+            send_origin(MOTOR_ID);
+            break;
+        default: break;
+    }
+}
+
+// Read line from USB
+static bool read_line(char *buf,size_t bufmax){
+    static size_t idx=0;
+    while(1){int c=getchar_timeout_us(0);
+        if(c==PICO_ERROR_TIMEOUT)break;
+        if(c=='\r')continue;
+        if(c=='\n'||idx>=bufmax-1){buf[idx]=0;idx=0;return true;}
+        buf[idx++]=(char)c;
+    }
+    return false;
 }
 
 int main() {
@@ -106,47 +159,36 @@ int main() {
     mcp2515_disable_loopback();   // NORMAL mode
     sleep_ms(100);
 
-    char line[CMD_BUFFER_SIZE];
-    while (true) {
-        // Read a full line from USB serial
-        if (!fgets(line, sizeof(line), stdin)) {
-            continue;
-        }
+    CurrentCmd cur={MODE_IDLE,0,0,0};
+    char line[CMD_BUFFER_SIZE],cmd[16];
+    float v1,v2,v3; int args;
 
-        // Parse command keyword and parameter
-        char cmd[16];
-        float v1, v2, v3, ap, av, aa;
-        int args = sscanf(line, "%15s %f", cmd, &v1, &v2, &v3);
-        if (args < 2) {
-            printf("Invalid input. Use 'RPM', 'POS', or 'TORQUE' followed by a value.\n");
-            continue;
-        }
+    while(1){
+        // read incoming
+        if(read_line(line,sizeof(line))){
+            args=sscanf(line,"%15s %f %f %f",cmd,&v1,&v2,&v3);
 
-        // Dispatch commands
-        if (strcasecmp(line, "STOP") == 0) {
-            stop_motor();
-        } else if (strcmp(cmd, "RPM") == 0) {
-            int32_t erpm = (int32_t)v1;
-            printf("Setting RPM to %d\n", erpm);
-            send_rpm(MOTOR_ID, erpm);
-        } else if (strcmp(cmd, "POS") == 0) {
-            printf("Moving to %.2f degrees\n", v1);
-            send_position(MOTOR_ID, v1);
-        } else if (strcmp(cmd, "TORQUE") == 0) {
-            printf("Applying %.2f Nm torque\n", v1);
-            send_torque(MOTOR_ID, v1);
-        } else if (strcmp(cmd, "AAN") == 0 && args >= 4) {
-            do_assist_as_needed(v1, v2, v3);
-        } else if (strcasecmp(cmd, "AUTO_MOVE") == 0) {
-            float ap = (args >= 2 ? v1 : 120.0f);
-            float av = (args >= 3 ? v2 : (ap / 6.0f));  // default 5s
-            float aa = (args >= 4 ? v3 : 1.0f);
-            send_pos_spd(MOTOR_ID, ap, av, aa);
-            printf("Auto Move: %.2f° @%.2f°/s accel=%.2f°/s²\n", ap, av, aa);
-        } else {
-            printf("Unknown command '%s'. Valid commands: RPM, POS, TORQUE.\n", cmd);
+            if(strcasecmp(cmd,"STOP")==0){ cur.mode=MODE_IDLE; stop_motor(); }
+
+            else if(strcasecmp(cmd,"AUTO_MOVE")==0&&args>=4){ cur.mode=MODE_POSSPD; cur.p1=v1;cur.p2=v2;cur.p3=v3; }
+
+            else if(strcasecmp(cmd,"RPM")==0&&args>=2){ cur.mode=MODE_RPM; cur.p1=v1; }
+
+            else if(strcasecmp(cmd,"POS")==0&&args>=2){ cur.mode=MODE_POS; cur.p1=v1; }
+
+            else if(strcasecmp(cmd,"TORQUE")==0&&args>=2){ cur.mode=MODE_TORQUE; cur.p1=v1; }
+
+            else if(strcasecmp(cmd,"POSSPD")==0&&args>=4){ cur.mode=MODE_POSSPD; cur.p1=v1;cur.p2=v2;cur.p3=v3; }
+
+            else if(strcasecmp(cmd,"AAN")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed(v1,v2,v3);}   
+
+            else if(strcasecmp(cmd,"ORIGIN")==0){ cur.mode=MODE_ORIGIN; }
         }
+        // maintain active command
+        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }
+        sleep_ms(LOOP_DT_MS);
     }
+    return 0;
 
     return 0;  // never reached
 }
