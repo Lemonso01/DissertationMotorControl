@@ -138,8 +138,8 @@ int main() {
         } else if (strcmp(cmd, "AAN") == 0 && args >= 4) {
             do_assist_as_needed(v1, v2, v3);
         } else if (strcasecmp(cmd, "AUTO_MOVE") == 0) {
-            float ap = (args >= 2 ? v1 : 90.0f);
-            float av = (args >= 3 ? v2 : (ap / 5.0f));  // default 5s
+            float ap = (args >= 2 ? v1 : 120.0f);
+            float av = (args >= 3 ? v2 : (ap / 6.0f));  // default 5s
             float aa = (args >= 4 ? v3 : 1.0f);
             send_pos_spd(MOTOR_ID, ap, av, aa);
             printf("Auto Move: %.2f° @%.2f°/s accel=%.2f°/s²\n", ap, av, aa);
