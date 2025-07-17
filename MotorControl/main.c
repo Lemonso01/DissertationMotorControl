@@ -19,7 +19,8 @@
 #define POS_TOL_DEG          2.0f
 #define ASSIST_GAIN          0.5f
 
-#define LOOP_MAIN_MS         100
+#define LOOP_MAIN_MS         10
+#define DEBOUNCE_MS          50     // debounce time in ms
 
 typedef enum {
     MODE_IDLE = 0,
@@ -35,6 +36,36 @@ typedef struct {
     CommandMode mode;
     float      p1, p2, p3;
 } CurrentCmd;
+
+static uint pin_list[4] = { ENDSTOP_PIN_TOP, ENDSTOP_PIN_BOTTOM,
+                            ENDSTOP_PIN_LEFT, ENDSTOP_PIN_RIGHT };
+static bool    last_state[4];
+static uint64_t last_time[4];
+
+void init_endstops(void) {
+    for (int i = 0; i < 4; ++i) {
+        gpio_init(pin_list[i]);
+        gpio_set_dir(pin_list[i], GPIO_IN);
+        gpio_pull_up(pin_list[i]);
+        last_state[i] = gpio_get(pin_list[i]);
+        last_time[i]  = to_ms_since_boot(get_absolute_time());
+    }
+}
+
+bool any_endstop_pressed_debounced(void) {
+    uint64_t now = to_ms_since_boot(get_absolute_time());
+    for (int i = 0; i < 4; ++i) {
+        bool st = gpio_get(pin_list[i]);       // 1 = open, 0 = pressed
+        if (st != last_state[i]) {
+            last_state[i] = st;
+            last_time[i]  = now;
+        } else if (!st && (now - last_time[i] >= DEBOUNCE_MS)) {
+
+            return true;
+        }
+    }
+    return false;
+}
 
 // Read one feedback frame, extract position in degrees
 bool read_position_feedback(float *out_deg) {
@@ -170,16 +201,16 @@ int main() {
     mcp2515_disable_loopback();   // NORMAL mode
     sleep_ms(100);
 
+    int cnt_top=0, cnt_bottom=0, cnt_left=0, cnt_right=0;
+
     CurrentCmd cur={MODE_IDLE,0,0,0};
     char line[CMD_BUFFER_SIZE],cmd[16];
     float v1,v2,v3; int args;
 
     while(1){
 
-         // Stop on any endstop press
-        if (!gpio_get(ENDSTOP_PIN_TOP) || !gpio_get(ENDSTOP_PIN_BOTTOM) ||
-            !gpio_get(ENDSTOP_PIN_LEFT) || !gpio_get(ENDSTOP_PIN_RIGHT)) {
-            printf("Endstop triggered! Stopping motor.\n");
+        if (any_endstop_pressed_debounced()) {
+            printf("Endstop! Stopping.\n");
             cur.mode = MODE_IDLE;
             stop_motor();
         }
