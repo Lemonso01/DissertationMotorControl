@@ -6,7 +6,7 @@
 
 // Motor CAN settings
 #define MOTOR_ID_1   0x01  // CAN node ID
-#define MOTOR_ID_1   0x02
+#define MOTOR_ID_2   0x02
 
 #define CMD_BUFFER_SIZE      64
 
