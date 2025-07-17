@@ -5,7 +5,9 @@
 #include "mcp2515.h"
 
 // Motor CAN settings
-#define MOTOR_ID   0x01  // CAN node ID
+#define MOTOR_ID_1   0x01  // CAN node ID
+#define MOTOR_ID_1   0x02
+
 #define CMD_BUFFER_SIZE      64
 
 #define ENDSTOP_PIN_TOP      22
@@ -13,9 +15,11 @@
 #define ENDSTOP_PIN_LEFT     14
 #define ENDSTOP_PIN_RIGHT    15
 
-#define LOOP_DT_MS           100     // control loop period
-#define POS_TOL_DEG          2.0f    // assist threshold
-#define ASSIST_GAIN          0.5f    // Nm per degree error
+#define LOOP_DT_MS           500     // AAN control loop period
+#define POS_TOL_DEG          2.0f
+#define ASSIST_GAIN          0.5f
+
+#define LOOP_MAIN_MS         100
 
 typedef enum {
     MODE_IDLE = 0,
@@ -33,7 +37,7 @@ typedef struct {
 } CurrentCmd;
 
 // Read one feedback frame, extract position in degrees
-static bool read_position_feedback(float *out_deg) {
+bool read_position_feedback(float *out_deg) {
     if (!mcp2515_check_message()) return false;
     uint32_t id;
     uint8_t data[8];
@@ -45,35 +49,37 @@ static bool read_position_feedback(float *out_deg) {
     return true;
 }
 
-// Assist-as-needed trajectory: move from start->end in duration, assist if lag
+// Assist-as-needed trajectory
 static void do_assist_as_needed(float start_deg, float end_deg, float duration_s) {
     const int steps = (int)(duration_s * 1000 / LOOP_DT_MS);
     const float vel = (end_deg - start_deg) / (steps * (LOOP_DT_MS/1000.0f));
     float desired = start_deg;
-    printf("Starting AAN from %.1f° to %.1f° over %.1fs (%d steps)\n",
+    printf("Starting AAN from %.1f° to %.1f° over %.1fs (%d steps)",
            start_deg, end_deg, duration_s, steps);
     for (int i = 0; i < steps; i++) {
         uint64_t t0 = to_ms_since_boot(get_absolute_time());
         // send position setpoint
-        send_position(MOTOR_ID, desired);
+        send_position(MOTOR_ID_1, desired);
         // read feedback
         float actual;
         if (read_position_feedback(&actual)) {
             float err = desired - actual;
             if (err > POS_TOL_DEG) {
-                float torque = err * ASSIST_GAIN;
-                printf("  step %d, desired=%.1f°, actual=%.1f°, assist=%.2fNm\n",
-                       i, desired, actual, torque);
-                send_torque(MOTOR_ID, torque);
+                // compute assist speed [rpm] based on error
+                float speed = err * ASSIST_GAIN;
+                if (speed > 6.0f) speed = 6.0f;
+                printf("  step %d, desired=%.1f°, actual=%.1f°, assist speed=%.2f rpm",
+                       i, desired, actual, speed);
+                send_rpm(MOTOR_ID_1, (int32_t)speed);
             }
         }
-        // increment desired
+        // increment desired trajectory
         desired += vel;
         // wait remainder of loop
         uint64_t dt = to_ms_since_boot(get_absolute_time()) - t0;
         if (dt < LOOP_DT_MS) sleep_ms(LOOP_DT_MS - dt);
     }
-    printf("Assit as Needed trajectory complete\n");
+    printf("Assist-as-needed trajectory complete");
 }
 
 void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2) {
@@ -96,7 +102,7 @@ void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2
     buf[7] = (a     ) & 0xFF;
     // Transmit
     mcp2515_send_extended(can_id, buf, 8);
-    printf("→ POSSPD: %.2f° @%.2f°/s accel=%.2f°/s²\n", pos_deg, vel_dps, acc_dps2);
+    printf("POSSPD: %.2f° @%.2f°/s accel=%.2f°/s²\n", pos_deg, vel_dps, acc_dps2);
 }
 
 void send_origin(uint8_t motor_id) {
@@ -108,29 +114,28 @@ void send_origin(uint8_t motor_id) {
 
 void stop_motor(void) {
     // zero velocity
-    send_rpm(MOTOR_ID, 0);
+    send_rpm(MOTOR_ID_1, 0);
     // clear torque
-    send_torque(MOTOR_ID, 0.0f);
+    send_torque(MOTOR_ID_1, 0.0f);
     printf("All commands zeroed\n");
 }
 
-// Dispatch current cmd each loop to keep motor engaged
 static void process_current_cmd(const CurrentCmd *cmd){
     switch(cmd->mode){
         case MODE_RPM:
-            send_rpm(MOTOR_ID,(int32_t)cmd->p1);
+            send_rpm(MOTOR_ID_1,(int32_t)cmd->p1);
             break;
         case MODE_POS:
-            send_position(MOTOR_ID,cmd->p1);
+            send_position(MOTOR_ID_1,cmd->p1);
             break;
         case MODE_TORQUE:
-            send_torque(MOTOR_ID,cmd->p1);
+            send_torque(MOTOR_ID_1,cmd->p1);
             break;
         case MODE_POSSPD:
-            send_pos_spd(MOTOR_ID,cmd->p1,cmd->p2,cmd->p3);
+            send_pos_spd(MOTOR_ID_1,cmd->p1,cmd->p2,cmd->p3);
             break;
         case MODE_ORIGIN:
-            send_origin(MOTOR_ID);
+            send_origin(MOTOR_ID_1);
             break;
         default: break;
     }
@@ -154,6 +159,12 @@ int main() {
     sleep_ms(2000);  // wait for USB
     printf("Pico CAN\n");
 
+    gpio_init(ENDSTOP_PIN_TOP);    gpio_set_dir(ENDSTOP_PIN_TOP, GPIO_IN);    gpio_pull_up(ENDSTOP_PIN_TOP);
+    gpio_init(ENDSTOP_PIN_BOTTOM); gpio_set_dir(ENDSTOP_PIN_BOTTOM, GPIO_IN); gpio_pull_up(ENDSTOP_PIN_BOTTOM);
+    gpio_init(ENDSTOP_PIN_LEFT);   gpio_set_dir(ENDSTOP_PIN_LEFT, GPIO_IN);   gpio_pull_up(ENDSTOP_PIN_LEFT);
+    gpio_init(ENDSTOP_PIN_RIGHT);  gpio_set_dir(ENDSTOP_PIN_RIGHT, GPIO_IN);  gpio_pull_up(ENDSTOP_PIN_RIGHT);
+
+
     // Initialize MCP2515 CAN controller
     mcp2515_init();               // SPI setup + reset + CNF regs
     mcp2515_disable_loopback();   // NORMAL mode
@@ -164,6 +175,15 @@ int main() {
     float v1,v2,v3; int args;
 
     while(1){
+
+         // Stop on any endstop press
+        if (!gpio_get(ENDSTOP_PIN_TOP) || !gpio_get(ENDSTOP_PIN_BOTTOM) ||
+            !gpio_get(ENDSTOP_PIN_LEFT) || !gpio_get(ENDSTOP_PIN_RIGHT)) {
+            printf("Endstop triggered! Stopping motor.\n");
+            cur.mode = MODE_IDLE;
+            stop_motor();
+        }
+
         // read incoming
         if(read_line(line,sizeof(line))){
             args=sscanf(line,"%15s %f %f %f",cmd,&v1,&v2,&v3);
@@ -186,9 +206,7 @@ int main() {
         }
         // maintain active command
         if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }
-        sleep_ms(LOOP_DT_MS);
+        sleep_ms(LOOP_MAIN_MS);
     }
     return 0;
-
-    return 0;  // never reached
 }
