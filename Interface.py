@@ -1,5 +1,5 @@
 # motor_gui.py
-# GUI for sending micro-friendly serial commands: RPM, POS, TORQUE, AAN, POSSPD, and STOP behavior
+# GUI for sending micro-friendly serial commands: RPM, POS, TORQUE, AAN, POSSPD, STOP, ORIGIN, CALIBRATE
 
 import threading
 import time
@@ -37,6 +37,7 @@ if REAL_TKINTER:
             style.theme_use("clam")
             style.configure("Red.TButton", foreground="white", background="red")
             style.configure("Blue.TButton", foreground="white", background="blue")
+            style.configure("Orange.TButton", foreground="white", background="orange")
 
             # Serial initialization
             ports = [p.device for p in list_ports.comports()]
@@ -69,28 +70,29 @@ if REAL_TKINTER:
             # Top controls spanning all columns
             ttk.Button(frm, text="⚙", width=3, command=self.open_settings).grid(row=0, column=0, columnspan=3, pady=(0,5))
             ttk.Button(frm, text="Set Origin", style="Blue.TButton", command=lambda: self.send_cmd("ORIGIN")).grid(row=1, column=0, columnspan=3, sticky="ew", pady=2)
-            ttk.Button(frm, text="STOP", style="Red.TButton", command=self.stop_all).grid(row=2, column=0, columnspan=3, sticky="ew", pady=2)
+            ttk.Button(frm, text="Calibrate", style="Orange.TButton", command=lambda: self.send_cmd("CALIBRATE")).grid(row=2, column=0, columnspan=3, sticky="ew", pady=2)
+            ttk.Button(frm, text="STOP", style="Red.TButton", command=self.stop_all).grid(row=3, column=0, columnspan=3, sticky="ew", pady=2)
 
             # Column headers & separator
-            ttk.Label(frm, text="TEST MODES", font=(None,10,'bold')).grid(row=3, column=0, pady=(10,2))
-            ttk.Separator(frm, orient='vertical').grid(row=3, column=1, rowspan=8, sticky='ns')
-            ttk.Label(frm, text="WORK MODES", font=(None,10,'bold')).grid(row=3, column=2, pady=(10,2))
+            ttk.Label(frm, text="TEST MODES", font=(None,10,'bold')).grid(row=4, column=0, pady=(10,2))
+            ttk.Separator(frm, orient='vertical').grid(row=4, column=1, rowspan=8, sticky='ns')
+            ttk.Label(frm, text="WORK MODES", font=(None,10,'bold')).grid(row=4, column=2, pady=(10,2))
 
             # TEST MODE buttons in col 0
-            ttk.Button(frm, text="RPM",    command=lambda: self.send_cmd(f"RPM {int(self.params['rpm'])}")).grid(row=4, column=0, sticky='ew', pady=2)
-            ttk.Button(frm, text="POS",    command=lambda: self.send_cmd(f"POS {self.params['pos']:.2f}")).grid(row=5, column=0, sticky='ew', pady=2)
-            ttk.Button(frm, text="TORQUE", command=lambda: self.send_cmd(f"TORQUE {self.params['torque']:.2f}")).grid(row=6, column=0, sticky='ew', pady=2)
-            ttk.Button(frm, text="DUTY",   command=lambda: self.send_cmd(f"DUTY {self.params['duty']:.3f}")).grid(row=7, column=0, sticky='ew', pady=2)
-            ttk.Button(frm, text="CURRENT",command=lambda: self.send_cmd(f"CURRENT {self.params['current']:.2f}")).grid(row=8, column=0, sticky='ew', pady=2)
-            ttk.Button(frm, text="BRAKE",  command=lambda: self.send_cmd(f"BRAKE {self.params['brake']:.2f}")).grid(row=9, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="RPM",    command=lambda: self.send_cmd(f"RPM {int(self.params['rpm'])}")).grid(row=5, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="POS",    command=lambda: self.send_cmd(f"POS {self.params['pos']:.2f}" )).grid(row=6, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="TORQUE", command=lambda: self.send_cmd(f"TORQUE {self.params['torque']:.2f}" )).grid(row=7, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="DUTY",   command=lambda: self.send_cmd(f"DUTY {self.params['duty']:.3f}" )).grid(row=8, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="CURRENT",command=lambda: self.send_cmd(f"CURRENT {self.params['current']:.2f}" )).grid(row=9, column=0, sticky='ew', pady=2)
+            ttk.Button(frm, text="BRAKE",  command=lambda: self.send_cmd(f"BRAKE {self.params['brake']:.2f}" )).grid(row=10, column=0, sticky='ew', pady=2)
             ttk.Button(frm, text="POSSPD", command=lambda: self.send_cmd(
                 f"POSSPD {self.params['posspd_p']:.2f} {self.params['posspd_v']:.2f} {self.params['posspd_a']:.2f}" )
-            ).grid(row=10, column=0, sticky='ew', pady=2)
+            ).grid(row=11, column=0, sticky='ew', pady=2)
 
             # WORK MODE buttons in col 2
-            ttk.Button(frm, text="Assist A/N", command=self.open_aan_dialog).grid(row=4, column=2, sticky='ew', pady=2)
-            ttk.Button(frm, text="Auto Move",  command=lambda: self.send_cmd("POSSPD 90.00 18.00 1.00")).grid(row=5, column=2, sticky='ew', pady=2)
-            ttk.Button(frm, text="Resist",     command=lambda: self.send_cmd(f"TORQUE {self.params['torque']:.2f}")).grid(row=6, column=2, sticky='ew', pady=2)
+            ttk.Button(frm, text="Assist A/N", command=self.open_aan_dialog).grid(row=5, column=2, sticky='ew', pady=2)
+            ttk.Button(frm, text="Auto Move",  command=lambda: self.send_cmd("POSSPD 90.00 18.00 1.00")).grid(row=6, column=2, sticky='ew', pady=2)
+            ttk.Button(frm, text="Resist",     command=lambda: self.send_cmd(f"TORQUE {self.params['torque']:.2f}" )).grid(row=7, column=2, sticky='ew', pady=2)
 
             # Log area
             self.log = tk.Text(self, width=60, height=20, state='disabled')
@@ -124,7 +126,7 @@ if REAL_TKINTER:
             labels = ["Start (°):", "End (°):", "Duration (s):"]
             keys   = ['aan_s', 'aan_e', 'aan_d']
             vars_loc = {}
-            for i,(lbl,key) in enumerate(zip(labels, keys)):
+            for i,(lbl, key) in enumerate(zip(labels, keys)):
                 ttk.Label(dlg, text=lbl).grid(row=i, column=0, sticky='e', padx=5, pady=2)
                 v = tk.DoubleVar(value=self.params[key])
                 ttk.Entry(dlg, textvariable=v, width=10).grid(row=i, column=1, pady=2)
@@ -142,7 +144,7 @@ if REAL_TKINTER:
             ttk.Button(fb, text='Cancel', command=dlg.destroy).grid(row=0, column=1)
 
         def _save(self, dlg):
-            for k,v in self.vars.items(): self.params[k] = v.get()
+            for k, v in self.vars.items(): self.params[k] = v.get()
             dlg.destroy()
 
         def stop_all(self):
