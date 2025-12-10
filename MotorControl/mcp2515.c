@@ -144,6 +144,7 @@ void send_rpm(uint8_t motor_id, int32_t rpm) {
     data[3] = rpm & 0xFF;
     uint32_t id = (CAN_PACKET_SET_RPM << 8) | motor_id;
     mcp2515_send_extended(id, data, 4);
+    printf("Reaches end of RMP command with data: %f", data);
 }
 
 // Send position command in degrees

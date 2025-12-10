@@ -215,8 +215,13 @@ int main() {
             stop_motor();
         }
 
+        sleep_ms(10000);
+
+        send_pos_spd(MOTOR_ID_1, 90.0f, 100.0f, 100.0f);
+
+
         // read incoming
-        if(read_line(line,sizeof(line))){
+        /*if(read_line(line,sizeof(line))){
             args=sscanf(line,"%15s %f %f %f",cmd,&v1,&v2,&v3);
 
             if(strcasecmp(cmd,"STOP")==0){ cur.mode=MODE_IDLE; stop_motor(); }
@@ -236,7 +241,7 @@ int main() {
             else if(strcasecmp(cmd,"ORIGIN")==0){ cur.mode=MODE_ORIGIN; }
         }
         // maintain active command
-        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }
+        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }*/
         sleep_ms(LOOP_MAIN_MS);
     }
     return 0;

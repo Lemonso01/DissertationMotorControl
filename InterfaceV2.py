@@ -133,17 +133,13 @@ class ElbowArmWidget(QtWidgets.QWidget):
         )
 
         # --- Drawing area ---
-        # More space above joint to allow longer forearm without hitting the title
         draw_rect = card_rect.adjusted(10, 40, -10, -10)
 
-        # Shift joint further down
+        # Shift joint further down for more wiggle room
         x0 = draw_rect.center().x()
         y0 = draw_rect.center().y() + 20
 
-        # Increase the usable radius
         radius = min(draw_rect.width(), draw_rect.height()) // 2
-
-        # Allow a longer forearm, but still safe
         forearm_len = min(self.L2, radius - 6)
 
         # --- Grid / reference lines ---
@@ -317,7 +313,8 @@ class WristDialWidget(QtWidgets.QWidget):
 # ---------------- Main Window ----------------
 class MainWindow(QtWidgets.QMainWindow):
     log_signal = QtCore.Signal(str)
-    status_signal = QtCore.Signal(dict)
+    # use "object" instead of "dict" for cross-thread safety
+    status_signal = QtCore.Signal(object)
 
     elbow_angle_signal = QtCore.Signal(float)
     wrist_angle_signal = QtCore.Signal(float)
@@ -756,14 +753,18 @@ class MainWindow(QtWidgets.QMainWindow):
                 buf += data
                 lines = buf.split(b"\n")
                 for ln in lines[:-1]:
-                    txt = ln.decode(errors="ignore").strip()
-                    if not txt:
-                        continue
-                    # Mark incoming lines
-                    self.log_signal.emit(f"RX: {txt}")
-                    status = self.parse_status_line(txt)
-                    if status:
-                        self.status_signal.emit(status)
+                    try:
+                        txt = ln.decode(errors="ignore").strip()
+                        if not txt:
+                            continue
+                        # Mark incoming lines
+                        self.log_signal.emit(f"RX: {txt}")
+                        status = self.parse_status_line(txt)
+                        if status:
+                            self.status_signal.emit(status)
+                    except Exception as e:
+                        # Do not crash the GUI because of a bad line
+                        print("Reader error:", e)
                 buf = lines[-1]
             time.sleep(0.005)
 
@@ -851,8 +852,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return status or None
 
-    @QtCore.Slot(dict)
-    def apply_status_update(self, status: dict):
+    @QtCore.Slot(object)
+    def apply_status_update(self, status: object):
+        # status is expected to be a dict
+        if not isinstance(status, dict):
+            return
         if "elbow_deg" in status:
             val = status["elbow_deg"]
             self.elbow_view.set_angle_deg(val)
