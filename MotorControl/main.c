@@ -37,6 +37,19 @@ typedef struct {
     float      p1, p2, p3;
 } CurrentCmd;
 
+typedef struct {
+    float   pos_deg;
+    float   speed_erpm;
+    float   current_A;
+    int8_t  temp_C;
+    uint8_t error;
+    bool    valid;
+} MotorStatus;
+
+
+static MotorStatus motor1_status = {0};
+static MotorStatus motor2_status = {0};
+
 static uint pin_list[4] = { ENDSTOP_PIN_TOP, ENDSTOP_PIN_BOTTOM,
                             ENDSTOP_PIN_LEFT, ENDSTOP_PIN_RIGHT };
 static bool    last_state[4];
@@ -67,51 +80,116 @@ bool any_endstop_pressed_debounced(void) {
     return false;
 }
 
-// Read one feedback frame, extract position in degrees
-bool read_position_feedback(float *out_deg) {
-    if (!mcp2515_check_message()) return false;
-    uint32_t id;
-    uint8_t data[8];
-    uint8_t len;
-    mcp2515_read_message(&id, data, &len);
-    if (len < 2) return false;
-    int16_t pos_raw = (int16_t)((data[0] << 8) | data[1]);
-    *out_deg = pos_raw * 0.1f;  // LSB = 0.1°
-    return true;
+void poll_can_status(void) {
+    while (mcp2515_check_message()) {
+        uint32_t id;
+        uint8_t  data[8];
+        uint8_t  len;
+        mcp2515_read_message(&id, data, &len);
+
+        if (len < 8) {
+            continue; // not a full status frame
+        }
+
+        uint8_t node_id = (uint8_t)(id & 0xFF);  // low 8 bits = MOTOR_ID_x
+
+        int16_t pos_raw = (int16_t)((data[0] << 8) | data[1]);
+        int16_t spd_raw = (int16_t)((data[2] << 8) | data[3]);
+        int16_t cur_raw = (int16_t)((data[4] << 8) | data[5]);
+        int8_t  tmp_raw = (int8_t)data[6];
+        uint8_t err_raw = data[7];
+
+        MotorStatus *st = NULL;
+        if (node_id == MOTOR_ID_1) {
+            st = &motor1_status;
+        } else if (node_id == MOTOR_ID_2) {
+            st = &motor2_status;
+        } else {
+            // Some other node, ignore
+            continue;
+        }
+
+        st->pos_deg    = pos_raw * 0.1f;    // 0.1° per LSB
+        st->speed_erpm = spd_raw * 10.0f;   // 10 eRPM per LSB (adjust if needed)
+        st->current_A  = cur_raw * 0.01f;   // 0.01 A per LSB
+        st->temp_C     = tmp_raw;
+        st->error      = err_raw;
+        st->valid      = true;
+    }
 }
 
-// Assist-as-needed trajectory
-static void do_assist_as_needed(float start_deg, float end_deg, float duration_s) {
-    const int steps = (int)(duration_s * 1000 / LOOP_DT_MS);
-    const float vel = (end_deg - start_deg) / (steps * (LOOP_DT_MS/1000.0f));
-    float desired = start_deg;
-    printf("Starting AAN from %.1f° to %.1f° over %.1fs (%d steps)",
-           start_deg, end_deg, duration_s, steps);
+// Generic Assist-as-needed trajectory for a given motor & status
+static void do_assist_as_needed_joint(uint8_t motor_id,
+                                      MotorStatus *st,
+                                      float start_deg,
+                                      float end_deg,
+                                      float duration_s)
+{
+    const int steps = (int)(duration_s * 1000.0f / LOOP_DT_MS);
+    if (steps <= 0) {
+        printf("AAN (motor %u): invalid duration %.2fs\n", motor_id, duration_s);
+        return;
+    }
+
+    const float dt_s = LOOP_DT_MS / 1000.0f;
+    const float vel  = (end_deg - start_deg) / (steps * dt_s);  // deg/s
+    float desired    = start_deg;
+
+    st->valid = false;  // force wait for fresh status
+
+    printf("AAN (motor %u): from %.1f° to %.1f° over %.1fs (%d steps)\n",
+           motor_id, start_deg, end_deg, duration_s, steps);
+
     for (int i = 0; i < steps; i++) {
         uint64_t t0 = to_ms_since_boot(get_absolute_time());
-        // send position setpoint
-        send_position(MOTOR_ID_1, desired);
-        // read feedback
-        float actual;
-        if (read_position_feedback(&actual)) {
-            float err = desired - actual;
+
+        // Safety: endstop check
+        if (any_endstop_pressed_debounced()) {
+            printf("AAN (motor %u): endstop hit, aborting.\n", motor_id);
+            stop_motor();   // currently stops motor 1 only; you may want a per-motor stop later
+            break;
+        }
+
+        // 1) Send position setpoint to THIS motor
+        send_position(motor_id, desired);
+
+        // 2) Poll CAN to refresh both motor statuses
+        poll_can_status();
+
+        // 3) Use latest feedback for THIS motor
+        if (st->valid) {
+            float actual = st->pos_deg;
+            float err    = desired - actual;
+
             if (err > POS_TOL_DEG) {
-                // compute assist speed [rpm] based on error
-                float speed = err * ASSIST_GAIN;
+                float speed = err * ASSIST_GAIN;  // rpm
                 if (speed > 6.0f) speed = 6.0f;
-                printf("  step %d, desired=%.1f°, actual=%.1f°, assist speed=%.2f rpm",
-                       i, desired, actual, speed);
-                send_rpm(MOTOR_ID_1, (int32_t)speed);
+                if (speed < 0.0f) speed = 0.0f;
+
+                printf("  motor %u step %d, desired=%.1f°, actual=%.1f°, assist speed=%.2f rpm\n",
+                       motor_id, i, desired, actual, speed);
+
+                send_rpm(motor_id, (int32_t)speed);
+            } else {
+                // within tolerance -> zero assist for this motor
+                send_rpm(motor_id, 0);
             }
         }
-        // increment desired trajectory
+
+        // 4) Advance desired angle
         desired += vel;
-        // wait remainder of loop
+
+        // 5) Loop timing
         uint64_t dt = to_ms_since_boot(get_absolute_time()) - t0;
-        if (dt < LOOP_DT_MS) sleep_ms(LOOP_DT_MS - dt);
+        if (dt < LOOP_DT_MS) {
+            sleep_ms(LOOP_DT_MS - dt);
+        }
     }
-    printf("Assist-as-needed trajectory complete");
+
+    printf("AAN (motor %u): trajectory complete\n", motor_id);
 }
+
+
 
 void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2) {
     // Build extended CAN ID
@@ -215,13 +293,29 @@ int main() {
             stop_motor();
         }
 
-        sleep_ms(10000);
+        poll_can_status();
 
-        send_pos_spd(MOTOR_ID_1, 90.0f, 100.0f, 100.0f);
+        // Optionally: print status to USB (throttle if too chatty)
+        if (motor1_status.valid) {
+            printf("pos1: %.1f deg spd1: %.0f erpm cur1: %.2f A temp1: %d err1: %u\n",
+                   motor1_status.pos_deg,
+                   motor1_status.speed_erpm,
+                   motor1_status.current_A,
+                   (int)motor1_status.temp_C,
+                   (unsigned)motor1_status.error);
+        }
+        if (motor2_status.valid) {
+            printf("pos2: %.1f deg spd2: %.0f erpm cur2: %.2f A temp2: %d err2: %u\n",
+                   motor2_status.pos_deg,
+                   motor2_status.speed_erpm,
+                   motor2_status.current_A,
+                   (int)motor2_status.temp_C,
+                   (unsigned)motor2_status.error);
+        }
 
 
         // read incoming
-        /*if(read_line(line,sizeof(line))){
+        if(read_line(line,sizeof(line))){
             args=sscanf(line,"%15s %f %f %f",cmd,&v1,&v2,&v3);
 
             if(strcasecmp(cmd,"STOP")==0){ cur.mode=MODE_IDLE; stop_motor(); }
@@ -236,12 +330,14 @@ int main() {
 
             else if(strcasecmp(cmd,"POSSPD")==0&&args>=4){ cur.mode=MODE_POSSPD; cur.p1=v1;cur.p2=v2;cur.p3=v3; }
 
-            else if(strcasecmp(cmd,"AAN")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed(v1,v2,v3);}   
+            else if(strcasecmp(cmd,"AAN")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed_joint(MOTOR_ID_1, &motor1_status, v1, v2, v3);}   
+
+            else if(strcasecmp(cmd,"AAN2")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed_joint(MOTOR_ID_2, &motor2_status, v1, v2, v3);}  
 
             else if(strcasecmp(cmd,"ORIGIN")==0){ cur.mode=MODE_ORIGIN; }
         }
         // maintain active command
-        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }*/
+        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }
         sleep_ms(LOOP_MAIN_MS);
     }
     return 0;

@@ -575,11 +575,20 @@ class MainWindow(QtWidgets.QMainWindow):
         layout = QtWidgets.QFormLayout(dlg)
 
         fields = [
-            ("RPM", 'rpm'), ("Pos (°)", 'pos'), ("Torque (Nm)", 'torque'),
-            ("Duty", 'duty'), ("Current (A)", 'current'), ("Brake (A)", 'brake'),
-            ("PosSpd Pos (°)", 'posspd_p'), ("PosSpd Vel (ERPM)", 'posspd_v'), ("PosSpd Acc", 'posspd_a'),
-            ("AAN Start (°)", "aan_s"), ("AAN End (°)", "aan_e"), ("AAN Dur (s)", "aan_d"),
+            ("RPM", 'rpm'),
+            ("Pos (°)", 'pos'),
+            ("Torque (Nm)", 'torque'),
+            ("Duty", 'duty'),
+            ("Current (A)", 'current'),
+            ("Brake (A)", 'brake'),
+            ("PosSpd Pos (°)", 'posspd_p'),
+            ("PosSpd Vel (deg/s)", 'posspd_v'),
+            ("PosSpd Acc (deg/s²)", 'posspd_a'),
+            ("AAN Start (°)", "aan_s"),
+            ("AAN End (°)", "aan_e"),
+            ("AAN Dur (s)", "aan_d"),
         ]
+
 
         widgets = {}
         for label, key in fields:
@@ -613,6 +622,12 @@ class MainWindow(QtWidgets.QMainWindow):
         dlg.setWindowTitle("Assist-As-Needed Parameters")
         layout = QtWidgets.QFormLayout(dlg)
 
+        # Joint selector
+        joint_combo = QtWidgets.QComboBox()
+        joint_combo.addItem("Elbow (Motor 1)", userData="AAN")
+        joint_combo.addItem("Wrist (Motor 2)", userData="AAN2")
+        layout.addRow("Joint:", joint_combo)
+
         le_start = QtWidgets.QLineEdit(str(self.params['aan_s']))
         le_end   = QtWidgets.QLineEdit(str(self.params['aan_e']))
         le_dur   = QtWidgets.QLineEdit(str(self.params['aan_d']))
@@ -635,15 +650,19 @@ class MainWindow(QtWidgets.QMainWindow):
             except ValueError:
                 QtWidgets.QMessageBox.warning(dlg, "Invalid input", "Please enter numeric values.")
                 return
+
             self.params['aan_s'] = s
             self.params['aan_e'] = e
             self.params['aan_d'] = d
-            self.send_cmd(f"AAN {s:.2f} {e:.2f} {d:.2f}")
+
+            cmd_name = joint_combo.currentData()  # "AAN" or "AAN2"
+            self.send_cmd(f"{cmd_name} {s:.2f} {e:.2f} {d:.2f}")
             dlg.accept()
 
         btn_box.accepted.connect(on_ok)
         btn_box.rejected.connect(dlg.reject)
         dlg.exec()
+
 
     # ---------- Simulate Move dialog ----------
     def open_sim_dialog(self):
