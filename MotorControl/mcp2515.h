@@ -31,6 +31,7 @@
 #define MCP_RXB0EID0    0x64
 #define MCP_RXB0DLC     0x65
 #define MCP_RXB0D0      0x66
+#define MCP_RXB1CTRL    0x70
 #define MCP_RXB1SIDH    0x71
 #define MCP_RXB1SIDL    0x72
 #define MCP_RXB1EID8    0x73
@@ -106,5 +107,7 @@ bool mcp2515_receive_frame(can_frame_t *frm);
 void mit_pack_cmd(can_frame_t *frm, uint8_t drv_id, float p_des, float v_des, float kp, float kd, float t_ff);
 void mit_unpack_reply(const can_frame_t *frm, float *p, float *v, float *t, float *kd, int *rawTemp, int *err);
 bool mit_recv_reply(uint8_t drv_id, float *p, float *v, float *t, float *kd, int *rawT, int *err);
+
+static void mcp2515_print_bus_health(void);
 
 #endif // MCP2515_H

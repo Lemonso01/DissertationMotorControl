@@ -79,6 +79,8 @@ void mcp2515_init() {
     mcp2515_write_register(MCP_CNF2, 0xD0);
     mcp2515_write_register(MCP_CNF3, 0x82);
     mcp2515_write_register(MCP_RXB0CTRL, 0x60);
+    mcp2515_write_register(MCP_RXB1CTRL, 0x60);
+    mcp2515_write_register(MCP_CANINTF, 0x00);
 
     uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
     printf("CANSTAT after init: 0x%02X\n", stat);
@@ -180,7 +182,7 @@ void send_torque(uint8_t motor_id, float torque_nm) {
 // === Message Handling ===
 bool mcp2515_check_message() {
     uint8_t intf = mcp2515_read_register(MCP_CANINTF);
-    return (intf & 0x01) != 0;
+    return (intf & 0x03) != 0; // RX0IF or RX1IF
 }
 
 void mcp2515_clear_rx0if() {
@@ -357,4 +359,12 @@ bool mit_recv_reply(uint8_t drv_id,
     if (rx.dlc != 8)                return false;
     mit_unpack_reply(&rx, p, v, t, kd, rawT, err);
     return true;
+}
+
+static void mcp2515_print_bus_health(void) {
+    uint8_t eflg = mcp2515_read_register(MCP_EFLG);
+    uint8_t tec  = mcp2515_read_register(MCP_TEC);
+    uint8_t rec  = mcp2515_read_register(MCP_REC);
+    uint8_t tx0  = mcp2515_read_register(MCP_TXB0CTRL);
+    printf("EFLG=0x%02X TEC=%u REC=%u TXB0CTRL=0x%02X\n", eflg, tec, rec, tx0);
 }
