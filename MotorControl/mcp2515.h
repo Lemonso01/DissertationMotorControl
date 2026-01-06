@@ -12,6 +12,8 @@
 #define MCP2515_CS_PIN 17
 
 // === MCP2515 Register Definitions ===
+#define MCP_TEC         0x1C
+#define MCP_REC         0x1D
 #define MCP_CANSTAT     0x0E
 #define MCP_CANCTRL     0x0F
 #define MCP_CNF1        0x2A
