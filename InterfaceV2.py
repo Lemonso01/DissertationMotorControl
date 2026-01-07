@@ -589,7 +589,6 @@ class MainWindow(QtWidgets.QMainWindow):
             ("AAN Dur (s)", "aan_d"),
         ]
 
-
         widgets = {}
         for label, key in fields:
             le = QtWidgets.QLineEdit()
@@ -662,7 +661,6 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_box.accepted.connect(on_ok)
         btn_box.rejected.connect(dlg.reject)
         dlg.exec()
-
 
     # ---------- Simulate Move dialog ----------
     def open_sim_dialog(self):
@@ -797,13 +795,65 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # ---------- Status line parsing ----------
     def parse_status_line(self, line: str):
-        lo = line.lower()
+        """
+        Supports BOTH:
+          1) Your MCU CSV telemetry:
+             "SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n"
+             SERVO,<motor_id>,<pos_deg>,<spd_erpm>,<cur_a>,<temp_c>,<err>
+
+          2) Legacy key:value lines (kept as fallback).
+        """
+
+        s = line.strip()
+        if not s:
+            return None
+
+        # --------- NEW: CSV SERVO parsing ----------
+        if s.upper().startswith("SERVO"):
+            parts = [p.strip() for p in s.split(",")]
+            if len(parts) != 7:
+                return None
+
+            try:
+                motor_id = int(parts[1])
+                pos_deg  = float(parts[2])
+                spd_erpm = float(parts[3])   # printed as %.0f, float parse is OK
+                cur_a    = float(parts[4])   # actual current in A
+                temp_c   = float(parts[5])   # printed as %d, float parse is OK
+                err      = int(parts[6])
+            except ValueError:
+                return None
+
+            status = {}
+
+            if motor_id == 1:
+                # Motor 1 -> Elbow
+                status["elbow_deg"] = pos_deg
+                status["spd1"]      = spd_erpm
+                status["tmp1"]      = temp_c
+                status["err1"]      = err
+                status["t1"]        = cur_a * KT_NM_PER_A_1  # torque estimate from current
+            elif motor_id == 2:
+                # Motor 2 -> Wrist (clamp for dial)
+                status["wrist_deg"] = max(-90.0, min(90.0, pos_deg))
+                status["spd2"]      = spd_erpm
+                status["tmp2"]      = temp_c
+                status["err2"]      = err
+                status["t2"]        = cur_a * KT_NM_PER_A_2
+            else:
+                return None
+
+            return status
+
+        # --------- Fallback: legacy parser ----------
+        lo = s.lower()
 
         if not any(k in lo for k in [
             "pos", "pos1", "pos2", "elbow", "wrist", "sup", "deg", "deg1", "deg2",
             "spd", "spd1", "spd2", "erpm", "erpm1", "erpm2",
             "iq", "iq1", "iq2", "cur", "cur1", "cur2", "current",
-            "torq", "torque", "tq", "temp", "temp1", "temp2", "err", "err1", "err2"
+            "torq", "torque", "tq", "temp", "temp1", "temp2", "err", "err1", "err2",
+            "servo"  # allow legacy lines that include 'servo'
         ]):
             return None
 
@@ -876,26 +926,32 @@ class MainWindow(QtWidgets.QMainWindow):
         # status is expected to be a dict
         if not isinstance(status, dict):
             return
+
         if "elbow_deg" in status:
             val = status["elbow_deg"]
             self.elbow_view.set_angle_deg(val)
             self.pos1_label.setText(f"{val:.1f}")
+
         if "wrist_deg" in status:
             val = status["wrist_deg"]
             self.wrist_view.set_angle_deg(val)
             self.pos2_label.setText(f"{val:.1f}")
+
         if "spd1" in status:
             self.spd1_label.setText(f"{status['spd1']:.0f}")
         if "spd2" in status:
             self.spd2_label.setText(f"{status['spd2']:.0f}")
+
         if "t1" in status:
             self.trq1_label.setText(f"{status['t1']:.2f}")
         if "t2" in status:
             self.trq2_label.setText(f"{status['t2']:.2f}")
+
         if "tmp1" in status:
             self.tmp1_label.setText(f"{status['tmp1']:.0f}")
         if "tmp2" in status:
             self.tmp2_label.setText(f"{status['tmp2']:.0f}")
+
         if "err1" in status:
             self.err1_label.setText(str(status["err1"]))
         if "err2" in status:

@@ -2940,7 +2940,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
 .flash_begin    0x10000000        0x0
                 0x10000000                        __flash_binary_start = .
 
-.text           0x10000000     0x639c
+.text           0x10000000     0x638c
                 0x10000000                        __logical_binary_start = .
  *(.vectors)
  .vectors       0x10000000      0x124 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
@@ -3030,584 +3030,584 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
  .text.can_send_on_txb.isra.0
                 0x100002b4      0x14c CMakeFiles/pico_can.dir/main.c.o
  .text.startup.main
-                0x10000400      0x3d8 CMakeFiles/pico_can.dir/main.c.o
+                0x10000400      0x3c8 CMakeFiles/pico_can.dir/main.c.o
                 0x10000400                main
  .text.gpio_set_function
-                0x100007d8       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
-                0x100007d8                gpio_set_function
+                0x100007c8       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+                0x100007c8                gpio_set_function
  .text.gpio_init
-                0x10000814       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
-                0x10000814                gpio_init
- .text.panic    0x1000085c       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
-                0x1000085c                panic
+                0x10000804       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+                0x10000804                gpio_init
+ .text.panic    0x1000084c       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+                0x1000084c                panic
  .text.hw_claim_or_assert
-                0x1000088c       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
-                0x1000088c                hw_claim_or_assert
+                0x1000087c       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+                0x1000087c                hw_claim_or_assert
  .text.hw_claim_unused_from_range
-                0x100008e4       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
-                0x100008e4                hw_claim_unused_from_range
+                0x100008d4       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+                0x100008d4                hw_claim_unused_from_range
  .text.next_striped_spin_lock_num
-                0x10000980       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
-                0x10000980                next_striped_spin_lock_num
+                0x10000970       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+                0x10000970                next_striped_spin_lock_num
  .text.spin_lock_claim_unused
-                0x10000998       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
-                0x10000998                spin_lock_claim_unused
+                0x10000988       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+                0x10000988                spin_lock_claim_unused
  .text.spinlock_set_extexclall
-                0x100009b8       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+                0x100009a8       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
  .text.spin_locks_reset
-                0x100009c8       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
-                0x100009c8                spin_locks_reset
+                0x100009b8       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+                0x100009b8                spin_locks_reset
  .text.runtime_init_per_core_irq_priorities
-                0x100009e0       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x100009e0                runtime_init_per_core_irq_priorities
+                0x100009d0       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x100009d0                runtime_init_per_core_irq_priorities
  .text.irq_set_enabled
-                0x10000a20       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000a20                irq_set_enabled
+                0x10000a10       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000a10                irq_set_enabled
  .text.irq_is_enabled
-                0x10000a4c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000a4c                irq_is_enabled
+                0x10000a3c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000a3c                irq_is_enabled
  .text.irq_set_pending
-                0x10000a6c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000a6c                irq_set_pending
+                0x10000a5c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000a5c                irq_set_pending
  .text.irq_has_shared_handler
-                0x10000a84       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000a84                irq_has_shared_handler
+                0x10000a74       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000a74                irq_has_shared_handler
  .text.irq_set_exclusive_handler
-                0x10000aa4       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000aa4                irq_set_exclusive_handler
+                0x10000a94       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000a94                irq_set_exclusive_handler
  .text.irq_add_shared_handler
-                0x10000b04      0x1e8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000b04                irq_add_shared_handler
+                0x10000af4      0x1e8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000af4                irq_add_shared_handler
  .text.irq_add_tail_to_free_list
-                0x10000cec       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000cec                irq_add_tail_to_free_list
+                0x10000cdc       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000cdc                irq_add_tail_to_free_list
  .text.user_irq_claim_unused
-                0x10000da8       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x10000da8                user_irq_claim_unused
+                0x10000d98       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10000d98                user_irq_claim_unused
  .text.lock_init
-                0x10000dd0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
-                0x10000dd0                lock_init
+                0x10000dc0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
+                0x10000dc0                lock_init
  .text.runtime_init_mutex
-                0x10000ddc       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
-                0x10000ddc                runtime_init_mutex
+                0x10000dcc       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+                0x10000dcc                runtime_init_mutex
  .text.mutex_init
-                0x10000e28       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
-                0x10000e28                mutex_init
+                0x10000e18       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+                0x10000e18                mutex_init
  .text.critical_section_init
-                0x10000e44       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
-                0x10000e44                critical_section_init
+                0x10000e34       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+                0x10000e34                critical_section_init
  .text.critical_section_init_with_lock_num
-                0x10000e60       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
-                0x10000e60                critical_section_init_with_lock_num
+                0x10000e50       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+                0x10000e50                critical_section_init_with_lock_num
  .text.sleep_until_callback
-                0x10000e70       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
- *fill*         0x10000eac        0x4 
+                0x10000e60       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+ *fill*         0x10000e9c        0x4 
  .text.alarm_pool_irq_handler
-                0x10000eb0      0x2f0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10000ea0      0x2f0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
  .text.runtime_init_default_alarm_pool
-                0x100011a0      0x100 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100011a0                runtime_init_default_alarm_pool
+                0x10001190      0x100 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10001190                runtime_init_default_alarm_pool
  .text.alarm_pool_get_default
-                0x100012a0        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100012a0                alarm_pool_get_default
+                0x10001290        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10001290                alarm_pool_get_default
  .text.alarm_pool_add_alarm_at
-                0x100012a8       0xdc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100012a8                alarm_pool_add_alarm_at
+                0x10001298       0xdc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10001298                alarm_pool_add_alarm_at
  .text.alarm_pool_add_alarm_at_force_in_context
-                0x10001384       0xc8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x10001384                alarm_pool_add_alarm_at_force_in_context
+                0x10001374       0xc8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10001374                alarm_pool_add_alarm_at_force_in_context
  .text.alarm_pool_cancel_alarm
-                0x1000144c       0x80 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x1000144c                alarm_pool_cancel_alarm
+                0x1000143c       0x80 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x1000143c                alarm_pool_cancel_alarm
  .text.alarm_pool_core_num
-                0x100014cc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100014cc                alarm_pool_core_num
+                0x100014bc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x100014bc                alarm_pool_core_num
  .text.sleep_until
-                0x100014d0       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100014d0                sleep_until
+                0x100014c0       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x100014c0                sleep_until
  .text.sleep_ms
-                0x1000158c       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x1000158c                sleep_ms
+                0x1000157c       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x1000157c                sleep_ms
  .text.best_effort_wfe_or_timeout
-                0x100015b8       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x100015b8                best_effort_wfe_or_timeout
+                0x100015a8       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x100015a8                best_effort_wfe_or_timeout
  .text.timer_hardware_alarm_claim
-                0x10001674       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
-                0x10001674                timer_hardware_alarm_claim
+                0x10001664       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x10001664                timer_hardware_alarm_claim
  .text.timer_time_us_64
-                0x10001698       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
-                0x10001698                timer_time_us_64
+                0x10001688       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x10001688                timer_time_us_64
  .text.time_us_64
-                0x100016a8       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
-                0x100016a8                time_us_64
+                0x10001698       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x10001698                time_us_64
  .text.busy_wait_until
-                0x100016bc       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
-                0x100016bc                busy_wait_until
+                0x100016ac       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x100016ac                busy_wait_until
  .text.clock_configure_undivided
-                0x100016e0       0xd0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
-                0x100016e0                clock_configure_undivided
+                0x100016d0       0xd0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+                0x100016d0                clock_configure_undivided
  .text.clock_get_hz
-                0x100017b0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
-                0x100017b0                clock_get_hz
+                0x100017a0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+                0x100017a0                clock_get_hz
  .text.pll_init
-                0x100017bc       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
-                0x100017bc                pll_init
+                0x100017ac       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+                0x100017ac                pll_init
  .text.watchdog_reboot
-                0x10001848       0x98 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
-                0x10001848                watchdog_reboot
+                0x10001838       0x98 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+                0x10001838                watchdog_reboot
  .text.tick_start
-                0x100018e0       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
-                0x100018e0                tick_start
+                0x100018d0       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+                0x100018d0                tick_start
  .text.rom_reboot.constprop.0.isra.0
-                0x100018f8       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+                0x100018e8       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
  .text.rom_func_lookup
-                0x1000192c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
-                0x1000192c                rom_func_lookup
+                0x1000191c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+                0x1000191c                rom_func_lookup
  .text.rom_reset_usb_boot_extra
-                0x10001944       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
-                0x10001944                rom_reset_usb_boot_extra
+                0x10001934       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+                0x10001934                rom_reset_usb_boot_extra
  .text.runtime_init_bootrom_locking_enable
-                0x10001960       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
-                0x10001960                runtime_init_bootrom_locking_enable
+                0x10001950       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+                0x10001950                runtime_init_bootrom_locking_enable
  .text.runtime_init_boot_locks_reset
-                0x10001974       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
-                0x10001974                runtime_init_boot_locks_reset
+                0x10001964       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+                0x10001964                runtime_init_boot_locks_reset
  .text.xosc_init
-                0x10001990       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
-                0x10001990                xosc_init
+                0x10001980       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+                0x10001980                xosc_init
  .text.first_per_core_initializer
-                0x100019c0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x100019b0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
  .text.hard_assertion_failure
-                0x100019c4        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
-                0x100019c4                hard_assertion_failure
+                0x100019b4        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x100019b4                hard_assertion_failure
  .text.runtime_run_initializers
-                0x100019d0       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
-                0x100019d0                runtime_run_initializers
+                0x100019c0       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x100019c0                runtime_run_initializers
  .text.runtime_init_early_resets
-                0x100019f0       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x100019f0                runtime_init_early_resets
+                0x100019e0       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x100019e0                runtime_init_early_resets
  .text.runtime_init_usb_power_down
-                0x10001a24       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001a24                runtime_init_usb_power_down
+                0x10001a14       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a14                runtime_init_usb_power_down
  .text.runtime_init_per_core_enable_coprocessors
-                0x10001a40       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001a40                runtime_init_per_core_enable_coprocessors
+                0x10001a30       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a30                runtime_init_per_core_enable_coprocessors
  .text.runtime_init_post_clock_resets
-                0x10001a5c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001a5c                runtime_init_post_clock_resets
+                0x10001a4c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a4c                runtime_init_post_clock_resets
  .text.runtime_init_bootrom_reset
-                0x10001a7c       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001a7c                runtime_init_bootrom_reset
+                0x10001a6c       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a6c                runtime_init_bootrom_reset
  .text.runtime_init_per_core_bootrom_reset
-                0x10001a90       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001a90                runtime_init_per_core_bootrom_reset
+                0x10001a80       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a80                runtime_init_per_core_bootrom_reset
  .text.runtime_init_spin_locks_reset
-                0x10001aa4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001aa4                runtime_init_spin_locks_reset
+                0x10001a94        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a94                runtime_init_spin_locks_reset
  .text.runtime_init_install_ram_vector_table
-                0x10001aa8       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10001aa8                runtime_init_install_ram_vector_table
+                0x10001a98       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10001a98                runtime_init_install_ram_vector_table
  .text.runtime_init_clocks
-                0x10001ac8       0xdc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
-                0x10001ac8                runtime_init_clocks
+                0x10001ab8       0xdc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+                0x10001ab8                runtime_init_clocks
  .text.__rp2350_dcp_engaged_state_save_restore
-                0x10001ba4       0x3a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
- *fill*         0x10001bde        0x2 
+                0x10001b94       0x3a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+ *fill*         0x10001bce        0x2 
  .text.__wrap___aeabi_dadd
-                0x10001be0       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001be8                __wrap___aeabi_dadd
+                0x10001bd0       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001bd8                __wrap___aeabi_dadd
  .text.__wrap___aeabi_dsub
-                0x10001c08       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001c10                __wrap___aeabi_dsub
+                0x10001bf8       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001c00                __wrap___aeabi_dsub
  .text.__wrap___aeabi_dmul
-                0x10001c30       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001c38                __wrap___aeabi_dmul
+                0x10001c20       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001c28                __wrap___aeabi_dmul
  .text.__wrap___aeabi_ddiv
-                0x10001c7c       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001c84                __wrap___aeabi_ddiv
+                0x10001c6c       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001c74                __wrap___aeabi_ddiv
  .text.__wrap___aeabi_i2d
-                0x10001d18       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001d20                __wrap___aeabi_i2d
-                0x10001d20                int2double
+                0x10001d08       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001d10                __wrap___aeabi_i2d
+                0x10001d10                int2double
  .text.__wrap___aeabi_ui2d
-                0x10001d3c       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001d44                __wrap___aeabi_ui2d
-                0x10001d44                uint2double
+                0x10001d2c       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001d34                __wrap___aeabi_ui2d
+                0x10001d34                uint2double
  .text.__wrap___aeabi_d2iz
-                0x10001d60       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001d68                __wrap___aeabi_d2iz
-                0x10001d68                double2int_z
+                0x10001d50       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001d58                __wrap___aeabi_d2iz
+                0x10001d58                double2int_z
  .text.__wrap___aeabi_d2uiz
-                0x10001d84       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001d8c                double2uint_z
-                0x10001d8c                double2uint
-                0x10001d8c                __wrap___aeabi_d2uiz
+                0x10001d74       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001d7c                double2uint_z
+                0x10001d7c                double2uint
+                0x10001d7c                __wrap___aeabi_d2uiz
  .text.__wrap___aeabi_dcmpun
-                0x10001da8       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001db0                __wrap___aeabi_dcmpun
+                0x10001d98       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001da0                __wrap___aeabi_dcmpun
  .text.__wrap___aeabi_dcmplt
-                0x10001dcc       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001dd4                __wrap___aeabi_dcmplt
+                0x10001dbc       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001dc4                __wrap___aeabi_dcmplt
  .text.__wrap___aeabi_dcmpge
-                0x10001df4       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001dfc                __wrap___aeabi_dcmpge
+                0x10001de4       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001dec                __wrap___aeabi_dcmpge
  .text.__wrap___aeabi_dcmpgt
-                0x10001e1c       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
-                0x10001e24                __wrap___aeabi_dcmpgt
+                0x10001e0c       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x10001e14                __wrap___aeabi_dcmpgt
  .text._out_null
-                0x10001e44        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10001e34        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text._out_rev
-                0x10001e48       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10001e38       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text._ntoa_format
-                0x10001ee4      0x2a4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10001ed4      0x2a4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text._out_char
-                0x10002188        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10002178        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text._out_fct
-                0x10002190        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
- *fill*         0x1000219c        0x4 
- .text._etoa    0x100021a0      0x460 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
- .text._ftoa    0x10002600      0x3f4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10002180        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+ *fill*         0x1000218c        0x4 
+ .text._etoa    0x10002190      0x460 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+ .text._ftoa    0x100025f0      0x3f4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text._vsnprintf
-                0x100029f4      0x9e8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x100029e4      0x9e8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .text.vfctprintf
-                0x100033dc       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
-                0x100033dc                vfctprintf
+                0x100033cc       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x100033cc                vfctprintf
  .text.weak_raw_vprintf
-                0x10003404       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
-                0x10003404                weak_raw_vprintf
- .text._exit    0x10003434        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
-                0x10003434                _exit
- .text.exit     0x10003438        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
-                0x10003438                exit
+                0x100033f4       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x100033f4                weak_raw_vprintf
+ .text._exit    0x10003424        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+                0x10003424                _exit
+ .text.exit     0x10003428        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+                0x10003428                exit
  .text.runtime_init
-                0x10003440       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
-                0x10003440                runtime_init
+                0x10003430       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+                0x10003430                runtime_init
  .text.stdio_out_chars_no_crlf
-                0x10003464        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003454        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
  .text.stdio_out_chars_crlf
-                0x1000346c       0xac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x1000345c       0xac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
  .text.stdio_buffered_printer
-                0x10003518       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003508       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
  .text.stdio_put_string
-                0x10003578       0xf0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x10003578                stdio_put_string
+                0x10003568       0xf0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003568                stdio_put_string
  .text.stdio_set_driver_enabled
-                0x10003668       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x10003668                stdio_set_driver_enabled
+                0x10003658       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003658                stdio_set_driver_enabled
  .text.stdio_init_all
-                0x10003698        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x10003698                stdio_init_all
+                0x10003688        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003688                stdio_init_all
  .text.__wrap_putchar
-                0x1000369c       0x84 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x1000369c                stdio_putchar
-                0x1000369c                __wrap_putchar
+                0x1000368c       0x84 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x1000368c                stdio_putchar
+                0x1000368c                __wrap_putchar
  .text.__wrap_puts
-                0x10003720       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x10003720                __wrap_puts
-                0x10003720                stdio_puts
+                0x10003710       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003710                __wrap_puts
+                0x10003710                stdio_puts
  .text.__wrap_vprintf
-                0x1000375c       0xc8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x1000375c                __wrap_vprintf
-                0x1000375c                stdio_vprintf
+                0x1000374c       0xc8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x1000374c                __wrap_vprintf
+                0x1000374c                stdio_vprintf
  .text.__wrap_printf
-                0x10003824       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
-                0x10003824                stdio_printf
-                0x10003824                __wrap_printf
+                0x10003814       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x10003814                stdio_printf
+                0x10003814                __wrap_printf
  .text.resetd_init
-                0x10003840        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x10003830        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .text.resetd_reset
-                0x10003844        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x10003834        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .text.resetd_open
-                0x10003850       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x10003840       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .text.resetd_xfer_cb
-                0x10003878        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x10003868        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .text.resetd_control_xfer_cb
-                0x1000387c       0x50 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x1000386c       0x50 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .text.tud_descriptor_bos_cb
-                0x100038cc        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
-                0x100038cc                tud_descriptor_bos_cb
+                0x100038bc        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100038bc                tud_descriptor_bos_cb
  .text.tud_vendor_control_xfer_cb
-                0x100038d4       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
-                0x100038d4                tud_vendor_control_xfer_cb
+                0x100038c4       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100038c4                tud_vendor_control_xfer_cb
  .text.usbd_app_driver_get_cb
-                0x100038fc       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
-                0x100038fc                usbd_app_driver_get_cb
+                0x100038ec       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100038ec                usbd_app_driver_get_cb
  .text.tud_cdc_line_coding_cb
-                0x1000390c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
-                0x1000390c                tud_cdc_line_coding_cb
+                0x100038fc       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100038fc                tud_cdc_line_coding_cb
  .text.stdio_usb_set_chars_available_callback
-                0x10003924       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
-                0x10003924                stdio_usb_set_chars_available_callback
+                0x10003914       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003914                stdio_usb_set_chars_available_callback
  .text.timer_task
-                0x10003938       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
- .text.usb_irq  0x100039a8        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003928       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+ .text.usb_irq  0x10003998        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .text.stdio_usb_in_chars
-                0x100039b4       0x88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
-                0x100039b4                stdio_usb_in_chars
+                0x100039a4       0x88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x100039a4                stdio_usb_in_chars
  .text.stdio_usb_out_flush
-                0x10003a3c       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003a2c       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .text.stdio_usb_out_chars
-                0x10003a90       0xf4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003a80       0xf4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .text.low_priority_worker_irq
-                0x10003b84       0xd8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003b74       0xd8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .text.stdio_usb_init
-                0x10003c5c       0xe8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
-                0x10003c5c                stdio_usb_init
+                0x10003c4c       0xe8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x10003c4c                stdio_usb_init
  .text.tud_descriptor_device_cb
-                0x10003d44        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
-                0x10003d44                tud_descriptor_device_cb
+                0x10003d34        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x10003d34                tud_descriptor_device_cb
  .text.tud_descriptor_configuration_cb
-                0x10003d4c        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
-                0x10003d4c                tud_descriptor_configuration_cb
+                0x10003d3c        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x10003d3c                tud_descriptor_configuration_cb
  .text.tud_descriptor_string_cb
-                0x10003d54       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
-                0x10003d54                tud_descriptor_string_cb
+                0x10003d44       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x10003d44                tud_descriptor_string_cb
  .text.startup._retrieve_unique_id_on_boot
-                0x10003dc4       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+                0x10003db4       0x30 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
  .text.pico_get_unique_board_id_string
-                0x10003df4      0x184 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
-                0x10003df4                pico_get_unique_board_id_string
+                0x10003de4      0x184 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+                0x10003de4                pico_get_unique_board_id_string
  .text.dcd_init
-                0x10003f78       0x90 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10003f78                dcd_init
+                0x10003f68       0x90 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10003f68                dcd_init
  .text.dcd_int_enable
-                0x10004008        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004008                dcd_int_enable
+                0x10003ff8        0x8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10003ff8                dcd_int_enable
  .text.dcd_set_address
-                0x10004010       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004010                dcd_set_address
+                0x10004000       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10004000                dcd_set_address
  .text.dcd_sof_enable
-                0x10004020       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004020                dcd_sof_enable
+                0x10004010       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10004010                dcd_sof_enable
  .text.dcd_edpt0_status_complete
-                0x1000403c       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x1000403c                dcd_edpt0_status_complete
+                0x1000402c       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x1000402c                dcd_edpt0_status_complete
  .text.dcd_edpt_open
-                0x10004058      0x108 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004058                dcd_edpt_open
+                0x10004048      0x108 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10004048                dcd_edpt_open
  .text.dcd_edpt_close_all
-                0x10004160        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004160                dcd_edpt_close_all
+                0x10004150        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10004150                dcd_edpt_close_all
  .text.dcd_edpt_xfer
-                0x10004164       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x10004164                dcd_edpt_xfer
+                0x10004154       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x10004154                dcd_edpt_xfer
  .text.dcd_edpt_stall
-                0x1000418c       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x1000418c                dcd_edpt_stall
+                0x1000417c       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x1000417c                dcd_edpt_stall
  .text.dcd_edpt_clear_stall
-                0x100041b8       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
-                0x100041b8                dcd_edpt_clear_stall
+                0x100041a8       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x100041a8                dcd_edpt_clear_stall
  .text.rp2040_usb_init
-                0x100041e4       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
-                0x100041e4                rp2040_usb_init
+                0x100041d4       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+                0x100041d4                rp2040_usb_init
  .text.hw_endpoint_xfer_start
-                0x10004224       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
-                0x10004224                hw_endpoint_xfer_start
+                0x10004214       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+                0x10004214                hw_endpoint_xfer_start
  .text.configuration_reset
-                0x10004264       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004254       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
  .text.tud_event_hook_cb
-                0x100042f0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x100042f0                tud_event_hook_cb
+                0x100042e0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042e0                tud_event_hook_cb
  .text.tud_sof_cb
-                0x100042f4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x100042f4                tud_sof_cb
+                0x100042e4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042e4                tud_sof_cb
  .text.tud_descriptor_device_qualifier_cb
-                0x100042f8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x100042f8                tud_descriptor_device_qualifier_cb
+                0x100042e8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042e8                tud_descriptor_device_qualifier_cb
  .text.tud_descriptor_other_speed_configuration_cb
-                0x100042fc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x100042fc                tud_descriptor_other_speed_configuration_cb
+                0x100042ec        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042ec                tud_descriptor_other_speed_configuration_cb
  .text.tud_mount_cb
-                0x10004300        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004300                tud_mount_cb
+                0x100042f0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042f0                tud_mount_cb
  .text.tud_umount_cb
-                0x10004304        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004304                tud_umount_cb
+                0x100042f4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042f4                tud_umount_cb
  .text.tud_suspend_cb
-                0x10004308        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004308                tud_suspend_cb
+                0x100042f8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042f8                tud_suspend_cb
  .text.tud_resume_cb
-                0x1000430c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x1000430c                tud_resume_cb
+                0x100042fc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x100042fc                tud_resume_cb
  .text.tud_mounted
-                0x10004310       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004310                tud_mounted
+                0x10004300       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004300                tud_mounted
  .text.tud_suspended
-                0x10004320       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004320                tud_suspended
+                0x10004310       0x10 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004310                tud_suspended
  .text.tud_rhport_init
-                0x10004330       0xf8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004330                tud_rhport_init
+                0x10004320       0xf8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004320                tud_rhport_init
  .text.tud_task_ext
-                0x10004428      0x784 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004428                tud_task_ext
+                0x10004418      0x784 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004418                tud_task_ext
  .text.usbd_open_edpt_pair
-                0x10004bac       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004bac                usbd_open_edpt_pair
+                0x10004b9c       0x9c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004b9c                usbd_open_edpt_pair
  .text.usbd_edpt_open
-                0x10004c48       0x44 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004c48                usbd_edpt_open
+                0x10004c38       0x44 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004c38                usbd_edpt_open
  .text.usbd_edpt_claim
-                0x10004c8c       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004c8c                usbd_edpt_claim
+                0x10004c7c       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004c7c                usbd_edpt_claim
  .text.usbd_edpt_release
-                0x10004cb0       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004cb0                usbd_edpt_release
+                0x10004ca0       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004ca0                usbd_edpt_release
  .text.usbd_edpt_xfer
-                0x10004cd4       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
-                0x10004cd4                usbd_edpt_xfer
+                0x10004cc4       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x10004cc4                usbd_edpt_xfer
  .text.tud_control_status
-                0x10004d44       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004d44                tud_control_status
+                0x10004d34       0x34 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004d34                tud_control_status
  .text.tud_control_xfer
-                0x10004d78       0xac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004d78                tud_control_xfer
+                0x10004d68       0xac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004d68                tud_control_xfer
  .text.usbd_control_reset
-                0x10004e24       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004e24                usbd_control_reset
+                0x10004e14       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004e14                usbd_control_reset
  .text.usbd_control_set_complete_callback
-                0x10004e38        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004e38                usbd_control_set_complete_callback
+                0x10004e28        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004e28                usbd_control_set_complete_callback
  .text.usbd_control_set_request
-                0x10004e44       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004e44                usbd_control_set_request
+                0x10004e34       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004e34                usbd_control_set_request
  .text.usbd_control_xfer_cb
-                0x10004e60       0xfc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
-                0x10004e60                usbd_control_xfer_cb
+                0x10004e50       0xfc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x10004e50                usbd_control_xfer_cb
  .text._prep_out_transaction.isra.0
-                0x10004f5c       0x74 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10004f4c       0x74 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
  .text.tud_cdc_n_connected
-                0x10004fd0       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10004fd0                tud_cdc_n_connected
+                0x10004fc0       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10004fc0                tud_cdc_n_connected
  .text.tud_cdc_n_available
-                0x10004ffc       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10004ffc                tud_cdc_n_available
+                0x10004fec       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10004fec                tud_cdc_n_available
  .text.tud_cdc_n_read
-                0x10005014       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10005014                tud_cdc_n_read
+                0x10005004       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005004                tud_cdc_n_read
  .text.tud_cdc_n_write_flush
-                0x100050a0       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x100050a0                tud_cdc_n_write_flush
+                0x10005090       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005090                tud_cdc_n_write_flush
  .text.tud_cdc_n_write
-                0x1000512c       0x44 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x1000512c                tud_cdc_n_write
+                0x1000511c       0x44 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x1000511c                tud_cdc_n_write
  .text.tud_cdc_n_write_available
-                0x10005170       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10005170                tud_cdc_n_write_available
+                0x10005160       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005160                tud_cdc_n_write_available
  .text.cdcd_init
-                0x10005188       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10005188                cdcd_init
+                0x10005178       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005178                cdcd_init
  .text.cdcd_deinit
-                0x100051f8       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x100051f8                cdcd_deinit
+                0x100051e8       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x100051e8                cdcd_deinit
  .text.cdcd_reset
-                0x10005224       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10005224                cdcd_reset
+                0x10005214       0x4c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005214                cdcd_reset
  .text.cdcd_open
-                0x10005270       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x10005270                cdcd_open
+                0x10005260       0xbc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x10005260                cdcd_open
  .text.cdcd_control_xfer_cb
-                0x1000532c       0xc0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x1000532c                cdcd_control_xfer_cb
+                0x1000531c       0xc0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x1000531c                cdcd_control_xfer_cb
  .text.cdcd_xfer_cb
-                0x100053ec       0xfc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
-                0x100053ec                cdcd_xfer_cb
+                0x100053dc       0xfc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x100053dc                cdcd_xfer_cb
  .text.vendord_init
-                0x100054e8       0x5c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
-                0x100054e8                vendord_init
+                0x100054d8       0x5c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x100054d8                vendord_init
  .text.vendord_deinit
-                0x10005544       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
-                0x10005544                vendord_deinit
+                0x10005534       0x1c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x10005534                vendord_deinit
  .text.vendord_reset
-                0x10005560       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
-                0x10005560                vendord_reset
+                0x10005550       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x10005550                vendord_reset
  .text.vendord_open
-                0x10005584      0x104 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
-                0x10005584                vendord_open
+                0x10005574      0x104 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x10005574                vendord_open
  .text.vendord_xfer_cb
-                0x10005688       0x88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
-                0x10005688                vendord_xfer_cb
+                0x10005678       0x88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x10005678                vendord_xfer_cb
  .text.tusb_rhport_init
-                0x10005710       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x10005710                tusb_rhport_init
+                0x10005700       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x10005700                tusb_rhport_init
  .text.tu_edpt_claim
-                0x10005770       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x10005770                tu_edpt_claim
+                0x10005760       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x10005760                tu_edpt_claim
  .text.tu_edpt_release
-                0x100057c4       0x38 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x100057c4                tu_edpt_release
+                0x100057b4       0x38 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x100057b4                tu_edpt_release
  .text.tu_edpt_validate
-                0x100057fc       0x64 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x100057fc                tu_edpt_validate
+                0x100057ec       0x64 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x100057ec                tu_edpt_validate
  .text.tu_edpt_bind_driver
-                0x10005860       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x10005860                tu_edpt_bind_driver
+                0x10005850       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x10005850                tu_edpt_bind_driver
  .text.tu_edpt_stream_init
-                0x100058b8       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x100058b8                tu_edpt_stream_init
+                0x100058a8       0x58 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x100058a8                tu_edpt_stream_init
  .text.tu_edpt_stream_deinit
-                0x10005910        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x10005910                tu_edpt_stream_deinit
+                0x10005900        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x10005900                tu_edpt_stream_deinit
  .text.tu_edpt_stream_write_zlp_if_needed
-                0x10005914       0x68 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x10005914                tu_edpt_stream_write_zlp_if_needed
+                0x10005904       0x68 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x10005904                tu_edpt_stream_write_zlp_if_needed
  .text.tu_edpt_stream_write_xfer
-                0x1000597c       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x1000597c                tu_edpt_stream_write_xfer
+                0x1000596c       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x1000596c                tu_edpt_stream_write_xfer
  .text.tu_edpt_stream_read_xfer
-                0x100059ec       0xd0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
-                0x100059ec                tu_edpt_stream_read_xfer
+                0x100059dc       0xd0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x100059dc                tu_edpt_stream_read_xfer
  .text.tu_fifo_config
-                0x10005abc       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005abc                tu_fifo_config
+                0x10005aac       0x60 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005aac                tu_fifo_config
  .text.tu_fifo_count
-                0x10005b1c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005b1c                tu_fifo_count
+                0x10005b0c       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005b0c                tu_fifo_count
  .text.tu_fifo_empty
-                0x10005b3c       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005b3c                tu_fifo_empty
+                0x10005b2c       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005b2c                tu_fifo_empty
  .text.tu_fifo_remaining
-                0x10005b50       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005b50                tu_fifo_remaining
+                0x10005b40       0x24 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005b40                tu_fifo_remaining
  .text.tu_fifo_read
-                0x10005b74       0x94 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005b74                tu_fifo_read
+                0x10005b64       0x94 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005b64                tu_fifo_read
  .text.tu_fifo_read_n
-                0x10005c08       0xd8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005c08                tu_fifo_read_n
+                0x10005bf8       0xd8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005bf8                tu_fifo_read_n
  .text.tu_fifo_write
-                0x10005ce0       0xa0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005ce0                tu_fifo_write
+                0x10005cd0       0xa0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005cd0                tu_fifo_write
  .text.tu_fifo_write_n
-                0x10005d80      0x158 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005d80                tu_fifo_write_n
+                0x10005d70      0x158 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005d70                tu_fifo_write_n
  .text.tu_fifo_clear
-                0x10005ed8       0x38 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005ed8                tu_fifo_clear
+                0x10005ec8       0x38 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005ec8                tu_fifo_clear
  .text.tu_fifo_set_overwritable
-                0x10005f10       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
-                0x10005f10                tu_fifo_set_overwritable
+                0x10005f00       0x3c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x10005f00                tu_fifo_set_overwritable
  .text.spi_init
-                0x10005f4c       0xf4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
-                0x10005f4c                spi_init
- .text          0x10006040       0xa4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
-                0x10006040                memset
- .text          0x100060e4       0xec /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
-                0x100060e4                memcpy
- .text          0x100061d0        0xc /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
-                0x100061d0                atexit
- .text          0x100061dc       0x5c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
-                0x100061dc                strlen
- .text          0x10006238       0x28 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
-                0x10006238                __libc_fini_array
- .text          0x10006260       0x64 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
-                0x10006260                __register_exitproc
- .text.startup  0x100062c4       0x14 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+                0x10005f3c       0xf4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+                0x10005f3c                spi_init
+ .text          0x10006030       0xa4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
+                0x10006030                memset
+ .text          0x100060d4       0xec /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
+                0x100060d4                memcpy
+ .text          0x100061c0        0xc /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
+                0x100061c0                atexit
+ .text          0x100061cc       0x5c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
+                0x100061cc                strlen
+ .text          0x10006228       0x28 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
+                0x10006228                __libc_fini_array
+ .text          0x10006250       0x64 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
+                0x10006250                __register_exitproc
+ .text.startup  0x100062b4       0x14 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
  *(.fini)
- .fini          0x100062d8        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crti.o
-                0x100062d8                _fini
- *fill*         0x100062dc        0x4 
- .fini.__stub   0x100062e0       0x70 linker stubs
+ .fini          0x100062c8        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crti.o
+                0x100062c8                _fini
+ *fill*         0x100062cc        0x4 
+ .fini.__stub   0x100062d0       0x70 linker stubs
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -3618,204 +3618,204 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
-                0x10006350                        . = ALIGN (0x4)
-                0x10006350                        PROVIDE (__preinit_array_start = .)
+                0x10006340                        . = ALIGN (0x4)
+                0x10006340                        PROVIDE (__preinit_array_start = .)
  *(SORT_BY_NAME(.preinit_array.*))
  .preinit_array.00050
-                0x10006350        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006350                __pre_init_runtime_init_bootrom_reset
+                0x10006340        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006340                __pre_init_runtime_init_bootrom_reset
  .preinit_array.00100
-                0x10006354        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006354                __pre_init_runtime_init_early_resets
+                0x10006344        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006344                __pre_init_runtime_init_early_resets
  .preinit_array.00101
-                0x10006358        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006358                __pre_init_runtime_init_usb_power_down
+                0x10006348        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006348                __pre_init_runtime_init_usb_power_down
  .preinit_array.00500
-                0x1000635c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x1000635c                __pre_init_runtime_init_clocks
+                0x1000634c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x1000634c                __pre_init_runtime_init_clocks
  .preinit_array.00600
-                0x10006360        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006360                __pre_init_runtime_init_post_clock_resets
+                0x10006350        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006350                __pre_init_runtime_init_post_clock_resets
  .preinit_array.01000
-                0x10006364        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
-                0x10006364                __pre_init_runtime_init_boot_locks_reset
+                0x10006354        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+                0x10006354                __pre_init_runtime_init_boot_locks_reset
  .preinit_array.01000
-                0x10006368        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006368                __pre_init_runtime_init_spin_locks_reset
+                0x10006358        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006358                __pre_init_runtime_init_spin_locks_reset
  .preinit_array.01010
-                0x1000636c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
-                0x1000636c                __pre_init_runtime_init_bootrom_locking_enable
+                0x1000635c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+                0x1000635c                __pre_init_runtime_init_bootrom_locking_enable
  .preinit_array.01100
-                0x10006370        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
-                0x10006370                __pre_init_runtime_init_mutex
+                0x10006360        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+                0x10006360                __pre_init_runtime_init_mutex
  .preinit_array.10080
-                0x10006374        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006374                __pre_init_runtime_init_install_ram_vector_table
+                0x10006364        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006364                __pre_init_runtime_init_install_ram_vector_table
  .preinit_array.11000
-                0x10006378        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
-                0x10006378                __pre_init_runtime_init_default_alarm_pool
+                0x10006368        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x10006368                __pre_init_runtime_init_default_alarm_pool
  .preinit_array.YYYYY
-                0x1000637c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
-                0x1000637c                __pre_init_first_per_core_initializer
+                0x1000636c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x1000636c                __pre_init_first_per_core_initializer
  .preinit_array.ZZZZZ.00051
-                0x10006380        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006380                __pre_init_runtime_init_per_core_bootrom_reset
+                0x10006370        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006370                __pre_init_runtime_init_per_core_bootrom_reset
  .preinit_array.ZZZZZ.00200
-                0x10006384        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
-                0x10006384                __pre_init_runtime_init_per_core_enable_coprocessors
+                0x10006374        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x10006374                __pre_init_runtime_init_per_core_enable_coprocessors
  .preinit_array.ZZZZZ.01000
-                0x10006388        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
-                0x10006388                __pre_init_spinlock_set_extexclall
+                0x10006378        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+                0x10006378                __pre_init_spinlock_set_extexclall
  .preinit_array.ZZZZZ.01200
-                0x1000638c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
-                0x1000638c                __pre_init_runtime_init_per_core_irq_priorities
+                0x1000637c        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x1000637c                __pre_init_runtime_init_per_core_irq_priorities
  *(.preinit_array)
-                0x10006390                        PROVIDE (__preinit_array_end = .)
-                0x10006390                        . = ALIGN (0x4)
-                0x10006390                        PROVIDE (__init_array_start = .)
+                0x10006380                        PROVIDE (__preinit_array_end = .)
+                0x10006380                        . = ALIGN (0x4)
+                0x10006380                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  .init_array.00000
-                0x10006390        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+                0x10006380        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
  *(.init_array)
- .init_array    0x10006394        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
- .init_array    0x10006398        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
-                0x1000639c                        PROVIDE (__init_array_end = .)
-                0x1000639c                        . = ALIGN (0x4)
-                0x1000639c                        PROVIDE (__fini_array_start = .)
+ .init_array    0x10006384        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
+ .init_array    0x10006388        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+                0x1000638c                        PROVIDE (__init_array_end = .)
+                0x1000638c                        . = ALIGN (0x4)
+                0x1000638c                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array)
-                0x1000639c                        PROVIDE (__fini_array_end = .)
+                0x1000638c                        PROVIDE (__fini_array_end = .)
  *(.eh_frame*)
- .eh_frame      0x1000639c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
-                0x1000639c                        . = ALIGN (0x4)
+ .eh_frame      0x1000638c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
+                0x1000638c                        . = ALIGN (0x4)
 
-.glue_7         0x1000639c        0x0
- .glue_7        0x1000639c        0x0 linker stubs
+.glue_7         0x1000638c        0x0
+ .glue_7        0x1000638c        0x0 linker stubs
 
-.glue_7t        0x1000639c        0x0
- .glue_7t       0x1000639c        0x0 linker stubs
+.glue_7t        0x1000638c        0x0
+ .glue_7t       0x1000638c        0x0 linker stubs
 
-.vfp11_veneer   0x1000639c        0x0
- .vfp11_veneer  0x1000639c        0x0 linker stubs
+.vfp11_veneer   0x1000638c        0x0
+ .vfp11_veneer  0x1000638c        0x0 linker stubs
 
-.v4_bx          0x1000639c        0x0
- .v4_bx         0x1000639c        0x0 linker stubs
+.v4_bx          0x1000638c        0x0
+ .v4_bx         0x1000638c        0x0 linker stubs
 
-.iplt           0x1000639c        0x0
- .iplt          0x1000639c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
+.iplt           0x1000638c        0x0
+ .iplt          0x1000638c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
 
-.boot2          0x1000639c        0x0
-                0x1000639c                        __boot2_start__ = .
+.boot2          0x1000638c        0x0
+                0x1000638c                        __boot2_start__ = .
  *(.boot2)
-                0x1000639c                        __boot2_end__ = .
+                0x1000638c                        __boot2_end__ = .
                 0x00000001                        ASSERT (((__boot2_end__ - __boot2_start__) <= 0x100), ERROR: Pico second stage bootloader must be no more than 256 bytes in size)
 
-.rodata         0x100063a0      0x43c
+.rodata         0x10006390      0x40c
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata.main.str1.4
-                0x100063a0      0x1d8 CMakeFiles/pico_can.dir/main.c.o
-                                 0x65 (size before relaxing)
+                0x10006390      0x1a8 CMakeFiles/pico_can.dir/main.c.o
+                                 0x37 (size before relaxing)
  .rodata.panic.str1.4
-                0x10006578       0x12 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+                0x10006538       0x12 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
  .rodata.spin_lock_claim_unused.str1.4
-                0x10006578       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+                0x10006538       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
  .rodata.user_irq_claim_unused.str1.4
-                0x10006578       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x10006538       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
  .rodata.timer_hardware_alarm_claim.str1.4
-                0x10006578       0x22 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x10006538       0x22 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
  .rodata.hard_assertion_failure.str1.4
-                0x10006578        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x10006538        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
  .rodata.str1.4
-                0x10006578       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006538       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_84
-                0x10006578        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006538        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_78
-                0x10006584        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006544        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_54
-                0x10006590        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006550        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_48
-                0x1000659c        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x1000655c        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_42
-                0x100065a8        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006568        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_34
-                0x100065b4        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006574        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata.__bi_26
-                0x100065c0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x10006580        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .rodata._ftoa.str1.4
-                0x100065cc       0x15 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
- *fill*         0x100065cc        0x4 
+                0x1000658c       0x15 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+ *fill*         0x1000658c        0x4 
  .rodata.pow10.0
-                0x100065d0       0x50 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x10006590       0x50 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .rodata.crlf_str.0
-                0x10006620        0x2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
- *fill*         0x10006622        0x2 
+                0x100065e0        0x2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+ *fill*         0x100065e2        0x2 
  .rodata._resetd_driver
-                0x10006624       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100065e4       0x20 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .rodata.desc_ms_os_20
-                0x10006644       0xa6 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
- *fill*         0x100066ea        0x2 
+                0x10006604       0xa6 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+ *fill*         0x100066aa        0x2 
  .rodata.desc_bos
-                0x100066ec       0x21 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
-                0x100066ec                desc_bos
+                0x100066ac       0x21 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x100066ac                desc_bos
  .rodata.str1.4
-                0x1000670d       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
- *fill*         0x1000670d        0x3 
+                0x100066cd       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+ *fill*         0x100066cd        0x3 
  .rodata.__bi_197.0
-                0x10006710        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x100066d0        0xc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .rodata.str1.4
-                0x1000671c       0x2a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x100066dc       0x2a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .rodata.usbd_desc_str
-                0x1000671c       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x100066dc       0x18 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .rodata.usbd_desc_cfg
-                0x10006734       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x100066f4       0x54 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .rodata.usbd_desc_device
-                0x10006788       0x12 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x10006748       0x12 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .rodata.str1.4
-                0x1000679a       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x1000675a       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
  .rodata.str1.4
-                0x1000679a       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
- *fill*         0x1000679a        0x2 
+                0x1000675a       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+ *fill*         0x1000675a        0x2 
  .rodata._usbd_driver
-                0x1000679c       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x1000675c       0x40 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
  *(.srodata*)
-                0x100067dc                        . = ALIGN (0x4)
+                0x1000679c                        . = ALIGN (0x4)
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.flashdata*)))
-                0x100067dc                        . = ALIGN (0x4)
+                0x1000679c                        . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x100067dc                        __exidx_start = .
+                0x1000679c                        __exidx_start = .
 
-.ARM.exidx      0x100067dc        0x8
+.ARM.exidx      0x1000679c        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x100067dc        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
- .ARM.exidx     0x100067e4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x1000679c        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
+ .ARM.exidx     0x100067a4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x100067e4                        __exidx_end = .
-                0x100067e4                        . = ALIGN (0x4)
-                0x100067e4                        __binary_info_start = .
+                0x100067a4                        __exidx_end = .
+                0x100067a4                        . = ALIGN (0x4)
+                0x100067a4                        __binary_info_start = .
 
-.binary_info    0x100067e4       0x20
+.binary_info    0x100067a4       0x20
  *(.binary_info.keep.*)
  .binary_info.keep.__bi_ptr84
-                0x100067e4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067a4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr78
-                0x100067e8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067a8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr54
-                0x100067ec        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067ac        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr48
-                0x100067f0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067b0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr42
-                0x100067f4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067b4        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr34
-                0x100067f8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067b8        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  .binary_info.keep.__bi_ptr26
-                0x100067fc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+                0x100067bc        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
  *(.binary_info.*)
  .binary_info.__bi_ptr197
-                0x10006800        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
-                0x10006804                        __binary_info_end = .
-                0x10006804                        . = ALIGN (0x4)
+                0x100067c0        0x4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x100067c4                        __binary_info_end = .
+                0x100067c4                        . = ALIGN (0x4)
 
 .ram_vector_table
                 0x20000000      0x110
@@ -3829,7 +3829,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
                 0x20000110                        . = ALIGN (0x4)
  *(.uninitialized_data*)
 
-.data           0x20000110     0x15a4 load address 0x10006804
+.data           0x20000110     0x15a4 load address 0x100067c4
                 0x20000110                        __data_start__ = .
  *(vtable)
  *(.time_critical*)
@@ -3949,23 +3949,23 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
                 0x200016b4                        . = ALIGN (0x4)
 
 .tm_clone_table
-                0x200016b4        0x0 load address 0x10007da8
+                0x200016b4        0x0 load address 0x10007d68
  .tm_clone_table
                 0x200016b4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
  .tm_clone_table
                 0x200016b4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtend.o
 
-.igot.plt       0x200016b4        0x0 load address 0x10007da8
+.igot.plt       0x200016b4        0x0 load address 0x10007d68
  .igot.plt      0x200016b4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
 
-.tdata          0x200016b4        0x0 load address 0x10007da8
+.tdata          0x200016b4        0x0 load address 0x10007d68
                 0x200016b4                        . = ALIGN (0x4)
  *(.tdata .tdata.* .gnu.linkonce.td.*)
                 0x200016b4                        __tdata_end = .
                 0x200016b4                        PROVIDE (__data_end__ = .)
-                0x10006804                        __etext = LOADADDR (.data)
+                0x100067c4                        __etext = LOADADDR (.data)
 
-.tbss           0x200016b4        0x0 load address 0x10007da8
+.tbss           0x200016b4        0x0 load address 0x10007d68
                 0x200016b4                        . = ALIGN (0x4)
                 0x200016b4                        __bss_start__ = .
                 0x200016b4                        __tls_base = .
@@ -3973,7 +3973,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
  *(.tcommon)
                 0x200016b4                        __tls_end = .
 
-.bss            0x200016b8      0xdc0 load address 0x10007da8
+.bss            0x200016b8      0xdc0 load address 0x10007d68
                 0x200016b8                        . = ALIGN (0x4)
                 0x200016b8                        __tbss_end = .
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.bss*)))
@@ -4077,26 +4077,26 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
  *fill*         0x20002475        0x3 
                 0x20002478                        __bss_end__ = .
 
-.heap           0x20002478      0x800 load address 0x10007da8
+.heap           0x20002478      0x800 load address 0x10007d68
                 0x20002478                        __end__ = .
                 0x20002478                        end = __end__
  *(.heap*)
  .heap          0x20002478      0x800 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
                 0x20080000                        __HeapLimit = (ORIGIN (RAM) + LENGTH (RAM))
 
-.scratch_x      0x20080000        0x0 load address 0x10007da8
+.scratch_x      0x20080000        0x0 load address 0x10007d68
                 0x20080000                        __scratch_x_start__ = .
  *(.scratch_x.*)
                 0x20080000                        . = ALIGN (0x4)
                 0x20080000                        __scratch_x_end__ = .
-                0x10007da8                        __scratch_x_source__ = LOADADDR (.scratch_x)
+                0x10007d68                        __scratch_x_source__ = LOADADDR (.scratch_x)
 
-.scratch_y      0x20081000        0x0 load address 0x10007da8
+.scratch_y      0x20081000        0x0 load address 0x10007d68
                 0x20081000                        __scratch_y_start__ = .
  *(.scratch_y.*)
                 0x20081000                        . = ALIGN (0x4)
                 0x20081000                        __scratch_y_end__ = .
-                0x10007da8                        __scratch_y_source__ = LOADADDR (.scratch_y)
+                0x10007d68                        __scratch_y_source__ = LOADADDR (.scratch_y)
 
 .stack1_dummy
  *(.stack1*)
@@ -4105,11 +4105,11 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.mai
  *(.stack*)
  .stack         0x20081000      0x800 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
 
-.flash_end      0x10007da8       0x14
+.flash_end      0x10007d68       0x14
  *(.embedded_end_block*)
  .embedded_end_block
-                0x10007da8       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
-                0x10007dbc                        PROVIDE (__flash_binary_end = .)
+                0x10007d68       0x14 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
+                0x10007d7c                        PROVIDE (__flash_binary_end = .)
                 0x20080000                        __StackLimit = (ORIGIN (RAM) + LENGTH (RAM))
                 0x20081000                        __StackOneTop = (ORIGIN (SCRATCH_X) + LENGTH (SCRATCH_X))
                 0x20082000                        __StackTop = (ORIGIN (SCRATCH_Y) + LENGTH (SCRATCH_Y))
@@ -4226,8 +4226,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtn.o
 OUTPUT(pico_can.elf elf32-littlearm)
 LOAD linker stubs
 
-.rel.dyn        0x10007dbc        0x0
- .rel.iplt      0x10007dbc        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
+.rel.dyn        0x10007d7c        0x0
+ .rel.iplt      0x10007d7c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtbegin.o
 
 .ARM.attributes
                 0x00000000       0x34
@@ -4398,60 +4398,60 @@ LOAD linker stubs
  .comment       0x00000026       0x27 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
  .comment       0x00000026       0x27 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/crtend.o
 
-.debug_info     0x00000000    0x35beb
- .debug_info    0x00000000     0x23d0 CMakeFiles/pico_can.dir/main.c.o
- .debug_info    0x000023d0     0x23e5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
- .debug_info    0x000047b5      0x1be CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
- .debug_info    0x00004973      0xb64 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
- .debug_info    0x000054d7      0x44d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
- .debug_info    0x00005924     0x143a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
- .debug_info    0x00006d5e     0x25c3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
- .debug_info    0x00009321      0x17b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
- .debug_info    0x0000949c     0x1e27 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
- .debug_info    0x0000b2c3      0x371 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
- .debug_info    0x0000b634     0x4bf9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
- .debug_info    0x0001022d     0x3082 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
- .debug_info    0x000132af     0x2871 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
- .debug_info    0x00015b20      0x4ef CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
- .debug_info    0x0001600f      0xb80 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
- .debug_info    0x00016b8f      0x254 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
- .debug_info    0x00016de3      0x8e4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
- .debug_info    0x000176c7      0x1ac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
- .debug_info    0x00017873      0x2fe CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
- .debug_info    0x00017b71      0x199 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
- .debug_info    0x00017d0a      0x20e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
- .debug_info    0x00017f18     0x1bb5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
- .debug_info    0x00019acd      0x7b0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
- .debug_info    0x0001a27d       0x23 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
- .debug_info    0x0001a2a0      0x288 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
- .debug_info    0x0001a528     0x2075 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
- .debug_info    0x0001c59d       0x23 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
- .debug_info    0x0001c5c0      0xbdf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
- .debug_info    0x0001d19f     0x1bcd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
- .debug_info    0x0001ed6c      0xae2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
- .debug_info    0x0001f84e     0x1f4b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
- .debug_info    0x00021799      0x713 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
- .debug_info    0x00021eac      0x29f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
- .debug_info    0x0002214b     0x2cf9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
- .debug_info    0x00024e44     0x123f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
- .debug_info    0x00026083     0x4b46 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
- .debug_info    0x0002abc9      0xbf3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
- .debug_info    0x0002b7bc     0x212f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
- .debug_info    0x0002d8eb     0x1752 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
- .debug_info    0x0002f03d     0x206c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
- .debug_info    0x000310a9     0x2866 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
- .debug_info    0x0003390f     0x11f9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
- .debug_info    0x00034b08       0xd3 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_arm_addsubdf3.o)
- .debug_info    0x00034bdb       0x24 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x00034bff      0x6f5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
- .debug_info    0x000352f4       0x3c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_dvmd_tls.o)
- .debug_info    0x00035330      0x135 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
- .debug_info    0x00035465       0x33 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
- .debug_info    0x00035498      0x11e /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
- .debug_info    0x000355b6       0xbd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
- .debug_info    0x00035673       0xf7 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
- .debug_info    0x0003576a      0x1fd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
- .debug_info    0x00035967      0x284 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+.debug_info     0x00000000    0x35bd8
+ .debug_info    0x00000000     0x23bd CMakeFiles/pico_can.dir/main.c.o
+ .debug_info    0x000023bd     0x23e5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+ .debug_info    0x000047a2      0x1be CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+ .debug_info    0x00004960      0xb64 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+ .debug_info    0x000054c4      0x44d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+ .debug_info    0x00005911     0x143a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+ .debug_info    0x00006d4b     0x25c3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+ .debug_info    0x0000930e      0x17b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
+ .debug_info    0x00009489     0x1e27 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+ .debug_info    0x0000b2b0      0x371 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+ .debug_info    0x0000b621     0x4bf9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+ .debug_info    0x0001021a     0x3082 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+ .debug_info    0x0001329c     0x2871 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+ .debug_info    0x00015b0d      0x4ef CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+ .debug_info    0x00015ffc      0xb80 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+ .debug_info    0x00016b7c      0x254 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+ .debug_info    0x00016dd0      0x8e4 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+ .debug_info    0x000176b4      0x1ac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+ .debug_info    0x00017860      0x2fe CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+ .debug_info    0x00017b5e      0x199 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+ .debug_info    0x00017cf7      0x20e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+ .debug_info    0x00017f05     0x1bb5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+ .debug_info    0x00019aba      0x7b0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+ .debug_info    0x0001a26a       0x23 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+ .debug_info    0x0001a28d      0x288 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+ .debug_info    0x0001a515     0x2075 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+ .debug_info    0x0001c58a       0x23 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
+ .debug_info    0x0001c5ad      0xbdf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+ .debug_info    0x0001d18c     0x1bcd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+ .debug_info    0x0001ed59      0xae2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+ .debug_info    0x0001f83b     0x1f4b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+ .debug_info    0x00021786      0x713 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+ .debug_info    0x00021e99      0x29f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+ .debug_info    0x00022138     0x2cf9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+ .debug_info    0x00024e31     0x123f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+ .debug_info    0x00026070     0x4b46 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+ .debug_info    0x0002abb6      0xbf3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+ .debug_info    0x0002b7a9     0x212f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+ .debug_info    0x0002d8d8     0x1752 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+ .debug_info    0x0002f02a     0x206c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+ .debug_info    0x00031096     0x2866 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+ .debug_info    0x000338fc     0x11f9 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+ .debug_info    0x00034af5       0xd3 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x00034bc8       0x24 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x00034bec      0x6f5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x000352e1       0x3c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0003531d      0x135 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
+ .debug_info    0x00035452       0x33 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
+ .debug_info    0x00035485      0x11e /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
+ .debug_info    0x000355a3       0xbd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
+ .debug_info    0x00035660       0xf7 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
+ .debug_info    0x00035757      0x1fd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
+ .debug_info    0x00035954      0x284 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
 .debug_abbrev   0x00000000     0x97aa
  .debug_abbrev  0x00000000      0x436 CMakeFiles/pico_can.dir/main.c.o
@@ -4509,97 +4509,97 @@ LOAD linker stubs
  .debug_abbrev  0x000095cd      0x1dd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
 .debug_loclists
-                0x00000000    0x1a1c3
+                0x00000000    0x1a1ce
  .debug_loclists
-                0x00000000      0xb96 CMakeFiles/pico_can.dir/main.c.o
+                0x00000000      0xba1 CMakeFiles/pico_can.dir/main.c.o
  .debug_loclists
-                0x00000b96     0x194b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+                0x00000ba1     0x194b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
  .debug_loclists
-                0x000024e1      0x451 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+                0x000024ec      0x451 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
  .debug_loclists
-                0x00002932      0x107 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+                0x0000293d      0x107 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
  .debug_loclists
-                0x00002a39       0xa2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+                0x00002a44       0xa2 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
  .debug_loclists
-                0x00002adb     0x10e3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x00002ae6     0x10e3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
  .debug_loclists
-                0x00003bbe       0x17 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
+                0x00003bc9       0x17 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
  .debug_loclists
-                0x00003bd5      0xae5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+                0x00003be0      0xae5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
  .debug_loclists
-                0x000046ba       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+                0x000046c5       0x8c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
  .debug_loclists
-                0x00004746     0x29e5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x00004751     0x29e5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
  .debug_loclists
-                0x0000712b     0x1a37 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x00007136     0x1a37 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
  .debug_loclists
-                0x00008b62     0x20df CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+                0x00008b6d     0x20df CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
  .debug_loclists
-                0x0000ac41      0x1b7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+                0x0000ac4c      0x1b7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
  .debug_loclists
-                0x0000adf8      0x533 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+                0x0000ae03      0x533 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
  .debug_loclists
-                0x0000b32b       0x8b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+                0x0000b336       0x8b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
  .debug_loclists
-                0x0000b3b6      0x49b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+                0x0000b3c1      0x49b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
  .debug_loclists
-                0x0000b851       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+                0x0000b85c       0x28 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
  .debug_loclists
-                0x0000b879       0x78 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+                0x0000b884       0x78 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
  .debug_loclists
-                0x0000b8f1       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+                0x0000b8fc       0x48 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
  .debug_loclists
-                0x0000b939       0x7e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x0000b944       0x7e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
  .debug_loclists
-                0x0000b9b7      0x10a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x0000b9c2      0x10a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
  .debug_loclists
-                0x0000bac1       0x74 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+                0x0000bacc       0x74 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
  .debug_loclists
-                0x0000bb35     0x290d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x0000bb40     0x290d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .debug_loclists
-                0x0000e442      0x408 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+                0x0000e44d      0x408 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
  .debug_loclists
-                0x0000e84a      0xaec CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x0000e855      0xaec CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
  .debug_loclists
-                0x0000f336      0x256 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x0000f341      0x256 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .debug_loclists
-                0x0000f58c      0x6ae CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x0000f597      0x6ae CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .debug_loclists
-                0x0000fc3a       0xfb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x0000fc45       0xfb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .debug_loclists
-                0x0000fd35      0x38d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+                0x0000fd40      0x38d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
  .debug_loclists
-                0x000100c2     0x1e88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x000100cd     0x1e88 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
  .debug_loclists
-                0x00011f4a      0x6cf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+                0x00011f55      0x6cf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
  .debug_loclists
-                0x00012619     0x216c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x00012624     0x216c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
  .debug_loclists
-                0x00014785      0x497 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x00014790      0x497 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
  .debug_loclists
-                0x00014c1c      0xe31 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x00014c27      0xe31 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
  .debug_loclists
-                0x00015a4d      0x70c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x00015a58      0x70c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
  .debug_loclists
-                0x00016159      0xe7b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x00016164      0xe7b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
  .debug_loclists
-                0x00016fd4     0x1bcb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x00016fdf     0x1bcb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
  .debug_loclists
-                0x00018b9f      0x8a5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+                0x00018baa      0x8a5 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
  .debug_loclists
-                0x00019444      0x93f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
+                0x0001944f      0x93f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
  .debug_loclists
-                0x00019d83      0x1c2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
+                0x00019d8e      0x1c2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
  .debug_loclists
-                0x00019f45       0x2b /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
+                0x00019f50       0x2b /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
  .debug_loclists
-                0x00019f70       0x29 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
+                0x00019f7b       0x29 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
  .debug_loclists
-                0x00019f99       0x42 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
+                0x00019fa4       0x42 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
  .debug_loclists
-                0x00019fdb       0xe6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
+                0x00019fe6       0xe6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
  .debug_loclists
-                0x0001a0c1      0x102 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+                0x0001a0cc      0x102 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
 .debug_aranges  0x00000000     0x1458
  .debug_aranges
@@ -4710,154 +4710,154 @@ LOAD linker stubs
                 0x00001430       0x28 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
 .debug_rnglists
-                0x00000000     0x497a
+                0x00000000     0x4974
  .debug_rnglists
-                0x00000000      0x1de CMakeFiles/pico_can.dir/main.c.o
+                0x00000000      0x1d8 CMakeFiles/pico_can.dir/main.c.o
  .debug_rnglists
-                0x000001de      0x641 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+                0x000001d8      0x641 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
  .debug_rnglists
-                0x0000081f       0x19 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+                0x00000819       0x19 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
  .debug_rnglists
-                0x00000838      0x104 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+                0x00000832      0x104 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
  .debug_rnglists
-                0x0000093c       0x67 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+                0x00000936       0x67 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
  .debug_rnglists
-                0x000009a3       0x43 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+                0x0000099d       0x43 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
  .debug_rnglists
-                0x000009e6      0x3ea CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+                0x000009e0      0x3ea CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
  .debug_rnglists
-                0x00000dd0       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
+                0x00000dca       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
  .debug_rnglists
-                0x00000de3      0x2c1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+                0x00000ddd      0x2c1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
  .debug_rnglists
-                0x000010a4       0x3a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+                0x0000109e       0x3a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
  .debug_rnglists
-                0x000010de      0x7a7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+                0x000010d8      0x7a7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
  .debug_rnglists
-                0x00001885      0x499 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+                0x0000187f      0x499 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
  .debug_rnglists
-                0x00001d1e      0x600 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+                0x00001d18      0x600 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
  .debug_rnglists
-                0x0000231e       0x59 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+                0x00002318       0x59 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
  .debug_rnglists
-                0x00002377      0x1cc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+                0x00002371      0x1cc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
  .debug_rnglists
-                0x00002543       0x2b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+                0x0000253d       0x2b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
  .debug_rnglists
-                0x0000256e       0x9d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+                0x00002568       0x9d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
  .debug_rnglists
-                0x0000260b       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+                0x00002605       0x13 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
  .debug_rnglists
-                0x0000261e       0x4f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+                0x00002618       0x4f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
  .debug_rnglists
-                0x0000266d       0x2b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+                0x00002667       0x2b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
  .debug_rnglists
-                0x00002698       0x3d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+                0x00002692       0x3d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
  .debug_rnglists
-                0x000026d5       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+                0x000026cf       0x70 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
  .debug_rnglists
-                0x00002745       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+                0x0000273f       0x2c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
  .debug_rnglists
-                0x00002771       0xb7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+                0x0000276b       0xb7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
  .debug_rnglists
-                0x00002828      0x2bf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+                0x00002822      0x2bf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
  .debug_rnglists
-                0x00002ae7       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
+                0x00002ae1       0x1b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
  .debug_rnglists
-                0x00002b02       0xaf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+                0x00002afc       0xaf CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
  .debug_rnglists
-                0x00002bb1      0x2f8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+                0x00002bab      0x2f8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
  .debug_rnglists
-                0x00002ea9       0x43 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+                0x00002ea3       0x43 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
  .debug_rnglists
-                0x00002eec      0x241 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+                0x00002ee6      0x241 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
  .debug_rnglists
-                0x0000312d       0x2e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+                0x00003127       0x2e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
  .debug_rnglists
-                0x0000315b       0xb1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+                0x00003155       0xb1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
  .debug_rnglists
-                0x0000320c      0x4bd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+                0x00003206      0x4bd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
  .debug_rnglists
-                0x000036c9       0xfb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+                0x000036c3       0xfb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
  .debug_rnglists
-                0x000037c4      0x5fd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+                0x000037be      0x5fd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
  .debug_rnglists
-                0x00003dc1       0x7f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+                0x00003dbb       0x7f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
  .debug_rnglists
-                0x00003e40      0x1d8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+                0x00003e3a      0x1d8 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
  .debug_rnglists
-                0x00004018      0x119 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+                0x00004012      0x119 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
  .debug_rnglists
-                0x00004131      0x24e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+                0x0000412b      0x24e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
  .debug_rnglists
-                0x0000437f      0x305 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+                0x00004379      0x305 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
  .debug_rnglists
-                0x00004684      0x234 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+                0x0000467e      0x234 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
  .debug_rnglists
-                0x000048b8       0x75 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
+                0x000048b2       0x75 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
  .debug_rnglists
-                0x0000492d       0x13 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
+                0x00004927       0x13 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
  .debug_rnglists
-                0x00004940       0x3a /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+                0x0000493a       0x3a /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
-.debug_line     0x00000000    0x2110a
- .debug_line    0x00000000      0xe56 CMakeFiles/pico_can.dir/main.c.o
- .debug_line    0x00000e56     0x1b36 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
- .debug_line    0x0000298c      0x1ff CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
- .debug_line    0x00002b8b      0x7d0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
- .debug_line    0x0000335b      0x39a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
- .debug_line    0x000036f5      0x327 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
- .debug_line    0x00003a1c     0x16e7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
- .debug_line    0x00005103      0x1f3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
- .debug_line    0x000052f6     0x11fc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
- .debug_line    0x000064f2      0x343 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
- .debug_line    0x00006835     0x2d05 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
- .debug_line    0x0000953a     0x1d36 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
- .debug_line    0x0000b270     0x1dac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
- .debug_line    0x0000d01c      0x45c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
- .debug_line    0x0000d478      0x94f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
- .debug_line    0x0000ddc7      0x2bd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
- .debug_line    0x0000e084      0x615 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
- .debug_line    0x0000e699      0x330 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
- .debug_line    0x0000e9c9      0x3aa CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
- .debug_line    0x0000ed73      0x2df CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
- .debug_line    0x0000f052      0x29c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
- .debug_line    0x0000f2ee      0x55f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
- .debug_line    0x0000f84d      0x503 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
- .debug_line    0x0000fd50      0x28f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
- .debug_line    0x0000ffdf      0x178 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
- .debug_line    0x00010157     0x195d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
- .debug_line    0x00011ab4       0xa1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
- .debug_line    0x00011b55      0x7a3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
- .debug_line    0x000122f8     0x1422 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
- .debug_line    0x0001371a      0x492 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
- .debug_line    0x00013bac     0x10a3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
- .debug_line    0x00014c4f      0x341 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
- .debug_line    0x00014f90      0x66f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
- .debug_line    0x000155ff     0x1d8a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
- .debug_line    0x00017389      0xb92 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
- .debug_line    0x00017f1b     0x260c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
- .debug_line    0x0001a527      0x62d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
- .debug_line    0x0001ab54      0xf9e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
- .debug_line    0x0001baf2      0x9cb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
- .debug_line    0x0001c4bd     0x127b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
- .debug_line    0x0001d738     0x1852 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
- .debug_line    0x0001ef8a     0x114c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
- .debug_line    0x000200d6      0x16f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x00020245       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x00020293      0x55e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
- .debug_line    0x000207f1       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_dvmd_tls.o)
- .debug_line    0x0002083b      0x1b6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
- .debug_line    0x000209f1       0xbd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
- .debug_line    0x00020aae       0xc3 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
- .debug_line    0x00020b71       0xf4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
- .debug_line    0x00020c65       0xd2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
- .debug_line    0x00020d37      0x154 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
- .debug_line    0x00020e8b      0x27f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
+.debug_line     0x00000000    0x21113
+ .debug_line    0x00000000      0xe5f CMakeFiles/pico_can.dir/main.c.o
+ .debug_line    0x00000e5f     0x1b36 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+ .debug_line    0x00002995      0x1ff CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+ .debug_line    0x00002b94      0x7d0 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o
+ .debug_line    0x00003364      0x39a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+ .debug_line    0x000036fe      0x327 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+ .debug_line    0x00003a25     0x16e7 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+ .debug_line    0x0000510c      0x1f3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/lock_core.c.o
+ .debug_line    0x000052ff     0x11fc CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/mutex.c.o
+ .debug_line    0x000064fb      0x343 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_sync/critical_section.c.o
+ .debug_line    0x0000683e     0x2d05 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/pico_time/time.c.o
+ .debug_line    0x00009543     0x1d36 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+ .debug_line    0x0000b279     0x1dac CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+ .debug_line    0x0000d025      0x45c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+ .debug_line    0x0000d481      0x94f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+ .debug_line    0x0000ddd0      0x2bd CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+ .debug_line    0x0000e08d      0x615 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+ .debug_line    0x0000e6a2      0x330 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+ .debug_line    0x0000e9d2      0x3aa CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+ .debug_line    0x0000ed7c      0x2df CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+ .debug_line    0x0000f05b      0x29c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+ .debug_line    0x0000f2f7      0x55f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+ .debug_line    0x0000f856      0x503 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+ .debug_line    0x0000fd59      0x28f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+ .debug_line    0x0000ffe8      0x178 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+ .debug_line    0x00010160     0x195d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+ .debug_line    0x00011abd       0xa1 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
+ .debug_line    0x00011b5e      0x7a3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+ .debug_line    0x00012301     0x1422 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+ .debug_line    0x00013723      0x492 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.o
+ .debug_line    0x00013bb5     0x10a3 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.o
+ .debug_line    0x00014c58      0x341 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o
+ .debug_line    0x00014f99      0x66f CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+ .debug_line    0x00015608     0x1d8a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+ .debug_line    0x00017392      0xb92 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+ .debug_line    0x00017f24     0x260c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.o
+ .debug_line    0x0001a530      0x62d CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.o
+ .debug_line    0x0001ab5d      0xf9e CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.o
+ .debug_line    0x0001bafb      0x9cb CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.o
+ .debug_line    0x0001c4c6     0x127b CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/tusb.c.o
+ .debug_line    0x0001d741     0x1852 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.o
+ .debug_line    0x0001ef93     0x114c CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+ .debug_line    0x000200df      0x16f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x0002024e       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x0002029c      0x55e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x000207fa       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/softfp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00020844      0x1b6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memset.o)
+ .debug_line    0x000209fa       0xbd /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-memcpy.o)
+ .debug_line    0x00020ab7       0xc3 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-atexit.o)
+ .debug_line    0x00020b7a       0xf4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-strlen-stub.o)
+ .debug_line    0x00020c6e       0xd2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-fini.o)
+ .debug_line    0x00020d40      0x154 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__atexit.o)
+ .debug_line    0x00020e94      0x27f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v8-m.main+fp/softfp/libg.a(libc_a-__call_atexit.o)
 
 .debug_str      0x00000000     0x9976
  .debug_str     0x00000000     0x9976 CMakeFiles/pico_can.dir/main.c.o
-                                0x7c7 (size before relaxing)
+                                0x7bb (size before relaxing)
  .debug_str     0x00009976      0xcfa CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
  .debug_str     0x00009976      0x20a CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
  .debug_str     0x00009976      0x367 CMakeFiles/pico_can.dir/home/goncalo_gcosta/pico/pico-sdk/src/common/hardware_claim/claim.c.o

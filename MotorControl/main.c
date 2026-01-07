@@ -511,8 +511,8 @@ int main(void) {
     absolute_time_t t_next = get_absolute_time();
 
     while (true) {
-        comm_can_set_spd(motor1_id, 250.0f);
-        comm_can_set_spd(motor2_id, -500.0f);
+        comm_can_set_pos(motor1_id, 180);
+        comm_can_set_pos(motor2_id, -90);
 
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
