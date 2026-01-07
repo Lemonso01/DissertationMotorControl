@@ -82,6 +82,8 @@ void mcp2515_init() {
     mcp2515_write_register(MCP_RXB1CTRL, 0x60);
     mcp2515_write_register(MCP_CANINTF, 0x00);
 
+
+    mcp2515_write_register(MCP_CANCTRL, 0x00);
     uint8_t stat = mcp2515_read_register(MCP_CANSTAT);
     printf("CANSTAT after init: 0x%02X\n", stat);
 }
@@ -367,4 +369,61 @@ static void mcp2515_print_bus_health(void) {
     uint8_t rec  = mcp2515_read_register(MCP_REC);
     uint8_t tx0  = mcp2515_read_register(MCP_TXB0CTRL);
     printf("EFLG=0x%02X TEC=%u REC=%u TXB0CTRL=0x%02X\n", eflg, tec, rec, tx0);
+}
+
+static inline void decode_servo_telem(const can_frame_t *rx, servo_telem_t *t)
+{
+    int16_t pos_i = (int16_t)((rx->data[0] << 8) | rx->data[1]);
+    int16_t spd_i = (int16_t)((rx->data[2] << 8) | rx->data[3]);
+    int16_t cur_i = (int16_t)((rx->data[4] << 8) | rx->data[5]);
+
+    t->pos_deg    = pos_i * 0.1f;     // manual scaling
+    t->speed_erpm = spd_i * 10.0f;    // manual scaling
+    t->current_A  = cur_i * 0.01f;    // manual scaling
+    t->temp_C     = (int8_t)rx->data[6];
+    t->err        = rx->data[7];
+}
+
+static inline bool is_servo_telem(const can_frame_t *rx, uint8_t motor_id)
+{
+    if (!rx->extended) return false;        // servo telemetry is EID
+    if (rx->dlc != 8)  return false;        // always 8 bytes
+    if ((rx->id & 0xFFu) != motor_id) return false;
+
+    // Optional (uncomment if you want to be strict like manufacturer example)
+    // uint8_t type = (rx->id >> 8) & 0xFF;
+    // if (type != 0x29) return false;
+
+    return true;
+}
+
+void process_can_rx(uint8_t motor1_id, uint8_t motor2_id)
+{
+    can_frame_t rx;
+
+    while (mcp2515_receive_frame(&rx)) {
+
+        // Debug: print everything once (keep while testing)
+        printf("%s ID=0x%lX DLC=%u DATA=",
+               rx.extended ? "EID" : "SID",
+               (unsigned long)rx.id,
+               rx.dlc);
+        for (int i = 0; i < rx.dlc; i++)
+            printf("%02X ", rx.data[i]);
+        printf("\n");
+
+        servo_telem_t t;
+
+        if (is_servo_telem(&rx, motor1_id)) {
+            decode_servo_telem(&rx, &t);
+            printf("[M1] pos=%.1f deg spd=%.0f eRPM cur=%.2f A temp=%d err=%u\n",
+                   t.pos_deg, t.speed_erpm, t.current_A, t.temp_C, t.err);
+        }
+
+        if (is_servo_telem(&rx, motor2_id)) {
+            decode_servo_telem(&rx, &t);
+            printf("[M2] pos=%.1f deg spd=%.0f eRPM cur=%.2f A temp=%d err=%u\n",
+                   t.pos_deg, t.speed_erpm, t.current_A, t.temp_C, t.err);
+        }
+    }
 }

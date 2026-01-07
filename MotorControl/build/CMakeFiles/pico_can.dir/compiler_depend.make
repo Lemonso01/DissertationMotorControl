@@ -3526,7 +3526,6 @@ CMakeFiles/pico_can.dir/main.c.o: /mnt/e/DissMotCont/MotorControl/main.c \
   /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
-  /mnt/e/DissMotCont/MotorControl/mcp2515.h \
   /usr/include/newlib/_ansi.h \
   /usr/include/newlib/_newlib_version.h \
   /usr/include/newlib/assert.h \
@@ -3630,9 +3629,9 @@ CMakeFiles/pico_can.dir/mcp2515.c.o: /mnt/e/DissMotCont/MotorControl/mcp2515.c \
   /usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h
 
 
-/mnt/e/DissMotCont/MotorControl/mcp2515.c:
-
 /mnt/e/DissMotCont/MotorControl/mcp2515.h:
+
+/mnt/e/DissMotCont/MotorControl/mcp2515.c:
 
 /mnt/e/DissMotCont/MotorControl/main.c:
 

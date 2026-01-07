@@ -73,7 +73,16 @@ typedef struct {
     uint8_t  data[8];    ///< payload
 } can_frame_t;
 
+typedef struct {
+    float   pos_deg;       // degrees
+    float   speed_erpm;    // electrical RPM
+    float   current_A;     // amps
+    int8_t  temp_C;        // °C
+    uint8_t err;           // error code
+} servo_telem_t;
+
 // === Function Prototypes ===
+static bool mcp2515_set_mode(uint8_t reqop_bits);
 void mcp2515_init();
 void mcp2515_reset();
 void mcp2515_select();
@@ -111,5 +120,8 @@ void mit_unpack_reply(const can_frame_t *frm, float *p, float *v, float *t, floa
 bool mit_recv_reply(uint8_t drv_id, float *p, float *v, float *t, float *kd, int *rawT, int *err);
 
 static void mcp2515_print_bus_health(void);
+static inline void decode_servo_telem(const can_frame_t *rx, servo_telem_t *t);
+static inline bool is_servo_telem(const can_frame_t *rx, uint8_t motor_id);
+void process_can_rx(uint8_t motor1_id, uint8_t motor2_id);
 
 #endif // MCP2515_H

@@ -1,344 +1,529 @@
+/**
+ * cubemars_can_pico.c
+ *
+ * Raspberry Pi Pico 2 + MCP2515
+ * CubeMars AK-series CAN test (Servo + MIT)
+ *
+ * Based directly on CubeMars Arduino reference code
+ * and AK Series Module Driver User Manual v1.0.15.X
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+
 #include "pico/stdlib.h"
-#include "mcp2515.h"
+#include "hardware/spi.h"
+#include "hardware/gpio.h"
 
-// Motor CAN settings
-#define MOTOR_ID_1   0x01  // CAN node ID
-#define MOTOR_ID_2   0x02
+/* ============================================================
+ * MCP2515 DEFINITIONS
+ * ============================================================ */
 
-#define CMD_BUFFER_SIZE      64
+#define MCP2515_SPI        spi0
+#define MCP2515_CS_PIN     17
+#define MCP2515_SCK_PIN    18
+#define MCP2515_MOSI_PIN   19
+#define MCP2515_MISO_PIN   16
 
-#define ENDSTOP_PIN_TOP      22
-#define ENDSTOP_PIN_BOTTOM   21
-#define ENDSTOP_PIN_LEFT     14
-#define ENDSTOP_PIN_RIGHT    15
+#define MCP2515_RESET       0xC0
+#define MCP2515_READ        0x03
+#define MCP2515_WRITE       0x02
+#define MCP2515_RTS_TX0     0x81
+#define MCP2515_RTS_TX1     0x82
+#define MCP2515_READ_STATUS 0xA0
 
-#define LOOP_DT_MS           500     // AAN control loop period
-#define POS_TOL_DEG          2.0f
-#define ASSIST_GAIN          0.5f
+// TX buffer base addresses (register maps)
+#define TXB0CTRL   0x30
+#define TXB0SIDH   0x31
 
-#define LOOP_MAIN_MS         10
-#define DEBOUNCE_MS          50     // debounce time in ms
+#define TXB1CTRL   0x40
+#define TXB1SIDH   0x41
+
+#define TXREQ_BIT  (1u << 3)
+
+/* MCP2515 registers (minimal set) */
+#define CANCTRL  0x0F
+#define CNF1     0x2A
+#define CNF2     0x29
+#define CNF3     0x28
+
+/* ============================================================
+ * CAN FRAME STRUCTURE
+ * ============================================================ */
+
+typedef struct {
+    uint32_t can_id;
+    uint8_t  can_dlc;
+    uint8_t  data[8];
+    bool     extended;
+} can_frame_t;
+
+/* ============================================================
+ * SPI LOW LEVEL
+ * ============================================================ */
+
+static inline void mcp2515_select(void) {
+    gpio_put(MCP2515_CS_PIN, 0);
+}
+
+static inline void mcp2515_deselect(void) {
+    gpio_put(MCP2515_CS_PIN, 1);
+}
+
+static void mcp2515_write_reg(uint8_t reg, uint8_t val) {
+    uint8_t buf[3] = { MCP2515_WRITE, reg, val };
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, buf, 3);
+    mcp2515_deselect();
+}
+
+static uint8_t mcp2515_read_reg(uint8_t reg) {
+    uint8_t tx[3] = { MCP2515_READ, reg, 0x00 };
+    uint8_t rx[3];
+    mcp2515_select();
+    spi_write_read_blocking(MCP2515_SPI, tx, rx, 3);
+    mcp2515_deselect();
+    return rx[2];
+}
+
+static void mcp2515_reset(void) {
+    uint8_t cmd = MCP2515_RESET;
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, &cmd, 1);
+    mcp2515_deselect();
+    sleep_ms(10);
+}
+
+/* ============================================================
+ * MCP2515 INIT (1 Mbps, 8 MHz)
+ * ============================================================ */
+
+static void mcp2515_init(void) {
+    mcp2515_reset();
+
+    /* Configuration mode */
+    mcp2515_write_reg(CANCTRL, 0x80);
+
+    /* 1 Mbps @ 16 MHz (CubeMars recommended) */
+    mcp2515_write_reg(CNF1, 0x00);   // SJW=1, BRP=0
+    mcp2515_write_reg(CNF2, 0xD1);   // BTLMODE=1, PHSEG1=3, PRSEG=0
+    mcp2515_write_reg(CNF3, 0x81);   // PHSEG2=3
+
+    /* Normal mode */
+    mcp2515_write_reg(CANCTRL, 0x00);
+}
+
+/* ============================================================
+ * CAN TRANSMISSION
+ * ============================================================ */
+
+static void can_send(const can_frame_t *frm) {
+    uint8_t buf[14];
+    uint8_t i = 0;
+
+    buf[i++] = MCP2515_WRITE;
+    buf[i++] = 0x31; // TXB0SIDH
+
+    if (frm->extended) {
+        uint32_t id = frm->can_id;
+        buf[i++] = (id >> 21) & 0xFF;
+        buf[i++] = ((id >> 13) & 0xE0) | 0x08 | ((id >> 16) & 0x03);
+        buf[i++] = (id >> 8) & 0xFF;
+        buf[i++] = id & 0xFF;
+    } else {
+        buf[i++] = (frm->can_id >> 3) & 0xFF;
+        buf[i++] = (frm->can_id & 0x07) << 5;
+        buf[i++] = 0;
+        buf[i++] = 0;
+    }
+
+    buf[i++] = frm->can_dlc & 0x0F;
+    memcpy(&buf[i], frm->data, frm->can_dlc);
+    i += frm->can_dlc;
+
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, buf, i);
+    mcp2515_deselect();
+
+    uint8_t rts = MCP2515_RTS_TX0;
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, &rts, 1);
+    mcp2515_deselect();
+}
+
+static bool mcp2515_wait_txb_free(uint8_t txb_ctrl_reg, uint32_t timeout_us)
+{
+    absolute_time_t t_end = make_timeout_time_us(timeout_us);
+
+    while (mcp2515_read_reg(txb_ctrl_reg) & TXREQ_BIT) {
+        if (absolute_time_diff_us(get_absolute_time(), t_end) <= 0) {
+            return false; // timed out
+        }
+        tight_loop_contents();
+    }
+    return true;
+}
+
+static bool can_send_on_txb(uint8_t txb_index, const can_frame_t *frm)
+{
+    uint8_t sidh_addr, ctrl_addr, rts_cmd;
+
+    if (txb_index == 0) {
+        ctrl_addr = TXB0CTRL;
+        sidh_addr = TXB0SIDH;
+        rts_cmd   = MCP2515_RTS_TX0;
+    } else if (txb_index == 1) {
+        ctrl_addr = TXB1CTRL;
+        sidh_addr = TXB1SIDH;
+        rts_cmd   = MCP2515_RTS_TX1;
+    } else {
+        return false;
+    }
+
+    // Wait until this TX buffer is free
+    if (!mcp2515_wait_txb_free(ctrl_addr, 2000)) { // 2 ms timeout
+        return false;
+    }
+
+    // Build write sequence: WRITE, start_reg, then ID regs + DLC + data
+    uint8_t buf[2 + 4 + 1 + 8]; // cmd+addr + 4 ID bytes + DLC + up to 8 data
+    uint8_t i = 0;
+
+    buf[i++] = MCP2515_WRITE;
+    buf[i++] = sidh_addr; // start at SIDH for selected TX buffer
+
+    if (frm->extended) {
+        // Extended 29-bit ID -> SIDH/SIDL/EID8/EID0
+        uint32_t id = frm->can_id;
+        buf[i++] = (id >> 21) & 0xFF;
+        buf[i++] = ((id >> 13) & 0xE0) | 0x08 | ((id >> 16) & 0x03); // EXIDE=1
+        buf[i++] = (id >> 8) & 0xFF;
+        buf[i++] = id & 0xFF;
+    } else {
+        // Standard 11-bit ID
+        buf[i++] = (frm->can_id >> 3) & 0xFF;
+        buf[i++] = (frm->can_id & 0x07) << 5;
+        buf[i++] = 0x00;
+        buf[i++] = 0x00;
+    }
+
+    buf[i++] = frm->can_dlc & 0x0F;
+
+    uint8_t dlc = frm->can_dlc;
+    if (dlc > 8) dlc = 8;
+    memcpy(&buf[i], frm->data, dlc);
+    i += dlc;
+
+    // Write TXBnSIDH..TXBnDLC..TXBnDATA
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, buf, i);
+    mcp2515_deselect();
+
+    // Request to send on that buffer
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, &rts_cmd, 1);
+    mcp2515_deselect();
+
+    return true;
+}
+
+static inline uint8_t txb_for_motor(uint8_t motor_id)
+{
+    // Map motor IDs to TX buffers deterministically
+    // motor 1 -> TXB0, motor 2 -> TXB1
+    // Adjust if your IDs differ.
+    return (motor_id == 1) ? 0 : 1;
+}
+
+/* ============================================================
+ * BUFFER HELPERS (IDENTICAL TO MANUAL)
+ * ============================================================ */
+
+static void buffer_append_int16(uint8_t *b, int16_t n, int32_t *i) {
+    b[(*i)++] = n >> 8;
+    b[(*i)++] = n;
+}
+
+static void buffer_append_int32(uint8_t *b, int32_t n, int32_t *i) {
+    b[(*i)++] = n >> 24;
+    b[(*i)++] = n >> 16;
+    b[(*i)++] = n >> 8;
+    b[(*i)++] = n;
+}
+
+/* ============================================================
+ * SERVO MODE COMMANDS
+ * ============================================================ */
 
 typedef enum {
-    MODE_IDLE = 0,
-    MODE_RPM,
-    MODE_POS,
-    MODE_TORQUE,
-    MODE_POSSPD,
-    MODE_AAN,
-    MODE_ORIGIN
-} CommandMode;
+    CAN_PACKET_SET_DUTY = 0,
+    CAN_PACKET_SET_CURRENT,
+    CAN_PACKET_SET_CURRENT_BRAKE,
+    CAN_PACKET_SET_RPM,
+    CAN_PACKET_SET_POS,
+    CAN_PACKET_SET_ORIGIN_HERE,
+    CAN_PACKET_SET_POS_SPD
+} CAN_PACKET_ID;
 
-typedef struct {
-    CommandMode mode;
-    float      p1, p2, p3;
-} CurrentCmd;
-
-typedef struct {
-    float   pos_deg;
-    float   speed_erpm;
-    float   current_A;
-    int8_t  temp_C;
-    uint8_t error;
-    bool    valid;
-} MotorStatus;
-
-
-static MotorStatus motor1_status = {0};
-static MotorStatus motor2_status = {0};
-
-static uint pin_list[4] = { ENDSTOP_PIN_TOP, ENDSTOP_PIN_BOTTOM,
-                            ENDSTOP_PIN_LEFT, ENDSTOP_PIN_RIGHT };
-static bool    last_state[4];
-static uint64_t last_time[4];
-
-void init_endstops(void) {
-    for (int i = 0; i < 4; ++i) {
-        gpio_init(pin_list[i]);
-        gpio_set_dir(pin_list[i], GPIO_IN);
-        gpio_pull_up(pin_list[i]);
-        last_state[i] = gpio_get(pin_list[i]);
-        last_time[i]  = to_ms_since_boot(get_absolute_time());
-    }
-}
-
-bool any_endstop_pressed_debounced(void) {
-    uint64_t now = to_ms_since_boot(get_absolute_time());
-    for (int i = 0; i < 4; ++i) {
-        bool st = gpio_get(pin_list[i]);       // 1 = open, 0 = pressed
-        if (st != last_state[i]) {
-            last_state[i] = st;
-            last_time[i]  = now;
-        } else if (!st && (now - last_time[i] >= DEBOUNCE_MS)) {
-
-            return true;
-        }
-    }
-    return false;
-}
-
-void poll_can_status(void) {
-    while (mcp2515_check_message()) {
-        uint32_t id;
-        uint8_t  data[8];
-        uint8_t  len;
-        mcp2515_read_message(&id, data, &len);
-
-        if (len < 8) {
-            continue; // not a full status frame
-        }
-
-        uint8_t node_id = (uint8_t)(id & 0xFF);  // low 8 bits = MOTOR_ID_x
-
-        int16_t pos_raw = (int16_t)((data[0] << 8) | data[1]);
-        int16_t spd_raw = (int16_t)((data[2] << 8) | data[3]);
-        int16_t cur_raw = (int16_t)((data[4] << 8) | data[5]);
-        int8_t  tmp_raw = (int8_t)data[6];
-        uint8_t err_raw = data[7];
-
-        MotorStatus *st = NULL;
-        if (node_id == MOTOR_ID_1) {
-            st = &motor1_status;
-        } else if (node_id == MOTOR_ID_2) {
-            st = &motor2_status;
-        } else {
-            // Some other node, ignore
-            continue;
-        }
-
-        st->pos_deg    = pos_raw * 0.1f;    // 0.1° per LSB
-        st->speed_erpm = spd_raw * 10.0f;   // 10 eRPM per LSB (adjust if needed)
-        st->current_A  = cur_raw * 0.01f;   // 0.01 A per LSB
-        st->temp_C     = tmp_raw;
-        st->error      = err_raw;
-        st->valid      = true;
-    }
-}
-
-// Generic Assist-as-needed trajectory for a given motor & status
-static void do_assist_as_needed_joint(uint8_t motor_id,
-                                      MotorStatus *st,
-                                      float start_deg,
-                                      float end_deg,
-                                      float duration_s)
+static bool comm_can_transmit_eid_motor(uint8_t motor_id, uint32_t eid, const uint8_t *data, uint8_t len)
 {
-    const int steps = (int)(duration_s * 1000.0f / LOOP_DT_MS);
-    if (steps <= 0) {
-        printf("AAN (motor %u): invalid duration %.2fs\n", motor_id, duration_s);
-        return;
+    can_frame_t f = {
+        .can_id    = eid,
+        .can_dlc   = len,
+        .extended  = true
+    };
+    if (len > 8) len = 8;
+    memcpy(f.data, data, len);
+
+    return can_send_on_txb(txb_for_motor(motor_id), &f);
+}
+
+static void comm_can_set_pos(uint8_t motor_id, float pos_deg)
+{
+    uint8_t buf[4];
+    int32_t idx = 0;
+
+    buffer_append_int32(buf, (int32_t)(pos_deg * 10000.0f), &idx);
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_POS << 8);
+    (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
+}
+
+
+static void comm_can_set_spd(uint8_t motor_id, float erpm)
+{
+    uint8_t buffer[4];
+    int32_t idx = 0;
+
+    buffer_append_int32(buffer, (int32_t)erpm, &idx);
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_RPM << 8);
+    (void)comm_can_transmit_eid_motor(motor_id, eid, buffer, (uint8_t)idx);
+}
+
+
+static uint8_t mcp2515_read_status(void)
+{
+    uint8_t cmd = MCP2515_READ_STATUS;
+    uint8_t status = 0;
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, &cmd, 1);
+    spi_read_blocking(MCP2515_SPI, 0x00, &status, 1);
+    mcp2515_deselect();
+    return status;
+}
+
+static void mcp2515_bit_modify(uint8_t reg, uint8_t mask, uint8_t data)
+{
+    uint8_t buf[4] = { 0x05, reg, mask, data }; // BIT MODIFY
+    mcp2515_select();
+    spi_write_blocking(MCP2515_SPI, buf, 4);
+    mcp2515_deselect();
+}
+
+/**
+ * Reads one frame from MCP2515 (RXB0 or RXB1).
+ * Returns true if a frame was read.
+ */
+static bool mcp2515_receive_frame(can_frame_t *frm)
+{
+    uint8_t status = mcp2515_read_status();
+
+    uint8_t addr;
+    bool from_rxb0 = false;
+
+    // RX0IF is indicated via status bits; common approach:
+    // If either RX buffer has data, pick one.
+    if (status & 0x01) {          // RX0IF
+        addr = 0x61;              // RXB0SIDH register address
+        from_rxb0 = true;
+    } else if (status & 0x02) {   // RX1IF
+        addr = 0x71;              // RXB1SIDH
+        from_rxb0 = false;
+    } else {
+        return false;
     }
 
-    const float dt_s = LOOP_DT_MS / 1000.0f;
-    const float vel  = (end_deg - start_deg) / (steps * dt_s);  // deg/s
-    float desired    = start_deg;
+    uint8_t sidh = mcp2515_read_reg(addr + 0);
+    uint8_t sidl = mcp2515_read_reg(addr + 1);
+    uint8_t eid8 = mcp2515_read_reg(addr + 2);
+    uint8_t eid0 = mcp2515_read_reg(addr + 3);
+    uint8_t dlc  = mcp2515_read_reg(addr + 4) & 0x0F;
 
-    st->valid = false;  // force wait for fresh status
+    frm->can_dlc = dlc;
 
-    printf("AAN (motor %u): from %.1f° to %.1f° over %.1fs (%d steps)\n",
-           motor_id, start_deg, end_deg, duration_s, steps);
+    // EXIDE bit (bit 3 of SIDL) indicates extended frame
+    bool ext = (sidl & (1u << 3)) != 0;
+    frm->extended = ext;
 
-    for (int i = 0; i < steps; i++) {
-        uint64_t t0 = to_ms_since_boot(get_absolute_time());
+    if (!ext) {
+        // Standard 11-bit ID: SIDH[7:0]<<3 | SIDL[7:5]
+        frm->can_id = ((uint32_t)sidh << 3) | (sidl >> 5);
+    } else {
+        // Extended 29-bit ID reconstruction:
+        // SID = (SIDH<<3) | (SIDL>>5)
+        // EID = (SIDL & 0x03)<<16 | (EID8<<8) | EID0
+        uint32_t sid = ((uint32_t)sidh << 3) | (sidl >> 5);
+        uint32_t eid = ((uint32_t)(sidl & 0x03) << 16) | ((uint32_t)eid8 << 8) | eid0;
+        frm->can_id = (sid << 18) | eid;
+    }
 
-        // Safety: endstop check
-        if (any_endstop_pressed_debounced()) {
-            printf("AAN (motor %u): endstop hit, aborting.\n", motor_id);
-            stop_motor();   // currently stops motor 1 only; you may want a per-motor stop later
-            break;
-        }
+    for (uint8_t i = 0; i < dlc; i++) {
+        frm->data[i] = mcp2515_read_reg(addr + 5 + i);
+    }
 
-        // 1) Send position setpoint to THIS motor
-        send_position(motor_id, desired);
+    // Clear the corresponding interrupt flag in CANINTF
+    // CANINTF register is 0x2C; RX0IF=0x01, RX1IF=0x02
+    if (from_rxb0) {
+        mcp2515_bit_modify(0x2C, 0x01, 0x00);
+    } else {
+        mcp2515_bit_modify(0x2C, 0x02, 0x00);
+    }
 
-        // 2) Poll CAN to refresh both motor statuses
-        poll_can_status();
+    return true;
+}
 
-        // 3) Use latest feedback for THIS motor
-        if (st->valid) {
-            float actual = st->pos_deg;
-            float err    = desired - actual;
+static void print_can_frame(const can_frame_t *f)
+{
+    printf("%s ID:0x%lX DLC:%u DATA:",
+           f->extended ? "EID" : "SID",
+           (unsigned long)f->can_id,
+           f->can_dlc);
 
-            if (err > POS_TOL_DEG) {
-                float speed = err * ASSIST_GAIN;  // rpm
-                if (speed > 6.0f) speed = 6.0f;
-                if (speed < 0.0f) speed = 0.0f;
+    for (uint8_t i = 0; i < f->can_dlc; i++) {
+        printf(" %02X", f->data[i]);
+    }
+    printf("\n");
+}
 
-                printf("  motor %u step %d, desired=%.1f°, actual=%.1f°, assist speed=%.2f rpm\n",
-                       motor_id, i, desired, actual, speed);
+static void servo_decode_and_print(const can_frame_t *f)
+{
+    int8_t motor_id = (uint8_t)(f->can_id & 0xFF);
 
-                send_rpm(motor_id, (int32_t)speed);
-            } else {
-                // within tolerance -> zero assist for this motor
-                send_rpm(motor_id, 0);
+    int16_t pos_i = (int16_t)((f->data[0] << 8) | f->data[1]);
+    int16_t spd_i = (int16_t)((f->data[2] << 8) | f->data[3]);
+    int16_t cur_i = (int16_t)((f->data[4] << 8) | f->data[5]);
+
+    float pos_deg  = pos_i * 0.1f;
+    float spd_erpm = spd_i * 10.0f;
+    float cur_a    = cur_i * 0.01f;
+
+    int8_t  temp_c = (int8_t)f->data[6];
+    uint8_t err    = f->data[7];
+
+    printf("SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n", motor_id, pos_deg, spd_erpm, cur_a, temp_c, err);
+}
+
+
+
+/* ============================================================
+ * MIT MODE
+ * ============================================================ */
+
+static unsigned int float_to_uint(float x, float min, float max, unsigned bits) {
+    float span = max - min;
+    if (x < min) x = min;
+    if (x > max) x = max;
+    return (unsigned)((x - min) * (((1 << bits) - 1) / span));
+}
+
+#define P_MIN -12.5f
+#define P_MAX  12.5f
+#define V_MIN -45.0f
+#define V_MAX  45.0f
+#define T_MIN -18.0f
+#define T_MAX  18.0f
+#define KP_MIN 0.0f
+#define KP_MAX 500.0f
+#define KD_MIN 0.0f
+#define KD_MAX 5.0f
+
+static void mit_pack_cmd(uint8_t id, float p, float v, float kp, float kd, float t) {
+    uint8_t buf[8];
+
+    int p_i  = float_to_uint(p,  P_MIN,  P_MAX, 16);
+    int v_i  = float_to_uint(v,  V_MIN,  V_MAX, 12);
+    int kp_i = float_to_uint(kp, KP_MIN, KP_MAX, 12);
+    int kd_i = float_to_uint(kd, KD_MIN, KD_MAX, 12);
+    int t_i  = float_to_uint(t,  T_MIN,  T_MAX, 12);
+
+    buf[0] = p_i >> 8;
+    buf[1] = p_i & 0xFF;
+    buf[2] = v_i >> 4;
+    buf[3] = ((v_i & 0xF) << 4) | (kp_i >> 8);
+    buf[4] = kp_i & 0xFF;
+    buf[5] = kd_i >> 4;
+    buf[6] = ((kd_i & 0xF) << 4) | (t_i >> 8);
+    buf[7] = t_i & 0xFF;
+
+    can_frame_t f = {
+        .can_id = id,
+        .can_dlc = 8,
+        .extended = false
+    };
+    memcpy(f.data, buf, 8);
+    can_send(&f);
+}
+
+/* ============================================================
+ * MAIN
+ * ============================================================ */
+
+int main(void) {
+    stdio_init_all();
+    sleep_ms(10000);
+
+    spi_init(MCP2515_SPI, 1000 * 1000);
+    gpio_set_function(MCP2515_SCK_PIN,  GPIO_FUNC_SPI);
+    gpio_set_function(MCP2515_MOSI_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(MCP2515_MISO_PIN, GPIO_FUNC_SPI);
+
+    gpio_init(MCP2515_CS_PIN);
+    gpio_set_dir(MCP2515_CS_PIN, GPIO_OUT);
+    gpio_put(MCP2515_CS_PIN, 1);
+
+
+    // Optional: disable filters/masks (often not strictly required if RXM=11)
+    mcp2515_write_reg(0x20, 0x00); // RXM0SIDH
+    mcp2515_write_reg(0x21, 0x00); // RXM0SIDL
+    mcp2515_write_reg(0x22, 0x00); // RXM0EID8
+    mcp2515_write_reg(0x23, 0x00); // RXM0EID0
+
+    mcp2515_write_reg(0x24, 0x00); // RXM1SIDH
+    mcp2515_write_reg(0x25, 0x00); // RXM1SIDL
+    mcp2515_write_reg(0x26, 0x00); // RXM1EID8
+    mcp2515_write_reg(0x27, 0x00); // RXM1EID0
+
+
+    printf("CubeMars CAN test start\n");
+
+    mcp2515_init();
+
+    // Accept all messages (standard + extended) into RXB0 and RXB1
+    mcp2515_write_reg(0x60, 0x60); // RXB0CTRL: receive any
+    mcp2515_write_reg(0x70, 0x60); // RXB1CTRL: receive any
+
+    uint8_t motor1_id = 1, motor2_id = 2;
+
+    can_frame_t rx1, rx2;
+
+    absolute_time_t t_next = get_absolute_time();
+
+    while (true) {
+        comm_can_set_spd(motor1_id, 250.0f);
+        comm_can_set_spd(motor2_id, -500.0f);
+
+        can_frame_t rx;
+        while (mcp2515_receive_frame(&rx)) {
+            if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
+                                rx.can_id == (0x2900u | motor2_id))) {
+                servo_decode_and_print(&rx);
             }
         }
 
-        // 4) Advance desired angle
-        desired += vel;
+        sleep_ms(10);
 
-        // 5) Loop timing
-        uint64_t dt = to_ms_since_boot(get_absolute_time()) - t0;
-        if (dt < LOOP_DT_MS) {
-            sleep_ms(LOOP_DT_MS - dt);
-        }
     }
 
-    printf("AAN (motor %u): trajectory complete\n", motor_id);
-}
-
-
-
-void send_pos_spd(uint8_t motor_id, float pos_deg, float vel_dps, float acc_dps2) {
-    // Build extended CAN ID
-    uint32_t can_id = ((uint32_t)CAN_PACKET_SET_POSRPM << 8) | motor_id;
-    uint8_t buf[8];
-    // Position scaled: LSB = 0.0001 deg (i.e., pos_deg*10000)
-    int32_t p = (int32_t)(pos_deg * 10000.0f);
-    buf[0] = (p >> 24) & 0xFF;
-    buf[1] = (p >> 16) & 0xFF;
-    buf[2] = (p >>  8) & 0xFF;
-    buf[3] = (p      ) & 0xFF;
-    // Velocity scaled: LSB = 1 deg/s
-    int16_t v = (int16_t)vel_dps;
-    buf[4] = (v >> 8) & 0xFF;
-    buf[5] = (v     ) & 0xFF;
-    // Acceleration scaled: LSB = 1 deg/s^2
-    int16_t a = (int16_t)acc_dps2;
-    buf[6] = (a >> 8) & 0xFF;
-    buf[7] = (a     ) & 0xFF;
-    // Transmit
-    mcp2515_send_extended(can_id, buf, 8);
-    printf("POSSPD: %.2f° @%.2f°/s accel=%.2f°/s²\n", pos_deg, vel_dps, acc_dps2);
-}
-
-void send_origin(uint8_t motor_id) {
-    uint32_t can_id = ((uint32_t)CAN_PACKET_SET_ORIGIN << 8) | motor_id;
-    // No data payload
-    mcp2515_send_extended(can_id, NULL, 0);
-    printf("Origin set (current position = zero)\n");
-}
-
-void stop_motor(void) {
-    // zero velocity
-    send_rpm(MOTOR_ID_1, 0);
-    // clear torque
-    send_torque(MOTOR_ID_1, 0.0f);
-    printf("All commands zeroed\n");
-}
-
-static void process_current_cmd(const CurrentCmd *cmd){
-    switch(cmd->mode){
-        case MODE_RPM:
-            send_rpm(MOTOR_ID_1,(int32_t)cmd->p1);
-            break;
-        case MODE_POS:
-            send_position(MOTOR_ID_1,cmd->p1);
-            break;
-        case MODE_TORQUE:
-            send_torque(MOTOR_ID_1,cmd->p1);
-            break;
-        case MODE_POSSPD:
-            send_pos_spd(MOTOR_ID_1,cmd->p1,cmd->p2,cmd->p3);
-            break;
-        case MODE_ORIGIN:
-            send_origin(MOTOR_ID_1);
-            break;
-        default: break;
-    }
-}
-
-// Read line from USB
-static bool read_line(char *buf,size_t bufmax){
-    static size_t idx=0;
-    while(1){int c=getchar_timeout_us(0);
-        if(c==PICO_ERROR_TIMEOUT)break;
-        if(c=='\r')continue;
-        if(c=='\n'||idx>=bufmax-1){buf[idx]=0;idx=0;return true;}
-        buf[idx++]=(char)c;
-    }
-    return false;
-}
-
-int main() {
-    // Initialize USB serial
-    stdio_init_all();
-    sleep_ms(2000);  // wait for USB
-    printf("Pico CAN\n");
-
-    gpio_init(ENDSTOP_PIN_TOP);    gpio_set_dir(ENDSTOP_PIN_TOP, GPIO_IN);    gpio_pull_up(ENDSTOP_PIN_TOP);
-    gpio_init(ENDSTOP_PIN_BOTTOM); gpio_set_dir(ENDSTOP_PIN_BOTTOM, GPIO_IN); gpio_pull_up(ENDSTOP_PIN_BOTTOM);
-    gpio_init(ENDSTOP_PIN_LEFT);   gpio_set_dir(ENDSTOP_PIN_LEFT, GPIO_IN);   gpio_pull_up(ENDSTOP_PIN_LEFT);
-    gpio_init(ENDSTOP_PIN_RIGHT);  gpio_set_dir(ENDSTOP_PIN_RIGHT, GPIO_IN);  gpio_pull_up(ENDSTOP_PIN_RIGHT);
-
-
-    // Initialize MCP2515 CAN controller
-    mcp2515_init();               // SPI setup + reset + CNF regs
-    mcp2515_disable_loopback();   // NORMAL mode
-    sleep_ms(100);
-
-    int cnt_top=0, cnt_bottom=0, cnt_left=0, cnt_right=0;
-
-    CurrentCmd cur={MODE_IDLE,0,0,0};
-    char line[CMD_BUFFER_SIZE],cmd[16];
-    float v1,v2,v3; int args;
-
-    while(1){
-
-        if (any_endstop_pressed_debounced()) {
-            printf("Endstop! Stopping.\n");
-            cur.mode = MODE_IDLE;
-            stop_motor();
-        }
-
-        poll_can_status();
-
-        // Optionally: print status to USB (throttle if too chatty)
-        if (motor1_status.valid) {
-            printf("pos1: %.1f deg spd1: %.0f erpm cur1: %.2f A temp1: %d err1: %u\n",
-                   motor1_status.pos_deg,
-                   motor1_status.speed_erpm,
-                   motor1_status.current_A,
-                   (int)motor1_status.temp_C,
-                   (unsigned)motor1_status.error);
-        }
-        if (motor2_status.valid) {
-            printf("pos2: %.1f deg spd2: %.0f erpm cur2: %.2f A temp2: %d err2: %u\n",
-                   motor2_status.pos_deg,
-                   motor2_status.speed_erpm,
-                   motor2_status.current_A,
-                   (int)motor2_status.temp_C,
-                   (unsigned)motor2_status.error);
-        }
-
-
-        // read incoming
-        if(read_line(line,sizeof(line))){
-            args=sscanf(line,"%15s %f %f %f",cmd,&v1,&v2,&v3);
-
-            if(strcasecmp(cmd,"STOP")==0){ cur.mode=MODE_IDLE; stop_motor(); }
-
-            else if(strcasecmp(cmd,"AUTO_MOVE")==0&&args>=4){ cur.mode=MODE_POSSPD; cur.p1=v1;cur.p2=v2;cur.p3=v3; }
-
-            else if(strcasecmp(cmd,"RPM")==0&&args>=2){ cur.mode=MODE_RPM; cur.p1=v1; }
-
-            else if(strcasecmp(cmd,"POS")==0&&args>=2){ cur.mode=MODE_POS; cur.p1=v1; }
-
-            else if(strcasecmp(cmd,"TORQUE")==0&&args>=2){ cur.mode=MODE_TORQUE; cur.p1=v1; }
-
-            else if(strcasecmp(cmd,"POSSPD")==0&&args>=4){ cur.mode=MODE_POSSPD; cur.p1=v1;cur.p2=v2;cur.p3=v3; }
-
-            else if(strcasecmp(cmd,"AAN")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed_joint(MOTOR_ID_1, &motor1_status, v1, v2, v3);}   
-
-            else if(strcasecmp(cmd,"AAN2")==0&&args>=4){ cur.mode=MODE_IDLE; do_assist_as_needed_joint(MOTOR_ID_2, &motor2_status, v1, v2, v3);}  
-
-            else if(strcasecmp(cmd,"ORIGIN")==0){ cur.mode=MODE_ORIGIN; }
-        }
-        // maintain active command
-        if(cur.mode!=MODE_IDLE){ process_current_cmd(&cur); }
-        sleep_ms(LOOP_MAIN_MS);
-    }
-    return 0;
 }

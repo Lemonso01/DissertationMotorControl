@@ -3597,7 +3597,6 @@ CMakeFiles/pico_can.dir/main.c.o
  /home/goncalo_gcosta/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h
  /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/config_autogen.h
  /mnt/e/DissMotCont/MotorControl/build/generated/pico_base/pico/version.h
- /mnt/e/DissMotCont/MotorControl/mcp2515.h
  /usr/include/newlib/_ansi.h
  /usr/include/newlib/_newlib_version.h
  /usr/include/newlib/assert.h
