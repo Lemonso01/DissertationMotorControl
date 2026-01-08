@@ -266,6 +266,29 @@ typedef enum {
     CAN_PACKET_SET_POS_SPD
 } CAN_PACKET_ID;
 
+typedef enum {
+    UI_CMD_NONE = 0,
+    UI_CMD_SPD,
+    UI_CMD_POS,
+    UI_CMD_PSA,
+    UI_CMD_ORG,
+    UI_CMD_STOP,
+    UI_CMD_STOPALL
+    UI_CMD_TRQ
+} ui_cmd_type_t;
+
+typedef struct {
+    ui_cmd_type_t type;
+    uint8_t motor_id;
+
+    float   pos_deg;
+    int16_t spd_erpm;
+    int16_t acc_erpm_s2;
+    uint8_t origin_mode;
+    float current_a;
+} ui_cmd_t;
+
+
 static bool comm_can_transmit_eid_motor(uint8_t motor_id, uint32_t eid, const uint8_t *data, uint8_t len)
 {
     can_frame_t f = {
@@ -302,6 +325,25 @@ static void comm_can_set_spd(uint8_t motor_id, float erpm)
     (void)comm_can_transmit_eid_motor(motor_id, eid, buffer, (uint8_t)idx);
 }
 
+static inline float clamp_f(float x, float lo, float hi)
+{
+    if (x < lo) return lo;
+    if (x > hi) return hi;
+    return x;
+}
+
+static void comm_can_set_current(uint8_t motor_id, float current_a)
+{
+    uint8_t buf[4];
+    int32_t idx = 0;
+
+    current_a = clamp_f(current_a, -5.0f, 5.0f);
+
+    buffer_append_int32(buf, (int32_t)(current_a * 1000.0f), &idx);
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_CURRENT << 8);
+    (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
+}
 
 static uint8_t mcp2515_read_status(void)
 {
@@ -415,6 +457,226 @@ static void servo_decode_and_print(const can_frame_t *f)
     printf("SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n", motor_id, pos_deg, spd_erpm, cur_a, temp_c, err);
 }
 
+static void comm_can_set_origin(uint8_t motor_id, uint8_t mode)
+{
+    // mode is typically:
+    // 0 = temporary zero
+    // 1 = save zero to flash (persistent)
+    // 2 = clear saved zero (if supported by firmware)
+
+    uint8_t buffer[1];
+    buffer[0] = mode;
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_ORIGIN_HERE << 8);
+
+    comm_can_transmit_eid_motor(motor_id, eid, buffer, 1);
+}
+
+static inline int16_t clamp_i16(int32_t x)
+{
+    if (x >  32767) return  32767;
+    if (x < -32768) return -32768;
+    return (int16_t)x;
+}
+
+static inline int16_t clamp_i16_nonneg(int32_t x)
+{
+    if (x < 0)      return 0;
+    if (x > 32767)  return 32767;
+    return (int16_t)x;
+}
+
+/**
+ * Servo Position–Speed–Acceleration command (CAN_PACKET_SET_POS_SPD = 6)
+ *
+ * motor_id: target motor CAN ID (e.g., 1 or 2)
+ * pos_deg: desired position in degrees
+ * spd_erpm: desired electrical RPM (ERPM)
+ * acc_erpm_s2: desired acceleration in ERPM/s^2 (>=0)
+ */
+static void servo_set_pos_spd(uint8_t motor_id, float pos_deg, int16_t spd_erpm, int16_t acc_erpm_s2)
+{
+    uint8_t buf[8];
+    int32_t idx = 0;
+
+    // Position: int32 scaled by 10000
+    buffer_append_int32(buf, (int32_t)(pos_deg * 10000.0f), &idx);
+
+    // Speed and Accel are sent in units of 10 ERPM / 10 ERPM/s^2
+    int16_t spd_tx = clamp_i16((int32_t)spd_erpm / 10);
+    int16_t acc_tx = clamp_i16_nonneg((int32_t)acc_erpm_s2 / 10);
+
+    buffer_append_int16(buf, spd_tx, &idx);
+    buffer_append_int16(buf, acc_tx, &idx);
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_POS_SPD << 8);
+
+    // Reuse your existing TX routing (TXB0/TXB1)
+    (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
+}
+
+static bool ui_read_line(char *out, size_t out_len)
+{
+    static char line[128];
+    static size_t n = 0;
+
+    int ch;
+    while ((ch = getchar_timeout_us(0)) != PICO_ERROR_TIMEOUT) {
+        if (ch == '\r') continue;
+
+        if (ch == '\n') {
+            line[n] = '\0';
+            strncpy(out, line, out_len);
+            out[out_len - 1] = '\0';
+            n = 0;
+            return true;
+        }
+
+        if (n < sizeof(line) - 1) {
+            line[n++] = (char)ch;
+        } else {
+            // overflow: reset buffer
+            n = 0;
+        }
+    }
+
+    return false;
+}
+
+static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
+{
+    // initialize
+    memset(cmd, 0, sizeof(*cmd));
+    cmd->type = UI_CMD_NONE;
+
+    // Trim leading spaces
+    while (*line == ' ' || *line == '\t') line++;
+
+    if (*line == '\0') return false;
+
+    // STOPALL
+    if (strncmp(line, "STOPALL", 7) == 0) {
+        cmd->type = UI_CMD_STOPALL;
+        return true;
+    }
+
+    // SPD <id> <erpm>
+    unsigned id_u = 0;
+    int spd_i = 0;
+    if (sscanf(line, "SPD %u %d", &id_u, &spd_i) == 2) {
+        cmd->type = UI_CMD_SPD;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->spd_erpm = (int16_t)spd_i;
+        return true;
+    }
+
+    // POS <id> <deg>
+    float pos_f = 0.0f;
+    if (sscanf(line, "POS %u %f", &id_u, &pos_f) == 2) {
+        cmd->type = UI_CMD_POS;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->pos_deg = pos_f;
+        return true;
+    }
+
+    // PSA <id> <deg> <erpm> <acc>
+    int acc_i = 0;
+    if (sscanf(line, "PSA %u %f %d %d", &id_u, &pos_f, &spd_i, &acc_i) == 4) {
+        cmd->type = UI_CMD_PSA;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->pos_deg = pos_f;
+        cmd->spd_erpm = (int16_t)spd_i;
+        cmd->acc_erpm_s2 = (int16_t)acc_i;
+        return true;
+    }
+
+    // ORG <id> <mode>
+    unsigned mode_u = 0;
+    if (sscanf(line, "ORG %u %u", &id_u, &mode_u) == 2) {
+        cmd->type = UI_CMD_ORG;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->origin_mode = (uint8_t)mode_u;
+        return true;
+    }
+
+    // STOP <id>
+    if (sscanf(line, "STOP %u", &id_u) == 1) {
+        cmd->type = UI_CMD_STOP;
+        cmd->motor_id = (uint8_t)id_u;
+        return true;
+    }
+
+    // TRQ <id> <current_A>
+    float cur_f = 0.0f;
+    if (sscanf(line, "TRQ %u %f", &id_u, &cur_f) == 2) {
+        cmd->type = UI_CMD_TRQ;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->current_a = cur_f;
+        return true;
+    }
+
+    return false;
+}
+
+static void ui_poll_and_apply(void)
+{
+    char line[128];
+    ui_cmd_t cmd;
+
+    // Read and process all complete lines available right now
+    while (ui_read_line(line, sizeof(line))) {
+
+        if (!ui_parse_command(line, &cmd)) {
+            printf("UI: parse error: '%s'\n", line);
+            continue;
+        }
+
+        switch (cmd.type) {
+            case UI_CMD_SPD:
+                comm_can_set_spd(cmd.motor_id, (float)cmd.spd_erpm);
+                printf("UI: SPD id=%u erpm=%d\n", cmd.motor_id, cmd.spd_erpm);
+                break;
+
+            case UI_CMD_POS:
+                comm_can_set_pos(cmd.motor_id, cmd.pos_deg);
+                printf("UI: POS id=%u deg=%.2f\n", cmd.motor_id, cmd.pos_deg);
+                break;
+
+            case UI_CMD_PSA:
+                servo_set_pos_spd(cmd.motor_id, cmd.pos_deg, cmd.spd_erpm, cmd.acc_erpm_s2);
+                printf("UI: PSA id=%u deg=%.2f spd=%d acc=%d\n",
+                       cmd.motor_id, cmd.pos_deg, cmd.spd_erpm, cmd.acc_erpm_s2);
+                break;
+
+            case UI_CMD_ORG:
+                comm_can_set_origin(cmd.motor_id, cmd.origin_mode);
+                printf("UI: ORG id=%u mode=%u\n", cmd.motor_id, cmd.origin_mode);
+                break;
+
+            case UI_CMD_STOP:
+                comm_can_set_spd(cmd.motor_id, 0.0f);
+                printf("UI: STOP id=%u\n", cmd.motor_id);
+                break;
+
+            case UI_CMD_STOPALL:
+                // If you only have 2 motors, hardcode IDs here
+                comm_can_set_spd(1, 0.0f);
+                comm_can_set_spd(2, 0.0f);
+                printf("UI: STOPALL\n");
+                break;
+
+            case UI_CMD_TRQ:
+                comm_can_set_current(cmd.motor_id, cmd.current_a);
+                printf("UI: TRQ id=%u Iq=%.3f A\n", cmd.motor_id, cmd.current_a);
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
+
 
 
 /* ============================================================
@@ -510,9 +772,19 @@ int main(void) {
 
     absolute_time_t t_next = get_absolute_time();
 
+    comm_can_set_origin(motor1_id, 1);
+    comm_can_set_origin(motor2_id, 1);
+
+
     while (true) {
-        comm_can_set_pos(motor1_id, 180);
-        comm_can_set_pos(motor2_id, -90);
+
+        ui_poll_and_apply();
+
+        //comm_can_set_pos(motor1_id, 180);
+        //comm_can_set_pos(motor2_id, -90);
+
+        //servo_set_pos_spd(motor1_id, 180.0f, 5000, 30000);
+        //servo_set_pos_spd(motor2_id, -90.0f, 4000, 20000);
 
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
