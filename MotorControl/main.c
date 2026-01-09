@@ -16,6 +16,9 @@
 #include "hardware/spi.h"
 #include "hardware/gpio.h"
 
+uint8_t motor1_id = 1, motor2_id = 2;
+
+
 /* ============================================================
  * MCP2515 DEFINITIONS
  * ============================================================ */
@@ -273,7 +276,7 @@ typedef enum {
     UI_CMD_PSA,
     UI_CMD_ORG,
     UI_CMD_STOP,
-    UI_CMD_STOPALL
+    UI_CMD_STOPALL,
     UI_CMD_TRQ
 } ui_cmd_type_t;
 
@@ -287,6 +290,28 @@ typedef struct {
     uint8_t origin_mode;
     float current_a;
 } ui_cmd_t;
+
+typedef enum {
+    MCTL_NONE = 0,
+    MCTL_SPD,
+    MCTL_POS,
+    MCTL_PSA,
+    MCTL_TRQ,
+    MCTL_STOP,
+    MCTL_IDLE
+} motor_ctl_mode_t;
+
+typedef struct {
+    motor_ctl_mode_t mode;
+    float   pos_deg;
+    int16_t spd_erpm;
+    int16_t acc_erpm_s2;
+    float   cur_a;
+    absolute_time_t last_ui_update;
+} motor_ctl_t;
+
+static motor_ctl_t g_m1 = { .mode = MCTL_IDLE };
+static motor_ctl_t g_m2 = { .mode = MCTL_IDLE };
 
 
 static bool comm_can_transmit_eid_motor(uint8_t motor_id, uint32_t eid, const uint8_t *data, uint8_t len)
@@ -563,7 +588,7 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
     // SPD <id> <erpm>
     unsigned id_u = 0;
     int spd_i = 0;
-    if (sscanf(line, "SPD %u %d", &id_u, &spd_i) == 2) {
+    if (sscanf(line, "RPM %u %d", &id_u, &spd_i) == 2) {
         cmd->type = UI_CMD_SPD;
         cmd->motor_id = (uint8_t)id_u;
         cmd->spd_erpm = (int16_t)spd_i;
@@ -580,22 +605,21 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
     }
 
     // PSA <id> <deg> <erpm> <acc>
-    int acc_i = 0;
-    if (sscanf(line, "PSA %u %f %d %d", &id_u, &pos_f, &spd_i, &acc_i) == 4) {
+    float acc_f = 0.00, spd_f = 0.00;
+    if (sscanf(line, "PSA %u %f %f %f", &id_u, &pos_f, &spd_f, &acc_f) == 4) {
         cmd->type = UI_CMD_PSA;
         cmd->motor_id = (uint8_t)id_u;
         cmd->pos_deg = pos_f;
-        cmd->spd_erpm = (int16_t)spd_i;
-        cmd->acc_erpm_s2 = (int16_t)acc_i;
+        cmd->spd_erpm = spd_f;
+        cmd->acc_erpm_s2 = acc_f;
         return true;
     }
 
     // ORG <id> <mode>
     unsigned mode_u = 0;
-    if (sscanf(line, "ORG %u %u", &id_u, &mode_u) == 2) {
+    if (sscanf(line, "ORIGIN") == 0) {
         cmd->type = UI_CMD_ORG;
-        cmd->motor_id = (uint8_t)id_u;
-        cmd->origin_mode = (uint8_t)mode_u;
+        cmd->origin_mode = 0;
         return true;
     }
 
@@ -608,7 +632,7 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
 
     // TRQ <id> <current_A>
     float cur_f = 0.0f;
-    if (sscanf(line, "TRQ %u %f", &id_u, &cur_f) == 2) {
+    if (sscanf(line, "TORQUE %u %f", &id_u, &cur_f) == 2) {
         cmd->type = UI_CMD_TRQ;
         cmd->motor_id = (uint8_t)id_u;
         cmd->current_a = cur_f;
@@ -618,56 +642,103 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
     return false;
 }
 
+static motor_ctl_t *ctl_for_id(uint8_t id)
+{
+    if (id == motor1_id) return &g_m1;
+    if (id == motor2_id) return &g_m2;
+    return NULL;
+}
+
+
 static void ui_poll_and_apply(void)
 {
     char line[128];
     ui_cmd_t cmd;
 
-    // Read and process all complete lines available right now
     while (ui_read_line(line, sizeof(line))) {
+
+        // Debug: confirm what the UI actually sent
+        // printf("UI RAW: '%s'\n", line);
 
         if (!ui_parse_command(line, &cmd)) {
             printf("UI: parse error: '%s'\n", line);
             continue;
         }
 
+        motor_ctl_t *ctl = ctl_for_id(cmd.motor_id);
+
+        printf("UI RAW: '%s'\n", line);
+
+
         switch (cmd.type) {
             case UI_CMD_SPD:
-                comm_can_set_spd(cmd.motor_id, (float)cmd.spd_erpm);
-                printf("UI: SPD id=%u erpm=%d\n", cmd.motor_id, cmd.spd_erpm);
+                if (ctl) {
+                    ctl->mode = MCTL_SPD;
+                    ctl->spd_erpm = cmd.spd_erpm;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: SPD %u %d\n", cmd.motor_id, cmd.spd_erpm);
                 break;
 
             case UI_CMD_POS:
-                comm_can_set_pos(cmd.motor_id, cmd.pos_deg);
-                printf("UI: POS id=%u deg=%.2f\n", cmd.motor_id, cmd.pos_deg);
+                if (ctl) {
+                    ctl->mode = MCTL_POS;
+                    ctl->pos_deg = cmd.pos_deg;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: POS %u %.2f\n", cmd.motor_id, cmd.pos_deg);
                 break;
 
             case UI_CMD_PSA:
-                servo_set_pos_spd(cmd.motor_id, cmd.pos_deg, cmd.spd_erpm, cmd.acc_erpm_s2);
-                printf("UI: PSA id=%u deg=%.2f spd=%d acc=%d\n",
+                if (ctl) {
+                    ctl->mode = MCTL_PSA;
+                    ctl->pos_deg = cmd.pos_deg;
+                    ctl->spd_erpm = cmd.spd_erpm;
+                    ctl->acc_erpm_s2 = cmd.acc_erpm_s2;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: PSA %u %.2f %d %d\n",
                        cmd.motor_id, cmd.pos_deg, cmd.spd_erpm, cmd.acc_erpm_s2);
                 break;
 
-            case UI_CMD_ORG:
-                comm_can_set_origin(cmd.motor_id, cmd.origin_mode);
-                printf("UI: ORG id=%u mode=%u\n", cmd.motor_id, cmd.origin_mode);
+            case UI_CMD_TRQ:
+                if (ctl) {
+                    ctl->mode = MCTL_TRQ;
+                    ctl->cur_a = cmd.current_a;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: TORQUE %u %.3f\n", cmd.motor_id, cmd.current_a);
                 break;
 
             case UI_CMD_STOP:
-                comm_can_set_spd(cmd.motor_id, 0.0f);
-                printf("UI: STOP id=%u\n", cmd.motor_id);
+
+                comm_can_set_current(cmd.motor_id, 0.0f);
+
+                if (ctl) {
+                    ctl->mode = MCTL_IDLE;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: STOP %u\n", cmd.motor_id);
                 break;
 
             case UI_CMD_STOPALL:
-                // If you only have 2 motors, hardcode IDs here
-                comm_can_set_spd(1, 0.0f);
-                comm_can_set_spd(2, 0.0f);
-                printf("UI: STOPALL\n");
+
+                comm_can_set_current(motor1_id, 0.0f);
+                comm_can_set_current(motor2_id, 0.0f);
+
+                g_m1.mode = MCTL_IDLE;
+                g_m2.mode = MCTL_IDLE;
+                g_m1.last_ui_update = get_absolute_time();
+                g_m2.last_ui_update = get_absolute_time();
+                printf("TX: STOPALL\n");
                 break;
 
-            case UI_CMD_TRQ:
-                comm_can_set_current(cmd.motor_id, cmd.current_a);
-                printf("UI: TRQ id=%u Iq=%.3f A\n", cmd.motor_id, cmd.current_a);
+            case UI_CMD_ORG:
+                // One-shot, apply to both motors
+                comm_can_set_origin(motor1_id, cmd.origin_mode);
+                comm_can_set_origin(motor2_id, cmd.origin_mode);
+                printf("UI: ORG both motors mode=%u (ids %u,%u)\n",
+                       cmd.origin_mode, motor1_id, motor2_id);
                 break;
 
             default:
@@ -675,6 +746,49 @@ static void ui_poll_and_apply(void)
         }
     }
 }
+
+static void motor_keepalive_tick(uint32_t timeout_ms)
+{
+    absolute_time_t now = get_absolute_time();
+
+    motor_ctl_t *m[2] = { &g_m1, &g_m2 };
+    uint8_t id[2] = { motor1_id, motor2_id };
+
+    for (int k = 0; k < 2; k++) {
+        // Optional safety: if UI is silent too long, stop the motor
+        if (timeout_ms > 0) {
+            int64_t dt_us = absolute_time_diff_us(m[k]->last_ui_update, now);
+            if (dt_us > (int64_t)timeout_ms * 1000) {
+                m[k]->mode = MCTL_STOP;
+            }
+        }
+
+        switch (m[k]->mode) {
+            case MCTL_SPD:
+                comm_can_set_spd(id[k], (float)m[k]->spd_erpm);
+                break;
+            case MCTL_POS:
+                comm_can_set_pos(id[k], m[k]->pos_deg);
+                break;
+            case MCTL_PSA:
+                servo_set_pos_spd(id[k], m[k]->pos_deg, m[k]->spd_erpm, m[k]->acc_erpm_s2);
+                break;
+            case MCTL_TRQ:
+                comm_can_set_current(id[k], m[k]->cur_a);
+                break;
+            case MCTL_IDLE:
+                // True idle: do not send any command for this motor
+                break;
+
+            default:
+                // If something unknown happens, fail safe to IDLE (no commands)
+                m[k]->mode = MCTL_IDLE;
+                break;
+        }
+    }
+}
+
+
 
 
 
@@ -766,31 +880,30 @@ int main(void) {
     mcp2515_write_reg(0x60, 0x60); // RXB0CTRL: receive any
     mcp2515_write_reg(0x70, 0x60); // RXB1CTRL: receive any
 
-    uint8_t motor1_id = 1, motor2_id = 2;
-
     can_frame_t rx1, rx2;
 
     absolute_time_t t_next = get_absolute_time();
 
-    comm_can_set_origin(motor1_id, 1);
-    comm_can_set_origin(motor2_id, 1);
+    //comm_can_set_origin(motor1_id, 1);
+    //comm_can_set_origin(motor2_id, 1);
 
 
     while (true) {
 
         ui_poll_and_apply();
+        motor_keepalive_tick(10000);
 
         //comm_can_set_pos(motor1_id, 180);
         //comm_can_set_pos(motor2_id, -90);
 
-        //servo_set_pos_spd(motor1_id, 180.0f, 5000, 30000);
+        //servo_set_pos_spd(motor1_id, 180.0f, 2000, 800);
         //servo_set_pos_spd(motor2_id, -90.0f, 4000, 20000);
 
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
             if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
                                 rx.can_id == (0x2900u | motor2_id))) {
-                servo_decode_and_print(&rx);
+                //servo_decode_and_print(&rx);
             }
         }
 

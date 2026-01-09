@@ -313,7 +313,6 @@ class WristDialWidget(QtWidgets.QWidget):
 # ---------------- Main Window ----------------
 class MainWindow(QtWidgets.QMainWindow):
     log_signal = QtCore.Signal(str)
-    # use "object" instead of "dict" for cross-thread safety
     status_signal = QtCore.Signal(object)
 
     elbow_angle_signal = QtCore.Signal(float)
@@ -331,13 +330,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.using_dummy = False
         self._init_serial()
 
-        # Parameters (for command buttons)
-        self.params = dict(
+        # Parameters (per-motor)
+        base_params = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
             posspd_p=0.0, posspd_v=0.0, posspd_a=0.0,
             aan_s=0.0, aan_e=0.0, aan_d=5.0
         )
+        self.params_m = {
+            1: dict(base_params),
+            2: dict(base_params),
+        }
 
         # Simulation handles
         self._sim_stop = threading.Event()
@@ -386,15 +389,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ser = DummySerial()
         self.using_dummy = True
 
+    # ---------- Per-motor param getter ----------
+    def p(self, motor_id: int, key: str) -> float:
+        mid = 1 if int(motor_id) == 1 else 2
+        return float(self.params_m[mid][key])
+
     # ---------- Motor-targeted command helper ----------
     def send_cmd_motor(self, motor_id: int, cmd: str):
         """
         Insert motor selection AFTER the command token:
           "TORQUE 1 0.00"
           "POS 2 10.00"
-          "POSSPD 1 90.00 18.00 1.00"
+          "PSA 1 90.00 18.00 1.00"
         """
-        motor_id = 1 if int(motor_id) == 1 else 2
+        mid = 1 if int(motor_id) == 1 else 2
         cmd = cmd.strip()
         if not cmd:
             return
@@ -402,7 +410,7 @@ class MainWindow(QtWidgets.QMainWindow):
         parts = cmd.split()
         head = parts[0]
         tail = parts[1:]
-        rebuilt = " ".join([head, str(motor_id)] + tail)
+        rebuilt = " ".join([head, str(mid)] + tail)
         self.send_cmd(rebuilt)
 
     # ---------- UI ----------
@@ -428,7 +436,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         btn_origin = QtWidgets.QPushButton("Set Origin")
         btn_origin.setStyleSheet("background-color: #1976d2; color: white;")
-        btn_origin.clicked.connect(lambda: self.send_cmd("ORIGIN"))
+        btn_origin.clicked.connect(lambda: self.send_cmd("SETORG"))
         left_layout.addWidget(btn_origin, 1, 0, 1, 3)
 
         btn_calib = QtWidgets.QPushButton("Calibrate")
@@ -456,7 +464,6 @@ class MainWindow(QtWidgets.QMainWindow):
         stop_row.addWidget(btn_stop1)
         stop_row.addWidget(btn_stop2)
         stop_row.addWidget(btn_stopall, stretch=1)
-
         left_layout.addLayout(stop_row, 3, 0, 1, 3)
 
         # Headers: Motor 1 / Motor 2
@@ -473,39 +480,39 @@ class MainWindow(QtWidgets.QMainWindow):
         lbl_m2.setStyleSheet("font-weight:bold;")
         left_layout.addWidget(lbl_m2, 4, 2, 1, 1)
 
-        # Motor 1 buttons
+        # ---------------- Motor 1 buttons ----------------
         row_m1 = 5
+
         btn_rpm_1 = QtWidgets.QPushButton("RPM")
-        btn_rpm_1.clicked.connect(lambda: self.send_cmd_motor(1, f"RPM {int(self.params['rpm'])}"))
+        btn_rpm_1.clicked.connect(lambda: self.send_cmd_motor(1, f"RPM {int(self.p(1,'rpm'))}"))
         left_layout.addWidget(btn_rpm_1, row_m1, 0); row_m1 += 1
 
         btn_pos_1 = QtWidgets.QPushButton("POS")
-        btn_pos_1.clicked.connect(lambda: self.send_cmd_motor(1, f"POS {self.params['pos']:.2f}"))
+        btn_pos_1.clicked.connect(lambda: self.send_cmd_motor(1, f"POS {self.p(1,'pos'):.2f}"))
         left_layout.addWidget(btn_pos_1, row_m1, 0); row_m1 += 1
 
         btn_torque_1 = QtWidgets.QPushButton("TORQUE")
-        btn_torque_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.params['torque']:.2f}"))
+        btn_torque_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
         left_layout.addWidget(btn_torque_1, row_m1, 0); row_m1 += 1
 
         btn_duty_1 = QtWidgets.QPushButton("DUTY")
-        btn_duty_1.clicked.connect(lambda: self.send_cmd_motor(1, f"DUTY {self.params['duty']:.3f}"))
+        btn_duty_1.clicked.connect(lambda: self.send_cmd_motor(1, f"DUTY {self.p(1,'duty'):.3f}"))
         left_layout.addWidget(btn_duty_1, row_m1, 0); row_m1 += 1
 
         btn_current_1 = QtWidgets.QPushButton("CURRENT")
-        btn_current_1.clicked.connect(lambda: self.send_cmd_motor(1, f"CURRENT {self.params['current']:.2f}"))
+        btn_current_1.clicked.connect(lambda: self.send_cmd_motor(1, f"CURRENT {self.p(1,'current'):.2f}"))
         left_layout.addWidget(btn_current_1, row_m1, 0); row_m1 += 1
 
         btn_brake_1 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRAKE {self.params['brake']:.2f}"))
+        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRAKE {self.p(1,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
 
         btn_posspd_1 = QtWidgets.QPushButton("POSSPD")
+        # Keeping your command token as PSA (as in your latest file)
         btn_posspd_1.clicked.connect(
             lambda: self.send_cmd_motor(
                 1,
-                f"POSSPD {self.params['posspd_p']:.2f} "
-                f"{self.params['posspd_v']:.2f} "
-                f"{self.params['posspd_a']:.2f}"
+                f"PSA {self.p(1,'posspd_p'):.2f} {self.p(1,'posspd_v'):.2f} {self.p(1,'posspd_a'):.2f}"
             )
         )
         left_layout.addWidget(btn_posspd_1, row_m1, 0); row_m1 += 1
@@ -515,50 +522,49 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_aan_1, row_m1, 0); row_m1 += 1
 
         btn_auto_1 = QtWidgets.QPushButton("Auto Move")
-        btn_auto_1.clicked.connect(lambda: self.send_cmd_motor(1, "POSSPD 90.00 18.00 1.00"))
+        btn_auto_1.clicked.connect(lambda: self.send_cmd_motor(1, "PSA 90.00 18.00 1.00"))
         left_layout.addWidget(btn_auto_1, row_m1, 0); row_m1 += 1
 
         btn_resist_1 = QtWidgets.QPushButton("Resist")
-        btn_resist_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.params['torque']:.2f}"))
+        btn_resist_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
         left_layout.addWidget(btn_resist_1, row_m1, 0); row_m1 += 1
 
         btn_sim_1 = QtWidgets.QPushButton("Simulate Move")
         btn_sim_1.clicked.connect(self.open_sim_dialog)
         left_layout.addWidget(btn_sim_1, row_m1, 0); row_m1 += 1
 
-        # Motor 2 buttons (same set)
+        # ---------------- Motor 2 buttons ----------------
         row_m2 = 5
+
         btn_rpm_2 = QtWidgets.QPushButton("RPM")
-        btn_rpm_2.clicked.connect(lambda: self.send_cmd_motor(2, f"RPM {int(self.params['rpm'])}"))
+        btn_rpm_2.clicked.connect(lambda: self.send_cmd_motor(2, f"RPM {int(self.p(2,'rpm'))}"))
         left_layout.addWidget(btn_rpm_2, row_m2, 2); row_m2 += 1
 
         btn_pos_2 = QtWidgets.QPushButton("POS")
-        btn_pos_2.clicked.connect(lambda: self.send_cmd_motor(2, f"POS {self.params['pos']:.2f}"))
+        btn_pos_2.clicked.connect(lambda: self.send_cmd_motor(2, f"POS {self.p(2,'pos'):.2f}"))
         left_layout.addWidget(btn_pos_2, row_m2, 2); row_m2 += 1
 
         btn_torque_2 = QtWidgets.QPushButton("TORQUE")
-        btn_torque_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.params['torque']:.2f}"))
+        btn_torque_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.p(2,'torque'):.2f}"))
         left_layout.addWidget(btn_torque_2, row_m2, 2); row_m2 += 1
 
         btn_duty_2 = QtWidgets.QPushButton("DUTY")
-        btn_duty_2.clicked.connect(lambda: self.send_cmd_motor(2, f"DUTY {self.params['duty']:.3f}"))
+        btn_duty_2.clicked.connect(lambda: self.send_cmd_motor(2, f"DUTY {self.p(2,'duty'):.3f}"))
         left_layout.addWidget(btn_duty_2, row_m2, 2); row_m2 += 1
 
         btn_current_2 = QtWidgets.QPushButton("CURRENT")
-        btn_current_2.clicked.connect(lambda: self.send_cmd_motor(2, f"CURRENT {self.params['current']:.2f}"))
+        btn_current_2.clicked.connect(lambda: self.send_cmd_motor(2, f"CURRENT {self.p(2,'current'):.2f}"))
         left_layout.addWidget(btn_current_2, row_m2, 2); row_m2 += 1
 
         btn_brake_2 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRAKE {self.params['brake']:.2f}"))
+        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRAKE {self.p(2,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
 
         btn_posspd_2 = QtWidgets.QPushButton("POSSPD")
         btn_posspd_2.clicked.connect(
             lambda: self.send_cmd_motor(
                 2,
-                f"POSSPD {self.params['posspd_p']:.2f} "
-                f"{self.params['posspd_v']:.2f} "
-                f"{self.params['posspd_a']:.2f}"
+                f"POSSPD {self.p(2,'posspd_p'):.2f} {self.p(2,'posspd_v'):.2f} {self.p(2,'posspd_a'):.2f}"
             )
         )
         left_layout.addWidget(btn_posspd_2, row_m2, 2); row_m2 += 1
@@ -572,7 +578,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_auto_2, row_m2, 2); row_m2 += 1
 
         btn_resist_2 = QtWidgets.QPushButton("Resist")
-        btn_resist_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.params['torque']:.2f}"))
+        btn_resist_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.p(2,'torque'):.2f}"))
         left_layout.addWidget(btn_resist_2, row_m2, 2); row_m2 += 1
 
         btn_sim_2 = QtWidgets.QPushButton("Simulate Move")
@@ -657,11 +663,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.log.appendPlainText(text)
         self.log.verticalScrollBar().setValue(self.log.verticalScrollBar().maximum())
 
-    # ---------- Settings dialog ----------
+    # ---------- Settings dialog (two columns: Motor 1 / Motor 2) ----------
     def open_settings(self):
         dlg = QtWidgets.QDialog(self)
         dlg.setWindowTitle("Settings")
-        layout = QtWidgets.QFormLayout(dlg)
+        layout = QtWidgets.QGridLayout(dlg)
+
+        # Header row
+        hdr0 = QtWidgets.QLabel("")
+        hdr1 = QtWidgets.QLabel("Motor 1")
+        hdr2 = QtWidgets.QLabel("Motor 2")
+        hdr1.setStyleSheet("font-weight:bold;")
+        hdr2.setStyleSheet("font-weight:bold;")
+        layout.addWidget(hdr0, 0, 0)
+        layout.addWidget(hdr1, 0, 1)
+        layout.addWidget(hdr2, 0, 2)
 
         fields = [
             ("RPM", 'rpm'),
@@ -678,23 +694,35 @@ class MainWindow(QtWidgets.QMainWindow):
             ("AAN Dur (s)", "aan_d"),
         ]
 
-        widgets = {}
+        w1 = {}
+        w2 = {}
+
+        row = 1
         for label, key in fields:
-            le = QtWidgets.QLineEdit()
-            le.setText(str(self.params[key]))
-            layout.addRow(label + ":", le)
-            widgets[key] = le
+            layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
+
+            e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
+            e2 = QtWidgets.QLineEdit(str(self.params_m[2][key]))
+
+            layout.addWidget(e1, row, 1)
+            layout.addWidget(e2, row, 2)
+
+            w1[key] = e1
+            w2[key] = e2
+            row += 1
 
         btn_box = QtWidgets.QDialogButtonBox(
             QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
             parent=dlg
         )
-        layout.addRow(btn_box)
+        layout.addWidget(btn_box, row, 0, 1, 3)
 
         def on_ok():
             try:
-                for key, le in widgets.items():
-                    self.params[key] = float(le.text())
+                for key, le in w1.items():
+                    self.params_m[1][key] = float(le.text())
+                for key, le in w2.items():
+                    self.params_m[2][key] = float(le.text())
             except ValueError:
                 QtWidgets.QMessageBox.warning(dlg, "Invalid input", "Please enter numeric values.")
                 return
@@ -706,13 +734,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # ---------- AAN dialog (motor-aware) ----------
     def open_aan_dialog(self, motor_id: int = 1):
+        mid = 1 if int(motor_id) == 1 else 2
+
         dlg = QtWidgets.QDialog(self)
-        dlg.setWindowTitle(f"Assist-As-Needed Parameters (Motor {motor_id})")
+        dlg.setWindowTitle(f"Assist-As-Needed Parameters (Motor {mid})")
         layout = QtWidgets.QFormLayout(dlg)
 
-        le_start = QtWidgets.QLineEdit(str(self.params['aan_s']))
-        le_end   = QtWidgets.QLineEdit(str(self.params['aan_e']))
-        le_dur   = QtWidgets.QLineEdit(str(self.params['aan_d']))
+        le_start = QtWidgets.QLineEdit(str(self.params_m[mid]['aan_s']))
+        le_end   = QtWidgets.QLineEdit(str(self.params_m[mid]['aan_e']))
+        le_dur   = QtWidgets.QLineEdit(str(self.params_m[mid]['aan_d']))
 
         layout.addRow("Start (°):", le_start)
         layout.addRow("End (°):",   le_end)
@@ -733,11 +763,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 QtWidgets.QMessageBox.warning(dlg, "Invalid input", "Please enter numeric values.")
                 return
 
-            self.params['aan_s'] = s
-            self.params['aan_e'] = e
-            self.params['aan_d'] = d
+            self.params_m[mid]['aan_s'] = s
+            self.params_m[mid]['aan_e'] = e
+            self.params_m[mid]['aan_d'] = d
 
-            self.send_cmd_motor(int(motor_id), f"AAN {s:.2f} {e:.2f} {d:.2f}")
+            self.send_cmd_motor(mid, f"AAN {s:.2f} {e:.2f} {d:.2f}")
             dlg.accept()
 
         btn_box.accepted.connect(on_ok)
@@ -826,18 +856,13 @@ class MainWindow(QtWidgets.QMainWindow):
             time.sleep(SIM_TICK_S)
 
     # ---------- Motor commands ----------
-    def stop_all(self):
-        self.send_cmd("STOPALL")
-
     def send_cmd(self, cmd: str):
         try:
             self.ser.write((cmd + "\n").encode())
         except Exception:
             pass
-        # Mark outgoing commands
         self.log_signal.emit(f"TX: {cmd}")
 
-    # ---------- Serial read + status parse ----------
     def reader(self):
         buf = b""
         while not self._reader_stop:
@@ -853,13 +878,11 @@ class MainWindow(QtWidgets.QMainWindow):
                         txt = ln.decode(errors="ignore").strip()
                         if not txt:
                             continue
-                        # Mark incoming lines
                         self.log_signal.emit(f"RX: {txt}")
                         status = self.parse_status_line(txt)
                         if status:
                             self.status_signal.emit(status)
                     except Exception as e:
-                        # Do not crash the GUI because of a bad line
                         print("Reader error:", e)
                 buf = lines[-1]
             time.sleep(0.005)
@@ -875,19 +898,13 @@ class MainWindow(QtWidgets.QMainWindow):
     # ---------- Status line parsing ----------
     def parse_status_line(self, line: str):
         """
-        Supports BOTH:
-          1) Your MCU CSV telemetry:
-             "SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n"
-             SERVO,<motor_id>,<pos_deg>,<spd_erpm>,<cur_a>,<temp_c>,<err>
-
-          2) Legacy key:value lines (kept as fallback).
+        Supports:
+          SERVO,<motor_id>,<pos_deg>,<spd_erpm>,<cur_a>,<temp_c>,<err>
         """
-
         s = line.strip()
         if not s:
             return None
 
-        # --------- CSV SERVO parsing ----------
         if s.upper().startswith("SERVO"):
             parts = [p.strip() for p in s.split(",")]
             if len(parts) != 7:
@@ -903,100 +920,25 @@ class MainWindow(QtWidgets.QMainWindow):
             except ValueError:
                 return None
 
-            status = {}
-
             if motor_id == 1:
-                status["elbow_deg"] = pos_deg
-                status["spd1"]      = spd_erpm
-                status["tmp1"]      = temp_c
-                status["err1"]      = err
-                status["t1"]        = cur_a * KT_NM_PER_A_1
-            elif motor_id == 2:
-                status["wrist_deg"] = max(-90.0, min(90.0, pos_deg))
-                status["spd2"]      = spd_erpm
-                status["tmp2"]      = temp_c
-                status["err2"]      = err
-                status["t2"]        = cur_a * KT_NM_PER_A_2
-            else:
-                return None
+                return {
+                    "elbow_deg": pos_deg,
+                    "spd1": spd_erpm,
+                    "tmp1": temp_c,
+                    "err1": err,
+                    "t1": cur_a * KT_NM_PER_A_1
+                }
 
-            return status
+            if motor_id == 2:
+                return {
+                    "wrist_deg": max(-90.0, min(90.0, pos_deg)),
+                    "spd2": spd_erpm,
+                    "tmp2": temp_c,
+                    "err2": err,
+                    "t2": cur_a * KT_NM_PER_A_2
+                }
 
-        # --------- Fallback: legacy parser ----------
-        lo = s.lower()
-
-        if not any(k in lo for k in [
-            "pos", "pos1", "pos2", "elbow", "wrist", "sup", "deg", "deg1", "deg2",
-            "spd", "spd1", "spd2", "erpm", "erpm1", "erpm2",
-            "iq", "iq1", "iq2", "cur", "cur1", "cur2", "current",
-            "torq", "torque", "tq", "temp", "temp1", "temp2", "err", "err1", "err2",
-            "servo"
-        ]):
-            return None
-
-        def pick(keys, default=None, cast=float):
-            for k in keys:
-                m = re.search(rf'\b{k}\s*[:= ]\s*(-?\d+(?:\.\d+)?)', lo)
-                if m:
-                    try:
-                        return cast(m.group(1))
-                    except Exception:
-                        pass
-            return default
-
-        elbow_deg = pick(["elbow", "pos1", "p1", "deg1", "deg"])
-        wrist_deg = pick(["wrist", "sup", "pos2", "p2", "deg2"])
-
-        pos1 = pick(["pos1", "p1"])
-        pos2 = pick(["pos2", "p2"])
-        if elbow_deg is None:
-            elbow_deg = pos1
-        if wrist_deg is None:
-            wrist_deg = pos2
-
-        spd1 = pick(["spd1", "erpm1", "v1", "speed1", "spd", "erpm", "speed"])
-        spd2 = pick(["spd2", "erpm2", "v2", "speed2"])
-
-        iq1 = pick(["iq1", "cur1", "current1", "i1", "iq", "cur", "current"])
-        iq2 = pick(["iq2", "cur2", "current2", "i2"])
-
-        t1 = pick(["torque1", "torq1", "tq1", "t1", "torque"])
-        t2 = pick(["torque2", "torq2", "tq2", "t2"])
-
-        tmp1 = pick(["temp1", "t1c", "temperature1", "temp"])
-        tmp2 = pick(["temp2", "t2c", "temperature2"])
-
-        err1 = pick(["err1", "error1", "e1", "err", "error"], cast=int)
-        err2 = pick(["err2", "error2", "e2"], cast=int)
-
-        if t1 is None and iq1 is not None:
-            t1 = float(iq1) * KT_NM_PER_A_1
-        if t2 is None and iq2 is not None:
-            t2 = float(iq2) * KT_NM_PER_A_2
-
-        status = {}
-        if elbow_deg is not None:
-            status["elbow_deg"] = float(elbow_deg)
-        if wrist_deg is not None:
-            status["wrist_deg"] = max(-90.0, min(90.0, float(wrist_deg)))
-        if spd1 is not None:
-            status["spd1"] = float(spd1)
-        if spd2 is not None:
-            status["spd2"] = float(spd2)
-        if t1 is not None:
-            status["t1"] = float(t1)
-        if t2 is not None:
-            status["t2"] = float(t2)
-        if tmp1 is not None:
-            status["tmp1"] = float(tmp1)
-        if tmp2 is not None:
-            status["tmp2"] = float(tmp2)
-        if err1 is not None:
-            status["err1"] = int(err1)
-        if err2 is not None:
-            status["err2"] = int(err2)
-
-        return status or None
+        return None
 
     @QtCore.Slot(object)
     def apply_status_update(self, status: object):
@@ -1004,36 +946,35 @@ class MainWindow(QtWidgets.QMainWindow):
             return
 
         if "elbow_deg" in status:
-            val = status["elbow_deg"]
+            val = float(status["elbow_deg"])
             self.elbow_view.set_angle_deg(val)
             self.pos1_label.setText(f"{val:.1f}")
 
         if "wrist_deg" in status:
-            val = status["wrist_deg"]
+            val = float(status["wrist_deg"])
             self.wrist_view.set_angle_deg(val)
             self.pos2_label.setText(f"{val:.1f}")
 
         if "spd1" in status:
-            self.spd1_label.setText(f"{status['spd1']:.0f}")
+            self.spd1_label.setText(f"{float(status['spd1']):.0f}")
         if "spd2" in status:
-            self.spd2_label.setText(f"{status['spd2']:.0f}")
+            self.spd2_label.setText(f"{float(status['spd2']):.0f}")
 
         if "t1" in status:
-            self.trq1_label.setText(f"{status['t1']:.2f}")
+            self.trq1_label.setText(f"{float(status['t1']):.2f}")
         if "t2" in status:
-            self.trq2_label.setText(f"{status['t2']:.2f}")
+            self.trq2_label.setText(f"{float(status['t2']):.2f}")
 
         if "tmp1" in status:
-            self.tmp1_label.setText(f"{status['tmp1']:.0f}")
+            self.tmp1_label.setText(f"{float(status['tmp1']):.0f}")
         if "tmp2" in status:
-            self.tmp2_label.setText(f"{status['tmp2']:.0f}")
+            self.tmp2_label.setText(f"{float(status['tmp2']):.0f}")
 
         if "err1" in status:
-            self.err1_label.setText(str(status["err1"]))
+            self.err1_label.setText(str(int(status["err1"])))
         if "err2" in status:
-            self.err2_label.setText(str(status["err2"]))
+            self.err2_label.setText(str(int(status["err2"])))
 
-    # ---------- Close handling ----------
     def closeEvent(self, event: QtGui.QCloseEvent):
         self._reader_stop = True
         with self._sim_lock:
