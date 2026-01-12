@@ -617,7 +617,7 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
 
     // ORG <id> <mode>
     unsigned mode_u = 0;
-    if (sscanf(line, "ORIGIN") == 0) {
+    if (strcmp(line, "ORIGIN") == 0) {
         cmd->type = UI_CMD_ORG;
         cmd->origin_mode = 0;
         return true;
@@ -846,6 +846,21 @@ static void mit_pack_cmd(uint8_t id, float p, float v, float kp, float kd, float
  * MAIN
  * ============================================================ */
 
+static void dbg_mcp2515_tx_state(void)
+{
+    uint8_t tx0 = mcp2515_read_reg(0x30); // TXB0CTRL
+    uint8_t tx1 = mcp2515_read_reg(0x40); // TXB1CTRL
+    printf("DBG TXB0CTRL=0x%02X TXB1CTRL=0x%02X (TXREQ0=%u TXREQ1=%u)\n",
+           tx0, tx1, (tx0 >> 3) & 1, (tx1 >> 3) & 1);
+}
+
+static void dbg_mcp2515_eflg(void)
+{
+    uint8_t eflg = mcp2515_read_reg(0x2D);
+    printf("DBG EFLG=0x%02X\n", eflg);
+}
+
+
 int main(void) {
     stdio_init_all();
     sleep_ms(10000);
@@ -901,9 +916,21 @@ int main(void) {
 
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
-            if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
+            /*if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
                                 rx.can_id == (0x2900u | motor2_id))) {
-                //servo_decode_and_print(&rx);
+                servo_decode_and_print(&rx);
+            }*/
+
+                dbg_mcp2515_tx_state();
+                dbg_mcp2515_eflg();
+
+            uint32_t t0 = to_ms_since_boot(get_absolute_time());
+            while (to_ms_since_boot(get_absolute_time()) - t0 < 5000) {
+                can_frame_t rx;
+                while (mcp2515_receive_frame(&rx)) {
+                    print_can_frame(&rx); // raw print
+                }
+                sleep_ms(10);
             }
         }
 

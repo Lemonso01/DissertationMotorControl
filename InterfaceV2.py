@@ -507,7 +507,7 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRAKE {self.p(1,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
 
-        btn_posspd_1 = QtWidgets.QPushButton("POSSPD")
+        btn_posspd_1 = QtWidgets.QPushButton("PSA")
         # Keeping your command token as PSA (as in your latest file)
         btn_posspd_1.clicked.connect(
             lambda: self.send_cmd_motor(
@@ -560,11 +560,11 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRAKE {self.p(2,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
 
-        btn_posspd_2 = QtWidgets.QPushButton("POSSPD")
+        btn_posspd_2 = QtWidgets.QPushButton("PSA")
         btn_posspd_2.clicked.connect(
             lambda: self.send_cmd_motor(
                 2,
-                f"POSSPD {self.p(2,'posspd_p'):.2f} {self.p(2,'posspd_v'):.2f} {self.p(2,'posspd_a'):.2f}"
+                f"PSA {self.p(2,'posspd_p'):.2f} {self.p(2,'posspd_v'):.2f} {self.p(2,'posspd_a'):.2f}"
             )
         )
         left_layout.addWidget(btn_posspd_2, row_m2, 2); row_m2 += 1
@@ -574,7 +574,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_aan_2, row_m2, 2); row_m2 += 1
 
         btn_auto_2 = QtWidgets.QPushButton("Auto Move")
-        btn_auto_2.clicked.connect(lambda: self.send_cmd_motor(2, "POSSPD 90.00 18.00 1.00"))
+        btn_auto_2.clicked.connect(lambda: self.send_cmd_motor(2, "PSA 90.00 18.00 1.00"))
         left_layout.addWidget(btn_auto_2, row_m2, 2); row_m2 += 1
 
         btn_resist_2 = QtWidgets.QPushButton("Resist")
