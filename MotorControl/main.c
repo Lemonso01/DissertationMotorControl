@@ -277,7 +277,7 @@ typedef enum {
     UI_CMD_ORG,
     UI_CMD_STOP,
     UI_CMD_STOPALL,
-    UI_CMD_TRQ
+    UI_CMD_TRQ,
     UI_CMD_AAN
 } ui_cmd_type_t;
 
