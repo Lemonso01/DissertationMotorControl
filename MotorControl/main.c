@@ -901,6 +901,9 @@ int main(void) {
 
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
+
+            print_can_frame(&rx);
+
             if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
                                 rx.can_id == (0x2900u | motor2_id))) {
                 //servo_decode_and_print(&rx);
