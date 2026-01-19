@@ -277,7 +277,8 @@ typedef enum {
     UI_CMD_ORG,
     UI_CMD_STOP,
     UI_CMD_STOPALL,
-    UI_CMD_TRQ
+    UI_CMD_TRQ,
+    UI_CMD_AAN
 } ui_cmd_type_t;
 
 typedef struct {
@@ -289,6 +290,10 @@ typedef struct {
     int16_t acc_erpm_s2;
     uint8_t origin_mode;
     float current_a;
+
+    float aan_start_deg;
+    float aan_end_deg;
+    float aan_duration_s;
 } ui_cmd_t;
 
 typedef enum {
@@ -312,6 +317,78 @@ typedef struct {
 
 static motor_ctl_t g_m1 = { .mode = MCTL_IDLE };
 static motor_ctl_t g_m2 = { .mode = MCTL_IDLE };
+
+typedef struct {
+    bool            valid;
+    float           pos_deg;
+    float           spd_erpm;
+    float           cur_a;
+    absolute_time_t t_last;
+} motor_fb_t;
+
+static motor_fb_t g_fb1 = {0};
+static motor_fb_t g_fb2 = {0};
+
+static inline motor_fb_t *fb_for_id(uint8_t id)
+{
+    if (id == motor1_id) return &g_fb1;
+    if (id == motor2_id) return &g_fb2;
+    return NULL;
+}
+
+typedef struct {
+    bool            enabled;        // AAN is running
+    bool            assisting;      // assistance already triggered
+    float           start_deg;
+    float           end_deg;
+    float           duration_s;
+    absolute_time_t t0;
+
+    // Assist ramp (slowly increase help)
+    float           assist_u;       // 0..1 assistance blending factor
+} aan_state_t;
+
+static aan_state_t g_aan1 = {0};
+static aan_state_t g_aan2 = {0};
+
+static inline aan_state_t *aan_for_id(uint8_t id)
+{
+    if (id == motor1_id) return &g_aan1;
+    if (id == motor2_id) return &g_aan2;
+    return NULL;
+}
+
+#define AAN_DELAY_S            5.0f
+#define AAN_POS_TOL_DEG        2.0f
+#define AAN_ASSIST_SPD_ERPM    2000
+#define AAN_ASSIST_ACC_ERPM_S2 3000
+
+// How fast assistance ramps up once triggered (per second)
+#define AAN_ASSIST_RAMP_RATE   0.25f   // 0->1 in ~4s
+
+static inline uint32_t time_ms_now(void)
+{
+    return (uint32_t)(to_ms_since_boot(get_absolute_time()));
+}
+
+static inline float clamp01(float x) {
+    if (x < 0.0f) return 0.0f;
+    if (x > 1.0f) return 1.0f;
+    return x;
+}
+
+static inline float lerp_f(float a, float b, float u) {
+    return a + (b - a) * u;
+}
+
+// Decide “5 seconds behind” without needing velocity estimation.
+// Compare actual position to expected position at (t - 5s), direction-aware.
+static inline bool behind_by_5s(float act, float exp_now, float exp_m5)
+{
+    float dir = exp_now - exp_m5; // sign indicates direction
+    if (dir >= 0.0f) return act < exp_m5; // moving positive
+    else             return act > exp_m5; // moving negative
+}
 
 
 static bool comm_can_transmit_eid_motor(uint8_t motor_id, uint32_t eid, const uint8_t *data, uint8_t len)
@@ -479,7 +556,9 @@ static void servo_decode_and_print(const can_frame_t *f)
     int8_t  temp_c = (int8_t)f->data[6];
     uint8_t err    = f->data[7];
 
-    printf("SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n", motor_id, pos_deg, spd_erpm, cur_a, temp_c, err);
+    uint32_t t_ms = time_ms_now();
+
+    printf("%lu,SERVO,%u,%.1f,%.0f,%.2f,%d,%u\n", (unsigned long)t_ms, motor_id, pos_deg, spd_erpm, cur_a, temp_c, err);
 }
 
 static void comm_can_set_origin(uint8_t motor_id, uint8_t mode)
@@ -539,6 +618,87 @@ static void servo_set_pos_spd(uint8_t motor_id, float pos_deg, int16_t spd_erpm,
     // Reuse your existing TX routing (TXB0/TXB1)
     (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
 }
+
+static void servo_decode_to_feedback(const can_frame_t *f)
+{
+    uint8_t motor_id = (uint8_t)(f->can_id & 0xFF);
+    motor_fb_t *fb = fb_for_id(motor_id);
+    if (!fb) return;
+    if (f->can_dlc < 8) return;
+
+    int16_t pos_i = (int16_t)((f->data[0] << 8) | f->data[1]);
+    int16_t spd_i = (int16_t)((f->data[2] << 8) | f->data[3]);
+    int16_t cur_i = (int16_t)((f->data[4] << 8) | f->data[5]);
+
+    fb->pos_deg  = pos_i * 0.1f;
+    fb->spd_erpm = spd_i * 10.0f;
+    fb->cur_a    = cur_i * 0.01f;
+    fb->t_last   = get_absolute_time();
+    fb->valid    = true;
+}
+
+static void aan_eval_and_assist(uint8_t motor_id)
+{
+    aan_state_t  *aan = aan_for_id(motor_id);
+    motor_fb_t   *fb  = fb_for_id(motor_id);
+    if (!aan || !fb) return;
+    if (!aan->enabled) return;
+    if (!fb->valid) return;
+
+    float t_s = (float)absolute_time_diff_us(aan->t0, get_absolute_time()) / 1e6f;
+    if (t_s < 0.0f) t_s = 0.0f;
+
+    float T = (aan->duration_s > 0.05f) ? aan->duration_s : 0.05f;
+
+    float u_now = clamp01(t_s / T);
+    float u_m5  = clamp01((t_s - AAN_DELAY_S) / T);
+
+    float exp_now = lerp_f(aan->start_deg, aan->end_deg, u_now);
+    float exp_m5  = lerp_f(aan->start_deg, aan->end_deg, u_m5);
+
+    float act = fb->pos_deg;
+
+    // Trigger assistance if behind by 5 seconds (only after 5 seconds elapsed)
+    if (!aan->assisting) {
+        if (t_s >= AAN_DELAY_S && behind_by_5s(act, exp_now, exp_m5)) {
+            aan->assisting = true;
+            aan->assist_u  = 0.0f; // start ramp at zero
+            printf("AAN TRIGGER id=%u t=%.2f act=%.2f exp_m5=%.2f exp=%.2f\n",
+                   motor_id, t_s, act, exp_m5, exp_now);
+        }
+    }
+
+    if (aan->assisting) {
+        // Ramp assistance smoothly over real time (no counters)
+        static absolute_time_t last_call_1 = {0}, last_call_2 = {0};
+        absolute_time_t *last_call = (motor_id == motor1_id) ? &last_call_1 : &last_call_2;
+
+        float dt_s = 0.0f;
+        if (to_us_since_boot(*last_call) != 0) {
+            dt_s = (float)absolute_time_diff_us(*last_call, get_absolute_time()) / 1e6f;
+            if (dt_s < 0.0f) dt_s = 0.0f;
+            if (dt_s > 0.2f) dt_s = 0.2f; // guard against long pauses
+        }
+        *last_call = get_absolute_time();
+
+        aan->assist_u = clamp01(aan->assist_u + AAN_ASSIST_RAMP_RATE * dt_s);
+
+        // “Slowly assist”: don’t jump straight to end.
+        // Move target gradually from current position toward end using assist_u.
+        float target = lerp_f(act, aan->end_deg, aan->assist_u);
+
+        servo_set_pos_spd(motor_id, target, AAN_ASSIST_SPD_ERPM, AAN_ASSIST_ACC_ERPM_S2);
+    }
+
+    // End conditions
+    if (fabsf(aan->end_deg - act) <= AAN_POS_TOL_DEG || t_s > (T + AAN_DELAY_S + 2.0f)) {
+        printf("AAN DONE id=%u act=%.2f end=%.2f\n", motor_id, act, aan->end_deg);
+        aan->enabled = false;
+        aan->assisting = false;
+        aan->assist_u = 0.0f;
+    }
+}
+
 
 static bool ui_read_line(char *out, size_t out_len)
 {
@@ -617,7 +777,7 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
 
     // ORG <id> <mode>
     unsigned mode_u = 0;
-    if (sscanf(line, "ORIGIN") == 0) {
+    if (strcmp(line, "ORIGIN") == 0) {
         cmd->type = UI_CMD_ORG;
         cmd->origin_mode = 0;
         return true;
@@ -636,6 +796,16 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
         cmd->type = UI_CMD_TRQ;
         cmd->motor_id = (uint8_t)id_u;
         cmd->current_a = cur_f;
+        return true;
+    }
+
+    float s_deg=0.0f, e_deg=0.0f, dur_s=0.0f;
+    if (sscanf(line, "AAN %u %f %f %f", &id_u, &s_deg, &e_deg, &dur_s) == 4) {
+        cmd->type = UI_CMD_AAN;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->aan_start_deg = s_deg;
+        cmd->aan_end_deg = e_deg;
+        cmd->aan_duration_s = dur_s;
         return true;
     }
 
@@ -710,21 +880,28 @@ static void ui_poll_and_apply(void)
                 printf("TX: TORQUE %u %.3f\n", cmd.motor_id, cmd.current_a);
                 break;
 
-            case UI_CMD_STOP:
+            case UI_CMD_STOP: {
 
                 comm_can_set_current(cmd.motor_id, 0.0f);
+                aan_state_t *aan = aan_for_id(cmd.motor_id);
+                if (aan){
+                    aan->enabled = false; aan->assisting = false; aan->assist_u = 0.0f;
+                }
 
                 if (ctl) {
                     ctl->mode = MCTL_IDLE;
                     ctl->last_ui_update = get_absolute_time();
                 }
                 printf("TX: STOP %u\n", cmd.motor_id);
-                break;
+            } break;
 
             case UI_CMD_STOPALL:
 
                 comm_can_set_current(motor1_id, 0.0f);
                 comm_can_set_current(motor2_id, 0.0f);
+
+                g_aan1.enabled = g_aan1.assisting = false; g_aan1.assist_u = 0.0f;
+                g_aan2.enabled = g_aan2.assisting = false; g_aan2.assist_u = 0.0f;
 
                 g_m1.mode = MCTL_IDLE;
                 g_m2.mode = MCTL_IDLE;
@@ -741,6 +918,22 @@ static void ui_poll_and_apply(void)
                        cmd.origin_mode, motor1_id, motor2_id);
                 break;
 
+            case UI_CMD_AAN: {
+                aan_state_t *aan = aan_for_id(cmd.motor_id);
+                if (aan) {
+                    aan->enabled = true;
+                    aan->assisting = false;
+                    aan->assist_u = 0.0f;
+                    aan->start_deg = cmd.aan_start_deg;
+                    aan->end_deg   = cmd.aan_end_deg;
+                    aan->duration_s = (cmd.aan_duration_s > 0.05f) ? cmd.aan_duration_s : 0.05f;
+                    aan->t0 = get_absolute_time();
+                    printf("AAN START id=%u start=%.2f end=%.2f dur=%.2f\n",
+                        cmd.motor_id, cmd.aan_start_deg, cmd.aan_end_deg, cmd.aan_duration_s);
+                }
+            } break;
+
+
             default:
                 break;
         }
@@ -751,38 +944,115 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
 {
     absolute_time_t now = get_absolute_time();
 
+    // convenience arrays for iterating motors
     motor_ctl_t *m[2] = { &g_m1, &g_m2 };
-    uint8_t id[2] = { motor1_id, motor2_id };
+    uint8_t      id[2] = { motor1_id, motor2_id };
 
     for (int k = 0; k < 2; k++) {
-        // Optional safety: if UI is silent too long, stop the motor
+
         if (timeout_ms > 0) {
             int64_t dt_us = absolute_time_diff_us(m[k]->last_ui_update, now);
             if (dt_us > (int64_t)timeout_ms * 1000) {
-                m[k]->mode = MCTL_STOP;
+
+                comm_can_set_current(id[k], 0.0f);
+                m[k]->mode = MCTL_IDLE;
             }
         }
 
+        aan_state_t *aan = aan_for_id(id[k]);
+        if (aan && aan->enabled) {
+
+    
+            motor_fb_t *fb = fb_for_id(id[k]);
+            if (!fb || !fb->valid) {
+                continue;
+            }
+
+            // Time since AAN start
+            float t_s = (float)absolute_time_diff_us(aan->t0, now) / 1e6f;
+            if (t_s < 0.0f) t_s = 0.0f;
+
+            float T = (aan->duration_s > 0.05f) ? aan->duration_s : 0.05f;
+
+            float u_now = clamp01(t_s / T);
+            float u_m5  = clamp01((t_s - AAN_DELAY_S) / T);
+
+            float exp_now = lerp_f(aan->start_deg, aan->end_deg, u_now);
+            float exp_m5  = lerp_f(aan->start_deg, aan->end_deg, u_m5);
+            float act     = fb->pos_deg;
+
+            // Trigger: behind by >= 5s (direction-aware), only after 5s elapsed
+            if (!aan->assisting) {
+                if (t_s >= AAN_DELAY_S && behind_by_5s(act, exp_now, exp_m5)) {
+                    aan->assisting = true;
+                    aan->assist_u  = 0.0f;
+
+                    // Use last_ui_update as a generic "last eval time" to avoid adding a field
+                    // (Alternatively, add aan->t_last_eval in aan_state_t)
+                    m[k]->last_ui_update = now;
+
+                    printf("AAN TRIGGER id=%u t=%.2f act=%.2f exp_m5=%.2f exp=%.2f\n",
+                           id[k], t_s, act, exp_m5, exp_now);
+                }
+            }
+
+            if (aan->assisting) {
+                // Ramp assistance smoothly (time-based, not tick-count based)
+                float dt_s = (float)absolute_time_diff_us(m[k]->last_ui_update, now) / 1e6f;
+                if (dt_s < 0.0f) dt_s = 0.0f;
+                if (dt_s > 0.2f) dt_s = 0.2f; // guard
+                m[k]->last_ui_update = now;
+
+                aan->assist_u = clamp01(aan->assist_u + AAN_ASSIST_RAMP_RATE * dt_s);
+
+                // "Slowly assist": set a target that moves gradually from current->end
+                float target = lerp_f(act, aan->end_deg, aan->assist_u);
+
+                servo_set_pos_spd(id[k],
+                                  target,
+                                  (int16_t)AAN_ASSIST_SPD_ERPM,
+                                  (int16_t)AAN_ASSIST_ACC_ERPM_S2);
+            }
+
+            // End conditions: position close enough OR time exceeded with grace
+            if (fabsf(aan->end_deg - act) <= AAN_POS_TOL_DEG ||
+                t_s > (T + AAN_DELAY_S + 2.0f)) {
+
+                printf("AAN DONE id=%u act=%.2f end=%.2f\n", id[k], act, aan->end_deg);
+
+                aan->enabled   = false;
+                aan->assisting = false;
+                aan->assist_u  = 0.0f;
+            }
+
+            // AAN owns the bus for this motor this iteration
+            continue;
+        }
+
         switch (m[k]->mode) {
+
             case MCTL_SPD:
                 comm_can_set_spd(id[k], (float)m[k]->spd_erpm);
                 break;
+
             case MCTL_POS:
                 comm_can_set_pos(id[k], m[k]->pos_deg);
                 break;
+
             case MCTL_PSA:
-                servo_set_pos_spd(id[k], m[k]->pos_deg, m[k]->spd_erpm, m[k]->acc_erpm_s2);
+                servo_set_pos_spd(id[k],
+                                  m[k]->pos_deg,
+                                  m[k]->spd_erpm,
+                                  m[k]->acc_erpm_s2);
                 break;
+
             case MCTL_TRQ:
                 comm_can_set_current(id[k], m[k]->cur_a);
                 break;
-            case MCTL_IDLE:
-                // True idle: do not send any command for this motor
-                break;
 
+            case MCTL_IDLE:
             default:
-                // If something unknown happens, fail safe to IDLE (no commands)
-                m[k]->mode = MCTL_IDLE;
+
                 break;
         }
     }
@@ -790,57 +1060,6 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
 
 
 
-
-
-
-/* ============================================================
- * MIT MODE
- * ============================================================ */
-
-static unsigned int float_to_uint(float x, float min, float max, unsigned bits) {
-    float span = max - min;
-    if (x < min) x = min;
-    if (x > max) x = max;
-    return (unsigned)((x - min) * (((1 << bits) - 1) / span));
-}
-
-#define P_MIN -12.5f
-#define P_MAX  12.5f
-#define V_MIN -45.0f
-#define V_MAX  45.0f
-#define T_MIN -18.0f
-#define T_MAX  18.0f
-#define KP_MIN 0.0f
-#define KP_MAX 500.0f
-#define KD_MIN 0.0f
-#define KD_MAX 5.0f
-
-static void mit_pack_cmd(uint8_t id, float p, float v, float kp, float kd, float t) {
-    uint8_t buf[8];
-
-    int p_i  = float_to_uint(p,  P_MIN,  P_MAX, 16);
-    int v_i  = float_to_uint(v,  V_MIN,  V_MAX, 12);
-    int kp_i = float_to_uint(kp, KP_MIN, KP_MAX, 12);
-    int kd_i = float_to_uint(kd, KD_MIN, KD_MAX, 12);
-    int t_i  = float_to_uint(t,  T_MIN,  T_MAX, 12);
-
-    buf[0] = p_i >> 8;
-    buf[1] = p_i & 0xFF;
-    buf[2] = v_i >> 4;
-    buf[3] = ((v_i & 0xF) << 4) | (kp_i >> 8);
-    buf[4] = kp_i & 0xFF;
-    buf[5] = kd_i >> 4;
-    buf[6] = ((kd_i & 0xF) << 4) | (t_i >> 8);
-    buf[7] = t_i & 0xFF;
-
-    can_frame_t f = {
-        .can_id = id,
-        .can_dlc = 8,
-        .extended = false
-    };
-    memcpy(f.data, buf, 8);
-    can_send(&f);
-}
 
 /* ============================================================
  * MAIN
@@ -891,7 +1110,7 @@ int main(void) {
     while (true) {
 
         ui_poll_and_apply();
-        motor_keepalive_tick(10000);
+        
 
         //comm_can_set_pos(motor1_id, 180);
         //comm_can_set_pos(motor2_id, -90);
@@ -907,8 +1126,11 @@ int main(void) {
             if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
                                 rx.can_id == (0x2900u | motor2_id))) {
                 //servo_decode_and_print(&rx);
+                servo_decode_to_feedback(&rx);
             }
         }
+
+        motor_keepalive_tick(10000);
 
         sleep_ms(10);
 
