@@ -305,7 +305,7 @@ typedef struct {
 
     float aan_start_deg;
     float aan_end_deg;
-    float aan_duration_s;
+    float aan_rpm;
 } ui_cmd_t;
 
 typedef enum {
@@ -359,6 +359,7 @@ typedef struct {
 
     // Assist ramp (slowly increase help)
     float           assist_u;       // 0..1 assistance blending factor
+    float           assist_spd_erpm;
 } aan_state_t;
 
 static aan_state_t g_aan1 = {0};
@@ -373,11 +374,57 @@ static inline aan_state_t *aan_for_id(uint8_t id)
 
 #define AAN_DELAY_S            5.0f
 #define AAN_POS_TOL_DEG        1.0f
-#define AAN_ASSIST_SPD_ERPM    2000
+#define AAN_ASSIST_SPD_ERPM    300
 #define AAN_ASSIST_ACC_ERPM_S2 3000
 
 // How fast assistance ramps up once triggered (per second)
 #define AAN_ASSIST_RAMP_RATE   0.25f   // 0->1 in ~4s
+
+#define POLEPAIR_1 21
+#define POLEPAIR_2 14
+#define MOTOR1_RATIO 10.f
+#define MOTOR2_RATIO 1.0f
+
+#define AAN_RPM_MAX   30.0f
+#define AAN_RPM_MIN   0.1f
+
+static inline float joint_rpm_to_erpm(uint8_t motor_id, float joint_rpm)
+{
+    float pole_pairs = 0.0f;
+    float gear       = 1.0f;
+
+    if (motor_id == motor1_id) { pole_pairs = POLEPAIR_1; gear = MOTOR1_RATIO; }
+    else if (motor_id == motor2_id) { pole_pairs = POLEPAIR_2; gear = MOTOR2_RATIO; }
+    else return 0.0f;
+
+    // ERPM = joint_rpm * gear_ratio * pole_pairs
+    return joint_rpm * gear * pole_pairs;
+}
+
+static inline float erpm_to_joint_rpm(uint8_t motor_id, float erpm)
+{
+    float pole_pairs = 0.0f;
+    float gear       = 1.0f;
+
+    if (motor_id == motor1_id) { pole_pairs = POLEPAIR_1; gear = MOTOR1_RATIO; }
+    else if (motor_id == motor2_id) { pole_pairs = POLEPAIR_2; gear = MOTOR2_RATIO; }
+    else return 0.0f;
+
+    // joint_rpm = ERPM / (pole_pairs * gear_ratio)
+    return erpm / (pole_pairs * gear);
+}
+
+static inline float duration_by_rpm(float start_deg, float end_deg, float rpm) {
+    
+    float delta_deg = fabsf(end_deg - start_deg);
+    float revolutions = delta_deg / 360.0f;
+
+    float rps = fabsf(rpm) / 60.0f;
+    if (rps < 1e-6f) return 0.0f; // avoid divide by zero
+
+    return revolutions / rps;
+
+}
 
 static inline uint32_t time_ms_now(void)
 {
@@ -834,13 +881,14 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
         return true;
     }
 
-    float s_deg=0.0f, e_deg=0.0f, dur_s=0.0f;
-    if (sscanf(line, "AAN %u %f %f %f", &id_u, &s_deg, &e_deg, &dur_s) == 4) {
+    // AAN <id> <starting_deg> <end_deg> <rpm>
+    float s_deg=0.0f, e_deg=0.0f, rpm=0.0f;
+    if (sscanf(line, "AAN %u %f %f %f", &id_u, &s_deg, &e_deg, &rpm) == 4) {
         cmd->type = UI_CMD_AAN;
         cmd->motor_id = (uint8_t)id_u;
         cmd->aan_start_deg = s_deg;
         cmd->aan_end_deg = e_deg;
-        cmd->aan_duration_s = dur_s;
+        cmd->aan_rpm = rpm;
         return true;
     }
 
@@ -961,15 +1009,38 @@ static void ui_poll_and_apply(void)
             case UI_CMD_AAN: {
                 aan_state_t *aan = aan_for_id(cmd.motor_id);
                 if (aan) {
-                    aan->enabled = true;
+                    aan->enabled   = true;
                     aan->assisting = false;
-                    aan->assist_u = 0.0f;
+                    aan->assist_u  = 0.0f;
+
                     aan->start_deg = cmd.aan_start_deg;
                     aan->end_deg   = cmd.aan_end_deg;
-                    aan->duration_s = (cmd.aan_duration_s > 0.05f) ? cmd.aan_duration_s : 0.05f;
+
+                    // 180 deg in 1 s => 30 RPM max (JOINT rpm)
+                    const float RPM_MAX = 30.0f;
+                    const float RPM_MIN = 0.1f;   // avoid division by zero / nonsense
+
+                    // Declare once
+                    float rpm_cmd = cmd.aan_rpm;
+
+                    // Clamp magnitude (keep sign)
+                    float rpm_abs = fabsf(rpm_cmd);
+                    if (rpm_abs > RPM_MAX) rpm_cmd = (rpm_cmd < 0.0f) ? -RPM_MAX : RPM_MAX;
+                    if (rpm_abs < RPM_MIN) rpm_cmd = (rpm_cmd < 0.0f) ? -RPM_MIN : RPM_MIN;
+
+                    // Duration computed with CLAMPED rpm
+                    float dur = duration_by_rpm(aan->start_deg, aan->end_deg, rpm_cmd);
+                    aan->duration_s = (dur > 0.05f) ? dur : 0.05f;
+
+                    // Convert JOINT rpm -> motor ERPM for servo_set_pos_spd
+                    float erpm_f = joint_rpm_to_erpm(cmd.motor_id, rpm_cmd);
+                    aan->assist_spd_erpm = clamp_i16((int32_t)lroundf(erpm_f));
+
                     aan->t0 = get_absolute_time();
-                    printf("AAN START id=%u start=%.2f end=%.2f dur=%.2f\n",
-                        cmd.motor_id, cmd.aan_start_deg, cmd.aan_end_deg, cmd.aan_duration_s);
+
+                    printf("AAN START id=%u start=%.2f end=%.2f rpm_req=%.2f rpm_used=%.2f dur=%.3f spd_erpm=%d\n",
+                        cmd.motor_id, aan->start_deg, aan->end_deg, cmd.aan_rpm, rpm_cmd,
+                        aan->duration_s, aan->assist_spd_erpm);
                 }
             } break;
 
@@ -1068,7 +1139,7 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
 
                 servo_set_pos_spd(id[k],
                                   target,
-                                  (int16_t)AAN_ASSIST_SPD_ERPM,
+                                  (int16_t)aan->assist_spd_erpm,
                                   (int16_t)AAN_ASSIST_ACC_ERPM_S2);
             }
 
@@ -1261,7 +1332,7 @@ int main(void) {
             }
         }
 
-        motor_keepalive_tick(10000);
+        motor_keepalive_tick(60000);
 
         sleep_ms(10);
 

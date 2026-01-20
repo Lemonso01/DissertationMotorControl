@@ -691,7 +691,7 @@ class MainWindow(QtWidgets.QMainWindow):
             ("PosSpd Acc (deg/s²)", 'posspd_a'),
             ("AAN Start (°)", "aan_s"),
             ("AAN End (°)", "aan_e"),
-            ("AAN Dur (s)", "aan_d"),
+            ("AAN RPM (RPM)", "aan_d"),
         ]
 
         w1 = {}
@@ -746,7 +746,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         layout.addRow("Start (°):", le_start)
         layout.addRow("End (°):",   le_end)
-        layout.addRow("Duration (s):", le_dur)
+        layout.addRow("Speed (RPM):", le_dur)
 
         btn_box = QtWidgets.QDialogButtonBox(
             QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
