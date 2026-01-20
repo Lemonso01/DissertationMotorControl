@@ -27,8 +27,8 @@ SIM_SPEED_DEG_PER_S    = 60.0   # 10 rpm = 60 deg/s
 SIM_TICK_S             = 0.02   # 50 Hz updates
 
 # Torque constants (Nm/A) for each motor (used if torque not provided)
-KT_NM_PER_A_1          = 0.08   # Motor 1 (Elbow)
-KT_NM_PER_A_2          = 0.08   # Motor 2 (Wrist)
+KT_NM_PER_A_1          = 0.123   # Motor 1 (Elbow)
+KT_NM_PER_A_2          = 0.078   # Motor 2 (Wrist)
 
 # Drawing sizes
 ELBOW_L_UPPER          = 110  # px
@@ -436,7 +436,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         btn_origin = QtWidgets.QPushButton("Set Origin")
         btn_origin.setStyleSheet("background-color: #1976d2; color: white;")
-        btn_origin.clicked.connect(lambda: self.send_cmd("SETORG"))
+        btn_origin.clicked.connect(lambda: self.send_cmd("ORIGIN 1"))
         left_layout.addWidget(btn_origin, 1, 0, 1, 3)
 
         btn_calib = QtWidgets.QPushButton("Calibrate")
@@ -504,7 +504,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_current_1, row_m1, 0); row_m1 += 1
 
         btn_brake_1 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRAKE {self.p(1,'brake'):.2f}"))
+        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
 
         btn_posspd_1 = QtWidgets.QPushButton("PSA")
@@ -557,7 +557,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_current_2, row_m2, 2); row_m2 += 1
 
         btn_brake_2 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRAKE {self.p(2,'brake'):.2f}"))
+        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
         left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
 
         btn_posspd_2 = QtWidgets.QPushButton("PSA")
@@ -898,47 +898,62 @@ class MainWindow(QtWidgets.QMainWindow):
     # ---------- Status line parsing ----------
     def parse_status_line(self, line: str):
         """
-        Supports:
-          SERVO,<motor_id>,<pos_deg>,<spd_erpm>,<cur_a>,<temp_c>,<err>
+        Expected format (timestamped):
+        <t_ms>,SERVO,<motor_id>,<pos_deg>,<spd_erpm>,<cur_a>,<temp_c>,<err>
+
+        We ignore everything before and including "SERVO", then parse from motor_id onwards.
+        Example:
+        123456,SERVO,1,10.0,1200,2.50,38,0
         """
         s = line.strip()
         if not s:
             return None
 
-        if s.upper().startswith("SERVO"):
-            parts = [p.strip() for p in s.split(",")]
-            if len(parts) != 7:
-                return None
+        parts = [p.strip() for p in s.split(",")]
 
-            try:
-                motor_id = int(parts[1])
-                pos_deg  = float(parts[2])
-                spd_erpm = float(parts[3])
-                cur_a    = float(parts[4])
-                temp_c   = float(parts[5])
-                err      = int(parts[6])
-            except ValueError:
-                return None
+        # Find "SERVO" token anywhere in the line
+        try:
+            i = next(idx for idx, tok in enumerate(parts) if tok.upper() == "SERVO")
+        except StopIteration:
+            return None
 
-            if motor_id == 1:
-                return {
-                    "elbow_deg": pos_deg,
-                    "spd1": spd_erpm,
-                    "tmp1": temp_c,
-                    "err1": err,
-                    "t1": cur_a * KT_NM_PER_A_1
-                }
+        # Need: motor_id, pos, spd, cur, temp, err -> 6 fields after SERVO
+        if len(parts) < i + 1 + 6:
+            return None
 
-            if motor_id == 2:
-                return {
-                    "wrist_deg": max(-90.0, min(90.0, pos_deg)),
-                    "spd2": spd_erpm,
-                    "tmp2": temp_c,
-                    "err2": err,
-                    "t2": cur_a * KT_NM_PER_A_2
-                }
+        try:
+            motor_id = int(parts[i + 1])
+            pos_deg  = float(parts[i + 2])
+            spd_erpm = float(parts[i + 3])
+            cur_a    = float(parts[i + 4])
+            temp_c   = float(parts[i + 5])
+            err      = int(parts[i + 6])
+        except ValueError:
+            return None
 
-        return None
+        status = {}
+
+        if motor_id == 1:
+            status["elbow_deg"] = pos_deg
+            status["spd1"]      = spd_erpm
+            status["tmp1"]      = temp_c
+            status["err1"]      = err
+            status["t1"]        = cur_a * KT_NM_PER_A_1
+
+        elif motor_id == 2:
+            status["wrist_deg"] = max(-90.0, min(90.0, pos_deg))
+            status["spd2"]      = spd_erpm
+            status["tmp2"]      = temp_c
+            status["err2"]      = err
+            status["t2"]        = cur_a * KT_NM_PER_A_2
+
+        else:
+            return None
+
+        return status
+
+
+
 
     @QtCore.Slot(object)
     def apply_status_update(self, status: object):

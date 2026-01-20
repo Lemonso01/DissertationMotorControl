@@ -20,6 +20,15 @@ uint8_t motor1_id = 1, motor2_id = 2;
 
 
 /* ============================================================
+ * SWITCH END STOP DEFENITIONS
+ * ============================================================ */
+
+#define WRIST_STOP_LEFT     15
+#define WRIST_STOP_RIGHT    14
+#define FOREARM_STOP_TOP    13
+#define FOREARM_STOP_BOTTOM 12
+
+/* ============================================================
  * MCP2515 DEFINITIONS
  * ============================================================ */
 
@@ -278,7 +287,8 @@ typedef enum {
     UI_CMD_STOP,
     UI_CMD_STOPALL,
     UI_CMD_TRQ,
-    UI_CMD_AAN
+    UI_CMD_AAN,
+    UI_CMD_BRK
 } ui_cmd_type_t;
 
 typedef struct {
@@ -290,6 +300,7 @@ typedef struct {
     int16_t acc_erpm_s2;
     uint8_t origin_mode;
     float current_a;
+    float current_brk;
 
     float aan_start_deg;
     float aan_end_deg;
@@ -303,7 +314,8 @@ typedef enum {
     MCTL_PSA,
     MCTL_TRQ,
     MCTL_STOP,
-    MCTL_IDLE
+    MCTL_IDLE,
+    MCTL_BRK
 } motor_ctl_mode_t;
 
 typedef struct {
@@ -359,7 +371,7 @@ static inline aan_state_t *aan_for_id(uint8_t id)
 }
 
 #define AAN_DELAY_S            5.0f
-#define AAN_POS_TOL_DEG        2.0f
+#define AAN_POS_TOL_DEG        1.0f
 #define AAN_ASSIST_SPD_ERPM    2000
 #define AAN_ASSIST_ACC_ERPM_S2 3000
 
@@ -434,12 +446,26 @@ static inline float clamp_f(float x, float lo, float hi)
     return x;
 }
 
+static void comm_can_set_current_brake(uint8_t motor_id, float brake_current_a)
+{
+    uint8_t buf[4];
+    int32_t idx = 0;
+
+    brake_current_a = clamp_f(brake_current_a, 0.0f, 5.0f);
+
+    buffer_append_int32(buf, (int32_t)(brake_current_a * 1000.0f), &idx);
+
+    uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_CURRENT_BRAKE << 8);
+    (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
+}
+
+
 static void comm_can_set_current(uint8_t motor_id, float current_a)
 {
     uint8_t buf[4];
     int32_t idx = 0;
 
-    current_a = clamp_f(current_a, -5.0f, 5.0f);
+    current_a = clamp_f(current_a, -2.0f, 2.0f);
 
     buffer_append_int32(buf, (int32_t)(current_a * 1000.0f), &idx);
 
@@ -473,16 +499,17 @@ static void mcp2515_bit_modify(uint8_t reg, uint8_t mask, uint8_t data)
 static bool mcp2515_receive_frame(can_frame_t *frm)
 {
     uint8_t status = mcp2515_read_status();
+    uint8_t canintf = mcp2515_read_reg(0x2C);
 
     uint8_t addr;
     bool from_rxb0 = false;
 
     // RX0IF is indicated via status bits; common approach:
     // If either RX buffer has data, pick one.
-    if (status & 0x01) {          // RX0IF
+    if (canintf & 0x01) {          // RX0IF
         addr = 0x61;              // RXB0SIDH register address
         from_rxb0 = true;
-    } else if (status & 0x02) {   // RX1IF
+    } else if (canintf & 0x02) {   // RX1IF
         addr = 0x71;              // RXB1SIDH
         from_rxb0 = false;
     } else {
@@ -777,9 +804,9 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
 
     // ORG <id> <mode>
     unsigned mode_u = 0;
-    if (strcmp(line, "ORIGIN") == 0) {
+    if (sscanf(line, "ORIGIN %u", &mode_u) == 1) {
         cmd->type = UI_CMD_ORG;
-        cmd->origin_mode = 0;
+        cmd->origin_mode = (uint8_t)mode_u;
         return true;
     }
 
@@ -806,6 +833,15 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
         cmd->aan_start_deg = s_deg;
         cmd->aan_end_deg = e_deg;
         cmd->aan_duration_s = dur_s;
+        return true;
+    }
+
+    // BRK <id> <brake_current_A>
+    float brk_a = 0.0f;
+    if (sscanf(line, "BRK %u %f", &id_u, &brk_a) == 2) {
+        cmd->type = UI_CMD_BRK;
+        cmd->motor_id = (uint8_t)id_u;
+        cmd->current_brk = brk_a;
         return true;
     }
 
@@ -883,6 +919,7 @@ static void ui_poll_and_apply(void)
             case UI_CMD_STOP: {
 
                 comm_can_set_current(cmd.motor_id, 0.0f);
+                comm_can_set_current_brake(cmd.motor_id, 0.0f);
                 aan_state_t *aan = aan_for_id(cmd.motor_id);
                 if (aan){
                     aan->enabled = false; aan->assisting = false; aan->assist_u = 0.0f;
@@ -900,6 +937,9 @@ static void ui_poll_and_apply(void)
                 comm_can_set_current(motor1_id, 0.0f);
                 comm_can_set_current(motor2_id, 0.0f);
 
+                comm_can_set_current_brake(motor1_id, 0.0f);
+                comm_can_set_current_brake(motor2_id, 0.0f);
+
                 g_aan1.enabled = g_aan1.assisting = false; g_aan1.assist_u = 0.0f;
                 g_aan2.enabled = g_aan2.assisting = false; g_aan2.assist_u = 0.0f;
 
@@ -908,14 +948,6 @@ static void ui_poll_and_apply(void)
                 g_m1.last_ui_update = get_absolute_time();
                 g_m2.last_ui_update = get_absolute_time();
                 printf("TX: STOPALL\n");
-                break;
-
-            case UI_CMD_ORG:
-                // One-shot, apply to both motors
-                comm_can_set_origin(motor1_id, cmd.origin_mode);
-                comm_can_set_origin(motor2_id, cmd.origin_mode);
-                printf("UI: ORG both motors mode=%u (ids %u,%u)\n",
-                       cmd.origin_mode, motor1_id, motor2_id);
                 break;
 
             case UI_CMD_AAN: {
@@ -932,6 +964,24 @@ static void ui_poll_and_apply(void)
                         cmd.motor_id, cmd.aan_start_deg, cmd.aan_end_deg, cmd.aan_duration_s);
                 }
             } break;
+
+            case UI_CMD_ORG:
+                // One-shot, apply to both motors
+                comm_can_set_origin(motor1_id, cmd.origin_mode);
+                comm_can_set_origin(motor2_id, cmd.origin_mode);
+                printf("UI: ORG both motors mode=%u (ids %u,%u)\n",
+                       cmd.origin_mode, motor1_id, motor2_id);
+                break;
+
+            case UI_CMD_BRK:
+                if (ctl) {
+                    ctl->mode = MCTL_BRK;
+                    ctl->cur_a = cmd.current_brk;
+                    ctl->last_ui_update = get_absolute_time();
+                }
+                printf("TX: BRK %u %.3f\n", cmd.motor_id, cmd.current_brk);
+                break;
+
 
 
             default:
@@ -1050,6 +1100,10 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
                 comm_can_set_current(id[k], m[k]->cur_a);
                 break;
 
+            case MCTL_BRK:
+                comm_can_set_current_brake(id[k], m[k]->cur_a);
+                break;
+
             case MCTL_IDLE:
             default:
 
@@ -1058,7 +1112,26 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
     }
 }
 
+/* ============================================================
+ * SWITCHES
+ * ============================================================ */
 
+void switch_init(void) {
+    gpio_init(WRIST_STOP_LEFT);
+    gpio_init(WRIST_STOP_RIGHT);
+    gpio_init(FOREARM_STOP_TOP);
+    gpio_init(FOREARM_STOP_BOTTOM);
+
+    gpio_set_dir(WRIST_STOP_LEFT, GPIO_IN);
+    gpio_set_dir(WRIST_STOP_RIGHT, GPIO_IN);
+    gpio_set_dir(FOREARM_STOP_TOP, GPIO_IN);
+    gpio_set_dir(FOREARM_STOP_BOTTOM, GPIO_IN);
+
+    gpio_pull_up(WRIST_STOP_LEFT);
+    gpio_pull_up(WRIST_STOP_RIGHT);
+    gpio_pull_up(FOREARM_STOP_TOP);
+    gpio_pull_up(FOREARM_STOP_BOTTOM);
+}
 
 
 /* ============================================================
@@ -1067,7 +1140,8 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
 
 int main(void) {
     stdio_init_all();
-    sleep_ms(10000);
+    sleep_ms(15000);
+
 
     spi_init(MCP2515_SPI, 1000 * 1000);
     gpio_set_function(MCP2515_SCK_PIN,  GPIO_FUNC_SPI);
@@ -1078,6 +1152,11 @@ int main(void) {
     gpio_set_dir(MCP2515_CS_PIN, GPIO_OUT);
     gpio_put(MCP2515_CS_PIN, 1);
 
+    printf("CubeMars CAN test start\n");
+
+    mcp2515_init();
+
+    printf("MCP2515 Init Successful\n");
 
     // Optional: disable filters/masks (often not strictly required if RXM=11)
     mcp2515_write_reg(0x20, 0x00); // RXM0SIDH
@@ -1090,14 +1169,14 @@ int main(void) {
     mcp2515_write_reg(0x26, 0x00); // RXM1EID8
     mcp2515_write_reg(0x27, 0x00); // RXM1EID0
 
-
-    printf("CubeMars CAN test start\n");
-
-    mcp2515_init();
+    printf("MCP2515 all masks disabled.\n");
 
     // Accept all messages (standard + extended) into RXB0 and RXB1
     mcp2515_write_reg(0x60, 0x60); // RXB0CTRL: receive any
     mcp2515_write_reg(0x70, 0x60); // RXB1CTRL: receive any
+    mcp2515_write_reg(0x2C, 0x00); // clear CANINTF
+
+    printf("MCP2515 Buffers recieve any\n");
 
     can_frame_t rx1, rx2;
 
@@ -1105,6 +1184,8 @@ int main(void) {
 
     //comm_can_set_origin(motor1_id, 1);
     //comm_can_set_origin(motor2_id, 1);
+
+    absolute_time_t t_dbg = make_timeout_time_ms(1000);
 
 
     while (true) {
@@ -1118,14 +1199,30 @@ int main(void) {
         //servo_set_pos_spd(motor1_id, 180.0f, 2000, 800);
         //servo_set_pos_spd(motor2_id, -90.0f, 4000, 20000);
 
+        /*if (absolute_time_diff_us(get_absolute_time(), t_dbg) <= 0) {
+            t_dbg = make_timeout_time_ms(1000);
+
+            uint8_t canstat = mcp2515_read_reg(0x0E);
+            uint8_t eflg    = mcp2515_read_reg(0x2D);
+            uint8_t tec     = mcp2515_read_reg(0x1C);
+            uint8_t rec     = mcp2515_read_reg(0x1D);
+
+            printf("CANSTAT=0x%02X EFLG=0x%02X TEC=%u REC=%u\n", canstat, eflg, tec, rec);
+
+            uint8_t canintf = mcp2515_read_reg(0x2C);   // CANINTF
+            uint8_t status  = mcp2515_read_status();    // READ_STATUS
+            printf("CANINTF=0x%02X READ_STATUS=0x%02X\n", canintf, status);
+
+        }*/
+
         can_frame_t rx;
         while (mcp2515_receive_frame(&rx)) {
 
-            print_can_frame(&rx);
+            //print_can_frame(&rx);
 
             if (rx.extended && (rx.can_id == (0x2900u | motor1_id) ||
                                 rx.can_id == (0x2900u | motor2_id))) {
-                //servo_decode_and_print(&rx);
+                servo_decode_and_print(&rx);
                 servo_decode_to_feedback(&rx);
             }
         }
