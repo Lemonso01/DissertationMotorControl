@@ -1149,8 +1149,8 @@ static volatile bool wrist_stop_latched   = false;
 static volatile bool forearm_stop_latched = false;
 
 static inline void update_limit_stops(void) {
-    bool wrist_trip   = sw_tripped(WRIST_STOP_LEFT)  || sw_tripped(WRIST_STOP_RIGHT);
-    bool forearm_trip = sw_tripped(FOREARM_STOP_TOP) || sw_tripped(FOREARM_STOP_BOTTOM);
+    bool wrist_trip   = switch_tripped(WRIST_STOP_LEFT)  || switch_tripped(WRIST_STOP_RIGHT);
+    bool forearm_trip = switch_tripped(FOREARM_STOP_TOP) || switch_tripped(FOREARM_STOP_BOTTOM);
 
     if (wrist_trip)   wrist_stop_latched   = true;
     if (forearm_trip) forearm_stop_latched = true;
