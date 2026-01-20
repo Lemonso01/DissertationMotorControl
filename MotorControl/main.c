@@ -28,6 +28,7 @@ uint8_t motor1_id = 1, motor2_id = 2;
 #define FOREARM_STOP_TOP    13
 #define FOREARM_STOP_BOTTOM 12
 
+
 /* ============================================================
  * MCP2515 DEFINITIONS
  * ============================================================ */
@@ -471,6 +472,13 @@ static void comm_can_set_current(uint8_t motor_id, float current_a)
 
     uint32_t eid = motor_id | ((uint32_t)CAN_PACKET_SET_CURRENT << 8);
     (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
+}
+
+void stop_motor(uint8_t motor_id) {
+
+    comm_can_set_current(motor_id, 0.0f);
+    comm_can_set_current_brake(motor_id, 0.0f);
+
 }
 
 static uint8_t mcp2515_read_status(void)
@@ -1133,6 +1141,29 @@ void switch_init(void) {
     gpio_pull_up(FOREARM_STOP_BOTTOM);
 }
 
+static inline bool switch_tripped(uint pin) {
+    return !gpio_get(pin);  // LOW means NO opened 
+}
+
+static volatile bool wrist_stop_latched   = false;
+static volatile bool forearm_stop_latched = false;
+
+static inline void update_limit_stops(void) {
+    bool wrist_trip   = sw_tripped(WRIST_STOP_LEFT)  || sw_tripped(WRIST_STOP_RIGHT);
+    bool forearm_trip = sw_tripped(FOREARM_STOP_TOP) || sw_tripped(FOREARM_STOP_BOTTOM);
+
+    if (wrist_trip)   wrist_stop_latched   = true;
+    if (forearm_trip) forearm_stop_latched = true;
+
+    if (wrist_stop_latched) {
+        stop_motor(motor2_id);
+    }
+    if (forearm_stop_latched) {
+        stop_motor(motor1_id);
+    }
+}
+
+
 
 /* ============================================================
  * MAIN
@@ -1140,6 +1171,8 @@ void switch_init(void) {
 
 int main(void) {
     stdio_init_all();
+    switch_init();
+
     sleep_ms(15000);
 
 
@@ -1191,6 +1224,7 @@ int main(void) {
     while (true) {
 
         ui_poll_and_apply();
+        update_limit_stops();
         
 
         //comm_can_set_pos(motor1_id, 180);
