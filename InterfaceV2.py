@@ -335,7 +335,8 @@ class MainWindow(QtWidgets.QMainWindow):
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
             posspd_p=0.0, posspd_v=0.0, posspd_a=0.0,
-            aan_s=0.0, aan_e=0.0, aan_d=5.0
+            aan_s=0.0, aan_e=0.0, aan_d=5.0,
+            res=0.0
         )
         self.params_m = {
             1: dict(base_params),
@@ -364,6 +365,24 @@ class MainWindow(QtWidgets.QMainWindow):
         threading.Thread(target=self.reader, daemon=True).start()
         if STATUS_POLL_ENABLED:
             threading.Thread(target=self.status_poller, daemon=True).start()
+
+
+    def kt(self, motor_id: int) -> float:
+        mid = 1 if int(motor_id) == 1 else 2
+        return KT_NM_PER_A_1 if mid == 1 else KT_NM_PER_A_2
+
+    def resist_current_from_user_input(self, motor_id: int) -> float:
+        """
+        User enters Resist as torque (Nm). Convert to current (A) for BRK command:
+          I = tau / Kt
+        """
+        mid = 1 if int(motor_id) == 1 else 2
+        tau_nm = float(self.params_m[mid]["brake"])  # reuse existing 'brake' field as "Resist torque"
+        kt = self.kt(mid)
+        if kt <= 0:
+            return 0.0
+        return tau_nm / kt
+
 
     # ---------- Serial init ----------
     def _init_serial(self):
@@ -526,7 +545,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_auto_1, row_m1, 0); row_m1 += 1
 
         btn_resist_1 = QtWidgets.QPushButton("Resist")
-        btn_resist_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
+        btn_resist_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}"))
         left_layout.addWidget(btn_resist_1, row_m1, 0); row_m1 += 1
 
         btn_sim_1 = QtWidgets.QPushButton("Simulate Move")
@@ -578,7 +597,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_auto_2, row_m2, 2); row_m2 += 1
 
         btn_resist_2 = QtWidgets.QPushButton("Resist")
-        btn_resist_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.p(2,'torque'):.2f}"))
+        btn_resist_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
         left_layout.addWidget(btn_resist_2, row_m2, 2); row_m2 += 1
 
         btn_sim_2 = QtWidgets.QPushButton("Simulate Move")
@@ -640,7 +659,7 @@ class MainWindow(QtWidgets.QMainWindow):
         status_layout.addWidget(self.spd1_label, row_s, 1)
         status_layout.addWidget(self.spd2_label, row_s, 2); row_s += 1
 
-        status_layout.addWidget(QtWidgets.QLabel("Torque (Nm):"), row_s, 0, alignment=QtCore.Qt.AlignRight)
+        status_layout.addWidget(QtWidgets.QLabel("Current (A):"), row_s, 0, alignment=QtCore.Qt.AlignRight)
         status_layout.addWidget(self.trq1_label, row_s, 1)
         status_layout.addWidget(self.trq2_label, row_s, 2); row_s += 1
 
@@ -692,6 +711,7 @@ class MainWindow(QtWidgets.QMainWindow):
             ("AAN Start (°)", "aan_s"),
             ("AAN End (°)", "aan_e"),
             ("AAN RPM (RPM)", "aan_d"),
+            ("Resist (Nm)", "res"),
         ]
 
         w1 = {}
@@ -938,14 +958,14 @@ class MainWindow(QtWidgets.QMainWindow):
             status["spd1"]      = spd_erpm
             status["tmp1"]      = temp_c
             status["err1"]      = err
-            status["t1"]        = cur_a * KT_NM_PER_A_1
+            status["t1"]        = cur_a 
 
         elif motor_id == 2:
-            status["wrist_deg"] = max(-90.0, min(90.0, pos_deg))
+            status["wrist_deg"] = pos_deg
             status["spd2"]      = spd_erpm
             status["tmp2"]      = temp_c
             status["err2"]      = err
-            status["t2"]        = cur_a * KT_NM_PER_A_2
+            status["t2"]        = cur_a 
 
         else:
             return None

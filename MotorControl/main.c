@@ -383,7 +383,7 @@ static inline aan_state_t *aan_for_id(uint8_t id)
 #define POLEPAIR_1 21
 #define POLEPAIR_2 14
 #define MOTOR1_RATIO 10.f
-#define MOTOR2_RATIO 1.0f
+#define MOTOR2_RATIO 6.0f
 
 #define AAN_RPM_MAX   30.0f
 #define AAN_RPM_MIN   0.1f
@@ -499,7 +499,7 @@ static void comm_can_set_current_brake(uint8_t motor_id, float brake_current_a)
     uint8_t buf[4];
     int32_t idx = 0;
 
-    brake_current_a = clamp_f(brake_current_a, 0.0f, 5.0f);
+    brake_current_a = clamp_f(brake_current_a, 0.0f, 10.0f);
 
     buffer_append_int32(buf, (int32_t)(brake_current_a * 1000.0f), &idx);
 
@@ -1144,8 +1144,7 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
             }
 
             // End conditions: position close enough OR time exceeded with grace
-            if (fabsf(aan->end_deg - act) <= AAN_POS_TOL_DEG ||
-                t_s > (T + AAN_DELAY_S + 2.0f)) {
+            if (fabsf(aan->end_deg - act) <= AAN_POS_TOL_DEG) {
 
                 printf("AAN DONE id=%u act=%.2f end=%.2f\n", id[k], act, aan->end_deg);
 
@@ -1191,6 +1190,29 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
     }
 }
 
+static void hard_stop_motor(uint8_t motor_id)
+{
+
+    comm_can_set_current(motor_id, 0.0f);
+    comm_can_set_current_brake(motor_id, 0.0f);
+
+    aan_state_t *aan = aan_for_id(motor_id);
+    if (aan) {
+        aan->enabled   = false;
+        aan->assisting = false;
+        aan->assist_u  = 0.0f;
+    }
+
+    motor_ctl_t *ctl = ctl_for_id(motor_id);
+    if (ctl) {
+        ctl->mode = MCTL_IDLE;
+        ctl->spd_erpm = 0;
+        ctl->acc_erpm_s2 = 0;
+        ctl->cur_a = 0.0f;
+        ctl->last_ui_update = get_absolute_time();
+    }
+}
+
 /* ============================================================
  * SWITCHES
  * ============================================================ */
@@ -1213,24 +1235,40 @@ void switch_init(void) {
 }
 
 static inline bool switch_tripped(uint pin) {
-    return !gpio_get(pin);  // LOW means NO opened 
+    return gpio_get(pin);  
 }
 
 static volatile bool wrist_stop_latched   = false;
 static volatile bool forearm_stop_latched = false;
 
 static inline void update_limit_stops(void) {
-    bool wrist_trip   = switch_tripped(WRIST_STOP_LEFT)  || switch_tripped(WRIST_STOP_RIGHT);
-    bool forearm_trip = switch_tripped(FOREARM_STOP_TOP) || switch_tripped(FOREARM_STOP_BOTTOM);
 
-    if (wrist_trip)   wrist_stop_latched   = true;
-    if (forearm_trip) forearm_stop_latched = true;
+    bool wrist_trip_left = false;
+    bool wrist_trip_right = false;
+    bool forearm_trip_top = false;
+    bool forearm_trip_bottom = false;
 
-    if (wrist_stop_latched) {
-        stop_motor(motor2_id);
+    wrist_trip_left = switch_tripped(WRIST_STOP_LEFT);  
+    wrist_trip_right = switch_tripped(WRIST_STOP_RIGHT);
+    forearm_trip_top = switch_tripped(FOREARM_STOP_TOP);
+    forearm_trip_bottom = switch_tripped(FOREARM_STOP_BOTTOM);
+
+
+    if (wrist_trip_left) {
+        hard_stop_motor(motor2_id);
+        printf("Wrist Left End-stop trigeered. Motor %d stopped.\n", motor2_id);
     }
-    if (forearm_stop_latched) {
-        stop_motor(motor1_id);
+    if (wrist_trip_right) {
+        hard_stop_motor(motor2_id);
+        printf("Wrist Right End-stop trigeered. Motor %d stopped.\n", motor2_id);
+    }
+    if (forearm_trip_top) {
+        hard_stop_motor(motor1_id);
+        printf("Elbow Top End-stop trigeered. Motor %d stopped.\n", motor1_id);
+    }
+    if (forearm_trip_bottom) {
+        hard_stop_motor(motor1_id);
+        printf("Elbow Bottom End-stop trigeered. Motor %d stopped.\n", motor1_id);
     }
 }
 
@@ -1243,6 +1281,7 @@ static inline void update_limit_stops(void) {
 int main(void) {
     stdio_init_all();
     switch_init();
+
 
     sleep_ms(15000);
 
@@ -1296,6 +1335,7 @@ int main(void) {
 
         ui_poll_and_apply();
         update_limit_stops();
+
         
 
         //comm_can_set_pos(motor1_id, 180);
