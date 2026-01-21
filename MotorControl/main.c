@@ -297,7 +297,7 @@ typedef struct {
     uint8_t motor_id;
 
     float   pos_deg;
-    int16_t spd_erpm;
+    int16_t spd_rpm;
     int16_t acc_erpm_s2;
     uint8_t origin_mode;
     float current_a;
@@ -322,6 +322,7 @@ typedef enum {
 typedef struct {
     motor_ctl_mode_t mode;
     float   pos_deg;
+    int16_t spd_rpm;
     int16_t spd_erpm;
     int16_t acc_erpm_s2;
     float   cur_a;
@@ -827,13 +828,13 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
         return true;
     }
 
-    // SPD <id> <erpm>
+    // SPD <id> <rpm>
     unsigned id_u = 0;
     int spd_i = 0;
     if (sscanf(line, "RPM %u %d", &id_u, &spd_i) == 2) {
         cmd->type = UI_CMD_SPD;
         cmd->motor_id = (uint8_t)id_u;
-        cmd->spd_erpm = (int16_t)spd_i;
+        cmd->spd_rpm = (int16_t)spd_i;
         return true;
     }
 
@@ -852,7 +853,7 @@ static bool ui_parse_command(const char *line, ui_cmd_t *cmd)
         cmd->type = UI_CMD_PSA;
         cmd->motor_id = (uint8_t)id_u;
         cmd->pos_deg = pos_f;
-        cmd->spd_erpm = spd_f;
+        cmd->spd_rpm = spd_f;
         cmd->acc_erpm_s2 = acc_f;
         return true;
     }
@@ -936,10 +937,21 @@ static void ui_poll_and_apply(void)
             case UI_CMD_SPD:
                 if (ctl) {
                     ctl->mode = MCTL_SPD;
-                    ctl->spd_erpm = cmd.spd_erpm;
+
+                    float rpm_cmd = cmd.spd_rpm;
+
+                    // Clamp
+                    float rpm_abs = fabsf(rpm_cmd);
+                    if (rpm_abs > AAN_RPM_MAX) rpm_cmd = (rpm_cmd < 0.0f) ? -AAN_RPM_MAX : AAN_RPM_MAX;
+                    if (rpm_abs < AAN_RPM_MIN) rpm_cmd = (rpm_cmd < 0.0f) ? -AAN_RPM_MIN : AAN_RPM_MIN;
+
+                    float erpm_f = joint_rpm_to_erpm(cmd.motor_id, rpm_cmd);
+
+                    ctl->spd_erpm = clamp_i16((int32_t)lroundf(erpm_f));
+
                     ctl->last_ui_update = get_absolute_time();
                 }
-                printf("TX: SPD %u %d\n", cmd.motor_id, cmd.spd_erpm);
+                printf("TX: SPD %u %d\n", cmd.motor_id, cmd.spd_rpm);
                 break;
 
             case UI_CMD_POS:
@@ -955,12 +967,22 @@ static void ui_poll_and_apply(void)
                 if (ctl) {
                     ctl->mode = MCTL_PSA;
                     ctl->pos_deg = cmd.pos_deg;
-                    ctl->spd_erpm = cmd.spd_erpm;
+                    
+                    float rpm_cmd = cmd.spd_rpm;
+
+                    // Clamp
+                    float rpm_abs = fabsf(rpm_cmd);
+                    if (rpm_abs > AAN_RPM_MAX) rpm_cmd = (rpm_cmd < 0.0f) ? -AAN_RPM_MAX : AAN_RPM_MAX;
+                    if (rpm_abs < AAN_RPM_MIN) rpm_cmd = (rpm_cmd < 0.0f) ? -AAN_RPM_MIN : AAN_RPM_MIN;
+
+                    float erpm_f = joint_rpm_to_erpm(cmd.motor_id, rpm_cmd);
+                    ctl->spd_erpm = clamp_i16((int32_t)lroundf(erpm_f));
+
                     ctl->acc_erpm_s2 = cmd.acc_erpm_s2;
                     ctl->last_ui_update = get_absolute_time();
                 }
                 printf("TX: PSA %u %.2f %d %d\n",
-                       cmd.motor_id, cmd.pos_deg, cmd.spd_erpm, cmd.acc_erpm_s2);
+                       cmd.motor_id, cmd.pos_deg, cmd.spd_rpm, cmd.acc_erpm_s2);
                 break;
 
             case UI_CMD_TRQ:

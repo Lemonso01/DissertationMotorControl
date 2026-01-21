@@ -331,16 +331,24 @@ class MainWindow(QtWidgets.QMainWindow):
         self._init_serial()
 
         # Parameters (per-motor)
-        base_params = dict(
+        base_params_1 = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
-            posspd_p=0.0, posspd_v=0.0, posspd_a=0.0,
+            posspd_p=0.0, posspd_v=0.0, posspd_a=1500,
+            aan_s=0.0, aan_e=0.0, aan_d=5.0,
+            res=0.0
+        )
+
+        base_params_2 = dict(
+            rpm=0.0, pos=0.0, torque=0.0,
+            duty=0.0, current=0.0, brake=0.0,
+            posspd_p=0.0, posspd_v=0.0, posspd_a=600,
             aan_s=0.0, aan_e=0.0, aan_d=5.0,
             res=0.0
         )
         self.params_m = {
-            1: dict(base_params),
-            2: dict(base_params),
+            1: dict(base_params_1),
+            2: dict(base_params_2),
         }
 
         # Simulation handles
@@ -706,7 +714,7 @@ class MainWindow(QtWidgets.QMainWindow):
             ("Current (A)", 'current'),
             ("Brake (A)", 'brake'),
             ("PosSpd Pos (°)", 'posspd_p'),
-            ("PosSpd Vel (deg/s)", 'posspd_v'),
+            ("PosSpd Vel (RPM)", 'posspd_v'),
             ("PosSpd Acc (deg/s²)", 'posspd_a'),
             ("AAN Start (°)", "aan_s"),
             ("AAN End (°)", "aan_e"),
