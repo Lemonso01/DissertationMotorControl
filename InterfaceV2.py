@@ -117,7 +117,7 @@ class ElbowArmWidget(QtWidgets.QWidget):
         painter.drawText(
             card_rect.adjusted(0, 4, 0, 0),
             QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop,
-            "Elbow Flexion"
+            "Elbow Flexion / Extention"
         )
 
         # --- Subtitle (angle text) ---
@@ -237,7 +237,7 @@ class WristDialWidget(QtWidgets.QWidget):
         painter.drawText(
             card_rect.adjusted(0, 4, 0, 0),
             QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop,
-            "Wrist Supination"
+            "Wrist Supination / Pronation"
         )
 
         painter.setPen(self._muted_text)
@@ -461,81 +461,86 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_settings.clicked.connect(self.open_settings)
         left_layout.addWidget(btn_settings, 0, 0, 1, 3)
 
-        btn_origin = QtWidgets.QPushButton("Set Origin")
+        btn_origin = QtWidgets.QPushButton("SET ORIGIN")
         btn_origin.setStyleSheet("background-color: #1976d2; color: white;")
         btn_origin.clicked.connect(lambda: self.send_cmd("ORIGIN 1"))
         left_layout.addWidget(btn_origin, 1, 0, 1, 3)
 
-        btn_calib = QtWidgets.QPushButton("Calibrate")
+        btn_calib = QtWidgets.QPushButton("CALIBRATE")
         btn_calib.setStyleSheet("background-color: #ff9800; color: white;")
         btn_calib.clicked.connect(lambda: self.send_cmd("CALIBRATE"))
         left_layout.addWidget(btn_calib, 2, 0, 1, 3)
 
-        # --- STOP buttons row (Stop 1, Stop 2, STOP ALL) ---
-        stop_row = QtWidgets.QHBoxLayout()
-        btn_stop1 = QtWidgets.QPushButton("Stop 1")
-        btn_stop2 = QtWidgets.QPushButton("Stop 2")
-        btn_stopall = QtWidgets.QPushButton("STOP ALL")
+         # --- STOP buttons ---
+        # Row 3: Stop 1 + Stop 2
+        stop_small_row = QtWidgets.QHBoxLayout()
+        btn_stop1 = QtWidgets.QPushButton("STOP 1")
+        btn_stop2 = QtWidgets.QPushButton("STOP 2")
 
         btn_stop1.setFixedWidth(70)
         btn_stop2.setFixedWidth(70)
 
         btn_stop1.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
         btn_stop2.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
-        btn_stopall.setStyleSheet("background-color: #b71c1c; color: white; font-weight:bold; font-size:14px;")
 
         btn_stop1.clicked.connect(lambda: self.send_cmd("STOP 1"))
         btn_stop2.clicked.connect(lambda: self.send_cmd("STOP 2"))
+
+        btn_stop1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        btn_stop2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+
+        stop_small_row = QtWidgets.QHBoxLayout()
+        stop_small_row.setContentsMargins(0, 0, 0, 0)
+        stop_small_row.setSpacing(8)
+        stop_small_row.addWidget(btn_stop1, 1)
+        stop_small_row.addWidget(btn_stop2, 1)
+
+        left_layout.addLayout(stop_small_row, 3, 0, 1, 3)
+
+        # Row 4-5: STOP ALL
+        btn_stopall = QtWidgets.QPushButton("STOP ALL")
+        btn_stopall.setStyleSheet("background-color: #b71c1c; color: yellow; font-weight:bold; font-size:18px;")
         btn_stopall.clicked.connect(lambda: self.send_cmd("STOPALL"))
 
-        stop_row.addWidget(btn_stop1)
-        stop_row.addWidget(btn_stop2)
-        stop_row.addWidget(btn_stopall, stretch=1)
-        left_layout.addLayout(stop_row, 3, 0, 1, 3)
+        # Expand + taller feel (row-span already gives height; this helps visually)
+        btn_stopall.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        btn_stopall.setMinimumHeight(90)
+
+        # Add to grid, spanning 2 rows and all 3 columns
+        left_layout.addWidget(btn_stopall, 4, 0, 2, 3)
 
         # Headers: Motor 1 / Motor 2
         lbl_m1 = QtWidgets.QLabel("MOTOR 1")
         lbl_m1.setStyleSheet("font-weight:bold;")
-        left_layout.addWidget(lbl_m1, 4, 0, 1, 1)
+        left_layout.addWidget(lbl_m1, 6, 0, 1, 1)
 
         vline = QtWidgets.QFrame()
         vline.setFrameShape(QtWidgets.QFrame.VLine)
         vline.setFrameShadow(QtWidgets.QFrame.Sunken)
-        left_layout.addWidget(vline, 4, 1, 12, 1)
+        left_layout.addWidget(vline, 6, 1, 12, 1)
 
         lbl_m2 = QtWidgets.QLabel("MOTOR 2")
         lbl_m2.setStyleSheet("font-weight:bold;")
-        left_layout.addWidget(lbl_m2, 4, 2, 1, 1)
+        left_layout.addWidget(lbl_m2, 6, 2, 1, 1)
+
+        # --- Extras menu button ---
+        extras_btn = QtWidgets.QPushButton("Extras")
+        extras_btn.setStyleSheet("background-color: #455a64; color: white; font-weight:bold;")
+        left_layout.addWidget(extras_btn, 7, 0, 1, 3)
+
+        extras_menu = QtWidgets.QMenu(extras_btn)
+
+        m1_menu = extras_menu.addMenu("Motor 1 Extras")
+        m2_menu = extras_menu.addMenu("Motor 2 Extras")
+
+        # Show menu directly under the button
+        extras_btn.clicked.connect(lambda: extras_menu.exec(extras_btn.mapToGlobal(QtCore.QPoint(0, extras_btn.height()))))
 
         # ---------------- Motor 1 buttons ----------------
-        row_m1 = 5
+        row_m1 = 8  # start below Extras row
 
-        btn_rpm_1 = QtWidgets.QPushButton("RPM")
-        btn_rpm_1.clicked.connect(lambda: self.send_cmd_motor(1, f"RPM {int(self.p(1,'rpm'))}"))
-        left_layout.addWidget(btn_rpm_1, row_m1, 0); row_m1 += 1
-
-        btn_pos_1 = QtWidgets.QPushButton("POS")
-        btn_pos_1.clicked.connect(lambda: self.send_cmd_motor(1, f"POS {self.p(1,'pos'):.2f}"))
-        left_layout.addWidget(btn_pos_1, row_m1, 0); row_m1 += 1
-
-        btn_torque_1 = QtWidgets.QPushButton("TORQUE")
-        btn_torque_1.clicked.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
-        left_layout.addWidget(btn_torque_1, row_m1, 0); row_m1 += 1
-
-        btn_duty_1 = QtWidgets.QPushButton("DUTY")
-        btn_duty_1.clicked.connect(lambda: self.send_cmd_motor(1, f"DUTY {self.p(1,'duty'):.3f}"))
-        left_layout.addWidget(btn_duty_1, row_m1, 0); row_m1 += 1
-
-        btn_current_1 = QtWidgets.QPushButton("CURRENT")
-        btn_current_1.clicked.connect(lambda: self.send_cmd_motor(1, f"CURRENT {self.p(1,'current'):.2f}"))
-        left_layout.addWidget(btn_current_1, row_m1, 0); row_m1 += 1
-
-        btn_brake_1 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
-        left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
-
+        # Visible main controls (keep in grid)
         btn_posspd_1 = QtWidgets.QPushButton("PSA")
-        # Keeping your command token as PSA (as in your latest file)
         btn_posspd_1.clicked.connect(
             lambda: self.send_cmd_motor(
                 1,
@@ -548,45 +553,41 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_aan_1.clicked.connect(lambda: self.open_aan_dialog(motor_id=1))
         left_layout.addWidget(btn_aan_1, row_m1, 0); row_m1 += 1
 
-        btn_auto_1 = QtWidgets.QPushButton("Auto Move")
-        btn_auto_1.clicked.connect(lambda: self.send_cmd_motor(1, "PSA 90.00 18.00 1.00"))
-        left_layout.addWidget(btn_auto_1, row_m1, 0); row_m1 += 1
+        btn_brake_1 = QtWidgets.QPushButton("BRAKE")
+        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
+        left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
 
-        btn_resist_1 = QtWidgets.QPushButton("Resist")
-        btn_resist_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}"))
-        left_layout.addWidget(btn_resist_1, row_m1, 0); row_m1 += 1
+        # Extras (in menu)
+        act_rpm_1 = m1_menu.addAction("RPM")
+        act_rpm_1.triggered.connect(lambda: self.send_cmd_motor(1, f"RPM {int(self.p(1,'rpm'))}"))
 
-        btn_sim_1 = QtWidgets.QPushButton("Simulate Move")
-        btn_sim_1.clicked.connect(self.open_sim_dialog)
-        left_layout.addWidget(btn_sim_1, row_m1, 0); row_m1 += 1
+        act_pos_1 = m1_menu.addAction("POS")
+        act_pos_1.triggered.connect(lambda: self.send_cmd_motor(1, f"POS {self.p(1,'pos'):.2f}"))
 
-        # ---------------- Motor 2 buttons ----------------
-        row_m2 = 5
+        act_torque_1 = m1_menu.addAction("TORQUE")
+        act_torque_1.triggered.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
 
-        btn_rpm_2 = QtWidgets.QPushButton("RPM")
-        btn_rpm_2.clicked.connect(lambda: self.send_cmd_motor(2, f"RPM {int(self.p(2,'rpm'))}"))
-        left_layout.addWidget(btn_rpm_2, row_m2, 2); row_m2 += 1
+        act_duty_1 = m1_menu.addAction("DUTY")
+        act_duty_1.triggered.connect(lambda: self.send_cmd_motor(1, f"DUTY {self.p(1,'duty'):.3f}"))
 
-        btn_pos_2 = QtWidgets.QPushButton("POS")
-        btn_pos_2.clicked.connect(lambda: self.send_cmd_motor(2, f"POS {self.p(2,'pos'):.2f}"))
-        left_layout.addWidget(btn_pos_2, row_m2, 2); row_m2 += 1
+        act_current_1 = m1_menu.addAction("CURRENT")
+        act_current_1.triggered.connect(lambda: self.send_cmd_motor(1, f"CURRENT {self.p(1,'current'):.2f}"))
 
-        btn_torque_2 = QtWidgets.QPushButton("TORQUE")
-        btn_torque_2.clicked.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.p(2,'torque'):.2f}"))
-        left_layout.addWidget(btn_torque_2, row_m2, 2); row_m2 += 1
+        m1_menu.addSeparator()
 
-        btn_duty_2 = QtWidgets.QPushButton("DUTY")
-        btn_duty_2.clicked.connect(lambda: self.send_cmd_motor(2, f"DUTY {self.p(2,'duty'):.3f}"))
-        left_layout.addWidget(btn_duty_2, row_m2, 2); row_m2 += 1
+        act_resist_1 = m1_menu.addAction("Resist")
+        act_resist_1.triggered.connect(
+            lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}")
+        )
 
-        btn_current_2 = QtWidgets.QPushButton("CURRENT")
-        btn_current_2.clicked.connect(lambda: self.send_cmd_motor(2, f"CURRENT {self.p(2,'current'):.2f}"))
-        left_layout.addWidget(btn_current_2, row_m2, 2); row_m2 += 1
+        act_sim_1 = m1_menu.addAction("Simulate Move")
+        act_sim_1.triggered.connect(self.open_sim_dialog)
 
-        btn_brake_2 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
-        left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
 
+                # ---------------- Motor 2 uttons ----------------
+        row_m2 = 8  # align with motor 1 start row
+
+        # Visible main controls (keep in grid)
         btn_posspd_2 = QtWidgets.QPushButton("PSA")
         btn_posspd_2.clicked.connect(
             lambda: self.send_cmd_motor(
@@ -600,17 +601,39 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_aan_2.clicked.connect(lambda: self.open_aan_dialog(motor_id=2))
         left_layout.addWidget(btn_aan_2, row_m2, 2); row_m2 += 1
 
-        btn_auto_2 = QtWidgets.QPushButton("Auto Move")
-        btn_auto_2.clicked.connect(lambda: self.send_cmd_motor(2, "PSA 90.00 18.00 1.00"))
-        left_layout.addWidget(btn_auto_2, row_m2, 2); row_m2 += 1
+        btn_brake_2 = QtWidgets.QPushButton("BRAKE")
+        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
+        left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
 
-        btn_resist_2 = QtWidgets.QPushButton("Resist")
-        btn_resist_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
-        left_layout.addWidget(btn_resist_2, row_m2, 2); row_m2 += 1
+        # Extras (in menu)
+        act_rpm_2 = m2_menu.addAction("RPM")
+        act_rpm_2.triggered.connect(lambda: self.send_cmd_motor(2, f"RPM {int(self.p(2,'rpm'))}"))
 
-        btn_sim_2 = QtWidgets.QPushButton("Simulate Move")
-        btn_sim_2.clicked.connect(self.open_sim_dialog)
-        left_layout.addWidget(btn_sim_2, row_m2, 2); row_m2 += 1
+        act_pos_2 = m2_menu.addAction("POS")
+        act_pos_2.triggered.connect(lambda: self.send_cmd_motor(2, f"POS {self.p(2,'pos'):.2f}"))
+
+        act_torque_2 = m2_menu.addAction("TORQUE")
+        act_torque_2.triggered.connect(lambda: self.send_cmd_motor(2, f"TORQUE {self.p(2,'torque'):.2f}"))
+
+        act_duty_2 = m2_menu.addAction("DUTY")
+        act_duty_2.triggered.connect(lambda: self.send_cmd_motor(2, f"DUTY {self.p(2,'duty'):.3f}"))
+
+        act_current_2 = m2_menu.addAction("CURRENT")
+        act_current_2.triggered.connect(lambda: self.send_cmd_motor(2, f"CURRENT {self.p(2,'current'):.2f}"))
+
+        m2_menu.addSeparator()
+
+        act_auto_2 = m2_menu.addAction("Auto Move")
+        act_auto_2.triggered.connect(lambda: self.send_cmd_motor(2, "PSA 90.00 18.00 1.00"))
+
+        act_resist_2 = m2_menu.addAction("Resist")
+        act_resist_2.triggered.connect(
+            lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}")
+        )
+
+        act_sim_2 = m2_menu.addAction("Simulate Move")
+        act_sim_2.triggered.connect(self.open_sim_dialog)
+
 
         left_layout.setRowStretch(max(row_m1, row_m2) + 1, 1)
 
@@ -663,7 +686,7 @@ class MainWindow(QtWidgets.QMainWindow):
         status_layout.addWidget(self.pos1_label, row_s, 1)
         status_layout.addWidget(self.pos2_label, row_s, 2); row_s += 1
 
-        status_layout.addWidget(QtWidgets.QLabel("Speed (ERPM):"), row_s, 0, alignment=QtCore.Qt.AlignRight)
+        status_layout.addWidget(QtWidgets.QLabel("Speed (RPM):"), row_s, 0, alignment=QtCore.Qt.AlignRight)
         status_layout.addWidget(self.spd1_label, row_s, 1)
         status_layout.addWidget(self.spd2_label, row_s, 2); row_s += 1
 
@@ -963,14 +986,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if motor_id == 1:
             status["elbow_deg"] = pos_deg
-            status["spd1"]      = spd_erpm
+            status["spd1"]      = spd_erpm / (21 * 10)
             status["tmp1"]      = temp_c
             status["err1"]      = err
             status["t1"]        = cur_a 
 
         elif motor_id == 2:
             status["wrist_deg"] = pos_deg
-            status["spd2"]      = spd_erpm
+            status["spd2"]      = spd_erpm / (14 * 6)
             status["tmp2"]      = temp_c
             status["err2"]      = err
             status["t2"]        = cur_a 
