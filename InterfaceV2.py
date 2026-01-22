@@ -713,6 +713,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         act_brake_1 = m1_menu.addAction("Brake")
         act_brake_1.triggered.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
+
+        act_psa_1 = m1_menu.addAction("PSA Start")
+        act_psa_1.triggered.connect(lambda: self.send_cmd_motor(1, f"PSA {self.p(1,'posspd_ps'):.2f} {self.p(1,'posspd_v'):.2f} {self.p(1,'posspd_a'):.2f}"))
         
         m1_menu.addSeparator()
 
@@ -754,6 +757,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         act_brake_2 = m2_menu.addAction("Brake")
         act_brake_2.triggered.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
+
+        act_psa_2 = m2_menu.addAction("PSA Start")
+        act_psa_2.triggered.connect(lambda: self.send_cmd_motor(2, f"PSA {self.p(2,'posspd_ps'):.2f} {self.p(2,'posspd_v'):.2f} {self.p(2,'posspd_a'):.2f}"))
         
         m2_menu.addSeparator()
 
