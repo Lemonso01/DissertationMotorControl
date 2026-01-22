@@ -11,6 +11,9 @@ import re
 import math
 import serial
 from serial.tools import list_ports
+import os
+from datetime import datetime
+
 
 from PySide6 import QtCore, QtGui, QtWidgets
 
@@ -30,11 +33,17 @@ SIM_TICK_S             = 0.02   # 50 Hz updates
 KT_NM_PER_A_1          = 0.123   # Motor 1 (Elbow)
 KT_NM_PER_A_2          = 0.078   # Motor 2 (Wrist)
 
+GEARBOX_REDUCTION_1    = 10 # Motor 1 (Elbow)
+GEARBOX_REDUCTION_2    = 6 # Motor 2 (Wrist)
+
 # Drawing sizes
 ELBOW_L_UPPER          = 110  # px
 ELBOW_L_FOREARM        = 110  # px
 WRIST_DIAL_R           = 70   # px
 WRIST_DIAL_OFFSET_DEG  = 90   # rotate drawing so numeric 0° points RIGHT visually
+
+#AUTOMOVE Tolerance
+AUTO_TOL               = 0.5 # 0.5° of tolerance for the final position
 
 
 class DummySerial:
@@ -334,7 +343,7 @@ class MainWindow(QtWidgets.QMainWindow):
         base_params_1 = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
-            posspd_p=0.0, posspd_v=0.0, posspd_a=1500,
+            posspd_ps=0.0, posspd_pe=0.0, posspd_v=0.0, posspd_a=1500, auto_rep=0,
             aan_s=0.0, aan_e=0.0, aan_d=5.0,
             res=0.0
         )
@@ -342,7 +351,7 @@ class MainWindow(QtWidgets.QMainWindow):
         base_params_2 = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
-            posspd_p=0.0, posspd_v=0.0, posspd_a=600,
+            posspd_ps=0.0, posspd_pe=0.0, posspd_v=0.0, posspd_a=600, auto_rep=0,
             aan_s=0.0, aan_e=0.0, aan_d=5.0,
             res=0.0
         )
@@ -350,6 +359,15 @@ class MainWindow(QtWidgets.QMainWindow):
             1: dict(base_params_1),
             2: dict(base_params_2),
         }
+
+        # AUTOMOVE Repetition
+        self._last_pos_deg = {1: None, 2: None}  # latest telemetry position per motor
+
+        self._auto = {
+            1: {"active": False, "moves_left": 0, "target": None},
+            2: {"active": False, "moves_left": 0, "target": None},
+        }
+
 
         # Simulation handles
         self._sim_stop = threading.Event()
@@ -360,6 +378,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self._reader_stop = False
 
         self._build_ui()
+
+        # ---- File logging (TX/RX) ----
+        self._log_fp = None
+        self._log_path = None
+        self._open_log_file()
+
 
         # Connect signals
         self.log_signal.connect(self.append_log)
@@ -378,18 +402,125 @@ class MainWindow(QtWidgets.QMainWindow):
     def kt(self, motor_id: int) -> float:
         mid = 1 if int(motor_id) == 1 else 2
         return KT_NM_PER_A_1 if mid == 1 else KT_NM_PER_A_2
+    
+    def Ng(self, motor_id: int) -> float:
+        mid = 1 if int(motor_id) == 1 else 2
+        return GEARBOX_REDUCTION_1 if mid == 1 else GEARBOX_REDUCTION_2
 
     def resist_current_from_user_input(self, motor_id: int) -> float:
         """
         User enters Resist as torque (Nm). Convert to current (A) for BRK command:
-          I = tau / Kt
+          I = T / (Kt * N)
+          
+          T = I * Kt * N
+
+          T - Torque (Nm)
+          I - Current (A)
+          Kt - Motor Torque constant
+          N - Motor Gearbox reduction
         """
         mid = 1 if int(motor_id) == 1 else 2
-        tau_nm = float(self.params_m[mid]["brake"])  # reuse existing 'brake' field as "Resist torque"
+        tau_nm = float(self.params_m[mid]["res"])
         kt = self.kt(mid)
-        if kt <= 0:
+        Ng = self.Ng(mid)
+        if kt <= 0 or Ng <= 0:
             return 0.0
-        return tau_nm / kt
+        return tau_nm / (kt * Ng)
+    
+    def start_auto_move(self, motor_id: int):
+        mid = 1 if int(motor_id) == 1 else 2
+
+
+        s = float(self.params_m[mid]["posspd_ps"])
+        e = float(self.params_m[mid]["posspd_pe"])
+        tol = AUTO_TOL
+
+        try:
+            rep = int(float(self.params_m[mid]["auto_rep"]))
+        except Exception:
+            rep = 1
+        rep = max(1, rep)
+
+        cur = self._last_pos_deg[mid]
+        if cur is None:
+            cur = s
+
+        # Decide first target based on where we are
+        if abs(cur - s) <= tol:
+            target = e
+        elif abs(cur - e) <= tol:
+            target = s
+        else:
+            target = e  # default
+
+        self._auto[mid]["active"] = True
+        self._auto[mid]["moves_left"] = 2 * rep
+        self._auto[mid]["target"] = float(target)
+
+        # Kick off first PSA immediately
+        self._send_psa(mid, target)
+
+    def stop_auto_move(self, motor_id: int):
+        mid = 1 if int(motor_id) == 1 else 2
+        self._auto[mid]["active"] = False
+        self._auto[mid]["moves_left"] = 0
+        self._auto[mid]["target"] = None
+
+    def _send_psa(self, mid: int, target_pos_deg: float):
+        v = float(self.params_m[mid]["posspd_v"])
+        a = float(self.params_m[mid]["posspd_a"])
+        self.send_cmd_motor(mid, f"PSA {float(target_pos_deg):.2f} {v:.2f} {a:.2f}")
+
+    def _auto_tick_on_position(self, mid: int, pos_deg: float):
+        st = self._auto[mid]
+        if not st["active"] or st["moves_left"] <= 0 or st["target"] is None:
+            return
+
+        tol = AUTO_TOL
+        tgt = float(st["target"])
+
+        # Wait until we're within tolerance
+        if abs(pos_deg - tgt) > tol:
+            return
+
+        # Reached current target => consume one move
+        st["moves_left"] -= 1
+        if st["moves_left"] <= 0:
+            self.stop_auto_move(mid)
+            return
+
+        s = float(self.params_m[mid]["posspd_ps"])
+        e = float(self.params_m[mid]["posspd_pe"])
+
+        # Toggle target
+        next_tgt = e if abs(tgt - s) <= tol else s
+        st["target"] = float(next_tgt)
+
+        # Schedule the next PSA after 1 second (non-blocking)
+        QtCore.QTimer.singleShot(1000, lambda mid=mid, t=next_tgt: self._send_psa(mid, t))
+
+    def _open_log_file(self):
+        # Create a logs folder next to your script
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        log_dir = os.path.join(base_dir, "logs")
+        os.makedirs(log_dir, exist_ok=True)
+
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self._log_path = os.path.join(log_dir, f"serial_log_{ts}.txt")
+        self._log_fp = open(self._log_path, "a", encoding="utf-8", buffering=1)  # line-buffered
+
+        # Write header
+        self._log_fp.write(f"Serial Log Started: {datetime.now().isoformat(timespec='seconds')}\n")
+        self._log_fp.write(f"Port: {SERIAL_PORT}  Baud: {BAUDRATE}\n")
+        self._log_fp.write("-" * 60 + "\n")
+
+    def _write_log_line(self, line: str):
+        #Write a line to file
+        if not self._log_fp:
+            return
+        self._log_fp.write(f"{line}\n")
+
+
 
 
     # ---------- Serial init ----------
@@ -462,12 +593,12 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_settings, 0, 0, 1, 3)
 
         btn_origin = QtWidgets.QPushButton("SET ORIGIN")
-        btn_origin.setStyleSheet("background-color: #1976d2; color: white;")
+        btn_origin.setStyleSheet("background-color: #1976d2; color: white; font-weight:bold;")
         btn_origin.clicked.connect(lambda: self.send_cmd("ORIGIN 1"))
         left_layout.addWidget(btn_origin, 1, 0, 1, 3)
 
         btn_calib = QtWidgets.QPushButton("CALIBRATE")
-        btn_calib.setStyleSheet("background-color: #ff9800; color: white;")
+        btn_calib.setStyleSheet("background-color: #ff9800; color: white; font-weight:bold;")
         btn_calib.clicked.connect(lambda: self.send_cmd("CALIBRATE"))
         left_layout.addWidget(btn_calib, 2, 0, 1, 3)
 
@@ -483,8 +614,8 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_stop1.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
         btn_stop2.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
 
-        btn_stop1.clicked.connect(lambda: self.send_cmd("STOP 1"))
-        btn_stop2.clicked.connect(lambda: self.send_cmd("STOP 2"))
+        btn_stop1.clicked.connect(lambda: (self.stop_auto_move(1), self.send_cmd("STOP 1")))
+        btn_stop2.clicked.connect(lambda: (self.stop_auto_move(2), self.send_cmd("STOP 2")))
 
         btn_stop1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         btn_stop2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
@@ -500,7 +631,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Row 4-5: STOP ALL
         btn_stopall = QtWidgets.QPushButton("STOP ALL")
         btn_stopall.setStyleSheet("background-color: #b71c1c; color: yellow; font-weight:bold; font-size:18px;")
-        btn_stopall.clicked.connect(lambda: self.send_cmd("STOPALL"))
+        btn_stopall.clicked.connect(lambda: (self.stop_auto_move(1), self.stop_auto_move(2), self.send_cmd("STOPALL")))
 
         # Expand + taller feel (row-span already gives height; this helps visually)
         btn_stopall.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -509,53 +640,60 @@ class MainWindow(QtWidgets.QMainWindow):
         # Add to grid, spanning 2 rows and all 3 columns
         left_layout.addWidget(btn_stopall, 4, 0, 2, 3)
 
-        # Headers: Motor 1 / Motor 2
-        lbl_m1 = QtWidgets.QLabel("MOTOR 1")
-        lbl_m1.setStyleSheet("font-weight:bold;")
-        left_layout.addWidget(lbl_m1, 6, 0, 1, 1)
-
-        vline = QtWidgets.QFrame()
-        vline.setFrameShape(QtWidgets.QFrame.VLine)
-        vline.setFrameShadow(QtWidgets.QFrame.Sunken)
-        left_layout.addWidget(vline, 6, 1, 12, 1)
-
-        lbl_m2 = QtWidgets.QLabel("MOTOR 2")
-        lbl_m2.setStyleSheet("font-weight:bold;")
-        left_layout.addWidget(lbl_m2, 6, 2, 1, 1)
-
         # --- Extras menu button ---
-        extras_btn = QtWidgets.QPushButton("Extras")
+        extras_btn = QtWidgets.QPushButton("EXTRAS")
         extras_btn.setStyleSheet("background-color: #455a64; color: white; font-weight:bold;")
-        left_layout.addWidget(extras_btn, 7, 0, 1, 3)
+        left_layout.addWidget(extras_btn, 6, 0, 1, 3)
 
         extras_menu = QtWidgets.QMenu(extras_btn)
 
-        m1_menu = extras_menu.addMenu("Motor 1 Extras")
-        m2_menu = extras_menu.addMenu("Motor 2 Extras")
+        m1_menu = extras_menu.addMenu("Motor 1 (Elbow) Extras")
+
+        m1_menu.addSeparator()
+        act_extras_settings_1 = m1_menu.addAction("Extras Settings")
+        act_extras_settings_1.triggered.connect(lambda: self.open_extras_settings(1))
+
+
+        m2_menu = extras_menu.addMenu("Motor 2 (Wrist) Extras")
+
+        m2_menu.addSeparator()
+        act_extras_settings_2 = m2_menu.addAction("Extras Settings")
+        act_extras_settings_2.triggered.connect(lambda: self.open_extras_settings(2))
 
         # Show menu directly under the button
         extras_btn.clicked.connect(lambda: extras_menu.exec(extras_btn.mapToGlobal(QtCore.QPoint(0, extras_btn.height()))))
 
-        # ---------------- Motor 1 buttons ----------------
-        row_m1 = 8  # start below Extras row
+        # Headers: Motor 1 / Motor 2
+        lbl_m1 = QtWidgets.QLabel("ELBOW MOTOR")
+        lbl_m1.setStyleSheet("font-weight:bold;")
+        left_layout.addWidget(lbl_m1, 7, 0, 1, 1)
 
-        # Visible main controls (keep in grid)
-        btn_posspd_1 = QtWidgets.QPushButton("PSA")
-        btn_posspd_1.clicked.connect(
-            lambda: self.send_cmd_motor(
-                1,
-                f"PSA {self.p(1,'posspd_p'):.2f} {self.p(1,'posspd_v'):.2f} {self.p(1,'posspd_a'):.2f}"
-            )
-        )
+        vline = QtWidgets.QFrame()
+        vline.setFrameShape(QtWidgets.QFrame.VLine)
+        vline.setFrameShadow(QtWidgets.QFrame.Sunken)
+        left_layout.addWidget(vline, 7, 1, 4, 1)
+
+        lbl_m2 = QtWidgets.QLabel("WRIST MOTOR")
+        lbl_m2.setStyleSheet("font-weight:bold;")
+        left_layout.addWidget(lbl_m2, 7, 2, 1, 1)
+
+    
+
+        # ---------------- Motor 1 buttons ----------------
+        row_m1 = 8
+
+        # Visible main controls
+        btn_posspd_1 = QtWidgets.QPushButton("AUTO MOVE")
+        btn_posspd_1.clicked.connect(lambda: self.start_auto_move(1))
         left_layout.addWidget(btn_posspd_1, row_m1, 0); row_m1 += 1
 
-        btn_aan_1 = QtWidgets.QPushButton("Assist A/N")
+        btn_aan_1 = QtWidgets.QPushButton("ASSIST A/N")
         btn_aan_1.clicked.connect(lambda: self.open_aan_dialog(motor_id=1))
         left_layout.addWidget(btn_aan_1, row_m1, 0); row_m1 += 1
 
-        btn_brake_1 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
-        left_layout.addWidget(btn_brake_1, row_m1, 0); row_m1 += 1
+        btn_res_1 = QtWidgets.QPushButton("RESIST")
+        btn_res_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}"))
+        left_layout.addWidget(btn_res_1, row_m1, 0); row_m1 += 1
 
         # Extras (in menu)
         act_rpm_1 = m1_menu.addAction("RPM")
@@ -573,37 +711,30 @@ class MainWindow(QtWidgets.QMainWindow):
         act_current_1 = m1_menu.addAction("CURRENT")
         act_current_1.triggered.connect(lambda: self.send_cmd_motor(1, f"CURRENT {self.p(1,'current'):.2f}"))
 
+        act_brake_1 = m1_menu.addAction("Brake")
+        act_brake_1.triggered.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
+        
         m1_menu.addSeparator()
-
-        act_resist_1 = m1_menu.addAction("Resist")
-        act_resist_1.triggered.connect(
-            lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}")
-        )
 
         act_sim_1 = m1_menu.addAction("Simulate Move")
         act_sim_1.triggered.connect(self.open_sim_dialog)
 
 
-                # ---------------- Motor 2 uttons ----------------
-        row_m2 = 8  # align with motor 1 start row
+        # ---------------- Motor 2 buttons ----------------
+        row_m2 = 8
 
-        # Visible main controls (keep in grid)
-        btn_posspd_2 = QtWidgets.QPushButton("PSA")
-        btn_posspd_2.clicked.connect(
-            lambda: self.send_cmd_motor(
-                2,
-                f"PSA {self.p(2,'posspd_p'):.2f} {self.p(2,'posspd_v'):.2f} {self.p(2,'posspd_a'):.2f}"
-            )
-        )
+        # Visible main controls
+        btn_posspd_2 = QtWidgets.QPushButton("AUTO MOVE")
+        btn_posspd_2.clicked.connect(lambda: self.start_auto_move(2))
         left_layout.addWidget(btn_posspd_2, row_m2, 2); row_m2 += 1
 
-        btn_aan_2 = QtWidgets.QPushButton("Assist A/N")
+        btn_aan_2 = QtWidgets.QPushButton("ASSIST A/N")
         btn_aan_2.clicked.connect(lambda: self.open_aan_dialog(motor_id=2))
         left_layout.addWidget(btn_aan_2, row_m2, 2); row_m2 += 1
 
-        btn_brake_2 = QtWidgets.QPushButton("BRAKE")
-        btn_brake_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
-        left_layout.addWidget(btn_brake_2, row_m2, 2); row_m2 += 1
+        btn_res_2 = QtWidgets.QPushButton("RESIST")
+        btn_res_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
+        left_layout.addWidget(btn_res_2, row_m2, 2); row_m2 += 1
 
         # Extras (in menu)
         act_rpm_2 = m2_menu.addAction("RPM")
@@ -621,21 +752,54 @@ class MainWindow(QtWidgets.QMainWindow):
         act_current_2 = m2_menu.addAction("CURRENT")
         act_current_2.triggered.connect(lambda: self.send_cmd_motor(2, f"CURRENT {self.p(2,'current'):.2f}"))
 
+        act_brake_2 = m2_menu.addAction("Brake")
+        act_brake_2.triggered.connect(lambda: self.send_cmd_motor(2, f"BRK {self.p(2,'brake'):.2f}"))
+        
         m2_menu.addSeparator()
-
-        act_auto_2 = m2_menu.addAction("Auto Move")
-        act_auto_2.triggered.connect(lambda: self.send_cmd_motor(2, "PSA 90.00 18.00 1.00"))
-
-        act_resist_2 = m2_menu.addAction("Resist")
-        act_resist_2.triggered.connect(
-            lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}")
-        )
 
         act_sim_2 = m2_menu.addAction("Simulate Move")
         act_sim_2.triggered.connect(self.open_sim_dialog)
 
+        # ---------------- Combined Motor buttons ----------------
 
-        left_layout.setRowStretch(max(row_m1, row_m2) + 1, 1)
+        extra_section_row = max(row_m1, row_m2)
+
+        extra_header = QtWidgets.QLabel("BOTH MOTORS")
+        extra_header.setStyleSheet("font-weight:bold; margin-top:6px;")
+        extra_header.setAlignment(QtCore.Qt.AlignCenter)
+
+        left_layout.addWidget(extra_header, extra_section_row, 0, 1, 3)
+
+        def start_auto_move_both():
+            self.start_auto_move(1)
+            QtCore.QTimer.singleShot(20, lambda: self.start_auto_move(2))
+
+        def resist_both():
+            self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}")
+            QtCore.QTimer.singleShot(20, lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
+
+        def aan_both():
+            self.send_cmd_motor(1, f"AAN {self.p(1,'aan_s'):.2f} {self.p(1,'aan_e'):.2f} {self.p(1,'aan_d'):.2f}")
+            QtCore.QTimer.singleShot(20, lambda: self.send_cmd_motor(2, f"AAN {self.p(2,'aan_s'):.2f} {self.p(2,'aan_e'):.2f} {self.p(2,'aan_d'):.2f}"))
+
+        btn_pospd_both = QtWidgets.QPushButton("AUTO MOVE")
+        btn_pospd_both.clicked.connect(start_auto_move_both)
+
+        btn_res_both = QtWidgets.QPushButton("RESIST")
+        btn_res_both.clicked.connect(resist_both)
+
+        btn_aan_both = QtWidgets.QPushButton("ASSIST A/N")
+        btn_aan_both.clicked.connect(aan_both)
+
+        for b in (btn_pospd_both, btn_res_both, btn_aan_both):
+            b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+
+        left_layout.addWidget(btn_pospd_both, extra_section_row + 1, 0, 1, 3)
+        left_layout.addWidget(btn_res_both, extra_section_row + 2, 0, 1, 3)
+        left_layout.addWidget(btn_aan_both, extra_section_row + 3, 0, 1, 3)
+
+        left_layout.setRowStretch(extra_section_row + 4, 1)
+
 
         # Right panel (log + graphics + status)
         right = QtWidgets.QWidget()
@@ -712,6 +876,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def append_log(self, text: str):
         self.log.appendPlainText(text)
         self.log.verticalScrollBar().setValue(self.log.verticalScrollBar().maximum())
+        self._write_log_line(text)
 
     # ---------- Settings dialog (two columns: Motor 1 / Motor 2) ----------
     def open_settings(self):
@@ -719,10 +884,23 @@ class MainWindow(QtWidgets.QMainWindow):
         dlg.setWindowTitle("Settings")
         layout = QtWidgets.QGridLayout(dlg)
 
+        def add_hline(row: int):
+            line = QtWidgets.QFrame()
+            line.setFrameShape(QtWidgets.QFrame.HLine)
+            line.setFrameShadow(QtWidgets.QFrame.Sunken)
+            layout.addWidget(line, row, 0, 1, 3)  # span all columns
+            return row + 1
+
+        def add_section_title(row: int, title: str):
+            lbl = QtWidgets.QLabel(title)
+            lbl.setStyleSheet("font-weight:bold; margin-top:6px;")
+            layout.addWidget(lbl, row, 0, 1, 3)  # span all columns
+            return row + 1
+
         # Header row
         hdr0 = QtWidgets.QLabel("")
-        hdr1 = QtWidgets.QLabel("Motor 1")
-        hdr2 = QtWidgets.QLabel("Motor 2")
+        hdr1 = QtWidgets.QLabel("Elbow Motor")
+        hdr2 = QtWidgets.QLabel("Wrist Motor")
         hdr1.setStyleSheet("font-weight:bold;")
         hdr2.setStyleSheet("font-weight:bold;")
         layout.addWidget(hdr0, 0, 0)
@@ -730,37 +908,85 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.addWidget(hdr2, 0, 2)
 
         fields = [
-            ("RPM", 'rpm'),
-            ("Pos (°)", 'pos'),
-            ("Torque (Nm)", 'torque'),
-            ("Duty", 'duty'),
-            ("Current (A)", 'current'),
-            ("Brake (A)", 'brake'),
-            ("PosSpd Pos (°)", 'posspd_p'),
+            #("RPM", 'rpm'),
+            #("Pos (°)", 'pos'),
+            #("Torque (Nm)", 'torque'),
+            #("Duty", 'duty'),
+            #("Current (A)", 'current'),
+
+            #AUTO MOVE Mode
+            ("AUTO MOVE Repetitions", 'auto_rep'),
+            ("PosSpd Pos Start (°)", 'posspd_ps'),
+            ("PosSpd Pos End (°)", 'posspd_pe'),
             ("PosSpd Vel (RPM)", 'posspd_v'),
             ("PosSpd Acc (deg/s²)", 'posspd_a'),
+
+            #Resist Mode
+            ("Resist (Nm)", 'res'),
+
+            #AAN Mode
             ("AAN Start (°)", "aan_s"),
             ("AAN End (°)", "aan_e"),
             ("AAN RPM (RPM)", "aan_d"),
-            ("Resist (Nm)", "res"),
         ]
 
         w1 = {}
         w2 = {}
 
         row = 1
-        for label, key in fields:
-            layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
 
+        # --- AUTO MOVE (PSA) section ---
+        row = add_section_title(row, "AUTO MOVE (PSA)")
+        for label, key in [
+            ("AUTO MOVE Repetitions", 'auto_rep'),
+            ("PosSpd Pos Start (°)", 'posspd_ps'),
+            ("PosSpd Pos End (°)",   'posspd_pe'),
+            ("PosSpd Vel (RPM)",     'posspd_v'),
+            ("PosSpd Acc (deg/s²)",  'posspd_a'),
+        ]:
+            layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
             e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
             e2 = QtWidgets.QLineEdit(str(self.params_m[2][key]))
-
             layout.addWidget(e1, row, 1)
             layout.addWidget(e2, row, 2)
-
             w1[key] = e1
             w2[key] = e2
             row += 1
+
+        row = add_hline(row)
+
+        # --- RESIST section ---
+        row = add_section_title(row, "RESIST")
+        for label, key in [
+            ("Resist (Nm)", 'res'),
+        ]:
+            layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
+            e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
+            e2 = QtWidgets.QLineEdit(str(self.params_m[2][key]))
+            layout.addWidget(e1, row, 1)
+            layout.addWidget(e2, row, 2)
+            w1[key] = e1
+            w2[key] = e2
+            row += 1
+
+        row = add_hline(row)
+
+        # --- ASSIST AS NEEDED section ---
+        row = add_section_title(row, "ASSIST AS NEEDED (AAN)")
+        for label, key in [
+            ("AAN Start (°)", "aan_s"),
+            ("AAN End (°)",   "aan_e"),
+            ("AAN RPM (RPM)", "aan_d"),
+        ]:
+            layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
+            e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
+            e2 = QtWidgets.QLineEdit(str(self.params_m[2][key]))
+            layout.addWidget(e1, row, 1)
+            layout.addWidget(e2, row, 2)
+            w1[key] = e1
+            w2[key] = e2
+            row += 1
+
 
         btn_box = QtWidgets.QDialogButtonBox(
             QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
@@ -782,6 +1008,52 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_box.accepted.connect(on_ok)
         btn_box.rejected.connect(dlg.reject)
         dlg.exec()
+
+    def open_extras_settings(self, motor_id: int):
+        mid = 1 if int(motor_id) == 1 else 2
+
+        dlg = QtWidgets.QDialog(self)
+        dlg.setWindowTitle(f"Extras Settings (Motor {mid})")
+        layout = QtWidgets.QFormLayout(dlg)
+
+        # Extras parameters you actually use in the menu actions
+        le_rpm     = QtWidgets.QLineEdit(str(self.params_m[mid]["rpm"]))
+        le_pos     = QtWidgets.QLineEdit(str(self.params_m[mid]["pos"]))
+        le_torque  = QtWidgets.QLineEdit(str(self.params_m[mid]["torque"]))
+        le_duty    = QtWidgets.QLineEdit(str(self.params_m[mid]["duty"]))
+        le_current = QtWidgets.QLineEdit(str(self.params_m[mid]["current"]))
+        le_res     = QtWidgets.QLineEdit(str(self.params_m[mid]["res"]))
+
+        layout.addRow("RPM (command value):", le_rpm)
+        layout.addRow("POS (°):",            le_pos)
+        layout.addRow("TORQUE (Nm):",        le_torque)
+        layout.addRow("DUTY:",               le_duty)
+        layout.addRow("CURRENT (A):",        le_current)
+        layout.addRow("Resist Torque (Nm):", le_res)
+
+        btn_box = QtWidgets.QDialogButtonBox(
+            QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
+            parent=dlg
+        )
+        layout.addRow(btn_box)
+
+        def on_ok():
+            try:
+                self.params_m[mid]["rpm"]     = float(le_rpm.text())
+                self.params_m[mid]["pos"]     = float(le_pos.text())
+                self.params_m[mid]["torque"]  = float(le_torque.text())
+                self.params_m[mid]["duty"]    = float(le_duty.text())
+                self.params_m[mid]["current"] = float(le_current.text())
+                self.params_m[mid]["res"]     = float(le_res.text())
+            except ValueError:
+                QtWidgets.QMessageBox.warning(dlg, "Invalid input", "Please enter numeric values.")
+                return
+            dlg.accept()
+
+        btn_box.accepted.connect(on_ok)
+        btn_box.rejected.connect(dlg.reject)
+        dlg.exec()
+
 
     # ---------- AAN dialog (motor-aware) ----------
     def open_aan_dialog(self, motor_id: int = 1):
@@ -1013,13 +1285,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if "elbow_deg" in status:
             val = float(status["elbow_deg"])
+            self._last_pos_deg[1] = val
             self.elbow_view.set_angle_deg(val)
             self.pos1_label.setText(f"{val:.1f}")
+            self._auto_tick_on_position(1, val)
 
         if "wrist_deg" in status:
             val = float(status["wrist_deg"])
+            self._last_pos_deg[2] = val
             self.wrist_view.set_angle_deg(val)
             self.pos2_label.setText(f"{val:.1f}")
+            self._auto_tick_on_position(2, val)
+
 
         if "spd1" in status:
             self.spd1_label.setText(f"{float(status['spd1']):.0f}")
@@ -1049,6 +1326,14 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             if self.ser and not isinstance(self.ser, DummySerial):
                 self.ser.close()
+        except Exception:
+            pass
+
+        try:
+            if self._log_fp:
+                self._log_fp.write(f"\nSerial Log Ended: {datetime.now().isoformat(timespec='seconds')}\n")
+                self._log_fp.close()
+                self._log_fp = None
         except Exception:
             pass
         super().closeEvent(event)
