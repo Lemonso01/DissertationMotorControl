@@ -469,7 +469,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def _send_psa(self, mid: int, target_pos_deg: float):
         v = float(self.params_m[mid]["posspd_v"])
         a = float(self.params_m[mid]["posspd_a"])
-        self.send_cmd_motor(mid, f"PSA {float(target_pos_deg):.2f} {v:.2f} {a:.2f}")
+        motor_pos = self._ui_deg_to_motor_deg(mid, target_pos_deg)
+        self.send_cmd_motor(mid, f"PSA {motor_pos:.2f} {v:.2f} {a:.2f}")
 
     def _auto_tick_on_position(self, mid: int, pos_deg: float):
         st = self._auto[mid]
@@ -519,6 +520,16 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self._log_fp:
             return
         self._log_fp.write(f"{line}\n")
+
+    def _ui_deg_to_motor_deg(self, mid: int, deg: float) -> float:
+        """Convert GUI/user-facing degrees -> motor convention."""
+        x = float(deg)
+        return -x if mid == 1 else x   # reverse only elbow motor
+
+    def _motor_deg_to_ui_deg(self, mid: int, deg: float) -> float:
+        """Convert motor feedback degrees -> GUI/user-facing convention."""
+        x = float(deg)
+        return -x if mid == 1 else x   # reverse only elbow motor
 
 
 
@@ -700,7 +711,7 @@ class MainWindow(QtWidgets.QMainWindow):
         act_rpm_1.triggered.connect(lambda: self.send_cmd_motor(1, f"RPM {int(self.p(1,'rpm'))}"))
 
         act_pos_1 = m1_menu.addAction("POS")
-        act_pos_1.triggered.connect(lambda: self.send_cmd_motor(1, f"POS {self.p(1,'pos'):.2f}"))
+        act_pos_1.triggered.connect(lambda: self.send_cmd_motor(1, f"POS {self._ui_deg_to_motor_deg(1, self.p(1,'pos')):.2f}"))
 
         act_torque_1 = m1_menu.addAction("TORQUE")
         act_torque_1.triggered.connect(lambda: self.send_cmd_motor(1, f"TORQUE {self.p(1,'torque'):.2f}"))
@@ -715,7 +726,8 @@ class MainWindow(QtWidgets.QMainWindow):
         act_brake_1.triggered.connect(lambda: self.send_cmd_motor(1, f"BRK {self.p(1,'brake'):.2f}"))
 
         act_psa_1 = m1_menu.addAction("PSA Start")
-        act_psa_1.triggered.connect(lambda: self.send_cmd_motor(1, f"PSA {self.p(1,'posspd_ps'):.2f} {self.p(1,'posspd_v'):.2f} {self.p(1,'posspd_a'):.2f}"))
+        act_psa_1.triggered.connect(lambda: self.send_cmd_motor(1, f"PSA {self._ui_deg_to_motor_deg(1, self.p(1,'posspd_ps')):.2f} "f"{self.p(1,'posspd_v'):.2f} {self.p(1,'posspd_a'):.2f}"))
+
         
         m1_menu.addSeparator()
 
@@ -785,7 +797,9 @@ class MainWindow(QtWidgets.QMainWindow):
             QtCore.QTimer.singleShot(20, lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
 
         def aan_both():
-            self.send_cmd_motor(1, f"AAN {self.p(1,'aan_s'):.2f} {self.p(1,'aan_e'):.2f} {self.p(1,'aan_d'):.2f}")
+            s1 = self._ui_deg_to_motor_deg(1, self.p(1,'aan_s'))
+            e1 = self._ui_deg_to_motor_deg(1, self.p(1,'aan_e'))
+            self.send_cmd_motor(1, f"AAN {s1:.2f} {e1:.2f} {self.p(1,'aan_d'):.2f}")
             QtCore.QTimer.singleShot(20, lambda: self.send_cmd_motor(2, f"AAN {self.p(2,'aan_s'):.2f} {self.p(2,'aan_e'):.2f} {self.p(2,'aan_d'):.2f}"))
 
         btn_pospd_both = QtWidgets.QPushButton("ACTIVE ASSIST")
@@ -1096,7 +1110,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.params_m[mid]['aan_e'] = e
             self.params_m[mid]['aan_d'] = d
 
-            self.send_cmd_motor(mid, f"AAN {s:.2f} {e:.2f} {d:.2f}")
+            s_m = self._ui_deg_to_motor_deg(mid, s)
+            e_m = self._ui_deg_to_motor_deg(mid, e)
+            self.send_cmd_motor(mid, f"AAN {s_m:.2f} {e_m:.2f} {d:.2f}")
             dlg.accept()
 
         btn_box.accepted.connect(on_ok)
@@ -1263,7 +1279,8 @@ class MainWindow(QtWidgets.QMainWindow):
         status = {}
 
         if motor_id == 1:
-            status["elbow_deg"] = pos_deg
+            pos_deg_ui = self._motor_deg_to_ui_deg(1, pos_deg)
+            status["elbow_deg"] = pos_deg_ui
             status["spd1"]      = spd_erpm / (21 * 10)
             status["tmp1"]      = temp_c
             status["err1"]      = err
