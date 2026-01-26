@@ -1278,19 +1278,23 @@ static inline void update_limit_stops(void) {
 
     if (wrist_trip_left) {
         hard_stop_motor(motor2_id);
-        printf("Wrist Left End-stop trigeered. Motor %d stopped.\n", motor2_id);
+        //printf("Wrist Left End-stop trigeered. Motor %d stopped.\n", motor2_id);
+        printf("SERVO,2,sw_l\n");
     }
     if (wrist_trip_right) {
         hard_stop_motor(motor2_id);
-        printf("Wrist Right End-stop trigeered. Motor %d stopped.\n", motor2_id);
+        //printf("Wrist Right End-stop trigeered. Motor %d stopped.\n", motor2_id);
+        printf("SERVO,2,sw_r\n");
     }
     if (forearm_trip_top) {
         hard_stop_motor(motor1_id);
-        printf("Elbow Top End-stop trigeered. Motor %d stopped.\n", motor1_id);
+        //printf("Elbow Top End-stop trigeered. Motor %d stopped.\n", motor1_id);
+        printf("SERVO,1,sw_t\n");
     }
     if (forearm_trip_bottom) {
         hard_stop_motor(motor1_id);
-        printf("Elbow Bottom End-stop trigeered. Motor %d stopped.\n", motor1_id);
+        //printf("Elbow Bottom End-stop trigeered. Motor %d stopped.\n", motor1_id);
+        printf("SERVO,1,sw_b\n");
     }
 }
 

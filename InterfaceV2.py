@@ -683,7 +683,7 @@ class MainWindow(QtWidgets.QMainWindow):
         row_m1 = 8
 
         # Visible main controls
-        btn_posspd_1 = QtWidgets.QPushButton("AUTO MOVE")
+        btn_posspd_1 = QtWidgets.QPushButton("ACTIVE ASSIST")
         btn_posspd_1.clicked.connect(lambda: self.start_auto_move(1))
         left_layout.addWidget(btn_posspd_1, row_m1, 0); row_m1 += 1
 
@@ -691,7 +691,7 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_aan_1.clicked.connect(lambda: self.open_aan_dialog(motor_id=1))
         left_layout.addWidget(btn_aan_1, row_m1, 0); row_m1 += 1
 
-        btn_res_1 = QtWidgets.QPushButton("RESIST")
+        btn_res_1 = QtWidgets.QPushButton("ACTIVE RESIST")
         btn_res_1.clicked.connect(lambda: self.send_cmd_motor(1, f"BRK {self.resist_current_from_user_input(1):.2f}"))
         left_layout.addWidget(btn_res_1, row_m1, 0); row_m1 += 1
 
@@ -727,7 +727,7 @@ class MainWindow(QtWidgets.QMainWindow):
         row_m2 = 8
 
         # Visible main controls
-        btn_posspd_2 = QtWidgets.QPushButton("AUTO MOVE")
+        btn_posspd_2 = QtWidgets.QPushButton("ACTIVE ASSIST")
         btn_posspd_2.clicked.connect(lambda: self.start_auto_move(2))
         left_layout.addWidget(btn_posspd_2, row_m2, 2); row_m2 += 1
 
@@ -735,7 +735,7 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_aan_2.clicked.connect(lambda: self.open_aan_dialog(motor_id=2))
         left_layout.addWidget(btn_aan_2, row_m2, 2); row_m2 += 1
 
-        btn_res_2 = QtWidgets.QPushButton("RESIST")
+        btn_res_2 = QtWidgets.QPushButton("ACTIVE RESIST")
         btn_res_2.clicked.connect(lambda: self.send_cmd_motor(2, f"BRK {self.resist_current_from_user_input(2):.2f}"))
         left_layout.addWidget(btn_res_2, row_m2, 2); row_m2 += 1
 
@@ -788,10 +788,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.send_cmd_motor(1, f"AAN {self.p(1,'aan_s'):.2f} {self.p(1,'aan_e'):.2f} {self.p(1,'aan_d'):.2f}")
             QtCore.QTimer.singleShot(20, lambda: self.send_cmd_motor(2, f"AAN {self.p(2,'aan_s'):.2f} {self.p(2,'aan_e'):.2f} {self.p(2,'aan_d'):.2f}"))
 
-        btn_pospd_both = QtWidgets.QPushButton("AUTO MOVE")
+        btn_pospd_both = QtWidgets.QPushButton("ACTIVE ASSIST")
         btn_pospd_both.clicked.connect(start_auto_move_both)
 
-        btn_res_both = QtWidgets.QPushButton("RESIST")
+        btn_res_both = QtWidgets.QPushButton("ACTIVE RESIST")
         btn_res_both.clicked.connect(resist_both)
 
         btn_aan_both = QtWidgets.QPushButton("ASSIST A/N")
@@ -920,15 +920,15 @@ class MainWindow(QtWidgets.QMainWindow):
             #("Duty", 'duty'),
             #("Current (A)", 'current'),
 
-            #AUTO MOVE Mode
-            ("AUTO MOVE Repetitions", 'auto_rep'),
-            ("PosSpd Pos Start (°)", 'posspd_ps'),
-            ("PosSpd Pos End (°)", 'posspd_pe'),
-            ("PosSpd Vel (RPM)", 'posspd_v'),
-            ("PosSpd Acc (deg/s²)", 'posspd_a'),
+            #ACTIVE ASSIST Mode
+            ("ACTIVE ASSIST Repetitions", 'auto_rep'),
+            ("ACTIVE ASSIST Start (°)", 'posspd_ps'),
+            ("ACTIVE ASSIST End (°)", 'posspd_pe'),
+            ("ACTIVE ASSIST (RPM)", 'posspd_v'),
+            ("ACTIVE ASSIST (deg/s²)", 'posspd_a'),
 
             #Resist Mode
-            ("Resist (Nm)", 'res'),
+            ("ACTIVE Resist (Nm)", 'res'),
 
             #AAN Mode
             ("AAN Start (°)", "aan_s"),
@@ -941,14 +941,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         row = 1
 
-        # --- AUTO MOVE (PSA) section ---
-        row = add_section_title(row, "AUTO MOVE (PSA)")
+        # --- ACTIVE ASSIST (PSA) section ---
+        row = add_section_title(row, "ACTIVE ASSIST (PSA)")
         for label, key in [
-            ("AUTO MOVE Repetitions", 'auto_rep'),
-            ("PosSpd Pos Start (°)", 'posspd_ps'),
-            ("PosSpd Pos End (°)",   'posspd_pe'),
-            ("PosSpd Vel (RPM)",     'posspd_v'),
-            ("PosSpd Acc (deg/s²)",  'posspd_a'),
+            ("ACTIVE ASSIST Repetitions", 'auto_rep'),
+            ("ACTIVE ASSIST Start (°)", 'posspd_ps'),
+            ("ACTIVE ASSIST End (°)",   'posspd_pe'),
+            ("ACTIVE ASSIST (RPM)",     'posspd_v'),
+            ("ACTIVE ASSIST (deg/s²)",  'posspd_a'),
         ]:
             layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
             e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
@@ -961,10 +961,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         row = add_hline(row)
 
-        # --- RESIST section ---
-        row = add_section_title(row, "RESIST")
+        # --- ACTIVE RESIST section ---
+        row = add_section_title(row, "ACTIVE RESIST")
         for label, key in [
-            ("Resist (Nm)", 'res'),
+            ("ACTIVE Resist (Nm)", 'res'),
         ]:
             layout.addWidget(QtWidgets.QLabel(label + ":"), row, 0)
             e1 = QtWidgets.QLineEdit(str(self.params_m[1][key]))
