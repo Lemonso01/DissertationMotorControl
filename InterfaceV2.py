@@ -343,16 +343,20 @@ class MainWindow(QtWidgets.QMainWindow):
         base_params_1 = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
-            posspd_ps=0.0, posspd_pe=0.0, posspd_v=0.0, posspd_a=1500, auto_rep=0,
-            aan_s=0.0, aan_e=0.0, aan_d=5.0,
+            posspd_ps=0.0, posspd_pe=100.0, posspd_v=5.0, posspd_a=1500, auto_rep=1,
+            auto_forever=False,
+            aan_s=0.0, aan_e=100.0, aan_d=5.0,
+            aan_rep=1, aan_forever=False, aan_period_s=1.0,
             res=0.0
         )
 
         base_params_2 = dict(
             rpm=0.0, pos=0.0, torque=0.0,
             duty=0.0, current=0.0, brake=0.0,
-            posspd_ps=0.0, posspd_pe=0.0, posspd_v=0.0, posspd_a=600, auto_rep=0,
-            aan_s=0.0, aan_e=0.0, aan_d=5.0,
+            posspd_ps=90.0, posspd_pe=-90.0, posspd_v=5.0, posspd_a=600, auto_rep=1,
+            auto_forever=False,
+            aan_s=90.0, aan_e=-90.0, aan_d=5.0,
+            aan_rep=1, aan_forever=False, aan_period_s=1.0,
             res=0.0
         )
         self.params_m = {
@@ -366,6 +370,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self._auto = {
             1: {"active": False, "moves_left": 0, "target": None},
             2: {"active": False, "moves_left": 0, "target": None},
+        }
+
+        self._aan_auto = {
+            1: {"active": False, "moves_left": 0, "timer": None},
+            2: {"active": False, "moves_left": 0, "timer": None},
         }
 
 
@@ -435,11 +444,17 @@ class MainWindow(QtWidgets.QMainWindow):
         e = float(self.params_m[mid]["posspd_pe"])
         tol = AUTO_TOL
 
-        try:
-            rep = int(float(self.params_m[mid]["auto_rep"]))
-        except Exception:
-            rep = 1
-        rep = max(1, rep)
+        forever = bool(self.params_m[mid].get("auto_forever", False))
+
+        if forever:
+            moves_left = -1  # sentinel for infinite
+        else:
+            try:
+                rep = int(float(self.params_m[mid]["auto_rep"]))
+            except Exception:
+                rep = 1
+            rep = max(1, rep)
+            moves_left = 2 * rep
 
         cur = self._last_pos_deg[mid]
         if cur is None:
@@ -454,7 +469,7 @@ class MainWindow(QtWidgets.QMainWindow):
             target = e  # default
 
         self._auto[mid]["active"] = True
-        self._auto[mid]["moves_left"] = 2 * rep
+        self._auto[mid]["moves_left"] = moves_left
         self._auto[mid]["target"] = float(target)
 
         # Kick off first PSA immediately
@@ -466,6 +481,71 @@ class MainWindow(QtWidgets.QMainWindow):
         self._auto[mid]["moves_left"] = 0
         self._auto[mid]["target"] = None
 
+    def start_aan_move(self, motor_id: int):
+        mid = 1 if int(motor_id) == 1 else 2
+
+        s = float(self.params_m[mid]["aan_s"])
+        e = float(self.params_m[mid]["aan_e"])
+        tol = AUTO_TOL
+
+        forever = bool(self.params_m[mid].get("aan_forever", False))
+
+        if forever:
+            moves_left = -1  # sentinel infinite
+        else:
+            try:
+                rep = int(float(self.params_m[mid].get("aan_rep", 1)))
+            except Exception:
+                rep = 1
+            rep = max(1, rep)
+            moves_left = 2 * rep  # go there + back counts as 2 like PSA
+
+        cur = self._last_pos_deg[mid]
+        if cur is None:
+            cur = s
+
+        # decide first target based on where we are
+        if abs(cur - s) <= tol:
+            target = e
+        elif abs(cur - e) <= tol:
+            target = s
+        else:
+            target = e
+
+        self._aan_auto[mid]["active"] = True
+        self._aan_auto[mid]["moves_left"] = moves_left
+        self._aan_auto[mid]["target"] = float(target)
+
+        self._send_aan(mid, target)
+
+    def stop_aan_move(self, motor_id: int):
+        mid = 1 if int(motor_id) == 1 else 2
+        self._aan_auto[mid]["active"] = False
+        self._aan_auto[mid]["moves_left"] = 0
+        self._aan_auto[mid]["target"] = None
+
+    def _send_aan(self, mid: int, target_pos_deg: float):
+        """
+        Send AAN such that the intended motion endpoint is target_pos_deg.
+        We treat AAN as a 'move from current endpoint to other endpoint' command,
+        but we still send start/end every time to be explicit.
+        """
+        s = float(self.params_m[mid]["aan_s"])
+        e = float(self.params_m[mid]["aan_e"])
+        d = float(self.params_m[mid]["aan_d"])
+
+        # if target is e -> command s->e ; if target is s -> command e->s
+        if abs(target_pos_deg - e) <= AUTO_TOL:
+            start_deg, end_deg = s, e
+        else:
+            start_deg, end_deg = e, s
+
+        s_m = self._ui_deg_to_motor_deg(mid, start_deg)
+        e_m = self._ui_deg_to_motor_deg(mid, end_deg)
+
+        self.send_cmd_motor(mid, f"AAN {s_m:.2f} {e_m:.2f} {d:.2f}")
+
+
     def _send_psa(self, mid: int, target_pos_deg: float):
         v = float(self.params_m[mid]["posspd_v"])
         a = float(self.params_m[mid]["posspd_a"])
@@ -474,7 +554,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def _auto_tick_on_position(self, mid: int, pos_deg: float):
         st = self._auto[mid]
-        if not st["active"] or st["moves_left"] <= 0 or st["target"] is None:
+        if not st["active"] or st["target"] is None:
+            return
+        if st["moves_left"] != -1 and st["moves_left"] <= 0:
             return
 
         tol = AUTO_TOL
@@ -484,11 +566,12 @@ class MainWindow(QtWidgets.QMainWindow):
         if abs(pos_deg - tgt) > tol:
             return
 
-        # Reached current target => consume one move
-        st["moves_left"] -= 1
-        if st["moves_left"] <= 0:
-            self.stop_auto_move(mid)
-            return
+        # Reached current target => consume one move (only if finite)
+        if st["moves_left"] != -1:
+            st["moves_left"] -= 1
+            if st["moves_left"] <= 0:
+                self.stop_auto_move(mid)
+                return
 
         s = float(self.params_m[mid]["posspd_ps"])
         e = float(self.params_m[mid]["posspd_pe"])
@@ -499,6 +582,40 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Schedule the next PSA after 1 second (non-blocking)
         QtCore.QTimer.singleShot(1000, lambda mid=mid, t=next_tgt: self._send_psa(mid, t))
+
+    def _aan_tick_on_position(self, mid: int, pos_deg: float):
+        st = self._aan_auto[mid]
+        if not st["active"] or st["target"] is None:
+            return
+
+        # if finite, require moves_left > 0
+        if st["moves_left"] != -1 and st["moves_left"] <= 0:
+            return
+
+        tol = AUTO_TOL
+        tgt = float(st["target"])
+
+        # wait until we are within tolerance of the target endpoint
+        if abs(pos_deg - tgt) > tol:
+            return
+
+        # reached target: consume a move if finite
+        if st["moves_left"] != -1:
+            st["moves_left"] -= 1
+            if st["moves_left"] <= 0:
+                self.stop_aan_move(mid)
+                return
+
+        s = float(self.params_m[mid]["aan_s"])
+        e = float(self.params_m[mid]["aan_e"])
+
+        # toggle target to the opposite endpoint
+        next_tgt = e if abs(tgt - s) <= tol else s
+        st["target"] = float(next_tgt)
+
+        # schedule next AAN after a short delay (avoid re-triggering immediately at same endpoint)
+        QtCore.QTimer.singleShot(300, lambda mid=mid, t=next_tgt: self._send_aan(mid, t))
+
 
     def _open_log_file(self):
         # Create a logs folder next to your script
@@ -625,8 +742,8 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_stop1.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
         btn_stop2.setStyleSheet("background-color: #d32f2f; color: white; font-weight:bold;")
 
-        btn_stop1.clicked.connect(lambda: (self.stop_auto_move(1), self.send_cmd("STOP 1")))
-        btn_stop2.clicked.connect(lambda: (self.stop_auto_move(2), self.send_cmd("STOP 2")))
+        btn_stop1.clicked.connect(lambda: (self.stop_auto_move(1), self.stop_aan_move(1), self.send_cmd("STOP 1")))
+        btn_stop2.clicked.connect(lambda: (self.stop_auto_move(2), self.stop_aan_move(2), self.send_cmd("STOP 2")))
 
         btn_stop1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         btn_stop2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
@@ -642,7 +759,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Row 4-5: STOP ALL
         btn_stopall = QtWidgets.QPushButton("STOP ALL")
         btn_stopall.setStyleSheet("background-color: #b71c1c; color: yellow; font-weight:bold; font-size:18px;")
-        btn_stopall.clicked.connect(lambda: (self.stop_auto_move(1), self.stop_auto_move(2), self.send_cmd("STOPALL")))
+        btn_stopall.clicked.connect(lambda: (self.stop_auto_move(1), self.stop_auto_move(2), self.stop_aan_move(1), self.stop_aan_move(2), self.send_cmd("STOPALL")))
 
         # Expand + taller feel (row-span already gives height; this helps visually)
         btn_stopall.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -699,7 +816,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_posspd_1, row_m1, 0); row_m1 += 1
 
         btn_aan_1 = QtWidgets.QPushButton("ASSIST A/N")
-        btn_aan_1.clicked.connect(lambda: self.open_aan_dialog(motor_id=1))
+        btn_aan_1.clicked.connect(lambda: self.start_aan_move(1))
         left_layout.addWidget(btn_aan_1, row_m1, 0); row_m1 += 1
 
         btn_res_1 = QtWidgets.QPushButton("ACTIVE RESIST")
@@ -744,7 +861,7 @@ class MainWindow(QtWidgets.QMainWindow):
         left_layout.addWidget(btn_posspd_2, row_m2, 2); row_m2 += 1
 
         btn_aan_2 = QtWidgets.QPushButton("ASSIST A/N")
-        btn_aan_2.clicked.connect(lambda: self.open_aan_dialog(motor_id=2))
+        btn_aan_2.clicked.connect(lambda: self.start_aan_move(2))
         left_layout.addWidget(btn_aan_2, row_m2, 2); row_m2 += 1
 
         btn_res_2 = QtWidgets.QPushButton("ACTIVE RESIST")
@@ -957,8 +1074,38 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # --- ACTIVE ASSIST (PSA) section ---
         row = add_section_title(row, "ACTIVE ASSIST (PSA)")
+
+        # --- Infinite checkbox row ---
+        layout.addWidget(QtWidgets.QLabel("ACTIVE ASSIST Do until STOP is pressed:"), row, 0)
+
+        cb1 = QtWidgets.QCheckBox()
+        cb2 = QtWidgets.QCheckBox()
+        cb1.setChecked(bool(self.params_m[1].get("auto_forever", False)))
+        cb2.setChecked(bool(self.params_m[2].get("auto_forever", False)))
+
+        layout.addWidget(cb1, row, 1)
+        layout.addWidget(cb2, row, 2)
+
+        w1["auto_forever"] = cb1
+        w2["auto_forever"] = cb2
+        row += 1
+
+        layout.addWidget(QtWidgets.QLabel("ACTIVE ASSIST Repetitions:"), row, 0)
+        e1_rep = QtWidgets.QLineEdit(str(self.params_m[1]["auto_rep"]))
+        e2_rep = QtWidgets.QLineEdit(str(self.params_m[2]["auto_rep"]))
+        layout.addWidget(e1_rep, row, 1)
+        layout.addWidget(e2_rep, row, 2)
+        w1["auto_rep"] = e1_rep
+        w2["auto_rep"] = e2_rep
+
+        e1_rep.setEnabled(not cb1.isChecked())
+        e2_rep.setEnabled(not cb2.isChecked())
+        cb1.toggled.connect(lambda checked, le=e1_rep: le.setEnabled(not checked))
+        cb2.toggled.connect(lambda checked, le=e2_rep: le.setEnabled(not checked))
+
+        row += 1
+
         for label, key in [
-            ("ACTIVE ASSIST Repetitions", 'auto_rep'),
             ("ACTIVE ASSIST Start (°)", 'posspd_ps'),
             ("ACTIVE ASSIST End (°)",   'posspd_pe'),
             ("ACTIVE ASSIST (RPM)",     'posspd_v'),
@@ -993,6 +1140,42 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # --- ASSIST AS NEEDED section ---
         row = add_section_title(row, "ASSIST AS NEEDED (AAN)")
+
+        # Loop forever checkbox
+        layout.addWidget(QtWidgets.QLabel("AAN Loop Forever:"), row, 0)
+
+        cb1_aan = QtWidgets.QCheckBox()
+        cb2_aan = QtWidgets.QCheckBox()
+        cb1_aan.setChecked(bool(self.params_m[1].get("aan_forever", False)))
+        cb2_aan.setChecked(bool(self.params_m[2].get("aan_forever", False)))
+
+        layout.addWidget(cb1_aan, row, 1)
+        layout.addWidget(cb2_aan, row, 2)
+
+        w1["aan_forever"] = cb1_aan
+        w2["aan_forever"] = cb2_aan
+        row += 1
+
+        # Repetitions (disabled when forever checked)
+        layout.addWidget(QtWidgets.QLabel("AAN Repetitions:"), row, 0)
+
+        e1_aan_rep = QtWidgets.QLineEdit(str(self.params_m[1].get("aan_rep", 1)))
+        e2_aan_rep = QtWidgets.QLineEdit(str(self.params_m[2].get("aan_rep", 1)))
+
+        layout.addWidget(e1_aan_rep, row, 1)
+        layout.addWidget(e2_aan_rep, row, 2)
+
+        w1["aan_rep"] = e1_aan_rep
+        w2["aan_rep"] = e2_aan_rep
+
+        # disable reps if forever is enabled
+        e1_aan_rep.setEnabled(not cb1_aan.isChecked())
+        e2_aan_rep.setEnabled(not cb2_aan.isChecked())
+        cb1_aan.toggled.connect(lambda checked, le=e1_aan_rep: le.setEnabled(not checked))
+        cb2_aan.toggled.connect(lambda checked, le=e2_aan_rep: le.setEnabled(not checked))
+
+        row += 1
+
         for label, key in [
             ("AAN Start (°)", "aan_s"),
             ("AAN End (°)",   "aan_e"),
@@ -1007,7 +1190,6 @@ class MainWindow(QtWidgets.QMainWindow):
             w2[key] = e2
             row += 1
 
-
         btn_box = QtWidgets.QDialogButtonBox(
             QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel,
             parent=dlg
@@ -1016,13 +1198,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
         def on_ok():
             try:
-                for key, le in w1.items():
-                    self.params_m[1][key] = float(le.text())
-                for key, le in w2.items():
-                    self.params_m[2][key] = float(le.text())
+                for key, widget in w1.items():
+                    if isinstance(widget, QtWidgets.QCheckBox):
+                        self.params_m[1][key] = bool(widget.isChecked())
+                    else:
+                        self.params_m[1][key] = float(widget.text())
+
+                for key, widget in w2.items():
+                    if isinstance(widget, QtWidgets.QCheckBox):
+                        self.params_m[2][key] = bool(widget.isChecked())
+                    else:
+                        self.params_m[2][key] = float(widget.text())
+
             except ValueError:
                 QtWidgets.QMessageBox.warning(dlg, "Invalid input", "Please enter numeric values.")
                 return
+
             dlg.accept()
 
         btn_box.accepted.connect(on_ok)
@@ -1312,6 +1503,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.elbow_view.set_angle_deg(val)
             self.pos1_label.setText(f"{val:.1f}")
             self._auto_tick_on_position(1, val)
+            self._aan_tick_on_position(1, val)
+
 
         if "wrist_deg" in status:
             val = float(status["wrist_deg"])
@@ -1319,6 +1512,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.wrist_view.set_angle_deg(val)
             self.pos2_label.setText(f"{val:.1f}")
             self._auto_tick_on_position(2, val)
+            self._aan_tick_on_position(2, val)
+
 
 
         if "spd1" in status:
