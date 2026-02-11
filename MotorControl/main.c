@@ -702,6 +702,24 @@ static void servo_set_pos_spd(uint8_t motor_id, float pos_deg, int16_t spd_erpm,
     (void)comm_can_transmit_eid_motor(motor_id, eid, buf, (uint8_t)idx);
 }
 
+static motor_ctl_t *ctl_for_id(uint8_t id);
+
+static void hold_position_psa(uint8_t motor_id, float hold_deg)
+{
+    motor_ctl_t *ctl = ctl_for_id(motor_id);
+    if (!ctl) return;
+
+    // Convert 5 JOINT rpm -> ERPM
+    float erpm_f = joint_rpm_to_erpm(motor_id, 5);
+    int16_t spd_erpm = clamp_i16((int32_t)lroundf(erpm_f));
+
+    ctl->mode = MCTL_PSA;
+    ctl->pos_deg = hold_deg;
+    ctl->spd_erpm = spd_erpm;
+    ctl->acc_erpm_s2 = (int16_t)1000;   // your code stores accel in int16_t
+    ctl->last_ui_update = get_absolute_time();      // timeout now counts from “AAN done”
+}
+
 static void servo_decode_to_feedback(const can_frame_t *f)
 {
     uint8_t motor_id = (uint8_t)(f->can_id & 0xFF);
@@ -1173,6 +1191,8 @@ static void motor_keepalive_tick(uint32_t timeout_ms)
                 aan->enabled   = false;
                 aan->assisting = false;
                 aan->assist_u  = 0.0f;
+
+                hold_position_psa(id[k], aan->end_deg);
             }
 
             // AAN owns the bus for this motor this iteration
